@@ -1,13 +1,9 @@
-﻿using HospitalSystem.Infrastructure.IRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HospitalSystem.Infrastructure.Context;
-using HospitalSystem.Core.UnitOfWork;
-using HospitalSystem.Core.Entities;
-namespace HospitalSystem.Infrastructure.Repository
+﻿using HospitalSystem.Core.Entities;
+using HospitalSystem.Core.IRepository;
+using HospitalSystem.Infrastructure.Data;
+using HospitalSystem.Infrastructure.Repository;
+
+namespace HospitalSystem.Application.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

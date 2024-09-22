@@ -1,12 +1,7 @@
 ﻿using HospitalSystem.Core.Entities;
-using HospitalSystem.Infrastructure.Context;
-using HospitalSystem.Infrastructure.IRepository;
+using HospitalSystem.Infrastructure.Data;
+using HospitalSystem.Core.IRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HospitalSystem.Infrastructure.Repository
 {

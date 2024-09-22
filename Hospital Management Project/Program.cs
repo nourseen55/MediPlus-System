@@ -1,9 +1,8 @@
-using HospitalSystem.Application.Services;
-using HospitalSystem.Core.UnitOfWork;
-using HospitalSystem.Infrastructure.Context;
-using HospitalSystem.Infrastructure.IRepository;
-using HospitalSystem.Infrastructure.Repository;
+using HospitalSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using HospitalSystem.Application.UnitOfWork;
+
+
 namespace Hospital_Management_Project
 {
     public class Program

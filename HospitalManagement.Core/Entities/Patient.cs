@@ -11,10 +11,8 @@ namespace HospitalSystem.Core.Entities
 {
     public class Patient:ApplicationUser
     {
-        public string PatientId { get; set; }       
-
         //Navigation Properties
-        public  virtual ICollection<Appointment>? Appointments { get; set; }
-        public virtual ICollection<MedicalRecord>?MedicalRecords { get; set; }
+        public virtual ICollection<Appointment>? Appointments { get; set; }
+        public virtual ICollection<MedicalRecord>? MedicalRecords { get; set; }
     }
 }

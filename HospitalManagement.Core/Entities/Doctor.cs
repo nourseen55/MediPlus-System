@@ -5,11 +5,12 @@ namespace HospitalSystem.Core.Entities
 {
     public class Doctor:ApplicationUser
     {
-        [Key]
-        public string Id { get; set; }  
         [Required]
         public string Specialization { get; set; }
-      
+
+        public virtual ICollection<MedicalRecord>? MedicalRecords { get; set; }
+        public virtual ICollection<Appointment>? Appointments { get; set; }
+        public virtual ICollection<Nurse>? Nurses { get; set; }
 
     }
 }

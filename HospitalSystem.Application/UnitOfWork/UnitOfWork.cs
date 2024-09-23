@@ -1,7 +1,4 @@
-﻿using HospitalSystem.Core.Entities;
-using HospitalSystem.Core.IRepository;
-using HospitalSystem.Infrastructure.Data;
-using HospitalSystem.Infrastructure.Repository;
+﻿
 
 namespace HospitalSystem.Application.UnitOfWork
 {
@@ -9,15 +6,15 @@ namespace HospitalSystem.Application.UnitOfWork
     {
 
         private readonly ApplicationDbContext _context;
-        public IRepository<Patient> _patientRepository { get; private set; }
+        public IGenericRepository<Patient> _patientRepository { get; private set; }
 
-        public IRepository<Nurse> _nurseRepository  { get; private set; }
+        public IGenericRepository<Nurse> _nurseRepository  { get; private set; }
 
-        public IRepository<Doctor> _doctorRepository { get; private set; }
+        public IGenericRepository<Doctor> _doctorRepository { get; private set; }
 
-        public IRepository<Appointment> _appointmentRepository { get; private set; }
+        public IGenericRepository<Appointment> _appointmentRepository { get; private set; }
 
-        public IRepository<MedicalRecord> _recordRepository  { get; private set; }
+        public IGenericRepository<MedicalRecord> _recordRepository  { get; private set; }
 
         public UnitOfWork(ApplicationDbContext applicationDbContext)
         {

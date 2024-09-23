@@ -1,7 +1,7 @@
 ﻿
 namespace HospitalSystem.Infrastructure.Repository
 {
-        public class DoctorRepository:IRepository<Doctor>
+        public class DoctorRepository:IGenericRepository<Doctor>
         {
        
             private readonly ApplicationDbContext _context;

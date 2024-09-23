@@ -1,6 +1,6 @@
 ﻿namespace HospitalSystem.Core.IRepository
 {
-    public interface IRepository<T>where T:class
+    public interface IGenericRepository<T>where T:class
     {
         Task AddEntityAsync(T entity);
         Task<IEnumerable<T>> GetAllEntityAsync();

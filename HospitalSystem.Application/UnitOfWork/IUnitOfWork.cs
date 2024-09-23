@@ -1,15 +1,13 @@
-﻿using HospitalSystem.Core.Entities;
-using HospitalSystem.Core.IRepository;
-
+﻿
 namespace HospitalSystem.Application.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<Patient> _patientRepository { get; }
-        IRepository<Nurse> _nurseRepository { get; }
-        IRepository<Doctor> _doctorRepository { get; }
-        IRepository<Appointment> _appointmentRepository { get; }
-        IRepository<MedicalRecord> _recordRepository { get; }
+        IGenericRepository<Patient> _patientRepository { get; }
+        IGenericRepository<Nurse> _nurseRepository { get; }
+        IGenericRepository<Doctor> _doctorRepository { get; }
+        IGenericRepository<Appointment> _appointmentRepository { get; }
+        IGenericRepository<MedicalRecord> _recordRepository { get; }
         int Complete();
 
     }

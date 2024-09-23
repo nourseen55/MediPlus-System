@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HospitalSystem.Infrastructure.Repository
 {
-    public class MedicalRecordRepository : IRepository<MedicalRecord>
+    public class MedicalRecordRepository : IGenericRepository<MedicalRecord>
     {
 
         private readonly ApplicationDbContext _context;

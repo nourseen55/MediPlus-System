@@ -1,7 +1,7 @@
 ﻿
 namespace HospitalSystem.Infrastructure.Repository
 {
-    public class AppointmentRepository : IRepository<Appointment>
+    public class AppointmentRepository : IGenericRepository<Appointment>
     {
 
         private readonly ApplicationDbContext _context;

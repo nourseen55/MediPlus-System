@@ -12,7 +12,7 @@ namespace Hospital_Management_Project
             options.UseSqlServer(builder.Configuration.GetConnectionString("cs"))
             );
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
-            //builder.Services.AddScoped<IPatientService,PatientService>();
+
 
             var app = builder.Build();
 

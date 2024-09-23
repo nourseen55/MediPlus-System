@@ -25,7 +25,7 @@ namespace HospitalSystem.Infrastructure.Repository
             return await _context.Patients.ToListAsync();
         }
 
-        public async Task<Patient> GetEntityByIdAsync(int id)
+        public async Task<Patient?> GetEntityByIdAsync(int id)
         {
             return await _context.Patients.FindAsync(id);
         }

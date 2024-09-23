@@ -1,8 +1,7 @@
 ﻿using HospitalSystem.Core.Entities;
-
-using Microsoft.EntityFrameworkCore;
 using HospitalSystem.Infrastructure.Data;
 using HospitalSystem.Core.IRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace HospitalSystem.Infrastructure.Repository
 {
@@ -26,7 +25,7 @@ namespace HospitalSystem.Infrastructure.Repository
             return await _context.Patients.ToListAsync();
         }
 
-        public async Task<Patient> GetEntityByIdAsync(int id)
+        public async Task<Patient?> GetEntityByIdAsync(int id)
         {
             return await _context.Patients.FindAsync(id);
         }

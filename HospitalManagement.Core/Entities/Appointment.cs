@@ -1,12 +1,7 @@
-﻿using HospitalSystem.Core.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace HospitalSystem.Core.Entities
+﻿namespace HospitalSystem.Core.Entities
 {
     public class Appointment
     {
-        [Key]
         public int AppointmentID { get; set; }
 
         [Display(Name = "Start Date")]
@@ -14,15 +9,10 @@ namespace HospitalSystem.Core.Entities
 
         [Display(Name = "End Date")]
         public DateTime? EndDateTime { get; set; }
-
-        [Required]
         public Status Status { get; set; }
 
-        [ForeignKey("Patient")]
         public string PatientID { get; set; }
         public virtual Patient? Patient { get; set; }
-
-        [ForeignKey("Doctor")]
         public string DoctorID { get; set; }
         public virtual Doctor? Doctor { get; set; }
 

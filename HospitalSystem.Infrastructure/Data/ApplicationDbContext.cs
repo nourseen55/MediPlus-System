@@ -1,9 +1,4 @@
-﻿using HospitalSystem.Core.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
-namespace HospitalSystem.Infrastructure.Data
+﻿namespace HospitalSystem.Infrastructure.Data
 {
     public class ApplicationDbContext:IdentityDbContext<IdentityUser>
     {

@@ -1,9 +1,4 @@
-﻿using HospitalSystem.Core.Entities;
-using HospitalSystem.Infrastructure.Data;
-using HospitalSystem.Core.IRepository;
-using Microsoft.EntityFrameworkCore;
-
-namespace HospitalSystem.Infrastructure.Repository
+﻿namespace HospitalSystem.Infrastructure.Repository
 {
     public class PatientRepository : IRepository<Patient>
     {

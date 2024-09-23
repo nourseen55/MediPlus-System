@@ -1,9 +1,4 @@
-﻿using HospitalSystem.Core.Entities;
-using HospitalSystem.Core.IRepository;
-using HospitalSystem.Infrastructure.Data;
-using HospitalSystem.Infrastructure.Repository;
-
-namespace HospitalSystem.Application.UnitOfWork
+﻿namespace HospitalSystem.Application.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

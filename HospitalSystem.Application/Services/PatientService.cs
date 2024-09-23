@@ -1,7 +1,4 @@
-﻿using HospitalSystem.Application.UnitOfWork;
-using HospitalSystem.Core.Entities;
-
-namespace HospitalSystem.Application.Services
+﻿namespace HospitalSystem.Application.Services
 {
     public class PatientService : IPatientService
     {

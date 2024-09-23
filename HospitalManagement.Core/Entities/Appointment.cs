@@ -1,8 +1,4 @@
-﻿using HospitalSystem.Core.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace HospitalSystem.Core.Entities
+﻿namespace HospitalSystem.Core.Entities
 {
     public class Appointment
     {

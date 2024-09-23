@@ -1,11 +1,4 @@
-﻿using HospitalSystem.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HospitalSystem.Application.Services
+﻿namespace HospitalSystem.Application.Services
 {
     public interface IPatientService
     {

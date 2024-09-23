@@ -1,7 +1,3 @@
-using Hospital_Management_Project.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
 namespace Hospital_Management_Project.Controllers
 {
     public class HomeController : Controller

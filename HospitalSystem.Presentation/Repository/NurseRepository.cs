@@ -1,5 +1,5 @@
 ﻿
-namespace HospitalSystem.Infrastructure.Repository
+namespace HospitalSystem.Persistance.Repository
 {
     public class NurseRepository : IGenericRepository<Nurse>
     {

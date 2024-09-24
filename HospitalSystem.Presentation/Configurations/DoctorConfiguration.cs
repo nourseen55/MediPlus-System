@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace HospitalSystem.Infrastructure.Configurations
+﻿namespace HospitalSystem.Persistance.Configurations
 {
     public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
     {

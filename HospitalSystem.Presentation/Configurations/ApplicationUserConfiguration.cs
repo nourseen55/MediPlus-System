@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-namespace HospitalSystem.Infrastructure.Configurations
+﻿namespace HospitalSystem.Persistance.Configurations
 {
     internal class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
@@ -9,9 +8,6 @@ namespace HospitalSystem.Infrastructure.Configurations
             builder.Property(e => e.Name).IsRequired().HasMaxLength(50);
             builder.Property(e => e.ZipCode).HasMaxLength(5);
             builder.Property(e=>e.City).HasMaxLength(20);
-
-
-
         }
     }
 }

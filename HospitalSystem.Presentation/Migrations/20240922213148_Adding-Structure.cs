@@ -1,9 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿#nullable disable
 
-#nullable disable
-
-namespace HospitalSystem.Infrastructure.Migrations
+namespace HospitalSystem.Persistance.Migrations
 {
     /// <inheritdoc />
     public partial class AddingStructure : Migration

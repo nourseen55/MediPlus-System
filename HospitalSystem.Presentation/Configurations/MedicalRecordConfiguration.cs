@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace HospitalSystem.Infrastructure.Configurations
+﻿namespace HospitalSystem.Persistance.Configurations
 {
     internal class MedicalRecordConfiguration : IEntityTypeConfiguration<MedicalRecord>
     {

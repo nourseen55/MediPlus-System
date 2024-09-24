@@ -1,6 +1,4 @@
-﻿using HospitalSystem.Infrastructure.Configurations;
-
-namespace HospitalSystem.Infrastructure.Data
+﻿namespace HospitalSystem.Persistance.Data
 {
     public class ApplicationDbContext:IdentityDbContext<IdentityUser>
     {

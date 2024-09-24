@@ -1,5 +1,6 @@
 ﻿global using HospitalSystem.Application.Interfaces;
 global using HospitalSystem.Core.Entities;
+global using HospitalSystem.Core.Enums;
 global using HospitalSystem.Core.IRepository;
 global using HospitalSystem.Persistance.Configurations;
 global using HospitalSystem.Persistance.Data;

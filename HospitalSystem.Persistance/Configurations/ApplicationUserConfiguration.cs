@@ -1,8 +1,6 @@
-﻿using HospitalSystem.Core.Enums;
-
-namespace HospitalSystem.Persistance.Configurations
+﻿namespace HospitalSystem.Persistance.Configurations
 {
-    internal class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
+    public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {

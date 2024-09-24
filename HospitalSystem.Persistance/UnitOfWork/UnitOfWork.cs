@@ -1,6 +1,4 @@
-﻿
-
-namespace HospitalSystem.Application.UnitOfWork
+﻿namespace HospitalSystem.Persistance.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

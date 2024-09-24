@@ -1,4 +1,6 @@
-﻿namespace HospitalSystem.Application.Services
+﻿using HospitalSystem.Application.Interfaces;
+
+namespace HospitalSystem.Application.Services
 {
     public class NurseService : INurseService
     {

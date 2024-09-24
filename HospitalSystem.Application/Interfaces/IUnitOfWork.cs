@@ -1,5 +1,4 @@
-﻿
-namespace HospitalSystem.Application.UnitOfWork
+﻿namespace HospitalSystem.Application.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

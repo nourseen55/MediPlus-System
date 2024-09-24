@@ -15,7 +15,6 @@
         public DbSet<Doctor> Doctors { set;get; }
         public DbSet<MedicalRecord> MedicalRecords { set;get; }
         public DbSet<Nurse> Nurses { set;get; }
-        public DbSet<ApplicationUser> ApplicationUsers { set;get; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,5 +25,10 @@
             modelBuilder.ApplyConfiguration(new NurseConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationUserConfiguration());
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=HospitalDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+        }
+
     }
 }

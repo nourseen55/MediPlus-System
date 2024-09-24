@@ -1,6 +1,8 @@
-﻿namespace HospitalSystem.Core.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace HospitalSystem.Core.Entities
 {
-    public class Doctor:ApplicationUser
+    public class Doctor : ApplicationUser
     {
         public string Specialization { get; set; }
 

@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using HospitalSystem.Persistance.Data;
 namespace Hospital_Management_Project
 {
     public class Program
@@ -12,11 +9,13 @@ namespace Hospital_Management_Project
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options=>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("cs"))
+                options.UseSqlServer(builder.Configuration.GetConnectionString("cs"))
             );
 
+            builder.Services.AddRazorPages();
+
             #region Identity Configuration
-            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            builder.Services.AddIdentity<IdentityUser,IdentityRole>(options =>
             {
                 /*options.SignIn.RequireConfirmedAccount = true;
                 options.Password = new()
@@ -28,11 +27,13 @@ namespace Hospital_Management_Project
                     RequireLowercase = true,
                     RequireNonAlphanumeric = true
                 };*/
-            }).AddEntityFrameworkStores<ApplicationDbContext>();
+            }).AddDefaultTokenProviders()
+              .AddEntityFrameworkStores<ApplicationDbContext>();
             #endregion
 
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             //builder.Services.AddScoped<IPatientService,PatientService>();
+            builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
             var app = builder.Build();
 
@@ -44,10 +45,10 @@ namespace Hospital_Management_Project
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.MapRazorPages();
             app.UseAuthorization();
             
-            app.MapRazorPages();
+            
 
             app.MapControllerRoute(
                 name: "default",

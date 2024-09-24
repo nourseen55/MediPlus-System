@@ -1,4 +1,6 @@
-﻿namespace HospitalSystem.Persistance.Configurations
+﻿using HospitalSystem.Core.Enums;
+
+namespace HospitalSystem.Persistance.Configurations
 {
     internal class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
@@ -8,6 +10,13 @@
             builder.Property(e => e.Name).IsRequired().HasMaxLength(50);
             builder.Property(e => e.ZipCode).HasMaxLength(5);
             builder.Property(e=>e.City).HasMaxLength(20);
+            builder.Property(e => e.Gender)
+                .IsRequired()
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (Gender)Enum.Parse(typeof(Gender), v))
+                .HasMaxLength(1)  
+                .IsUnicode(false);
         }
     }
 }

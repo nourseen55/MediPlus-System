@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Infrastructure", "HospitalSystem.Infrastructure\HospitalSystem.Infrastructure.csproj", "{2AB24AF2-704B-48D3-8645-619F156A9FEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Presentation", "HospitalSystem.Presentation\HospitalSystem.Presentation.csproj", "{9899BA4D-C86D-465F-AA94-523DDDF83F95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Persistance", "HospitalSystem.Presentation\HospitalSystem.Persistance.csproj", "{9899BA4D-C86D-465F-AA94-523DDDF83F95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

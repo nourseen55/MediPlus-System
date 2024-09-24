@@ -239,10 +239,12 @@ namespace HospitalSystem.Persistance.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -279,10 +281,12 @@ namespace HospitalSystem.Persistance.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -303,6 +307,12 @@ namespace HospitalSystem.Persistance.Migrations
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -5,6 +5,9 @@
         public string Name { get; set; }
         public string ZipCode { get; set; }
         public string City { get; set; }
+
+        public Gender Gender { get; set; }
+
         public DateTime DateOfBirth { get; set; }
         public int Age()
         {

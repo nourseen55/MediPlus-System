@@ -2,10 +2,10 @@
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
-        public ApplicationDbContext()
-        {
+        //public ApplicationDbContext()
+        //{
             
-        }
+        //}
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
         {
             
@@ -23,12 +23,12 @@
             modelBuilder.ApplyConfiguration(new DoctorConfiguration());
             modelBuilder.ApplyConfiguration(new MedicalRecordConfiguration());
             modelBuilder.ApplyConfiguration(new NurseConfiguration());
-            modelBuilder.ApplyConfiguration(new ApplicationUserConfiguration());
+            modelBuilder.ApplyConfiguration(new PatientConfiguration());
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=HospitalDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=HospitalDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+        //}
 
     }
 }

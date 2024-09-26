@@ -1,0 +1,82 @@
+﻿@model HospitalSystem.Core.Entities.Patient
+
+@{
+    Layout = "_PatientLayout";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <h4 class="page-title">Patient Details</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="form-group">
+                    <label>First Name:</label>
+                    <p>@Model.FirstName</p>
+                </div>
+                <div class="form-group">
+                    <label>Last Name:</label>
+                    <p>@Model.LastName</p>
+                </div>
+                <div class="form-group">
+                    <label>Username:</label>
+                    <p>@Model.UserName</p>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <p>@Model.Email</p>
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth:</label>
+                    <p>@Model.DateOfBirth.ToShortDateString()</p>
+                </div>
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <p>@Model.Gender</p>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number:</label>
+                    <p>@Model.PhoneNumber</p>
+                </div>
+                <div class="form-group">
+                    <label>City:</label>
+                    <p>@Model.City</p>
+                </div>
+                <div class="form-group">
+                    <label>Country:</label>
+                    <p>@Model.Country</p>
+                </div>
+                <div class="form-group">
+                    <label>Postal Code:</label>
+                    <p>@Model.ZipCode</p>
+                </div>
+                <div class="form-group">
+                    <label>Age:</label>
+                    <p>@Model.Age()</p> <!-- Assuming you have the Age method in the model -->
+                </div>
+                <div class="form-group">
+                    <label>Avatar:</label>
+                    @if (!string.IsNullOrEmpty(Model.Img))
+                    {
+                        <div class="upload-img">
+                            <img src="@Url.Content(Model.Img)" alt="Patient Image" style="max-width: 150px;" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="upload-img">
+                            <img src="~/assets/img/user.jpg" alt="Default Image" style="max-width: 150px;" />
+                        </div>
+                    }
+                </div>
+                <div class="m-t-20 text-center">
+                    <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Index")" class="btn btn-secondary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -44,9 +44,9 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
             return View(appointment);
         }
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var appoint = _IAppointmentService.GetAppointmentByIdAsync(id);
+            var appoint = await _IAppointmentService.GetAppointmentByIdAsync(id);
             if (appoint == null)
             { 
                 return NotFound();

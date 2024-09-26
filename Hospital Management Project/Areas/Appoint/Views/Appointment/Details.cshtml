@@ -49,7 +49,7 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-dark" href="/Appoint/Appointment/Edit/ID"></a>
-    <a class="btn btn-dark" href="/Appoint/Appointment/Delete/ID"></a>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-dark" asp-action="Edit" asp-route-id="@Model.AppointmentID">Edit</a>
+    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.AppointmentID">Delete</a>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
 </div>

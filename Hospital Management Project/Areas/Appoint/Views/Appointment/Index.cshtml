@@ -7,9 +7,7 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -58,11 +56,14 @@
                 @item.DoctorID
             </td>
             <td>
-               <a class="btn btn-dark" href="/Appoint/Appointment/Edit/@item.AppointmentID"></a>
-                    <a class="btn btn-dark" href="/Appoint/Appointment/Details/@item.AppointmentID"></a>
-                    <a class="btn btn-dark" href="/Appoint/Appointment/Delete/@item.AppointmentID"></a>
+               <a class="btn btn-dark" href="/Appoint/Appointment/Edit/@item.AppointmentID">Edit</a>
+                    <a class="btn btn-primary" href="/Appoint/Appointment/Details/@item.AppointmentID">Details</a>
+                    <a class="btn btn-danger" href="/Appoint/Appointment/Delete/@item.AppointmentID">Delete</a>
                 </td>
         </tr>
 }
     </tbody>
 </table>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>

@@ -2,7 +2,7 @@
 {
     public enum Gender
     {
-        Mail = 'M',
-        Female = 'F'
+        Male,
+        Female
     }
 }

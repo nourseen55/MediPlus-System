@@ -1,0 +1,143 @@
+﻿@model HospitalSystem.Core.Entities.Patient
+
+@{
+    Layout = "_PatientLayout";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <h4 class="page-title">Add Patient</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <form asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                         <div class="col-sm-6">
+                             <div class="form-group">
+                                 <label>First Name <span class="text-danger">*</span></label>
+                                <input asp-for="FirstName" class="form-control" type="text" required />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+
+                             </div>
+                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Last Name <span class="text-danger">*</span></label>
+                                <input asp-for="LastName" class="form-control" type="text" required />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Username<span class="text-danger">*</span></label>
+                                <input asp-for="UserName" class="form-control" type="text" required />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Email <span class="text-danger">*</span></label>
+                                <input asp-for="Email" class="form-control" type="email" required />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Password <span class="text-danger">*</span></label>
+                                <input asp-for="PasswordHash" class="form-control" type="password" required />
+                                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Date of Birth <span class="text-danger">*</span></label>
+                                <div class="cal-icon">
+                                    <input asp-for="DateOfBirth" type="date" class="form-control" required />
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group gender-select">
+                                <label class="gen-label">Gender:</label>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" asp-for="Gender" name="gender" value="Male" class="form-check-input" id="Male">Male
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        <input type="radio" asp-for="Gender" name="gender" value="Female" class="form-check-input" id="Female">Female
+                                    </label>
+                                </div>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6 col-md-6 col-lg-3">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select asp-for="Country" class="form-control select" required>
+                                    <option value="">Select Country</option>
+                                    <option value="Egypt">Egypt</option>
+                                    <option value="USA">USA</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                </select>
+                                <span asp-validation-for="Country" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input asp-for="City" class="form-control" type="text" />
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+
+
+                        <div class="col-sm-6 col-md-6 col-lg-3">
+                            <div class="form-group">
+                                <label>Postal Code</label>
+                                <input asp-for="ZipCode" type="text" class="form-control" required />
+                                <span asp-validation-for="ZipCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input asp-for="PhoneNumber" class="form-control" type="text" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Avatar</label>
+                                <div class="profile-upload">
+                                    <div class="upload-img">
+                                        <img alt="" src="~/assets/img/user.jpg">
+                                    </div>
+                                    <div class="upload-input">
+                                        <input type="file" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="m-t-20 text-center">
+                        <button type="submit" class="btn btn-primary submit-btn">Create Patient</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

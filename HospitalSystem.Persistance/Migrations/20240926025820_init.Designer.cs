@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalSystem.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240924175051_init")]
+    [Migration("20240926025820_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -34,14 +34,12 @@ namespace HospitalSystem.Persistance.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AppointmentID"));
 
                     b.Property<string>("DoctorID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("EndDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PatientID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("StartDateTime")
@@ -242,12 +240,10 @@ namespace HospitalSystem.Persistance.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -284,12 +280,10 @@ namespace HospitalSystem.Persistance.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -299,55 +293,63 @@ namespace HospitalSystem.Persistance.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("HospitalSystem.Core.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("HospitalSystem.Core.Entities.Doctor", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .IsUnicode(false)
-                        .HasColumnType("varchar(1)");
+                    b.Property<char>("Gender")
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Img")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("ZipCode")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.ToTable("ApplicationUser", (string)null);
-                });
-
-            modelBuilder.Entity("HospitalSystem.Core.Entities.Doctor", b =>
-                {
-                    b.HasBaseType("HospitalSystem.Core.Entities.ApplicationUser");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Specialization")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.ToTable("Doctor", (string)null);
                 });
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.Nurse", b =>
                 {
-                    b.HasBaseType("HospitalSystem.Core.Entities.ApplicationUser");
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("City")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DoctorID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<char>("Gender")
+                        .HasColumnType("nvarchar(1)");
+
+                    b.Property<string>("Img")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasIndex("DoctorID");
 
@@ -356,9 +358,38 @@ namespace HospitalSystem.Persistance.Migrations
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.Patient", b =>
                 {
-                    b.HasBaseType("HospitalSystem.Core.Entities.ApplicationUser");
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.ToTable("Patients");
+                    b.Property<string>("City")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Country")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Img")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.Appointment", b =>
@@ -366,14 +397,12 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasOne("HospitalSystem.Core.Entities.Doctor", "Doctor")
                         .WithMany("Appointments")
                         .HasForeignKey("DoctorID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HospitalSystem.Core.Entities.Patient", "Patient")
                         .WithMany("Appointments")
                         .HasForeignKey("PatientID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Doctor");
 
@@ -391,7 +420,7 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasOne("HospitalSystem.Core.Entities.Patient", "Patient")
                         .WithMany("MedicalRecords")
                         .HasForeignKey("PatientID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Doctor");
@@ -450,18 +479,9 @@ namespace HospitalSystem.Persistance.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HospitalSystem.Core.Entities.ApplicationUser", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
-                        .WithOne()
-                        .HasForeignKey("HospitalSystem.Core.Entities.ApplicationUser", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HospitalSystem.Core.Entities.Doctor", b =>
                 {
-                    b.HasOne("HospitalSystem.Core.Entities.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithOne()
                         .HasForeignKey("HospitalSystem.Core.Entities.Doctor", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -473,10 +493,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasOne("HospitalSystem.Core.Entities.Doctor", "Doctor")
                         .WithMany("Nurses")
                         .HasForeignKey("DoctorID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("HospitalSystem.Core.Entities.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithOne()
                         .HasForeignKey("HospitalSystem.Core.Entities.Nurse", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -487,7 +506,7 @@ namespace HospitalSystem.Persistance.Migrations
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.Patient", b =>
                 {
-                    b.HasOne("HospitalSystem.Core.Entities.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithOne()
                         .HasForeignKey("HospitalSystem.Core.Entities.Patient", "Id")
                         .OnDelete(DeleteBehavior.Cascade)

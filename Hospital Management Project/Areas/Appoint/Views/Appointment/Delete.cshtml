@@ -1,4 +1,4 @@
-﻿@model HospitalSystem.Core.Entities.Appointment
+﻿@model Appointment
 
 @{
     ViewData["Title"] = "Delete";
@@ -49,8 +49,10 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="ConfirmDelete" method="post">
+        <input type="hidden" name="id" value="@Model.AppointmentID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="Cancel" asp-action="Index" class="btn btn=dark" />
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

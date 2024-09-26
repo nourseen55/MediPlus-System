@@ -1,3 +1,5 @@
+using HospitalSystem.Application.Services;
+
 namespace Hospital_Management_Project
 {
     public class Program
@@ -33,6 +35,7 @@ namespace Hospital_Management_Project
 
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             //builder.Services.AddScoped<IPatientService,PatientService>();
+            builder.Services.AddScoped<IAppointmentService,AppointmentService>(); 
             builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
             var app = builder.Build();
@@ -47,12 +50,17 @@ namespace Hospital_Management_Project
             app.UseRouting();
             app.MapRazorPages();
             app.UseAuthorization();
-            
-            
+
+
+
+            app.MapControllerRoute(
+            name: "areaRoute",
+            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
             app.Run();
         }

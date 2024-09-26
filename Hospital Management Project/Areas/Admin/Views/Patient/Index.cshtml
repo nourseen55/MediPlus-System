@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Patient>
+﻿@model IEnumerable<HospitalSystem.Core.Entities.Patient>
 
 @{
     Layout = "_PatientLayout";
@@ -22,10 +22,12 @@
                                 <thead>
                                     <tr>
                                         
-                                        <th>Name</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
                                         <th>Age</th>
                                         <th>Gender</th>
                                         <th>City</th>
+                                        <th>Country</th>
                                         <th>Email</th>
                                         <th class="text-right">Action</th>
                                     </tr>
@@ -43,10 +45,11 @@
                                         @foreach (var item in Model)
                                         {
                                             <tr>
-                                                <td><img width="28" height="28" src="~/assets/img/user.jpg" class="rounded-circle m-r-5" alt="">@item.Name</td>
+                                                <td><img width="28" height="28" src="~/assets/img/user.jpg" class="rounded-circle m-r-5" alt="">@item.FirstName</td>
                                                 <td>@item.Age()</td>
                                                 <td>@item.Gender</td>
                                                 <td>@item.City</td>
+                                                <td>@item.Country</td>
                                                 <td>@item.Email</td>
                                                 <td class="text-right">
                                                     <div class="dropdown dropdown-action">

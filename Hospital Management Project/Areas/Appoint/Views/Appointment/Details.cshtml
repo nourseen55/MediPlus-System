@@ -1,0 +1,55 @@
+﻿@model HospitalSystem.Core.Entities.Appointment
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Appointment</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AppointmentID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AppointmentID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDateTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDateTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDateTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndDateTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PatientID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PatientID)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DoctorID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DoctorID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-dark" href="/Appoint/Appointment/Edit/ID"></a>
+    <a class="btn btn-dark" href="/Appoint/Appointment/Delete/ID"></a>
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,3 +1,5 @@
+using HospitalSystem.Application.Services;
+
 namespace Hospital_Management_Project
 {
     public class Program
@@ -32,7 +34,7 @@ namespace Hospital_Management_Project
             #endregion
 
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
-            //builder.Services.AddScoped<IPatientService,PatientService>();
+            builder.Services.AddScoped<IPatientService,PatientService>();
             builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
             var app = builder.Build();
@@ -52,7 +54,7 @@ namespace Hospital_Management_Project
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

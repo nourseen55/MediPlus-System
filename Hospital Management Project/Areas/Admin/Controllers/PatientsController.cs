@@ -1,4 +1,7 @@
-﻿namespace Hospital_Management_Project.Areas.Patient.Controllers
+﻿using HospitalSystem.Application.Services;
+using HospitalSystem.Core.Entities;
+
+namespace Hospital_Management_Project.Areas.Patient.Controllers
 {
     [Area("Admin")]
     public class PatientController : Controller
@@ -26,7 +29,7 @@
         [HttpGet]
         public IActionResult Create()
         {
-            var patient = new HospitalSystem.Core.Entities.Patient(); 
+            var patient = new HospitalSystem.Core.Entities.Patient();
             return View(patient);
         }
 

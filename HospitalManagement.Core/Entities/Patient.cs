@@ -1,11 +1,16 @@
-﻿namespace HospitalSystem.Core.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace HospitalSystem.Core.Entities
 {
     public class Patient : IdentityUser
     {
-        public string? Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string? Img { get; set; }
         public string? ZipCode { get; set; }
+
         public string? City { get; set; }
+        public string? Country { get; set; }
 
         public Gender Gender { get; set; }
 

@@ -38,7 +38,7 @@ namespace Hospital_Management_Project
             builder.Services.AddScoped<IPatientService, PatientService>();
             builder.Services.AddScoped<IAppointmentService,AppointmentService>(); 
 
-            builder.Services.AddScoped<IPatientService,PatientService>();
+            builder.Services.AddScoped<IDoctorService,DoctorService>();
 
             builder.Services.AddSingleton<IEmailSender, EmailSender>();
 

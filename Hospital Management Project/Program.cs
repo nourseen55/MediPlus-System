@@ -34,7 +34,12 @@ namespace Hospital_Management_Project
             #endregion
 
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+
+            builder.Services.AddScoped<IPatientService, PatientService>();
+            builder.Services.AddScoped<IAppointmentService,AppointmentService>(); 
+
             builder.Services.AddScoped<IPatientService,PatientService>();
+
             builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
             var app = builder.Build();

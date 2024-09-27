@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalSystem.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240927012309_init")]
+    [Migration("20240927165617_init")]
     partial class init
     {
         /// <inheritdoc />

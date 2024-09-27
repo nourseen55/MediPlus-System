@@ -22,7 +22,7 @@ namespace HospitalSystem.Persistance.Repository
                 return await _context.Doctors.ToListAsync();
             }
 
-            public async Task<Doctor?> GetEntityByIdAsync(int id)
+            public async Task<Doctor?> GetEntityByIdAsync(string id)
             {
                 return await _context.Doctors.FindAsync(id);
             }
@@ -33,7 +33,7 @@ namespace HospitalSystem.Persistance.Repository
                 await _context.SaveChangesAsync();
             }
 
-            public async Task DeleteEntityAsync(int id)
+            public async Task DeleteEntityAsync(string id)
             {
                 var Doctor = await GetEntityByIdAsync(id);
                 if (Doctor != null)

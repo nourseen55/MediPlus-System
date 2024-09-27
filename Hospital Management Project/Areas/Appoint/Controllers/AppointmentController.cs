@@ -18,7 +18,7 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
             var app= await _IAppointmentService.GetAllAppointmentsAsync();
             return View(app);
         }
-        public async Task< IActionResult> Details(int id) 
+        public async Task< IActionResult> Details(string id) 
         { 
             var app= await _IAppointmentService.GetAppointmentByIdAsync(id);
             if (app == null) 
@@ -44,7 +44,7 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
             return View(appointment);
         }
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(string id)
         {
             var appoint = await _IAppointmentService.GetAppointmentByIdAsync(id);
             if (appoint == null)
@@ -66,14 +66,14 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
             return View(appointment);
         }
         [HttpGet]
-        public async Task< IActionResult> Delete(int id)
+        public async Task< IActionResult> Delete(string id)
         {
             var app =await _IAppointmentService.GetAppointmentByIdAsync(id);
             return View(app);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ConfirmDelete(int id)
+        public async Task<IActionResult> ConfirmDelete(string id)
         {
             await _IAppointmentService.DeleteAppointmentAsync(id);
             return RedirectToAction("Index");

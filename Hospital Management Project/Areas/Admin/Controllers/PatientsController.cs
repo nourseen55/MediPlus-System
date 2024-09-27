@@ -91,7 +91,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
                 {
                     string fileName = Guid.NewGuid().ToString();
 
-                    var filePath = Path.Combine(RootPath, @"Image\Patients");
+                    var filePath = Path.Combine(RootPath, @"Images\Patients");
                     var extension = Path.GetExtension(Img.FileName);
 
                     using (var fileStream = new FileStream(Path.Combine(filePath, fileName + extension), FileMode.Create))
@@ -99,7 +99,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
                         await Img.CopyToAsync(fileStream);
                     }
 
-                    patient.Img = @"Image\Patients\" + fileName + extension;
+                    patient.Img = @"Images\Patients\" + fileName + extension;
                 }
                 await _patientService.UpdatePatientAsync(patient);
                 

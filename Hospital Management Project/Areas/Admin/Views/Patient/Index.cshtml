@@ -22,11 +22,12 @@
                                 <thead>
                                     <tr>
                                         
-                                        <th>First Name</th>
+                                        <th>Name</th>
                                         <th>Age</th>
                                         <th>Gender</th>
                                         <th>City</th>
                                         <th>Country</th>
+                                        <th>Zip Code</th>
                                         <th>Email</th>
                                         <th class="text-right">Action</th>
                                     </tr>
@@ -44,11 +45,12 @@
                                         @foreach (var item in Model)
                                         {
                                             <tr>
-                                                <td><img width="28" height="28" src="~/@item.Img" class="rounded-circle m-r-5" alt="">@item.FirstName</td>
+                                                <td><img width="28" height="28" src="~/@item.Img" class="rounded-circle m-r-5" alt="">@(item.FirstName+@item.LastName)</td>
                                                 <td>@item.Age()</td>
                                                 <td>@item.Gender</td>
                                                 <td>@item.City</td>
                                                 <td>@item.Country</td>
+                                                <td>@item.ZipCode</td>
                                                 <td>@item.Email</td>
                                             <!-- Action Icon and Dropdown -->
                                             <td class="text-right">

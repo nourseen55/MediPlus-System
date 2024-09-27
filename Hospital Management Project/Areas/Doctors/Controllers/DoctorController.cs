@@ -40,6 +40,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
                     }
                     doctor.Img = @"Images/Doctors/" + filename + ext;
                 }
+                doctor.UserName = doctor.Email;
                 await _doctorService.AddDoctorAsync(doctor);
                 return RedirectToAction("Index");
             }
@@ -49,7 +50,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(string id)
         {
-            var doctor = _doctorService.GetDoctorByIdAsync(id);
+            var doctor = await _doctorService.GetDoctorByIdAsync(id);
             return View(doctor);
         }
             [HttpPost]
@@ -94,23 +95,12 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             return View(doctor);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Delete(string id)
-        {
-            var doctor=await _doctorService.GetDoctorByIdAsync(id);
-            return View(doctor);
-        }
         [HttpPost]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmDelete(string id)
         {
             await _doctorService.DeleteDoctorAsync(id);
-            return RedirectToAction("Index");
-
-        }
-        public async Task<IActionResult>Details (string id)
-        {
-            var doctor =await _doctorService.GetDoctorByIdAsync(id);
-            return View(doctor);
+            return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> Index()
         {

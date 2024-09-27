@@ -1,5 +1,6 @@
 ﻿using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Hospital_Management_Project.Areas.Patient.Controllers
 {
@@ -7,16 +8,18 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
     public class PatientController : Controller
     {
         private readonly IPatientService _patientService;
-        public PatientController(IPatientService patientService)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public PatientController(IPatientService patientService, IWebHostEnvironment webHostEnvironment)
         {
             _patientService = patientService;
+            _webHostEnvironment = webHostEnvironment;
         }
         public async Task<IActionResult> Index()
         {
             var Patient = await _patientService.GetAllPatientsAsync();
             return View(Patient);
         }
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(string id)
         {
             var Patient = await _patientService.GetPatientByIdAsync(id);
             if (Patient == null)
@@ -34,19 +37,35 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(HospitalSystem.Core.Entities.Patient patient)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(HospitalSystem.Core.Entities.Patient patient, IFormFile Img)
         {
             if (ModelState.IsValid)
             {
+                string RootPath = _webHostEnvironment.WebRootPath;
+
+                if (Img != null && Img.Length > 0)
+                {
+                    string fileName = Guid.NewGuid().ToString();
+
+                    var filePath = Path.Combine(RootPath, @"Image\Patients");
+                    var extension = Path.GetExtension(Img.FileName);
+
+                    using (var fileStream = new FileStream(Path.Combine(filePath, fileName + extension), FileMode.Create))
+                    {
+                        await Img.CopyToAsync(fileStream);
+                    }
+
+                    patient.Img = @"Image\Patients\" + fileName + extension;
+                }
                 await _patientService.AddPatientAsync(patient);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             return View(patient);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(string id)
         {
             var Patient = await _patientService.GetPatientByIdAsync(id);
             if (Patient == null)
@@ -58,33 +77,41 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, HospitalSystem.Core.Entities.Patient patient)
+        public async Task<IActionResult> Edit(string? id, HospitalSystem.Core.Entities.Patient patient,IFormFile Img)
         {
-            if (id.ToString() != patient.Id)
+            if (id != patient.Id)
             {
                 return BadRequest();
             }
             if (ModelState.IsValid)
             {
+                string RootPath = _webHostEnvironment.WebRootPath;
+
+                if (Img != null && Img.Length > 0)
+                {
+                    string fileName = Guid.NewGuid().ToString();
+
+                    var filePath = Path.Combine(RootPath, @"Image\Patients");
+                    var extension = Path.GetExtension(Img.FileName);
+
+                    using (var fileStream = new FileStream(Path.Combine(filePath, fileName + extension), FileMode.Create))
+                    {
+                        await Img.CopyToAsync(fileStream);
+                    }
+
+                    patient.Img = @"Image\Patients\" + fileName + extension;
+                }
                 await _patientService.UpdatePatientAsync(patient);
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(patient);
 
         }
-        public async Task<IActionResult> Delete(int id)
-        {
-            var Patient = await _patientService.GetPatientByIdAsync(id);
-            if (Patient == null)
-            {
-                return NotFound();
-            }
-            return View(Patient);
 
-        }
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ConfirmDelete(int id)
+        public async Task<IActionResult> ConfirmDelete(string id)
         {
             await _patientService.DeletePatientAsync(id);
             return RedirectToAction(nameof(Index));

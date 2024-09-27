@@ -171,6 +171,6 @@
         </div>
     </div>
     @RenderBody();
-    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @RenderSection("Scripts",required:false)
 </body>
 </html>

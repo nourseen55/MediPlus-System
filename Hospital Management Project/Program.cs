@@ -49,12 +49,16 @@ namespace Hospital_Management_Project
             app.UseRouting();
             app.MapRazorPages();
             app.UseAuthorization();
-            
-            
+
+
+
+            app.MapControllerRoute(
+                name: "areaRoute",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }

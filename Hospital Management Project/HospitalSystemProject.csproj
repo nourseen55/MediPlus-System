@@ -25,4 +25,8 @@
     <ProjectReference Include="..\HospitalSystem.Persistance\HospitalSystem.Persistance.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Image\Patients\" />
+  </ItemGroup>
+
 </Project>

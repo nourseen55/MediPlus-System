@@ -37,7 +37,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(HospitalSystem.Core.Entities.Patient patient, IFormFile Img)
         {
             if (ModelState.IsValid)
@@ -48,7 +48,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
                 {
                     string fileName = Guid.NewGuid().ToString();
 
-                    var filePath = Path.Combine(RootPath, @"Image\Patients");
+                    var filePath = Path.Combine(RootPath, @"Images\Patients");
                     var extension = Path.GetExtension(Img.FileName);
 
                     using (var fileStream = new FileStream(Path.Combine(filePath, fileName + extension), FileMode.Create))
@@ -56,7 +56,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
                         await Img.CopyToAsync(fileStream);
                     }
 
-                    patient.Img = @"Image\Patients\" + fileName + extension;
+                    patient.Img = @"Images\Patients\" + fileName + extension;
                 }
                 await _patientService.AddPatientAsync(patient);
                 return RedirectToAction("Index");
@@ -77,12 +77,8 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string? id, HospitalSystem.Core.Entities.Patient patient,IFormFile Img)
+        public async Task<IActionResult> Edit( HospitalSystem.Core.Entities.Patient patient,IFormFile Img)
         {
-            if (id != patient.Id)
-            {
-                return BadRequest();
-            }
             if (ModelState.IsValid)
             {
                 string RootPath = _webHostEnvironment.WebRootPath;

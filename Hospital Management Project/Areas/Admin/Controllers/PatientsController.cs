@@ -77,7 +77,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit( HospitalSystem.Core.Entities.Patient patient,IFormFile Img)
+        public async Task<IActionResult> Edit(HospitalSystem.Core.Entities.Patient patient,IFormFile Img)
         {
             if (ModelState.IsValid)
             {

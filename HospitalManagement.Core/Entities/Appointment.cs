@@ -3,8 +3,7 @@ namespace HospitalSystem.Core.Entities
 {
     public class Appointment
     {
-        [Key]
-        public int AppointmentID { get; set; }
+        public string AppointmentID { get; set; } = Guid.NewGuid().ToString();
 
         [Display(Name = "Start Date")]
         public DateTime? StartDateTime { get; set; }

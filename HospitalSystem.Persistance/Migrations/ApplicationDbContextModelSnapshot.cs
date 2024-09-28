@@ -60,7 +60,6 @@ namespace HospitalSystem.Persistance.Migrations
             modelBuilder.Entity("HospitalSystem.Core.Entities.Departments", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DepartmentName")
@@ -73,7 +72,7 @@ namespace HospitalSystem.Persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.MedicalRecord", b =>

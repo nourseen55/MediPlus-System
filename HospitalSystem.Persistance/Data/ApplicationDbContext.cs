@@ -29,7 +29,7 @@
         /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=HospitalDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
-        }
-*/
+        }*/
+
     }
 }

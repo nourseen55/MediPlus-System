@@ -4,7 +4,7 @@ namespace HospitalSystem.Core.Entities
     public class Appointment
     {
         [Key]
-        public string AppointmentID { get; set; }
+        public int AppointmentID { get; set; }
 
         [Display(Name = "Start Date")]
         public DateTime? StartDateTime { get; set; }

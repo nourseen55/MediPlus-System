@@ -47,9 +47,9 @@
                                         <tr>
                                             @* <td><img width="28" height="28" src="~/@item.Img" class="rounded-circle m-r-5" alt="">@item.FirstName</td> *@
                                             <td>@item.AppointmentID</td>
-                                            <td>@item.PatientID</td>
+                                            <td>@item.Patient?.FirstName</td>
                                             <td>@item.CalculateAge()</td>
-                                            <td>@item.DoctorID</td>
+                                            <td>@item.Doctor?.Name</td>
                                             <td>@item.StartDateTime</td>
                                             <td>@item.EndDateTime</td>
 

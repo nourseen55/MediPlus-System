@@ -31,10 +31,6 @@ namespace HospitalSystem.Persistance.Configurations
             builder.Property(p => p.Country)
                        .HasMaxLength(100);
 
-
-
-
-
                 builder.Property(p => p.DateOfBirth)
                        .IsRequired();
 

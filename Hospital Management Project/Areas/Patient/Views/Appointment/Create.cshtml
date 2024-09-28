@@ -1,5 +1,7 @@
 ﻿@model Appointment
-
+<br />
+<br />
+<br />
 @{
     ViewData["Title"] = "Create";
     Layout = "_AppointmentLayout";
@@ -15,21 +17,15 @@
         <div class="col-lg-8 offset-lg-2">
             <form asp-action="Create" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="AppointmentID"></label>
-                            <input asp-for="AppointmentID" class="form-control" type="text" readonly="">
-                        </div>
-                    </div>
-                        <div class="col-md-6">
+
+                        
                             <div class="form-group">
                                 <label asp-for="DateOfBirth">Date of Birth</label>
                                 <input asp-for="DateOfBirth" type="date" class="form-control" />
                                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                             </div>
-                        </div>
-                </div>
+                       
+
                 <div class="row">
 
                         <div class="col-md-6">

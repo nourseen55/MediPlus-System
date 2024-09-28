@@ -1,5 +1,6 @@
+using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
-
+using HospitalSystem.Infrastructure.Mapping;
 namespace Hospital_Management_Project
 {
     public class Program
@@ -13,6 +14,7 @@ namespace Hospital_Management_Project
             builder.Services.AddDbContext<ApplicationDbContext>(options=>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("cs"))
             );
+
 
             builder.Services.AddRazorPages();
 
@@ -32,6 +34,7 @@ namespace Hospital_Management_Project
             }).AddDefaultTokenProviders()
               .AddEntityFrameworkStores<ApplicationDbContext>();
             #endregion
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 
@@ -39,8 +42,12 @@ namespace Hospital_Management_Project
             builder.Services.AddScoped<IAppointmentService,AppointmentService>(); 
 
             builder.Services.AddScoped<IDoctorService,DoctorService>();
+            builder.Services.AddScoped<IImageService,ImageService>();
+            
+
 
             builder.Services.AddSingleton<IEmailSender, EmailSender>();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
 
             var app = builder.Build();
 

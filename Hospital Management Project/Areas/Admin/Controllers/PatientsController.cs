@@ -1,18 +1,25 @@
-﻿using HospitalSystem.Application.Services;
+﻿
+using AutoMapper;
+using HospitalSystem.Application.IServices;
+using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
+using HospitalSystem.Core.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hospital_Management_Project.Areas.Patient.Controllers
 {
     [Area("Admin")]
     public class PatientController : Controller
     {
+        private readonly IMapper _mapper;
         private readonly IPatientService _patientService;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        public PatientController(IPatientService patientService, IWebHostEnvironment webHostEnvironment)
+        private readonly IImageService _imageService;
+        public PatientController(IPatientService patientService, IImageService imageService, IMapper mapper)
         {
             _patientService = patientService;
-            _webHostEnvironment = webHostEnvironment;
+            _imageService = imageService;
+            _mapper = mapper;
         }
         public async Task<IActionResult> Index()
         {
@@ -37,27 +44,18 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(HospitalSystem.Core.Entities.Patient patient, IFormFile Img)
         {
             if (ModelState.IsValid)
             {
-                string RootPath = _webHostEnvironment.WebRootPath;
-
                 if (Img != null && Img.Length > 0)
                 {
-                    string fileName = Guid.NewGuid().ToString();
-
-                    var filePath = Path.Combine(RootPath, @"Images\Patients");
-                    var extension = Path.GetExtension(Img.FileName);
-
-                    using (var fileStream = new FileStream(Path.Combine(filePath, fileName + extension), FileMode.Create))
-                    {
-                        await Img.CopyToAsync(fileStream);
-                    }
-
-                    patient.Img = @"Images\Patients\" + fileName + extension;
+                    var path = @"Images\Patients";
+                    string imgPath = await _imageService.SaveImageAsync(Img, path);
+                    patient.Img = imgPath;
                 }
+
                 await _patientService.AddPatientAsync(patient);
                 return RedirectToAction("Index");
             }
@@ -72,40 +70,35 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
             {
                 return NotFound();
             }
-            return View(Patient);
+            var model = _mapper.Map<PatientVM>(Patient);
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string? id, HospitalSystem.Core.Entities.Patient patient,IFormFile Img)
+        public async Task<IActionResult> Edit(PatientVM patientVM,IFormFile Img)
         {
-            if (id != patient.Id)
-            {
-                return BadRequest();
-            }
             if (ModelState.IsValid)
             {
-                string RootPath = _webHostEnvironment.WebRootPath;
-
-                if (Img != null && Img.Length > 0)
+                
+                var patient = await _patientService.GetPatientByIdAsync(patientVM.Id);
+                if (patient == null)
                 {
-                    string fileName = Guid.NewGuid().ToString();
+                    return NotFound();
+                }
+                var model = _mapper.Map(patientVM, patient);
 
-                    var filePath = Path.Combine(RootPath, @"Images\Patients");
-                    var extension = Path.GetExtension(Img.FileName);
-
-                    using (var fileStream = new FileStream(Path.Combine(filePath, fileName + extension), FileMode.Create))
-                    {
-                        await Img.CopyToAsync(fileStream);
-                    }
-
-                    patient.Img = @"Images\Patients\" + fileName + extension;
+                if (Img != null && Img.Length > 0) 
+                {
+                    var path = @"Images\Patients";
+                    string imgPath = await _imageService.SaveImageAsync(Img, path);
+                    patient.Img = imgPath; 
                 }
                 await _patientService.UpdatePatientAsync(patient);
                 
                 return RedirectToAction(nameof(Index));
             }
-            return View(patient);
+            return View(patientVM);
 
         }
 

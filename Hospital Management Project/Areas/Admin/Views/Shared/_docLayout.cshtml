@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/favicon.ico">
-    <title>Patients</title>
+    <title>Doctors</title>
     <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/assets/css/select2.min.css">
@@ -89,11 +89,11 @@
                     <li>
                         <a href="index-2.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="~/Doctors/doctor"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                     </li>
-                    <li class="Active">
-                        <a href="~/Admin/Patients"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                    <li >
+                        <a href="~/admin/patient"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                     </li>
                     <li>
                         <a href="~/Patient/Appoinments"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
@@ -101,7 +101,7 @@
                     <li>
                         <a href="schedule.html"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
                     </li>
-                    <li>
+                    <li >
                         <a href="~/admin/Department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                     </li>
                     <li class="submenu">
@@ -171,6 +171,6 @@
         </div>
     </div>
     @RenderBody();
-    @RenderSection("Scripts",required:false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

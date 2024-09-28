@@ -1,4 +1,4 @@
-﻿@model Patient
+﻿@model PatientVM
 
 @{
     Layout = "_PatientLayout";
@@ -14,7 +14,7 @@
         <div class="col-lg-8 offset-lg-2">
                 <form asp-action="Edit" method="post" enctype="multipart/form-data">
                     @Html.AntiForgeryToken()
-                    <input hidden asp-for="Id" />
+                      <input hidden asp-for="Id" />
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -47,8 +47,8 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Password <span class="text-danger">*</span></label>
-                                <input asp-for="PasswordHash" class="form-control" type="password" required />
-                                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                                <input asp-for="Password" class="form-control" type="password" required />
+                                <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                         </div>
 

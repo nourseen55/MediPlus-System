@@ -54,6 +54,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.ToTable("Appointment", (string)null);
                 });
 
+            modelBuilder.Entity("HospitalSystem.Core.Entities.Departments", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DepartmentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments", (string)null);
+                });
+
             modelBuilder.Entity("HospitalSystem.Core.Entities.MedicalRecord", b =>
                 {
                     b.Property<int>("Id")

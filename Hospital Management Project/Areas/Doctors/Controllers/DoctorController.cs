@@ -24,19 +24,19 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             return View(doctor);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Doctor doctor,IFormFile file)
+        public async Task<IActionResult> Create(Doctor doctor,IFormFile Img)
         {
             if (ModelState.IsValid)
             {
                 var environment = _webHostEnvironment.WebRootPath;
-                if (file != null)
+                if (Img != null)
                 {
                     var filename=Guid.NewGuid().ToString();
                     var path=Path.Combine(environment,@"Images/Doctors");
-                    var ext=Path.GetExtension(file.FileName);
+                    var ext=Path.GetExtension(Img.FileName);
                     using (var filestream = new FileStream(Path.Combine(path, filename + ext), FileMode.Create))
                     {
-                        file.CopyTo(filestream);
+                        Img.CopyTo(filestream);
                     }
                     doctor.Img = @"Images/Doctors/" + filename + ext;
                 }
@@ -54,12 +54,12 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             return View(doctor);
         }
             [HttpPost]
-        public async Task<IActionResult> Update(Doctor doctor, IFormFile file) // 'file' should match the input name attribute
+        public async Task<IActionResult> Update(Doctor doctor, IFormFile Img) // 'file' should match the input name attribute
         {
             if (ModelState.IsValid)
             {
                 var environment = _webHostEnvironment.WebRootPath;
-                if (file != null && file.Length > 0) // Ensure the file is not null
+                if (Img != null && Img.Length > 0) // Ensure the file is not null
                 {
                     var filename = Guid.NewGuid().ToString();
                     var path = Path.Combine(environment, "Images", "Doctors");
@@ -69,7 +69,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
                         Directory.CreateDirectory(path);
                     }
 
-                    var ext = Path.GetExtension(file.FileName);
+                    var ext = Path.GetExtension(Img.FileName);
 
                     // If an old image exists, delete it
                     if (!string.IsNullOrEmpty(doctor.Img))
@@ -83,7 +83,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
 
                     using (var filestream = new FileStream(Path.Combine(path, filename + ext), FileMode.Create))
                     {
-                        file.CopyTo(filestream);
+                        Img.CopyTo(filestream);
                     }
 
                     doctor.Img = @"Images/Doctors/" + filename + ext;

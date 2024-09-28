@@ -79,10 +79,19 @@
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="Img" class="control-label">Profile Image</label>
-                    <input type="file" name="file" class="form-control" />
+              <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Avatar</label>
+                        <div class="profile-upload">
+                            <div class="upload-img">
+                                <img src="~/assets/img/user.jpg" alt="Default Image" id="ImagePreview" />
+                            </div>
+                            <div class="upload-input">
+                                <input asp-for="Img" type="file" class="form-control" id="imgfile" onchange="Image(event);" name="Img" />
+                            </div>
+                            <span asp-validation-for="Img" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">Create</button>
@@ -98,5 +107,11 @@
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script>
+            var Image = function (event) {
+                var img = document.getElementById("ImagePreview");
+                img.src = URL.createObjectURL(event.target.files[0]);
+            }
+        </script>
     }
 }

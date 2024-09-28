@@ -1,4 +1,4 @@
-﻿global using Hospital_Management_Project.ViewModels;
+﻿global using HospitalSystem.Core.ViewModels;
 global using HospitalSystem.Application.Interfaces;
 global using HospitalSystem.Infrastructure.Services;
 global using HospitalSystem.Core.Entities;

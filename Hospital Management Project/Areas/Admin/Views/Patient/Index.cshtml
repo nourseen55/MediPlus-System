@@ -38,7 +38,7 @@
                                    @if (!Model.Any())
                                    {
                                         <tr>
-                                            <td colspan="6" class="text-center text-muted">No patient records available</td>
+                                            <td colspan="9" class="text-center text-muted">No patient records available</td>
                                         </tr>
                                    }
                                    else
@@ -69,8 +69,6 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                            
-
                                             <!-- Modal for Confirm Delete -->
                                             <div id="delete_patient_@item.Id" class="modal fade delete-modal" role="dialog">
                                                 <div class="modal-dialog modal-dialog-centered">

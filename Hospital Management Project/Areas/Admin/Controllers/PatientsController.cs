@@ -1,6 +1,8 @@
 ﻿using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
+using HospitalSystem.Core.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hospital_Management_Project.Areas.Patient.Controllers
 {
@@ -42,6 +44,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 string RootPath = _webHostEnvironment.WebRootPath;
 
                 if (Img != null && Img.Length > 0)
@@ -72,15 +75,52 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
             {
                 return NotFound();
             }
-            return View(Patient);
+            var model = new PatientVM
+            {
+                Id = Patient.Id,
+                FirstName = Patient.FirstName,
+                LastName = Patient.LastName,
+                Img = Patient.Img,
+                ZipCode = Patient.ZipCode,
+                City = Patient.City,
+                Country = Patient.Country,
+                Gender = Patient.Gender,
+                DateOfBirth = Patient.DateOfBirth,
+                Email = Patient.Email,
+                UserName = Patient.UserName, 
+                PhoneNumber = Patient.PhoneNumber,
+                Password = Patient.PasswordHash
+            };
+
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(HospitalSystem.Core.Entities.Patient patient,IFormFile Img)
+        public async Task<IActionResult> Edit(PatientVM patientVM,IFormFile Img)
         {
             if (ModelState.IsValid)
             {
+                var patient = await _patientService.GetPatientByIdAsync(patientVM.Id);
+                if (patient == null)
+                {
+                    return NotFound();
+                }
+                patient.Id = patientVM.Id;
+                patient.FirstName = patientVM.FirstName;
+                patient.LastName = patientVM.LastName;
+                patient.ZipCode = patientVM.ZipCode;
+                patient.City = patientVM.City;
+                patient.Country = patientVM.Country;
+                patient.Gender = patientVM.Gender;
+                patient.DateOfBirth = patientVM.DateOfBirth;
+                patient.Email = patientVM.Email;
+                patient.UserName = patientVM.UserName;
+                patient.PhoneNumber = patientVM.PhoneNumber;
+
+
+
+
                 string RootPath = _webHostEnvironment.WebRootPath;
 
                 if (Img != null && Img.Length > 0)
@@ -101,7 +141,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
                 
                 return RedirectToAction(nameof(Index));
             }
-            return View(patient);
+            return View(patientVM);
 
         }
 

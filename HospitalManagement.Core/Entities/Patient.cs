@@ -21,6 +21,7 @@ namespace HospitalSystem.Core.Entities
             return DateTime.Today.Year - DateOfBirth.Year;
         }
 
+
         public virtual ICollection<Appointment>? Appointments { get; set; }
         public virtual ICollection<MedicalRecord>? MedicalRecords { get; set; }
     }

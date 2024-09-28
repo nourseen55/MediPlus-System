@@ -87,7 +87,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
                 Gender = Patient.Gender,
                 DateOfBirth = Patient.DateOfBirth,
                 Email = Patient.Email,
-                UserName = Patient.UserName, 
+                UserName = Patient.UserName,
                 PhoneNumber = Patient.PhoneNumber,
                 Password = Patient.PasswordHash
             };

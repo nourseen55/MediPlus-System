@@ -3,6 +3,7 @@ namespace HospitalSystem.Core.Entities
 {
     public class Appointment
     {
+        [Key]
         public string AppointmentID { get; set; } = Guid.NewGuid().ToString();
 
         [Display(Name = "Start Date")]

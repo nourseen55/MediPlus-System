@@ -16,7 +16,7 @@ namespace HospitalSystem.Application.Services
             await _unitOfWork._appointmentRepository.AddEntityAsync(Appointment);
         }
 
-        public async Task<Appointment> GetAppointmentByIdAsync(int id)
+        public async Task<Appointment> GetAppointmentByIdAsync(string id)
         {
             return await _unitOfWork._appointmentRepository.GetEntityByIdAsync(id);
         }
@@ -31,7 +31,7 @@ namespace HospitalSystem.Application.Services
              await _unitOfWork._appointmentRepository.UpdateEntityAsync(Appointment);
         }
 
-        public async Task DeleteAppointmentAsync(int id)
+        public async Task DeleteAppointmentAsync(string id)
         {
             await _unitOfWork._appointmentRepository.DeleteEntityAsync(id);
         }

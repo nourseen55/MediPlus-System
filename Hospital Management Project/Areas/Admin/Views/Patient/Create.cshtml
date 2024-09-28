@@ -1,4 +1,4 @@
-﻿@model HospitalSystem.Core.Entities.Patient
+﻿@model Patient
 
 @{
     Layout = "_PatientLayout";
@@ -13,7 +13,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
-                <form asp-action="Create" method="post">
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
                     @Html.AntiForgeryToken()
                     <div class="row">
                          <div class="col-sm-6">
@@ -45,13 +45,13 @@
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Password <span class="text-danger">*</span></label>
-                                <input asp-for="PasswordHash" class="form-control" type="password" required />
-                                <span asp-validation-for="PasswordHash" class="text-danger"></span>
-                            </div>
-                        </div>
+                       <div class="col-sm-6">
+                              <div class="form-group">
+                                  <label>Password <span class="text-danger">*</span></label>
+                                  <input asp-for="PasswordHash" class="form-control" type="password" required />
+                                  <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                              </div>
+                          </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Date of Birth <span class="text-danger">*</span></label>
@@ -120,24 +120,36 @@
                                 <label>Avatar</label>
                                 <div class="profile-upload">
                                     <div class="upload-img">
-                                        <img alt="" src="~/assets/img/user.jpg">
+                                        <img src="~/assets/img/user.jpg" alt="Default Image" id="ImagePreview" />
                                     </div>
                                     <div class="upload-input">
-                                        <input type="file" class="form-control" />
+                                        <input asp-for="Img" type="file" class="form-control" id="imgfile" onchange="Image(event);" name="Img" />
                                     </div>
+                                    <span asp-validation-for="Img" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="m-t-20 text-center">
-                        <button type="submit" class="btn btn-primary submit-btn">Create Patient</button>
+                   <div class="m-t-20 text-center">
+                        <button class="btn btn-primary submit-btn" type="submit">Create Patient</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        var Image = function (event) {
+            var img = document.getElementById("ImagePreview");
+            img.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+}
+
+
 
 
 

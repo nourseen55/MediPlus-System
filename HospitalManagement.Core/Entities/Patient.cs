@@ -16,6 +16,7 @@ namespace HospitalSystem.Core.Entities
 
         public DateTime DateOfBirth { get; set; }
 
+
         public int Age()
         {
             return DateTime.Today.Year - DateOfBirth.Year;

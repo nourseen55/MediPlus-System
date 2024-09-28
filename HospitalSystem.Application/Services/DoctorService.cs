@@ -16,7 +16,7 @@ namespace HospitalSystem.Application.Services
             await _unitOfWork._doctorRepository.AddEntityAsync(Doctor);
         }
 
-        public async Task<Doctor> GetDoctorByIdAsync(int id)
+        public async Task<Doctor> GetDoctorByIdAsync(string id)
         {
             return await _unitOfWork._doctorRepository.GetEntityByIdAsync(id);
         }
@@ -31,7 +31,7 @@ namespace HospitalSystem.Application.Services
              await _unitOfWork._doctorRepository.UpdateEntityAsync(Doctor);
         }
 
-        public async Task DeleteDoctorAsync(int id)
+        public async Task DeleteDoctorAsync(string id)
         {
             await _unitOfWork._doctorRepository.DeleteEntityAsync(id);
         }

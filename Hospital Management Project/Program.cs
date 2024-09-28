@@ -38,7 +38,7 @@ namespace Hospital_Management_Project
             builder.Services.AddScoped<IPatientService, PatientService>();
             builder.Services.AddScoped<IAppointmentService,AppointmentService>(); 
 
-            builder.Services.AddScoped<IPatientService,PatientService>();
+            builder.Services.AddScoped<IDoctorService,DoctorService>();
 
             builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
@@ -58,13 +58,12 @@ namespace Hospital_Management_Project
 
 
             app.MapControllerRoute(
-            name: "areaRoute",
-            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                name: "areaRoute",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
 
             app.Run();
         }

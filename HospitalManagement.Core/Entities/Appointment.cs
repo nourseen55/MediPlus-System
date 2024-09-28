@@ -1,8 +1,10 @@
-﻿namespace HospitalSystem.Core.Entities
+﻿
+namespace HospitalSystem.Core.Entities
 {
     public class Appointment
     {
-        public int AppointmentID { get; set; }
+        [Key]
+        public string AppointmentID { get; set; }
 
         [Display(Name = "Start Date")]
         public DateTime? StartDateTime { get; set; }
@@ -15,6 +17,11 @@
         public virtual Patient? Patient { get; set; }
         public string? DoctorID { get; set; }
         public virtual Doctor? Doctor { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
+        public int CalculateAge()
+        {
+            return DateTime.Today.Year - DateOfBirth.Year;
+        }
     }
 }

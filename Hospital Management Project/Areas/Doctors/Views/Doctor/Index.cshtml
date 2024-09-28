@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Doctor>
+
+<h1>Doctors</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Specialization</th>
+@*             <th>Medical Records</th>
+ *@          @*   <th>Appointments</th>
+            <th>Nurses</th> *@
+            <th>Actions</th> <!-- New column for action links -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doctor in Model)
+        {
+            <tr>
+                <td>@doctor.Name</td>
+                <td>@doctor.Specialization</td>
+
+                <!-- Medical Records -->
+         @*        <td>
+                    <ul>
+                        @foreach (var record in doctor.MedicalRecords)
+                        {
+                            <li>Record ID: @record.Id</li> <!-- You can replace with actual data from MedicalRecord -->
+                        }
+                    </ul>
+                </td>
+
+                <!-- Appointments -->
+                <td>
+                    <ul>
+                        @foreach (var appointment in doctor.Appointments)
+                        {
+                            <li>Appointment ID: @appointment.AppointmentID</li> <!-- Replace with actual data from Appointment -->
+                        }
+                    </ul>
+                </td>
+
+                <!-- Nurses -->
+                <td>
+                    <ul>
+                        @foreach (var nurse in doctor.Nurses)
+                        {
+                            <li>@nurse.Name</li> <!-- Assuming Nurse has a Name property -->
+                        }
+                    </ul>
+                </td> *@
+
+                <!-- Action Links -->
+                <td>
+                    <!-- Details Link -->
+                    <a asp-action="Details" asp-route-id="@doctor.Id" class="btn btn-info">Details</a>
+
+                    <!-- Edit/Update Link -->
+                    <a asp-action="Update" asp-route-id="@doctor.Id" class="btn btn-warning">Update</a>
+
+                    <!-- Delete Link -->
+                    <a asp-action="Delete" asp-route-id="@doctor.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Create" class="btn btn-success">Create New Doctor</a>
+</div>

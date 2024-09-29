@@ -8,12 +8,6 @@ namespace Hospital_Management_Project
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
-            builder.Configuration
-                .SetBasePath(Directory.GetCurrentDirectory()) // Ensure the correct path
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddEnvironmentVariables();
-
             var db1 = builder.Configuration.GetConnectionString("cs");
             
             // Add services to the container.

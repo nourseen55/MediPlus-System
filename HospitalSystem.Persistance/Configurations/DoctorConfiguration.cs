@@ -5,7 +5,12 @@
         public void Configure(EntityTypeBuilder<Doctor> builder)
         {
             builder.ToTable("Doctor");
-            builder.Property(d => d.Specialization).IsRequired();
+            builder
+                 .HasOne(d => d.Department)          
+                 .WithMany(dep => dep.Doctors)        
+                 .HasForeignKey(d => d.DepartmentId)  
+                 .OnDelete(DeleteBehavior.Restrict);  
+
         }
     }
 }

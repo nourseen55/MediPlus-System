@@ -16,11 +16,11 @@ namespace HospitalSystem.Core.ViewModels
         public string? Email { get; set; }
         public string? PasswordHash { get; set; }
         public string? PhoneNumber { get; set; }
+        public string DepartmentId { get; set; }
 
         public Gender Gender { get; set; }
 
         public DateTime DateOfBirth { get; set; }
       
-        public string? Specialization { get; set; }
     }
 }

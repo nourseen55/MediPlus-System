@@ -8,41 +8,44 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <!-- Decrease the width using Bootstrap column class -->
             <form asp-action="Create" method="post" enctype="multipart/form-data" class="shadow p-4 rounded bg-light">
+                <!-- First Row: Name and Email -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label asp-for="Name" class="control-label"></label>
                         <input asp-for="Name" class="form-control" placeholder="Enter Name" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="Email" class="control-label"></label>
-                            <input asp-for="Email" class="form-control" placeholder="Enter Email" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Password <span class="text-danger">*</span></label>
-                                <input asp-for="PasswordHash" class="form-control" type="password" required />
-                                <span asp-validation-for="PasswordHash" class="text-danger"></span>
-                            </div>
-                        </div>
                     <div class="form-group col-md-6">
-                        <label asp-for="Specialization" class="control-label"></label>
-                        <input asp-for="Specialization" class="form-control" placeholder="Enter Specialization" />
-                        <span asp-validation-for="Specialization" class="text-danger"></span>
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" placeholder="Enter Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                 </div>
 
+                <!-- Second Row: Password and Department -->
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Password <span class="text-danger">*</span></label>
+                        <input asp-for="PasswordHash" class="form-control" type="password" required />
+                        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="DepartmentId" class="control-label">Department</label>
+                        <select asp-for="DepartmentId" class="form-control form-control-lg" asp-items="ViewBag.Departments">
+                            <option value="">Select Department</option>
+                        </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Third Row: ZipCode and City -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label asp-for="ZipCode" class="control-label"></label>
                         <input asp-for="ZipCode" class="form-control" placeholder="Enter Zip Code" />
                         <span asp-validation-for="ZipCode" class="text-danger"></span>
                     </div>
-
                     <div class="form-group col-md-6">
                         <label asp-for="City" class="control-label"></label>
                         <input asp-for="City" class="form-control" placeholder="Enter City" />
@@ -50,6 +53,7 @@
                     </div>
                 </div>
 
+                <!-- Fourth Row: Gender and DateOfBirth -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label asp-for="Gender" class="control-label d-block">Gender</label>
@@ -61,11 +65,8 @@
                             <input asp-for="Gender" class="form-check-input" type="radio" value="1" id="genderFemale" />
                             <label class="form-check-label" for="genderFemale">Female</label>
                         </div>
-                       
                         <span asp-validation-for="Gender" class="text-danger"></span>
                     </div>
-
-
                     <div class="form-group col-md-6">
                         <label asp-for="DateOfBirth" class="control-label"></label>
                         <input asp-for="DateOfBirth" class="form-control" type="date" />
@@ -73,15 +74,14 @@
                     </div>
                 </div>
 
-               
+                <!-- Fifth Row: PhoneNumber and Image -->
+                <div class="form-row">
                     <div class="form-group col-md-6">
                         <label asp-for="PhoneNumber" class="control-label"></label>
                         <input asp-for="PhoneNumber" class="form-control" placeholder="Enter Phone Number" />
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
-                </div>
-              <div class="col-sm-6">
-                    <div class="form-group">
+                    <div class="form-group col-md-6">
                         <label>Avatar</label>
                         <div class="profile-upload">
                             <div class="upload-img">
@@ -95,6 +95,7 @@
                     </div>
                 </div>
 
+                <!-- Submit Button -->
                 <button type="submit" class="btn btn-primary btn-block">Create</button>
             </form>
 

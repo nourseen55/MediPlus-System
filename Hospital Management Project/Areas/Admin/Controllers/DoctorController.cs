@@ -5,6 +5,7 @@ using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
 using HospitalSystem.Core.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using static System.Net.Mime.MediaTypeNames;
 namespace Hospital_Management_Project.Areas.Admin.Controllers
 {
@@ -16,17 +17,23 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         private readonly IMapper mapper;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<IdentityUser> _userManager;
-        public DoctorController(IDoctorService doctorService, IImageService imageService, IMapper mapper, IWebHostEnvironment webHostEnvironment, UserManager<IdentityUser> userManager)
+        private readonly IDepartmentService _departmentService;
+        public DoctorController(IDoctorService doctorService, IImageService imageService, IDepartmentService departmentService,IMapper mapper, IWebHostEnvironment webHostEnvironment, UserManager<IdentityUser> userManager)
         {
             _doctorService = doctorService;
             _webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
             _imageService = imageService;
             this.mapper = mapper;
+            _departmentService = departmentService;
         }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
+            IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
+            ViewBag.Departments = departments.Select(d => new SelectListItem { Value = d.Id, Text = d.DepartmentName });
+
+
             Doctor doctor = new Doctor();
             return View(doctor);
         }
@@ -44,12 +51,16 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                 await _doctorService.AddDoctorAsync(doctor);
                 return RedirectToAction("Index");
             }
+            IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
+            ViewBag.Departments = departments.Select(d => new SelectListItem { Value = d.Id, Text = d.DepartmentName });
             return View(doctor);
 
         }
         [HttpGet]
         public async Task<IActionResult> Update(string id)
         {
+            IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
+            ViewBag.Departments = departments.Select(d => new SelectListItem { Value = d.Id, Text = d.DepartmentName });
             var doctor = await _doctorService.GetDoctorByIdAsync(id);
             var doctorvm = mapper.Map<DoctorVM>(doctor);
             return View(doctorvm);
@@ -67,6 +78,8 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                     doctor.Img = await _imageService.SaveImageAsync(Img, path);
 
                 }
+                IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
+                ViewBag.Departments = departments.Select(d => new SelectListItem { Value = d.Id, Text = d.DepartmentName });
                 await _doctorService.UpdateDoctorAsync(doctor);
                 return RedirectToAction("Index");
             }

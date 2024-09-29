@@ -28,6 +28,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\Images\Doctors\" />
     <Folder Include="wwwroot\Images\Nurses\" />
+    <Folder Include="wwwroot\DiagnosisDocument\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using HospitalSystem.Application.Services;
+﻿using HospitalSystem.Application.IServices;
+using HospitalSystem.Application.Services;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Hospital_Management_Project.Areas.Doctors.Controllers{
@@ -11,20 +12,24 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         private readonly IPatientService _patientService;
         private readonly IAppointmentService _appointmentService;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IImageService _fileService;
 
-        public MedicalRecordController(IMedicalRecordService medicalRecordService, IPatientService patientService , IAppointmentService appointmentService , UserManager<IdentityUser> userManager)
+        public MedicalRecordController(IMedicalRecordService medicalRecordService, IImageService fileService, IPatientService patientService , IAppointmentService appointmentService , UserManager<IdentityUser> userManager)
         {
             _medicalRecordService = medicalRecordService;
             _patientService = patientService;
             _appointmentService = appointmentService;
             _userManager = userManager;
+            _fileService = fileService;
+            
+            
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-            var doctorId = "6ff97f10-e5c2-4815-a51c-a558fd4bcb9a";
+            var doctorId = "453737d3-1891-4db0-be30-94a52f0ad18b";
 
             var patients = await _appointmentService.GetPatientsByDoctorAsync(doctorId);
             return View(patients);
@@ -51,17 +56,24 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
                 PatientID = patientId.ToString(),
                 Patient = patient,
                 DateOfEntry = DateTime.Now,
-                DoctorID = "6ff97f10-e5c2-4815-a51c-a558fd4bcb9a"
+                DoctorID = "453737d3-1891-4db0-be30-94a52f0ad18b"
             };
 
             return View(record);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(MedicalRecord record)
+        public async Task<IActionResult> Create(MedicalRecord record, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null && file.Length > 0)
+                {
+                    var path = @"DiagnosisDocument";
+                    string FilePath = await _fileService.SaveImageAsync(file, path);
+                    record.DiagnosisDocument = FilePath;
+                }
+
                 await _medicalRecordService.AddMedicalRecordAsync(record);
                 return RedirectToAction("Index");
             }
@@ -78,12 +90,19 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(MedicalRecord record)
+        public async Task<IActionResult> Edit(MedicalRecord record, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null && file.Length > 0)
+                {
+                    var path = @"DiagnosisDocument";
+                    string FilePath = await _fileService.SaveImageAsync(file, path);
+                    record.DiagnosisDocument = FilePath;
+                }
+
                 await _medicalRecordService.UpdateMedicalRecordAsync(record);
-                return RedirectToAction("RecordsByPatient", new { id = record.PatientID });
+                return RedirectToAction("Index", new { patientId = record.PatientID });
             }
             return View(record);
         }

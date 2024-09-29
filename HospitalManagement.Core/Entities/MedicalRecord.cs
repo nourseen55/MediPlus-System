@@ -11,5 +11,6 @@
         public virtual Patient? Patient { get; set; }
         public string? DoctorID { get; set; }
         public virtual Doctor? Doctor { get; set; }
+        public string? DiagnosisDocument { get; set; }
     }
 }

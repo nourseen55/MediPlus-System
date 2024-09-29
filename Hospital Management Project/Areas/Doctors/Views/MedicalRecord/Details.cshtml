@@ -160,6 +160,13 @@
                                 <span asp-validation-for="DateOfEntry" class="text-danger"></span>
                             </div>
                         </div>
+                        <div class="form-group col-sm-12  my-5">
+                            @if (!string.IsNullOrEmpty(@Model.DiagnosisDocument))
+                            {
+                                <label asp-for="DiagnosisDocument" class="control-label">Diagnosis Document: </label>
+                                <a href="~/@Model.DiagnosisDocument">Diagonisis Document</a>
+                            }
+                        </div>
                     </div>
                 </div>
     </div>

@@ -71,13 +71,17 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var doctor = await _doctorService.GetDoctorByIdAsync(doctorvm.Id);
+                if (doctor == null)
+                {
+                    return NotFound();
+                }
                 mapper.Map(doctorvm, doctor);
                 if (Img != null && Img.Length > 0)
                 {
                     var path = @"Images/Doctors/";
                     doctor.Img = await _imageService.SaveImageAsync(Img, path);
-
                 }
+                doctor.Gender = doctorvm.Gender;
                 IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
                 ViewBag.Departments = departments.Select(d => new SelectListItem { Value = d.Id, Text = d.DepartmentName });
                 await _doctorService.UpdateDoctorAsync(doctor);
@@ -85,6 +89,7 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             }
             return View(doctorvm);
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

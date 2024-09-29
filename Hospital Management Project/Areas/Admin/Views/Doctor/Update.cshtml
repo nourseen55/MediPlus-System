@@ -57,14 +57,31 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label asp-for="Gender" class="control-label d-block">Gender</label>
-                        <div class="form-check form-check-inline">
-                            <input asp-for="Gender" class="form-check-input" type="radio" value="0" id="genderMale" />
-                            <label class="form-check-label" for="genderMale">Male</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input asp-for="Gender" class="form-check-input" type="radio" value="1" id="genderFemale" />
-                            <label class="form-check-label" for="genderFemale">Female</label>
-                        </div>
+                            @if (Model.Gender ==HospitalSystem.Core.Enums.Gender.Male)
+                            {
+                            <div class="form-check form-check-inline">
+                                <input asp-for="Gender" class="form-check-input" type="radio" value="0" id="genderMale" checked/>
+                                <label class="form-check-label" for="genderMale">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="Gender" class="form-check-input" type="radio" value="1" id="genderFemale" />
+                                <label class="form-check-label" for="genderFemale">Female</label>
+                            </div>
+                            }
+                        @if (Model.Gender == HospitalSystem.Core.Enums.Gender.Female)
+                        {
+                            <div class="form-check form-check-inline">
+                                <input asp-for="Gender" class="form-check-input" type="radio" value="0" id="genderMale" checked />
+                                <label class="form-check-label" for="genderMale">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="Gender" class="form-check-input" type="radio" value="1" id="genderFemale" checked />
+                                <label class="form-check-label" for="genderFemale">Female</label>
+                            </div>
+                        }
+
+                           
+                      
                         <span asp-validation-for="Gender" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
@@ -85,7 +102,7 @@
                         <label>Avatar</label>
                         <div class="profile-upload">
                             <div class="upload-img">
-                                <img src="~/assets/img/user.jpg" alt="Default Image" id="ImagePreview" />
+                                <img src="~/@Model.Img" alt="Default Image" id="ImagePreview" />
                             </div>
                             <div class="upload-input">
                                 <input asp-for="Img" type="file" class="form-control" id="imgfile" onchange="Image(event);" name="Img" />

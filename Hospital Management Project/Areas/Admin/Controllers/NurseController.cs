@@ -2,11 +2,13 @@
 using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
+using HospitalSystem.Core.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Hospital_Management_Project.Areas.Admin.Controllers
-{
+{ 
     [Area("Admin")]
     public class NurseController : Controller
     {

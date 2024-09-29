@@ -3,7 +3,9 @@ using AutoMapper;
 using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
+using HospitalSystem.Core.Enums;
 using HospitalSystem.Core.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 

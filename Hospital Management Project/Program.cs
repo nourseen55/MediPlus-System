@@ -1,3 +1,4 @@
+using Hospital_Management_Project.Middlewares;
 using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
 using HospitalSystem.Infrastructure.Mapping;
@@ -8,31 +9,33 @@ namespace Hospital_Management_Project
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            var db1 = builder.Configuration.GetConnectionString("cs");
+            
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<ApplicationDbContext>(options=>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("cs"))
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(db1)
             );
 
 
             builder.Services.AddRazorPages();
 
             #region Identity Configuration
-            builder.Services.AddIdentity<IdentityUser,IdentityRole>(options =>
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
-                /*options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedAccount = true;
                 options.Password = new()
                 {
                     RequiredLength = 8,
                     RequiredUniqueChars = 0,
-                    RequireDigit = true,
-                    RequireUppercase = true,
-                    RequireLowercase = true,
-                    RequireNonAlphanumeric = true
-                };*/
-            }).AddDefaultTokenProviders()
-              .AddEntityFrameworkStores<ApplicationDbContext>();
+                    RequireDigit = false,
+                    RequireUppercase = false,
+                    RequireLowercase = false,
+                    RequireNonAlphanumeric = false
+                };
+            }).AddEntityFrameworkStores<ApplicationDbContext>()
+              .AddDefaultTokenProviders();
+              
             #endregion
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -64,7 +67,11 @@ namespace Hospital_Management_Project
 
             app.UseRouting();
             app.MapRazorPages();
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<AdminAuthorizationMiddleware>();
 
 
 

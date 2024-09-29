@@ -1,4 +1,6 @@
 ﻿using HospitalSystem.Application.IServices;
+using HospitalSystem.Core.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital_Management_Project.Areas.Admin.Controllers

@@ -3,6 +3,7 @@ using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
 using HospitalSystem.Core.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Hospital_Management_Project.Areas.Appoint.Controllers
 {
     [Area("Patient")]
+    [Authorize(Roles = nameof(UserRoles.Patient))]
     public class AppointmentController : Controller
     {
        private readonly IAppointmentService _IAppointmentService;

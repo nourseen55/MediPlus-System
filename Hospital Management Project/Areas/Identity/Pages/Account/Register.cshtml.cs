@@ -105,15 +105,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 
 
         public async Task OnGetAsync(string returnUrl = null)
-        {
-            if (!_roleManager.RoleExistsAsync(nameof(UserRoles.Admin)).GetAwaiter().GetResult())
-            {
-                _roleManager.CreateAsync(new IdentityRole(nameof(UserRoles.Admin))).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(nameof(UserRoles.Patient))).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(nameof(UserRoles.Nurse))).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(nameof(UserRoles.Doctor))).GetAwaiter().GetResult();
-            }
-            
+        {            
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }

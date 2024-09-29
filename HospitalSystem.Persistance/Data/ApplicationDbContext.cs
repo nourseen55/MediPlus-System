@@ -25,11 +25,29 @@
             modelBuilder.ApplyConfiguration(new MedicalRecordConfiguration());
             modelBuilder.ApplyConfiguration(new NurseConfiguration());
             modelBuilder.ApplyConfiguration(new PatientConfiguration());
-        }
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=HospitalDB;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
-        }*/
 
+            SeedRoles(modelBuilder);
+        }
+
+
+        private void SeedRoles(ModelBuilder modelBuilder)
+        {
+            foreach(var role in Enum.GetValues(typeof(UserRoles)))
+            {
+                int c = 1;
+                string? StringRole = role.ToString();
+                if(StringRole is null)
+                    continue;
+                modelBuilder.Entity<IdentityRole>().HasData(
+
+                    new IdentityRole
+                    {
+                        Id = $"{c}",
+                        Name = StringRole,
+                        NormalizedName = StringRole.ToUpper()
+                    }
+                );
+            }
+        }
     }
 }

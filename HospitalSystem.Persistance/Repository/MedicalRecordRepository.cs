@@ -41,6 +41,26 @@
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task<List<MedicalRecord>> GetMedicalRecordsByPatientIdAsync(string patientId)
+        {
+            if (string.IsNullOrWhiteSpace(patientId))
+            {
+                return new List<MedicalRecord>();
+            }
+
+            var medicalRecords = await _context.MedicalRecords
+                .Include(record => record.Patient)
+                .Include(record => record.Doctor)
+                .Where(record => record.PatientID == patientId)
+                .ToListAsync();
+
+            return medicalRecords;
+        }
+
+        public async Task<MedicalRecord?> GetMedicalRecordAndPatientDetails(int id)
+        {
+            return await _context.MedicalRecords.Include(record => record.Patient).SingleOrDefaultAsync(r => r.Id == id); ;
+        }
 
     }
 }

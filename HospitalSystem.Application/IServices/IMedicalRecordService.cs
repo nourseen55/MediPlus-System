@@ -7,5 +7,7 @@
         Task<IEnumerable<MedicalRecord>> GetAllMedicalRecordsAsync();
         Task UpdateMedicalRecordAsync(MedicalRecord MedicalRecord);
         Task DeleteMedicalRecordAsync(string id);
+        Task<List<MedicalRecord>> GetMedicalRecordsByPatientIdAsync(string patientId);
+        Task<MedicalRecord?> GetMedicalRecordAndPatientDetails(int id);
     }
 }

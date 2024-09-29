@@ -15,8 +15,8 @@ namespace HospitalSystem.Core.Entities
         public DateTime? EndDateTime { get; set; }
         public Status Status { get; set; }
 
-        public string? PatientID { get; set; }
-        public virtual Patient? Patient { get; set; }
+        public string PatientID { get; set; }
+        public virtual Patient Patient { get; set; }
         public string? DoctorID { get; set; }
         public virtual Doctor? Doctor { get; set; }
         public DateTime DateOfBirth { get; set; }

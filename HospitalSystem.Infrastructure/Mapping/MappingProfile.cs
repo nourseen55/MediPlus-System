@@ -15,8 +15,14 @@ namespace HospitalSystem.Infrastructure.Mapping
         {
             CreateMap<Patient, PatientVM>();
             CreateMap<PatientVM, Patient>();
+
             CreateMap<Doctor, DoctorVM>();
             CreateMap<DoctorVM, Doctor>();
+
+            CreateMap<Nurse, NurseVM>();
+            CreateMap<NurseVM, Nurse>()
+            .ForMember(dest => dest.Doctor, opt => opt.Ignore()) 
+            .ForMember(dest => dest.Departments, opt => opt.Ignore());
         }
         
 

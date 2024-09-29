@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/favicon.ico">
-    <title>Appointment</title>
+    <title>Appoinments</title>
     <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/assets/css/select2.min.css">
@@ -90,28 +90,22 @@
                         <a href="index-2.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
+                        <a href="~/Admin/Doctor"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
+                    </li>
+                    <li >
+                        <a href="~/Admin/Patient"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                     </li>
                     <li class="active">
-                        <a href="/admin/patients/index"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
-                    </li>
-                    <li>
-                        <a href="/appoint/appointment/index"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
+                        <a href="~/Patient/Appointment"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                     </li>
                     <li>
                         <a href="schedule.html"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
                     </li>
                     <li>
-                        <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
+                        <a href="~/Admin/Department"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                     </li>
-                    <li class="submenu">
-                        <a href="#"><i class="fa fa-user"></i> <span> Employees </span> <span class="menu-arrow"></span></a>
-                        <ul style="display: none;">
-                            <li><a href="employees.html">Employees List</a></li>
-                            <li><a href="leaves.html">Leaves</a></li>
-                            <li><a href="holidays.html">Holidays</a></li>
-                            <li><a href="attendance.html">Attendance</a></li>
-                        </ul>
+                    <li>
+                        <a href="~/Admin/Nurse"><i class="fa fa-user"></i><span>Nurses</span></a>
                     </li>
                     <li class="submenu">
                         <a href="#"><i class="fa fa-money"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>
@@ -171,6 +165,6 @@
         </div>
     </div>
     @RenderBody();
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts",required:false)
 </body>
 </html>

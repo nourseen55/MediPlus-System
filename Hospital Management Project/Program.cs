@@ -42,6 +42,9 @@ namespace Hospital_Management_Project
             builder.Services.AddScoped<IAppointmentService,AppointmentService>(); 
 
             builder.Services.AddScoped<IDoctorService,DoctorService>();
+            builder.Services.AddScoped<INurseService,NurseService>();
+
+            builder.Services.AddScoped<IDepartmentService,DepartmentService>();
             builder.Services.AddScoped<IImageService,ImageService>();
             
 

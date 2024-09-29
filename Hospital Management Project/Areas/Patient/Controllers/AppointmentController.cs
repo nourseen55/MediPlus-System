@@ -1,4 +1,5 @@
 ﻿
+using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
 using HospitalSystem.Core.Enums;
@@ -15,11 +16,13 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
        private readonly IAppointmentService _IAppointmentService;
         private readonly IDoctorService _IDoctorService;
         private readonly IPatientService _IPatientService;
-        public AppointmentController(IAppointmentService IAppointmentService, IDoctorService IDoctorService, IPatientService IPatientService)
+        private readonly IDepartmentService _departmentService;
+        public AppointmentController(IAppointmentService IAppointmentService, IDoctorService IDoctorService, IPatientService IPatientService, IDepartmentService departmentService)
         {
             _IAppointmentService = IAppointmentService;
             _IDoctorService = IDoctorService;
             _IPatientService = IPatientService;
+            _departmentService = departmentService;
         }
         public async Task<IActionResult> Index()
         {
@@ -40,6 +43,7 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
         {
             var doctors = await _IDoctorService.GetAllDoctorsAsync();
             var patients = await _IPatientService.GetAllPatientsAsync();
+            var departments=await _departmentService.GetAllDepartmentsAsync();
 
             ViewBag.Doctors = doctors.Select(d => new SelectListItem
             {
@@ -51,6 +55,11 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
             {
                 Value = p.Id.ToString(),
                 Text = p.UserName
+            }).ToList();
+            ViewBag.Department = departments.Select(p => new SelectListItem
+            {
+                Value = p.Id.ToString(),
+                Text = p.DepartmentName
             }).ToList();
             ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(Status)));
             return View();
@@ -66,20 +75,7 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
                 return RedirectToAction("Index");
             }
 
-            //var doctors = await _IDoctorService.GetAllDoctorsAsync();
-            //var patients = await _IPatientService.GetAllPatientsAsync();
-
-            //ViewBag.Doctors = doctors.Select(d => new SelectListItem
-            //{
-            //    Value = d.Id.ToString(),
-            //    Text = d.Name
-            //}).ToList();
-
-            //ViewBag.Patients = patients.Select(p => new SelectListItem
-            //{
-            //    Value = p.Id.ToString(),
-            //    Text = p.UserName
-            //}).ToList();
+        
 
             return View(appointment);
         }
@@ -94,6 +90,8 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
           
             var doctors = await _IDoctorService.GetAllDoctorsAsync();
             var patients = await _IPatientService.GetAllPatientsAsync();
+            var departments = await _departmentService.GetAllDepartmentsAsync();
+
 
             ViewBag.Doctors = doctors.Select(d => new SelectListItem
             {
@@ -105,6 +103,11 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
             {
                 Value = p.Id.ToString(),
                 Text = p.UserName
+            }).ToList();
+            ViewBag.Department = departments.Select(p => new SelectListItem
+            {
+                Value = p.Id.ToString(),
+                Text = p.DepartmentName
             }).ToList();
             ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(Status)));
 
@@ -119,21 +122,6 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
                 await _IAppointmentService.UpdateAppointmentAsync(appointment);
                 return RedirectToAction("Index");
             }
-
-            //var doctors = await _IDoctorService.GetAllDoctorsAsync();
-            //var patients = await _IPatientService.GetAllPatientsAsync();
-
-            //ViewBag.Doctors = doctors.Select(d => new SelectListItem
-            //{
-            //    Value = d.Id.ToString(),
-            //    Text = d.Name
-            //}).ToList();
-
-            //ViewBag.Patients = patients.Select(p => new SelectListItem
-            //{
-            //    Value = p.Id.ToString(),
-            //    Text = p.UserName
-            //}).ToList();
             return View(appointment);
         }
 

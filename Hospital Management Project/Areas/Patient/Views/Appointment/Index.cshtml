@@ -23,7 +23,7 @@
                         <table class="table table-striped custom-table custom-table datatable mb-0">
                         <thead>
                             <tr>
-                                    <th>Appointment ID</th>
+                                    
                                     <th>Patient Name</th>
                                     <th>Age</th>
                                     <th>Doctor Name</th>
@@ -45,8 +45,7 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            @* <td><img width="28" height="28" src="~/@item.Img" class="rounded-circle m-r-5" alt="">@item.FirstName</td> *@
-                                            <td>@item.AppointmentID</td>
+                                            
                                             <td>@item.Patient?.FirstName</td>
                                             <td>@item.CalculateAge()</td>
                                             <td>@item.Doctor?.Name</td>
@@ -69,8 +68,6 @@
                                             </td>
                                         </tr>
 
-
-                                        <!-- Modal for Confirm Delete -->
                                         <div id="delete_Appointment_@item.AppointmentID" class="modal fade delete-modal" role="dialog">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">

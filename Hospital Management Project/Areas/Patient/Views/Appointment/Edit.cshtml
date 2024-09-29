@@ -21,7 +21,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="AppointmentID"></label>
-                                <input asp-for="AppointmentID" class="form-control" type="text" readonly="" />
+                                <input asp-for="AppointmentID" class="form-control" type="text"  hidden/>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -77,7 +77,8 @@
 
                     <div class="form-group">
                         <label asp-for="Status" class="control-label"></label>
-                        <input asp-for="Status" class="form-control" />
+                        @* <input asp-for="Status" class="form-control" /> *@
+                        <select asp-for="Status" class="form-control" asp-items="ViewBag.StatusList"></select>
                         <span asp-validation-for="Status" class="text-danger"></span>
                     </div>
 

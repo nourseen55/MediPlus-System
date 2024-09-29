@@ -62,7 +62,8 @@
 
                 <div class="form-group">
                     <label asp-for="Status" class="control-label"></label>
-                    <input asp-for="Status" class="form-control" />
+                    @* <input asp-for="Status" class="form-control" /> *@
+                        <select asp-for="Status" class="form-control" asp-items="ViewBag.StatusList"></select>
                     <span asp-validation-for="Status" class="text-danger"></span>
                 </div>
                 <div class="m-t-20 text-center">

@@ -1,6 +1,7 @@
 ﻿
 using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
+using HospitalSystem.Core.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -51,6 +52,7 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
                 Value = p.Id.ToString(),
                 Text = p.UserName
             }).ToList();
+            ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(Status)));
             return View();
         }
 
@@ -64,20 +66,20 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
                 return RedirectToAction("Index");
             }
 
-            var doctors = await _IDoctorService.GetAllDoctorsAsync();
-            var patients = await _IPatientService.GetAllPatientsAsync();
+            //var doctors = await _IDoctorService.GetAllDoctorsAsync();
+            //var patients = await _IPatientService.GetAllPatientsAsync();
 
-            ViewBag.Doctors = doctors.Select(d => new SelectListItem
-            {
-                Value = d.Id.ToString(),
-                Text = d.Name
-            }).ToList();
+            //ViewBag.Doctors = doctors.Select(d => new SelectListItem
+            //{
+            //    Value = d.Id.ToString(),
+            //    Text = d.Name
+            //}).ToList();
 
-            ViewBag.Patients = patients.Select(p => new SelectListItem
-            {
-                Value = p.Id.ToString(),
-                Text = p.UserName
-            }).ToList();
+            //ViewBag.Patients = patients.Select(p => new SelectListItem
+            //{
+            //    Value = p.Id.ToString(),
+            //    Text = p.UserName
+            //}).ToList();
 
             return View(appointment);
         }
@@ -104,6 +106,8 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
                 Value = p.Id.ToString(),
                 Text = p.UserName
             }).ToList();
+            ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(Status)));
+
             return View(appoint);
         }
         [HttpPost]
@@ -116,20 +120,20 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
                 return RedirectToAction("Index");
             }
 
-            var doctors = await _IDoctorService.GetAllDoctorsAsync();
-            var patients = await _IPatientService.GetAllPatientsAsync();
+            //var doctors = await _IDoctorService.GetAllDoctorsAsync();
+            //var patients = await _IPatientService.GetAllPatientsAsync();
 
-            ViewBag.Doctors = doctors.Select(d => new SelectListItem
-            {
-                Value = d.Id.ToString(),
-                Text = d.Name
-            }).ToList();
+            //ViewBag.Doctors = doctors.Select(d => new SelectListItem
+            //{
+            //    Value = d.Id.ToString(),
+            //    Text = d.Name
+            //}).ToList();
 
-            ViewBag.Patients = patients.Select(p => new SelectListItem
-            {
-                Value = p.Id.ToString(),
-                Text = p.UserName
-            }).ToList();
+            //ViewBag.Patients = patients.Select(p => new SelectListItem
+            //{
+            //    Value = p.Id.ToString(),
+            //    Text = p.UserName
+            //}).ToList();
             return View(appointment);
         }
 

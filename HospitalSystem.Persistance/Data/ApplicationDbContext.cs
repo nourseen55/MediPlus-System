@@ -2,7 +2,7 @@
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
-        /*public ApplicationDbContext()
+       /* public ApplicationDbContext()
         {
 
         }*/

@@ -83,6 +83,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Property<DateTime>("DateOfEntry")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DepartmentsId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Diagnosis")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -100,6 +103,8 @@ namespace HospitalSystem.Persistance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentsId");
 
                     b.HasIndex("DoctorID");
 
@@ -318,6 +323,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DepartmentsId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
@@ -334,6 +342,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasIndex("DepartmentsId");
+
                     b.ToTable("Doctor", (string)null);
                 });
 
@@ -346,6 +356,9 @@ namespace HospitalSystem.Persistance.Migrations
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DepartmentID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DoctorID")
                         .HasColumnType("nvarchar(450)");
@@ -361,6 +374,8 @@ namespace HospitalSystem.Persistance.Migrations
 
                     b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("DepartmentID");
 
                     b.HasIndex("DoctorID");
 
@@ -422,6 +437,10 @@ namespace HospitalSystem.Persistance.Migrations
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.MedicalRecord", b =>
                 {
+                    b.HasOne("HospitalSystem.Core.Entities.Departments", null)
+                        .WithMany("MedicalRecords")
+                        .HasForeignKey("DepartmentsId");
+
                     b.HasOne("HospitalSystem.Core.Entities.Doctor", "Doctor")
                         .WithMany("MedicalRecords")
                         .HasForeignKey("DoctorID")
@@ -492,6 +511,10 @@ namespace HospitalSystem.Persistance.Migrations
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.Doctor", b =>
                 {
+                    b.HasOne("HospitalSystem.Core.Entities.Departments", null)
+                        .WithMany("Doctors")
+                        .HasForeignKey("DepartmentsId");
+
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithOne()
                         .HasForeignKey("HospitalSystem.Core.Entities.Doctor", "Id")
@@ -501,6 +524,11 @@ namespace HospitalSystem.Persistance.Migrations
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.Nurse", b =>
                 {
+                    b.HasOne("HospitalSystem.Core.Entities.Departments", "Departments")
+                        .WithMany("Nurses")
+                        .HasForeignKey("DepartmentID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("HospitalSystem.Core.Entities.Doctor", "Doctor")
                         .WithMany("Nurses")
                         .HasForeignKey("DoctorID")
@@ -512,6 +540,8 @@ namespace HospitalSystem.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Departments");
+
                     b.Navigation("Doctor");
                 });
 
@@ -522,6 +552,15 @@ namespace HospitalSystem.Persistance.Migrations
                         .HasForeignKey("HospitalSystem.Core.Entities.Patient", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HospitalSystem.Core.Entities.Departments", b =>
+                {
+                    b.Navigation("Doctors");
+
+                    b.Navigation("MedicalRecords");
+
+                    b.Navigation("Nurses");
                 });
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.Doctor", b =>

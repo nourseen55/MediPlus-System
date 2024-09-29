@@ -1,7 +1,8 @@
 ﻿
+
 namespace HospitalSystem.Persistance.Repository
 {
-        public class DoctorRepository:IGenericRepository<Doctor>
+        public class DoctorRepository:IDoctorRepository
         {
        
             private readonly ApplicationDbContext _context;
@@ -42,6 +43,13 @@ namespace HospitalSystem.Persistance.Repository
                     await _context.SaveChangesAsync();
                 }
             }
-        
-    }
+
+		    public async Task<List<Doctor>> GetByDepartmentId(string Id)
+		    {
+			    return await _context.Doctors.Where(x=>x.DepartmentId==Id && x.Status==true).ToListAsync();
+            
+		    }
+
+		
+	}
 }

@@ -8,7 +8,7 @@
 
         public IGenericRepository<Nurse> _nurseRepository  { get; private set; }
 
-        public IGenericRepository<Doctor> _doctorRepository { get; private set; }
+        public IDoctorRepository _doctorRepository { get; private set; }
 
         public IAppointmentRepository _appointmentRepository { get; private set; }
 

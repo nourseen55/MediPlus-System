@@ -35,5 +35,10 @@ namespace HospitalSystem.Application.Services
         {
             await _unitOfWork._doctorRepository.DeleteEntityAsync(id);
         }
-    }
+
+		public async Task<List<Doctor>> GetByDepartmentId(string Id)
+		{
+			return await _unitOfWork._doctorRepository.GetByDepartmentId(Id);
+		}
+	}
 }

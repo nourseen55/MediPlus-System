@@ -7,5 +7,7 @@
         Task<IEnumerable<Doctor>> GetAllDoctorsAsync();
         Task UpdateDoctorAsync(Doctor Doctor);
         Task DeleteDoctorAsync(string id);
-    }
+        Task<List<Doctor>> GetByDepartmentId(string Id);
+
+	}
 }

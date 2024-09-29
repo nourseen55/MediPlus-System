@@ -4,7 +4,7 @@
     {
         IGenericRepository<Patient> _patientRepository { get; }
         IGenericRepository<Nurse> _nurseRepository { get; }
-        IGenericRepository<Doctor> _doctorRepository { get; }
+        IDoctorRepository _doctorRepository { get; }
         IAppointmentRepository _appointmentRepository { get; }
         IMedicalRecordRepository _recordRepository { get; }
         IGenericRepository<Departments> _departmentsRepository { get; }

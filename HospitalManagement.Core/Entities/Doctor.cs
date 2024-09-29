@@ -16,7 +16,9 @@ namespace HospitalSystem.Core.Entities
         {
             return DateTime.Today.Year - DateOfBirth.Year;
         }
-        public string? Specialization { get; set; }
+        [ForeignKey("Department")]
+        public string DepartmentId { get; set; }
+        public virtual Departments? Department { get; set; }
 
         public virtual ICollection<MedicalRecord>? MedicalRecords { get; set; }
         public virtual ICollection<Appointment>? Appointments { get; set; }

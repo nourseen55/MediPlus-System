@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HospitalSystem.Core.Entities
@@ -16,6 +17,7 @@ namespace HospitalSystem.Core.Entities
         public Status Status { get; set; }
 
         public string PatientID { get; set; }
+        [ValidateNever]
         public virtual Patient Patient { get; set; }
         public string? DoctorID { get; set; }
         public virtual Doctor? Doctor { get; set; }

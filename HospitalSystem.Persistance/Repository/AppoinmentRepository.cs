@@ -42,6 +42,14 @@ namespace HospitalSystem.Persistance.Repository
                 await _context.SaveChangesAsync();
             }
         }
-
+        public async Task<IEnumerable<Patient>> GetPatientsByDoctorAsync(string doctorId)
+        {
+            return await _context.Appointments
+                .Include(a => a.Patient)
+                .Where(a => a.DoctorID == doctorId && a.Patient != null)
+                .Select(a => a.Patient)
+                .Distinct()
+                .ToListAsync();
+        }
     }
 }

@@ -46,7 +46,8 @@ namespace Hospital_Management_Project
 
             builder.Services.AddScoped<IDepartmentService,DepartmentService>();
             builder.Services.AddScoped<IImageService,ImageService>();
-            
+            builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
+
 
 
             builder.Services.AddSingleton<IEmailSender, EmailSender>();

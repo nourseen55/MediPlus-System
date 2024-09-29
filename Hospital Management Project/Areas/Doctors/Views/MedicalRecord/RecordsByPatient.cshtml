@@ -1,0 +1,75 @@
+﻿@model IEnumerable<HospitalSystem.Core.Entities.MedicalRecord>
+
+@{
+    ViewData["Title"] = "Patient Record";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="container mt-5">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Patient Medical Records</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="mb-3">Patient: @Model.FirstOrDefault()?.Patient?.FirstName @Model.FirstOrDefault()?.Patient?.LastName </h5>
+                        @if (!Model.Any())
+                        {
+                            <div class="alert alert-warning" role="alert">
+                                No medical records found for this patient.
+                            </div>
+                        }
+                        else
+                        {
+                            // Iterate through each record and display it vertically
+                            foreach (var record in Model)
+                            {
+                                <div class="card my-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Record on @record.DateOfEntry.ToString("dd-MM-yyyy")</h5>
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <strong>Doctor:</strong> @record.Doctor?.Name
+                                            </div>
+                                            <div class="col-md-6">
+                                                <strong>Diagnosis:</strong> @record.Diagnosis
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <div class="col-md-6">
+                                                <strong>Treatment:</strong> @record.Treatment
+                                            </div>
+                                            <div class="col-md-6">
+                                                <strong>Response to medication:</strong> @record.Response
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="d-flex text-left">
+                                                    <a asp-controller="MedicalRecord" asp-action="Details" asp-route-id="@record.Id" class="btn btn-info m-2">View</a>
+                                                    <a asp-controller="MedicalRecord" asp-action="Edit" asp-route-id="@record.Id" class="btn btn-warning m-2">Edit</a>
+                                                    <a asp-controller="MedicalRecord" asp-action="Delete" asp-route-id="@record.Id" class="btn btn-danger m-2">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                        <div class="text-right mt-4">
+                            <a asp-action="Create" asp-controller="MedicalRecord" asp-route-patientId="@ViewBag.PatientId" class="btn btn-success">Add New Record</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

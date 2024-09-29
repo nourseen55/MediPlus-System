@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Patient>
+
+@{
+    ViewData["Title"] = "Patients Record";
+}
+
+<div class="main-wrapper">
+    <div class="page-wrapper">
+        <div class="container-fluid">
+            <div class="form-container mx-auto" style="max-width: 1000px;" >
+                <h3 class="form-header fw-semibold my-3">Patient List</h3>
+                <div class="line my-2"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-border table-striped custom-table datatable mb-0">
+                                <thead class="bg-primary text-dark">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Age</th>
+                                        <th>Gender</th>
+                                        <th>Phone Number</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (!Model.Any())
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted">No patient records available</td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <img width="28" height="28" src="~/@item.Img" class="rounded-circle m-r-5" alt="">
+                                                    @(item.FirstName + " " + item.LastName)
+                                                </td>
+                                                <td>@item.Age()</td>
+                                                <td>@item.Gender</td>
+                                                <td>@item.PhoneNumber</td>
+                                                <td class="text-center">
+                                                    <a asp-action="RecordsByPatient" asp-controller="MedicalRecord" asp-route-Id="@item.Id" class="btn btn-info">View Records</a>
+                                                    <a asp-action="Create" asp-controller="MedicalRecord" asp-route-patientId="@item.Id" class="btn btn-primary">Create Record</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="sidebar-overlay" data-reff=""></div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

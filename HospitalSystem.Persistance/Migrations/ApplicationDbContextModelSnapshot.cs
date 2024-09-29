@@ -37,6 +37,7 @@ namespace HospitalSystem.Persistance.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PatientID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("StartDateTime")
@@ -91,12 +92,13 @@ namespace HospitalSystem.Persistance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DoctorID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PatientID")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Response")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Treatment")
                         .IsRequired()
@@ -428,7 +430,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasOne("HospitalSystem.Core.Entities.Patient", "Patient")
                         .WithMany("Appointments")
                         .HasForeignKey("PatientID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Doctor");
 
@@ -444,14 +447,12 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasOne("HospitalSystem.Core.Entities.Doctor", "Doctor")
                         .WithMany("MedicalRecords")
                         .HasForeignKey("DoctorID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HospitalSystem.Core.Entities.Patient", "Patient")
                         .WithMany("MedicalRecords")
                         .HasForeignKey("PatientID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Doctor");
 

@@ -1,0 +1,133 @@
+﻿@model HospitalSystem.Core.Entities.MedicalRecord
+
+@{
+    ViewData["Title"] = "Create Medical Record";
+}
+
+<div class="main-wrapper">
+    <div class="page-wrapper">
+        <div class="fav d-flex justify-content-center my-2 text-center">
+            <img src="~/assets/img/logo-dark.png" />
+        </div>
+        <div class="container">
+            <div class="form-container">
+                <h3 class="form-header fw-semibold my-3">Add Medical Record</h3>
+                <div class="line my-2"></div>
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="PatientID" value="@Model.PatientID" />
+                    <input type="hidden" asp-for="DoctorID" value="@Model.DoctorID" />
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Patient Name</label>
+                                <input value="@Model.Patient.FirstName" class="form-control" type="text" />
+                                <small class="form-text text-muted">First Name</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <br />
+                                <input value="@Model.Patient.LastName" class="form-control" type="text" />
+                                <small class="form-text text-muted">Last Name</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Patient's health issue<span class="text-danger">*</span></label>
+                                <input asp-for="Diagnosis" class="form-control" type="text" required />
+                                <span asp-validation-for="Diagnosis" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Medication<span class="text-danger">*</span></label>
+                                <textarea asp-for="Treatment" class="form-control" rows="4" required></textarea>
+                                <span asp-validation-for="Treatment" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Patient's response to medication</label>
+                                <textarea asp-for="Response" class="form-control" rows="4"></textarea>
+                                <span asp-validation-for="Response" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label asp-for="DateOfEntry" class="control-label"></label>
+                            <input asp-for="DateOfEntry" class="form-control" type="date" />
+                            <span asp-validation-for="DateOfEntry" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <h5>Please give information about the patient's health.</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="empty border-0"></th>
+                                <th class="bg text-white y" style="border-radius: 10px 0 0 0;">Yes</th>
+                                <th class="bg text-white" style="border-radius: 0 10px 0 0;">No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="bg text-white" style="border-radius: 10px 0 0 0;">Are you currently under medical care?</td>
+                                <td class="y"><input type="radio" name="q1" /></td>
+                                <td class="y"><input type="radio" name="q1" /></td>
+                            </tr>
+                            <tr>
+                                <td class="bg text-white">Do you have any drug allergies?</td>
+                                <td class="y"><input type="radio" name="q2" /></td>
+                                <td class="y"><input type="radio" name="q2" /></td>
+                            </tr>
+                            <tr>
+                                <td class="bg text-white">Do you have any food or environmental allergies?</td>
+                                <td class="y"><input type="radio" name="q3" /></td>
+                                <td class="y"><input type="radio" name="q3" /></td>
+                            </tr>
+                            <tr>
+                                <td class="bg text-white">Have you ever had tuberculosis or had a positive tuberculosis test?</td>
+                                <td class="y"><input type="radio" name="q4" /></td>
+                                <td class="y"><input type="radio" name="q4" /></td>
+                            </tr>
+                            <tr>
+                                <td class="bg text-white">Have you ever been cared for by a mental health clinician?</td>
+                                <td class="y"><input type="radio" name="q5" /></td>
+                                <td class="y"><input type="radio" name="q5" /></td>
+                            </tr>
+                            <tr>
+                                <td class="bg text-white">Have you ever restricted your eating?</td>
+                                <td class="y"><input type="radio" name="q6" /></td>
+                                <td class="y"><input type="radio" name="q6" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="form-group">
+                        <label class="my-3">Is the patient diagnosed with chronic disease?</label>
+                        <select class="form-select">
+                            <option>Please Select</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group my-5">
+                        <label class="my-3">If yes, please upload your diagnosis documents.</label>
+                        <input type="file" />
+                    </div>
+
+                    <div class="m-t-20 text-center">
+                        <button class="btn btn-primary submit-btn" type="submit">Create Medical Record</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

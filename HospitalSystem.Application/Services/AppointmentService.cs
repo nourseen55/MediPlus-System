@@ -35,5 +35,10 @@ namespace HospitalSystem.Application.Services
         {
             await _unitOfWork._appointmentRepository.DeleteEntityAsync(id);
         }
+
+        public async Task<IEnumerable<Patient>> GetPatientsByDoctorAsync(string doctorId)
+        {
+            return await _unitOfWork._appointmentRepository.GetPatientsByDoctorAsync(doctorId);
+        }
     }
 }

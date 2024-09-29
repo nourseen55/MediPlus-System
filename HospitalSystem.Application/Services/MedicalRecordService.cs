@@ -16,7 +16,7 @@ namespace HospitalSystem.Application.Services
             await _unitOfWork._recordRepository.AddEntityAsync(MedicalRecord);
         }
 
-        public async Task<MedicalRecord> GetMedicalRecordByIdAsync(string id)
+        public async Task<MedicalRecord> GetMedicalRecordByIdAsync(int id)
         {
             return await _unitOfWork._recordRepository.GetEntityByIdAsync(id);
         }
@@ -31,9 +31,19 @@ namespace HospitalSystem.Application.Services
              await _unitOfWork._recordRepository.UpdateEntityAsync(MedicalRecord);
         }
 
-        public async Task DeleteMedicalRecordAsync(string id)
+        public async Task DeleteMedicalRecordAsync(int id)
         {
             await _unitOfWork._recordRepository.DeleteEntityAsync(id);
+        }
+
+        public async Task<List<MedicalRecord>> GetMedicalRecordsByPatientIdAsync(string patientId)
+        {
+            return await _unitOfWork._recordRepository.GetMedicalRecordsByPatientIdAsync(patientId);
+        }
+
+        public async Task<MedicalRecord?> GetMedicalRecordAndPatientDetails(int id)
+        {
+            return await _unitOfWork._recordRepository.GetMedicalRecordAndPatientDetails(id);
         }
     }
 }

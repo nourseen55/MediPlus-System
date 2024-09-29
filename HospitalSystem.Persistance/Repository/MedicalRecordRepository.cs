@@ -1,6 +1,8 @@
-﻿namespace HospitalSystem.Persistance.Repository
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace HospitalSystem.Persistance.Repository
 {
-    public class MedicalRecordRepository : IGenericRepository<MedicalRecord>
+    public class MedicalRecordRepository : IMedicalRecordRepository
     {
 
         private readonly ApplicationDbContext _context;
@@ -21,7 +23,7 @@
             return await _context.MedicalRecords.ToListAsync();
         }
 
-        public async Task<MedicalRecord?> GetEntityByIdAsync(string id)
+        public async Task<MedicalRecord?> GetEntityByIdAsync(int id)
         {
             return await _context.MedicalRecords.FindAsync(id);
         }
@@ -32,7 +34,7 @@
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteEntityAsync(string id)
+        public async Task DeleteEntityAsync(int id)
         {
             var MedicalRecord = await GetEntityByIdAsync(id);
             if (MedicalRecord != null)
@@ -41,6 +43,7 @@
                 await _context.SaveChangesAsync();
             }
         }
+
         public async Task<List<MedicalRecord>> GetMedicalRecordsByPatientIdAsync(string patientId)
         {
             if (string.IsNullOrWhiteSpace(patientId))
@@ -61,6 +64,5 @@
         {
             return await _context.MedicalRecords.Include(record => record.Patient).SingleOrDefaultAsync(r => r.Id == id); ;
         }
-
     }
 }

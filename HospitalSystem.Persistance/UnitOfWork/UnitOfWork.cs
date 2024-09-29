@@ -10,9 +10,9 @@
 
         public IGenericRepository<Doctor> _doctorRepository { get; private set; }
 
-        public IGenericRepository<Appointment> _appointmentRepository { get; private set; }
+        public IAppointmentRepository _appointmentRepository { get; private set; }
 
-        public IGenericRepository<MedicalRecord> _recordRepository  { get; private set; }
+        public IMedicalRecordRepository _recordRepository  { get; private set; }
 
         public IGenericRepository<Departments> _departmentsRepository { get; private set; }
 

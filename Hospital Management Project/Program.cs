@@ -8,18 +8,25 @@ namespace Hospital_Management_Project
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            
+            builder.Configuration
+                .SetBasePath(Directory.GetCurrentDirectory()) // Ensure the correct path
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
 
+            var db1 = builder.Configuration.GetConnectionString("cs");
+            
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddDbContext<ApplicationDbContext>(options=>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("cs"))
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(db1)
             );
 
 
             builder.Services.AddRazorPages();
 
             #region Identity Configuration
-            builder.Services.AddIdentity<IdentityUser,IdentityRole>(options =>
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 /*options.SignIn.RequireConfirmedAccount = true;
                 options.Password = new()
@@ -31,8 +38,9 @@ namespace Hospital_Management_Project
                     RequireLowercase = true,
                     RequireNonAlphanumeric = true
                 };*/
-            }).AddDefaultTokenProviders()
-              .AddEntityFrameworkStores<ApplicationDbContext>();
+            }).AddEntityFrameworkStores<ApplicationDbContext>()
+              .AddDefaultTokenProviders();
+              
             #endregion
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 

@@ -26,28 +26,28 @@
             modelBuilder.ApplyConfiguration(new NurseConfiguration());
             modelBuilder.ApplyConfiguration(new PatientConfiguration());
 
-            //SeedRoles(modelBuilder);
+            SeedRoles(modelBuilder);
         }
 
 
-        //private void SeedRoles(ModelBuilder modelBuilder)
-        //{
-        //    foreach(var role in Enum.GetValues(typeof(UserRoles)))
-        //    {
-        //        int c = 1;
-        //        string? StringRole = role.ToString();
-        //        if(StringRole is null)
-        //            continue;
-        //        modelBuilder.Entity<IdentityRole>().HasData(
+        private void SeedRoles(ModelBuilder modelBuilder)
+        {
+            foreach (var role in Enum.GetValues(typeof(UserRoles)))
+            {
+                string? roleName = role.ToString();
+                if (roleName == null) { continue; }
 
-        //            new IdentityRole
-        //            {
-        //                Id = $"{c}",
-        //                Name = StringRole,
-        //                NormalizedName = StringRole.ToUpper()
-        //            }
-        //        );}
-          
-        
+                modelBuilder.Entity<IdentityRole>().HasData(
+
+                    new IdentityRole
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Name = roleName,
+                        NormalizedName = roleName.ToUpper()
+                    }
+                );
+            }
+
+        }
     }
 }

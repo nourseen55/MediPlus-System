@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Infrastructure", "HospitalSystem.Infrastructure\HospitalSystem.Infrastructure.csproj", "{2AB24AF2-704B-48D3-8645-619F156A9FEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Persistance", "HospitalSystem.Persistance\HospitalSystem.Persistance.csproj", "{29FCFF99-D2D8-4000-AE18-E17F94278FA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Persistance", "HospitalSystem.Persistance\HospitalSystem.Persistance.csproj", "{1490C82F-797D-4FD7-BDC8-1BF2247EAAE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{2AB24AF2-704B-48D3-8645-619F156A9FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AB24AF2-704B-48D3-8645-619F156A9FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AB24AF2-704B-48D3-8645-619F156A9FEC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29FCFF99-D2D8-4000-AE18-E17F94278FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29FCFF99-D2D8-4000-AE18-E17F94278FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29FCFF99-D2D8-4000-AE18-E17F94278FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29FCFF99-D2D8-4000-AE18-E17F94278FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1490C82F-797D-4FD7-BDC8-1BF2247EAAE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1490C82F-797D-4FD7-BDC8-1BF2247EAAE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1490C82F-797D-4FD7-BDC8-1BF2247EAAE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1490C82F-797D-4FD7-BDC8-1BF2247EAAE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

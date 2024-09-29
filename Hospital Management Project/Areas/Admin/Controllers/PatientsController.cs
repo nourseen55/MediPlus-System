@@ -109,5 +109,6 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
             await _patientService.DeletePatientAsync(id);
             return RedirectToAction(nameof(Index));
         }
+       
     }
 }

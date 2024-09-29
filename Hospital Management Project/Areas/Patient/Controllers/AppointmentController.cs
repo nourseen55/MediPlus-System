@@ -39,30 +39,17 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
             return View(app);
         }
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(string DoctorID)
         {
-            var doctors = await _IDoctorService.GetAllDoctorsAsync();
-            var patients = await _IPatientService.GetAllPatientsAsync();
-            var departments=await _departmentService.GetAllDepartmentsAsync();
+            var appoit = new Appointment()
+            {
+                DoctorID = DoctorID,
+                PatientID = "98461dab-ec05-4974-864e-c65e11239338"
+                 
+            };
 
-            ViewBag.Doctors = doctors.Select(d => new SelectListItem
-            {
-                Value = d.Id.ToString(),
-                Text = d.Name
-            }).ToList();
-
-            ViewBag.Patients = patients.Select(p => new SelectListItem
-            {
-                Value = p.Id.ToString(),
-                Text = p.UserName
-            }).ToList();
-            ViewBag.Department = departments.Select(p => new SelectListItem
-            {
-                Value = p.Id.ToString(),
-                Text = p.DepartmentName
-            }).ToList();
-            ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(Status)));
-            return View();
+            
+            return View(appoit);
         }
 
         [HttpPost]
@@ -70,7 +57,14 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
         public async Task<IActionResult> Create(Appointment appointment)
         {
             if (ModelState.IsValid)
-            {              
+            {
+                Doctor doctor= await _IDoctorService.GetDoctorByIdAsync(appointment.DoctorID);
+                while (DateTime.Now < appointment.EndDateTime)
+                {
+                    doctor.Status = false;
+
+                }
+
                 await _IAppointmentService.AddAppointmentAsync(appointment);
                 return RedirectToAction("Index");
             }
@@ -132,5 +126,11 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
             await _IAppointmentService.DeleteAppointmentAsync(id);
             return RedirectToAction("Index");
         }
-    }
+		public async Task<IActionResult> ViewDoctors(string Id)
+		{
+            List<Doctor> doctors=await _IDoctorService.GetByDepartmentId(Id);
+
+			return View(doctors);
+		}
+	}
 }

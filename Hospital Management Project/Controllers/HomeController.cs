@@ -1,28 +1,24 @@
+using HospitalSystem.Application.IServices;
+using HospitalSystem.Application.Services;
+
 namespace Hospital_Management_Project.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IDepartmentService _departmentService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IDepartmentService departmentService)
         {
             _logger = logger;
+            _departmentService = departmentService;
         }
 
-        public IActionResult Index()
+        public async Task< IActionResult> Index()
         {
-            return View();
+            var department=await _departmentService.GetAllDepartmentsAsync();
+			return View(department);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

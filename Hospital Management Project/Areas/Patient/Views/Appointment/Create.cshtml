@@ -4,7 +4,6 @@
 <br />
 @{
     ViewData["Title"] = "Create";
-    Layout = "_AppointmentLayout";
 }
 <div class="page-wrapper">
 <div class="Container">
@@ -17,9 +16,15 @@
         <div class="col-lg-8 offset-lg-2">
             <form asp-action="Create" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="hidden" asp-for="PatientID" />
+                        <label>Patient Name</label>
+                        <input type="text" class="form-control" value="@Model.Patient?.FirstName @Model.Patient?.LastName" readonly />
+                    </div>
+                    <input type="hidden" asp-for="DoctorID" />
+                    <input type="hidden" asp-for="EndDateTime" />
 
-                        
-                            <div class="form-group">
+                    <div class="form-group">
                                 <label asp-for="DateOfBirth">Date of Birth</label>
                                 <input asp-for="DateOfBirth" type="date" class="form-control" />
                                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
@@ -28,24 +33,19 @@
 
                 <div class="row">
 
-                        <div class="col-md-6">
+                        @* <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="DoctorID">Doctor</label>
-                                <select asp-for="DoctorID" asp-items="ViewBag.Doctors" class="select form-control" size="1">
-                                    <option value="">Select Doctor Name</option>
-
-                                </select>
+                                <input asp-for="DoctorID" class="form-control" />
+                                <span asp-validation-for="DoctorID" class="text-danger"></span>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="PatientID">Patient Name</label>
-                                <select asp-for="PatientID" asp-items="ViewBag.Patients" class="select form-control" size="1">
-                                    <option value="">Select Patient Name</option>
-
-                                </select>
-                            </div>
-                        </div>
+                        </div> *@
+                       @*   <div class="col-md-6">
+                             <div class="form-group">
+                                 <label asp-for="PatientID">Patient Name</label>
+                                 <input asp-for="PatientID" class="form-control" />
+                             </div>
+                         </div> *@
                 </div>
                 <div class="row">
                         <div class="col-md-6">
@@ -56,36 +56,10 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="EndDateTime">End Date & Time</label>
-                                <input asp-for="EndDateTime" type="datetime-local" class="form-control" />
-                                <span asp-validation-for="EndDateTime" class="text-danger"></span>
-                            </div>
-                        </div>
+
                 </div>
                
-                <div class="row">
-                        <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Status" class="control-label"></label>
-                                <select asp-for="Status" class="form-control" asp-items="ViewBag.StatusList" select>
-                                    <option value="">Select Status</option>
-
-                                </select>
-                        <span asp-validation-for="Status" class="text-danger"></span>
-                    </div>
-                        </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="DeptId">Deprtment Name</label>
-                            <select asp-for="DeptId" asp-items="ViewBag.Department" class="select form-control" size="1">
-                                    <option value="">Select Department</option>
-
-                            </select>
-                        </div>
-                    </div>
-                    </div>
+               
                 <div class="m-t-20 text-center">
                     <button class="btn btn-primary submit-btn">Create Appointment</button>
                 </div>

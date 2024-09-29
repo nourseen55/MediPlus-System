@@ -1,3 +1,4 @@
+using Hospital_Management_Project.Middlewares;
 using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
 using HospitalSystem.Infrastructure.Mapping;
@@ -22,16 +23,16 @@ namespace Hospital_Management_Project
             #region Identity Configuration
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
-                /*options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedAccount = true;
                 options.Password = new()
                 {
                     RequiredLength = 8,
                     RequiredUniqueChars = 0,
-                    RequireDigit = true,
-                    RequireUppercase = true,
-                    RequireLowercase = true,
-                    RequireNonAlphanumeric = true
-                };*/
+                    RequireDigit = false,
+                    RequireUppercase = false,
+                    RequireLowercase = false,
+                    RequireNonAlphanumeric = false
+                };
             }).AddEntityFrameworkStores<ApplicationDbContext>()
               .AddDefaultTokenProviders();
               
@@ -66,7 +67,11 @@ namespace Hospital_Management_Project
 
             app.UseRouting();
             app.MapRazorPages();
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<AdminAuthorizationMiddleware>();
 
 
 

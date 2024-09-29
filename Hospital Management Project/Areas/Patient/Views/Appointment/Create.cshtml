@@ -31,13 +31,19 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="DoctorID">Doctor</label>
-                                <select asp-for="DoctorID" asp-items="ViewBag.Doctors" class="select form-control" size="1"></select>
+                                <select asp-for="DoctorID" asp-items="ViewBag.Doctors" class="select form-control" size="1">
+                                    <option value="">Select Doctor Name</option>
+
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="PatientID">Patient Name</label>
-                                <select asp-for="PatientID" asp-items="ViewBag.Patients" class="select form-control" size="1"></select>
+                                <select asp-for="PatientID" asp-items="ViewBag.Patients" class="select form-control" size="1">
+                                    <option value="">Select Patient Name</option>
+
+                                </select>
                             </div>
                         </div>
                 </div>
@@ -59,12 +65,27 @@
                         </div>
                 </div>
                
+                <div class="row">
+                        <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+                                <select asp-for="Status" class="form-control" asp-items="ViewBag.StatusList" select>
+                                    <option value="">Select Status</option>
 
-                <div class="form-group">
-                    <label asp-for="Status" class="control-label"></label>
-                    <input asp-for="Status" class="form-control" />
-                    <span asp-validation-for="Status" class="text-danger"></span>
-                </div>
+                                </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                        </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="DeptId">Deprtment Name</label>
+                            <select asp-for="DeptId" asp-items="ViewBag.Department" class="select form-control" size="1">
+                                    <option value="">Select Department</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    </div>
                 <div class="m-t-20 text-center">
                     <button class="btn btn-primary submit-btn">Create Appointment</button>
                 </div>

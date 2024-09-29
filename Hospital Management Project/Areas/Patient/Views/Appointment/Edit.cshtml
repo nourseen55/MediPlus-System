@@ -16,14 +16,9 @@
             <div class="col-lg-8 offset-lg-2">
                 <form asp-action="Edit" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="AppointmentID" class="form-control" type="text" hidden />
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="AppointmentID"></label>
-                                <input asp-for="AppointmentID" class="form-control" type="text" readonly="" />
-                            </div>
-                        </div>
                         <div class="col-md-6">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -55,30 +50,37 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="StartDateTime">Date</label>
-                                <div class="cal-icon">
-                                    <input asp-for="StartDateTime" type="text" class="form-control datetimepicker" />
-                                    <span asp-validation-for="StartDateTime" class="text-danger"></span>
-                                </div>
+                                <label asp-for="StartDateTime">Start Date & Time</label>
+                                <input asp-for="StartDateTime" type="datetime-local" class="form-control" />
+                                <span asp-validation-for="StartDateTime" class="text-danger"></span>
                             </div>
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="EndDateTime"></label>
-                                <div class="cal-icon">
-                                    <input asp-for="EndDateTime" type="text" class="form-control" id="datetimepicker3" />
-                                    <span asp-validation-for="EndDateTime" class="text-danger"></span>
-                                </div>
+                                <label asp-for="EndDateTime">End Date & Time</label>
+                                <input asp-for="EndDateTime" type="datetime-local" class="form-control" />
+                                <span asp-validation-for="EndDateTime" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
 
-              
 
-                    <div class="form-group">
-                        <label asp-for="Status" class="control-label"></label>
-                        <input asp-for="Status" class="form-control" />
-                        <span asp-validation-for="Status" class="text-danger"></span>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Status" class="control-label"></label>
+                                <select asp-for="Status" class="form-control select" asp-items="ViewBag.StatusList"></select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="DeptId">Deprtment Name</label>
+                                <select asp-for="DeptId" asp-items="ViewBag.Department" class="select form-control" size="1"></select>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="m-t-20 text-center">

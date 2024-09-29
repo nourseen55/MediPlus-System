@@ -19,7 +19,7 @@ namespace HospitalSystem.Persistance.Repository
 
         public async Task<IEnumerable<Appointment>> GetAllEntityAsync()
         {
-            return await _context.Appointments.Include(a=>a.Patient).Include(b=>b.Doctor).ToListAsync();
+            return await _context.Appointments.Include(a=>a.Patient).Include(b=>b.Doctor).Include(d=>d.Departments).ToListAsync();
         }
 
         public async Task<Appointment?> GetEntityByIdAsync(string id)

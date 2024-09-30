@@ -18,9 +18,8 @@ namespace HospitalSystem.Infrastructure.Mapping
 
             CreateMap<Doctor, DoctorVM>();
             CreateMap<DoctorVM, Doctor>();
-
-            CreateMap<Nurse, NurseVM>();
             CreateMap<NurseVM, Nurse>();
+            CreateMap<Nurse, NurseVM>();
             
         }
         

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HospitalSystem.Persistance.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class newinit1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -207,6 +207,7 @@ namespace HospitalSystem.Persistance.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
                     DepartmentId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -233,21 +234,20 @@ namespace HospitalSystem.Persistance.Migrations
                     AppointmentID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EndDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
                     PatientID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DoctorID = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DeptId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    DeptId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DepartmentId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointment", x => x.AppointmentID);
                     table.ForeignKey(
-                        name: "FK_Appointment_Departments_DeptId",
-                        column: x => x.DeptId,
+                        name: "FK_Appointment_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
                         principalTable: "Departments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Appointment_Doctor_DoctorID",
                         column: x => x.DoctorID,
@@ -341,16 +341,16 @@ namespace HospitalSystem.Persistance.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2ff296b9-127d-44de-8582-44754f8b5cb5", null, "Admin", "ADMIN" },
-                    { "5f4ac32c-2481-472d-bb6d-131d62c8ba6b", null, "Doctor", "DOCTOR" },
-                    { "c0a00a56-aec9-4a24-a8a1-31139847432e", null, "Patient", "PATIENT" },
-                    { "f5bf7023-610f-45c2-bc88-4e72688011d5", null, "Nurse", "NURSE" }
+                    { "00b39f03-0b97-40db-9455-67a8634b51a7", null, "Admin", "ADMIN" },
+                    { "13949769-ad3b-4717-a55b-2fb5b68efa92", null, "Patient", "PATIENT" },
+                    { "32517c0b-90a6-4e86-a494-92a81070f910", null, "Doctor", "DOCTOR" },
+                    { "73798911-0417-47e7-84ca-5bdba1cc9973", null, "Nurse", "NURSE" }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointment_DeptId",
+                name: "IX_Appointment_DepartmentId",
                 table: "Appointment",
-                column: "DeptId");
+                column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointment_DoctorID",

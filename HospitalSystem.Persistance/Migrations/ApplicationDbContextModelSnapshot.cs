@@ -30,8 +30,11 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DeptId")
+                    b.Property<string>("DepartmentId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("DeptId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DoctorID")
                         .HasColumnType("nvarchar(450)");
@@ -46,12 +49,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Property<DateTime?>("StartDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("AppointmentID");
 
-                    b.HasIndex("DeptId");
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("DoctorID");
 
@@ -151,25 +151,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5f4ac32c-2481-472d-bb6d-131d62c8ba6b",
+                            Id = "32517c0b-90a6-4e86-a494-92a81070f910",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "f5bf7023-610f-45c2-bc88-4e72688011d5",
+                            Id = "73798911-0417-47e7-84ca-5bdba1cc9973",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         },
                         new
                         {
-                            Id = "c0a00a56-aec9-4a24-a8a1-31139847432e",
+                            Id = "13949769-ad3b-4717-a55b-2fb5b68efa92",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "2ff296b9-127d-44de-8582-44754f8b5cb5",
+                            Id = "00b39f03-0b97-40db-9455-67a8634b51a7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -371,6 +371,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
 
@@ -452,10 +455,9 @@ namespace HospitalSystem.Persistance.Migrations
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.Appointment", b =>
                 {
-                    b.HasOne("HospitalSystem.Core.Entities.Departments", "Departments")
+                    b.HasOne("HospitalSystem.Core.Entities.Departments", "Department")
                         .WithMany("Appointments")
-                        .HasForeignKey("DeptId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("DepartmentId");
 
                     b.HasOne("HospitalSystem.Core.Entities.Doctor", "Doctor")
                         .WithMany("Appointments")
@@ -468,7 +470,7 @@ namespace HospitalSystem.Persistance.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Departments");
+                    b.Navigation("Department");
 
                     b.Navigation("Doctor");
 

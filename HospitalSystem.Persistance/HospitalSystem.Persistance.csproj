@@ -30,8 +30,4 @@
     <ProjectReference Include="..\HospitalSystem.Application\HospitalSystem.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

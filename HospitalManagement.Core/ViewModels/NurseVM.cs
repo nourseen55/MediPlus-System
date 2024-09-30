@@ -10,7 +10,7 @@ namespace HospitalSystem.Core.ViewModels
 {
     public class NurseVM
     {
-        public string ID { get; set; }
+        public string? ID { get; set; } = Guid.NewGuid().ToString();
         public string? Name { get; set; }
         public string? Img { get; set; }
         public string? ZipCode { get; set; }
@@ -28,5 +28,7 @@ namespace HospitalSystem.Core.ViewModels
 
         public string? DoctorID { get; set; }
         public string? DepartmentID { get; set; }
+        public  IEnumerable<Departments>? Departments { get; set; }
+        public IEnumerable<Doctor>? Doctors { get; set; }
     }
 }

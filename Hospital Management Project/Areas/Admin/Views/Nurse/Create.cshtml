@@ -1,4 +1,4 @@
-﻿@model Nurse
+﻿@model NurseVM
 
 @{
     ViewData["Title"] = "Create";
@@ -95,21 +95,25 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="DoctorID">Doctor</label>
-                                <select asp-for="DoctorID" asp-items="ViewBag.doctors" class="select form-control" size="1">
-                                    <option value="">-- Select Doctor --</option> <!-- Placeholder option -->
+                                <label asp-for="DepartmentID" class="control-label">Department</label>
+                                <select asp-for="DepartmentID" class="form-control" id="DepartmentSelect">
+                                    <option value="">Select Department</option>
+                                    @foreach (var department in Model.Departments)
+                                    {
+                                        <option value="@department.Id">@department.DepartmentName</option>
+                                    }
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label asp-for="DepartmentID">Department Name</label>
-                                <select asp-for="DepartmentID" asp-items="ViewBag.dept" class="select form-control" size="1">
-                                    <option value="">-- Select Department --</option> <!-- Placeholder option -->
+                                <label asp-for="DoctorID" class="control-label">Doctor</label>
+                                <select asp-for="DoctorID" class="form-control" id="DoctorSelect">
+                                    <option value="">Select Doctor</option>
                                 </select>
                             </div>
                         </div>
-                   </div>
+                    </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Avatar</label>
@@ -142,6 +146,35 @@
             img.src = URL.createObjectURL(event.target.files[0]);
         }
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var doctors = [
+        @foreach (var doctor in Model.Doctors)
+        {
+            <text>{id: '@doctor.Id', name: '@doctor.Name', departmentId: '@doctor.DepartmentId' }, </text>
+        }
+                    ];
+            $('#DepartmentSelect').change(function () {
+                var selectedDepartmentId = $(this).val();
+                $('#DoctorSelect').empty();
+
+                if (selectedDepartmentId) {
+                    var filteredDoctors = doctors.filter(function (doctor) {
+                        return doctor.departmentId === selectedDepartmentId;
+                    });
+
+                    $('#DoctorSelect').append('<option value="">Select Doctor</option>');
+                    $.each(filteredDoctors, function (index, doctor) {
+                        $('#DoctorSelect').append('<option value="' + doctor.id + '">' + doctor.name + '</option>');
+                    });
+                } else {
+                    $('#DoctorSelect').append('<option value="">Select Doctor</option>');
+                }
+            });
+        });
+    </script>
+
 }
 
 

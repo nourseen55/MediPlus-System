@@ -3,9 +3,11 @@ using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
 using HospitalSystem.Core.Enums;
+using HospitalSystem.Core.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hospital_Management_Project.Areas.Admin.Controllers
 { 
@@ -39,30 +41,60 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             }
             return View(Nurse);
         }
+        //[HttpGet]
+        //public async Task<IActionResult> Create()
+        //{
+        //    var doctors=await _DoctorService.GetAllDoctorsAsync();
+        //    var dept = await _departmentService.GetAllDepartmentsAsync();
+        //    ViewBag.Doctors = doctors.Select(d => new SelectListItem
+        //    {
+        //        Value = d.Id,
+        //        Text = d.Name
+        //    }).ToList();
+
+        //    ViewBag.Dept = dept.Select(d => new SelectListItem
+        //    {
+        //        Value=d.Id,
+        //        Text = d.DepartmentName
+        //    }).ToList();
+
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(Nurse nurse, IFormFile Img)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (Img != null && Img.Length > 0)
+        //        {
+        //            var path = @"Images\Nurses";
+        //            string imgPath = await _imageService.SaveImageAsync(Img, path);
+        //            nurse.Img = imgPath;
+        //        }
+
+
+        //        await _nurseService.AddNurseAsync(nurse);
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(nurse);
+        //}
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var doctors=await _DoctorService.GetAllDoctorsAsync();
-            var dept = await _departmentService.GetAllDepartmentsAsync();
-            ViewBag.Doctors = doctors.Select(d => new SelectListItem
+            var model = new NurseVM
             {
-                Value = d.Id,
-                Text = d.Name
-            }).ToList();
-
-            ViewBag.Dept = dept.Select(d => new SelectListItem
-            {
-                Value=d.Id,
-                Text = d.DepartmentName
-            }).ToList();
-
-            return View();
+                Departments = await _departmentService.GetAllDepartmentsAsync(),
+                Doctors = await _DoctorService.GetAllDoctorsAsync()
+            };
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Nurse nurse, IFormFile Img)
+        public async Task<IActionResult> Create(NurseVM model, IFormFile Img)
         {
             if (ModelState.IsValid)
             {
@@ -70,15 +102,20 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                 {
                     var path = @"Images\Nurses";
                     string imgPath = await _imageService.SaveImageAsync(Img, path);
-                    nurse.Img = imgPath;
+                    model.Img = imgPath; 
                 }
-               
+
+                var nurse = new Nurse();
+                _mapper.Map(model, nurse);
 
                 await _nurseService.AddNurseAsync(nurse);
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
-            return View(nurse);
+
+            model.Departments = await _departmentService.GetAllDepartmentsAsync();
+            return View(model);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Edit(string id)

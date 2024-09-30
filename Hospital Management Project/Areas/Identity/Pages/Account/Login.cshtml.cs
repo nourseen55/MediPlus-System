@@ -19,37 +19,69 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager; // UserManager for role access
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userManager)
         {
             _signInManager = signInManager;
-            _userManager = userManager; // Initialize UserManager
             _logger = logger;
+            _userManager = userManager;
         }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         [BindProperty]
         public InputModel Input { get; set; }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         public string ReturnUrl { get; set; }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         [TempData]
         public string ErrorMessage { get; set; }
 
+        /// <summary>
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     directly from your code. This API may change or be removed in future releases.
+        /// </summary>
         public class InputModel
         {
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
             [Required]
             [EmailAddress]
             public string Email { get; set; }
 
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
+            /// <summary>
+            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+            ///     directly from your code. This API may change or be removed in future releases.
+            /// </summary>
             [Display(Name = "Remember me?")]
             public bool RememberMe { get; set; }
         }
@@ -62,57 +94,67 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             }
 
             returnUrl ??= Url.Content("~/");
+
+            // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             ReturnUrl = returnUrl;
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
+
+            // Get external authentication schemes if any
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
+            // Validate the model
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                // Sign in the user with the provided email and password
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
+                // Check if the sign-in was successful
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-
-                    // Retrieve the user based on their email
+                    // Retrieve the user object from the UserManager
                     var user = await _userManager.FindByEmailAsync(Input.Email);
+
                     if (user != null)
                     {
-                        // Check user roles if needed
+                        // Retrieve the roles assigned to the user
                         var userRoles = await _userManager.GetRolesAsync(user);
-                        // Example: Check if the user is an admin and perform specific actions
-                        if (userRoles.Contains("Admin")) // Replace "Admin" with your specific role name
+
+                        // Redirect based on the user's roles
+                        if (userRoles.Contains("Admin"))
                         {
-                            // Logic for admin user
+                            return LocalRedirect("/AdminArea"); // Redirect to Admin area
+                        }
+                        else if (userRoles.Contains("Doctor"))
+                        {
+                            return LocalRedirect("/DoctorArea"); // Redirect to Doctor area
+                        }
+                        else if (userRoles.Contains("Patient"))
+                        {
+                            return LocalRedirect("/PatientArea"); // Redirect to Patient area
+                        }
+                        else if (userRoles.Contains("Nurse"))
+                        {
+                            return LocalRedirect("/NurseArea"); // Redirect to Nurse area
                         }
                     }
 
+                    // If no specific role, redirect to default return URL
+                    _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
-            }
 
-            // If we got this far, something failed, redisplay form
+                // If login failed, display an error message
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return Page();
+            }
             return Page();
         }
     }

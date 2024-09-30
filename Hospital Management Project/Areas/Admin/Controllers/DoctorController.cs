@@ -18,9 +18,9 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         private readonly IImageService _imageService;
         private readonly IMapper mapper;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IDepartmentService _departmentService;
-        public DoctorController(IDoctorService doctorService, IImageService imageService, IDepartmentService departmentService,IMapper mapper, IWebHostEnvironment webHostEnvironment, UserManager<IdentityUser> userManager)
+        public DoctorController(IDoctorService doctorService, IImageService imageService, IDepartmentService departmentService,IMapper mapper, IWebHostEnvironment webHostEnvironment, UserManager<ApplicationUser> userManager)
         {
             _doctorService = doctorService;
             _webHostEnvironment = webHostEnvironment;
@@ -34,7 +34,6 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         {
             IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
             ViewBag.Departments = departments.Select(d => new SelectListItem { Value = d.Id, Text = d.DepartmentName });
-
 
             Doctor doctor = new Doctor();
             return View(doctor);
@@ -50,6 +49,7 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
 
                     doctor.Img = await _imageService.SaveImageAsync(Img, path);
                 }
+                doctor.UserName = doctor.Email;
                 await _doctorService.AddDoctorAsync(doctor);
                 return RedirectToAction("Index");
             }

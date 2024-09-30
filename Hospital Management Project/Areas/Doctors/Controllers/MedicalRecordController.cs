@@ -1,20 +1,21 @@
 ﻿using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
+using HospitalSystem.Core.Enums;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Hospital_Management_Project.Areas.Doctors.Controllers{
 
     [Area("Doctors")]
-    //[Authorize(Roles ="Doctor")]
+    [Authorize(Roles =nameof(UserRoles.Doctor))]
     public class MedicalRecordController : Controller
     {
         private readonly IMedicalRecordService _medicalRecordService;
         private readonly IPatientService _patientService;
         private readonly IAppointmentService _appointmentService;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IImageService _fileService;
 
-        public MedicalRecordController(IMedicalRecordService medicalRecordService, IImageService fileService, IPatientService patientService , IAppointmentService appointmentService , UserManager<IdentityUser> userManager)
+        public MedicalRecordController(IMedicalRecordService medicalRecordService, IImageService fileService, IPatientService patientService , IAppointmentService appointmentService , UserManager<ApplicationUser> userManager)
         {
             _medicalRecordService = medicalRecordService;
             _patientService = patientService;
@@ -29,7 +30,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-            var doctorId = "453737d3-1891-4db0-be30-94a52f0ad18b";
+            var doctorId = user?.Id;
 
             var patients = await _appointmentService.GetPatientsByDoctorAsync(doctorId);
             return View(patients);
@@ -56,7 +57,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
                 PatientID = patientId.ToString(),
                 Patient = patient,
                 DateOfEntry = DateTime.Now,
-                DoctorID = "453737d3-1891-4db0-be30-94a52f0ad18b"
+                DoctorID =user?.Id
             };
 
             return View(record);

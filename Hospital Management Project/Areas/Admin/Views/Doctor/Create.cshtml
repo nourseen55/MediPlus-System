@@ -12,9 +12,14 @@
                 <!-- First Row: Name and Email -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label asp-for="FullName" class="control-label"></label>
-                        <input asp-for="FullName" class="form-control" placeholder="Enter Name" />
-                        <span asp-validation-for="FullName" class="text-danger"></span>
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" placeholder="Enter Name" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" placeholder="Enter Name" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label asp-for="Email" class="control-label"></label>
@@ -27,8 +32,8 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>Password <span class="text-danger">*</span></label>
-                        <input asp-for="PasswordHash" class="form-control" type="password" required />
-                        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                        <input class="form-control" type="password" required />
+                        <span  class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label asp-for="DepartmentId" class="control-label">Department</label>

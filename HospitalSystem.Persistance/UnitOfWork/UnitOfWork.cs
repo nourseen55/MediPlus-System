@@ -4,6 +4,8 @@
     {
 
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
+
         public IGenericRepository<Patient> _patientRepository { get; private set; }
 
         public IGenericRepository<Nurse> _nurseRepository  { get; private set; }
@@ -16,12 +18,13 @@
 
         public IGenericRepository<Departments> _departmentsRepository { get; private set; }
 
-        public UnitOfWork(ApplicationDbContext applicationDbContext)
+        public UnitOfWork(ApplicationDbContext applicationDbContext,UserManager<ApplicationUser> userManager)
         {
             _context = applicationDbContext;
+            _userManager = userManager;
             _patientRepository = new PatientRepository(applicationDbContext);
             _nurseRepository = new NurseRepository(applicationDbContext);
-            _doctorRepository = new DoctorRepository(applicationDbContext);
+            _doctorRepository = new DoctorRepository(applicationDbContext,_userManager);
             _appointmentRepository = new AppointmentRepository(applicationDbContext);
             _recordRepository = new MedicalRecordRepository(applicationDbContext);
             _departmentsRepository = new DpartmentRepository(applicationDbContext);

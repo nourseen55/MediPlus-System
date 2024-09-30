@@ -1,4 +1,4 @@
-﻿/*using AutoMapper;
+﻿using AutoMapper;
 using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
@@ -10,16 +10,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hospital_Management_Project.Areas.Admin.Controllers
-{ 
+{
     [Area("Admin")]
     public class NurseController : Controller
     {
-       private readonly INurseService _nurseService;
+        private readonly INurseService _nurseService;
         private readonly IMapper _mapper;
         private readonly IImageService _imageService;
         private readonly IDoctorService _DoctorService;
         private readonly IDepartmentService _departmentService;
-        public NurseController(INurseService nurseService,IMapper mapper,IImageService imageService,IDepartmentService departmentService,IDoctorService doctorService)
+        public NurseController(INurseService nurseService, IMapper mapper, IImageService imageService, IDepartmentService departmentService, IDoctorService doctorService)
         {
             _nurseService = nurseService;
             _mapper = mapper;
@@ -34,69 +34,20 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Details(string id)
         {
-            var Nurse= await _nurseService.GetNurseByIdAsync(id);   
+            var Nurse = await _nurseService.GetNurseByIdAsync(id);
             if (Nurse == null)
             {
                 return NotFound();
             }
             return View(Nurse);
         }
-        //[HttpGet]
-        //public async Task<IActionResult> Create()
-        //{
-        //    var doctors=await _DoctorService.GetAllDoctorsAsync();
-        //    var dept = await _departmentService.GetAllDepartmentsAsync();
-        //    ViewBag.Doctors = doctors.Select(d => new SelectListItem
-        //    {
-        //        Value = d.Id,
-        //        Text = d.Name
-        //    }).ToList();
 
-        //    ViewBag.Dept = dept.Select(d => new SelectListItem
-        //    {
-        //        Value=d.Id,
-        //        Text = d.DepartmentName
-        //    }).ToList();
-
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create(Nurse nurse, IFormFile Img)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (Img != null && Img.Length > 0)
-        //        {
-        //            var path = @"Images\Nurses";
-        //            string imgPath = await _imageService.SaveImageAsync(Img, path);
-        //            nurse.Img = imgPath;
-        //        }
-
-
-        //        await _nurseService.AddNurseAsync(nurse);
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(nurse);
-        //}
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
             var model = new NurseVM
             {
-                Value = d.Id,
-                Text = d.FullName
-            }).ToList();
-
-            ViewBag.Dept = dept.Select(d => new SelectListItem
-            {
-                Value=d.Id,
-                Text = d.DepartmentName
-            }).ToList();
-
-            return View();
                 Departments = await _departmentService.GetAllDepartmentsAsync(),
                 Doctors = await _DoctorService.GetAllDoctorsAsync()
             };
@@ -113,7 +64,7 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                 {
                     var path = @"Images\Nurses";
                     string imgPath = await _imageService.SaveImageAsync(Img, path);
-                    model.Img = imgPath; 
+                    model.Img = imgPath;
                 }
 
                 var nurse = new Nurse();
@@ -193,4 +144,3 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
 
     }
 }
-*/

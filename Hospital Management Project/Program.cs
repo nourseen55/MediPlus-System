@@ -71,7 +71,7 @@ namespace Hospital_Management_Project
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseMiddleware<AdminAuthorizationMiddleware>();
+            //app.UseMiddleware<AdminAuthorizationMiddleware>();
 
 
 

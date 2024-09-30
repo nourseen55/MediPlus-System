@@ -64,12 +64,12 @@ namespace HospitalSystem.Persistance.Data
             var adminUser = new ApplicationUser
             {
                 Id = adminId,
-                UserName = "admin@example.com",
-                NormalizedUserName = "ADMIN@EXAMPLE.COM",
-                Email = "admin@example.com",
-                NormalizedEmail = "ADMIN@EXAMPLE.COM",
+                UserName = "admin@admin.com",
+                NormalizedUserName = "ADMIN@ADMIN.COM",
+                Email = "admin@admin.com",
+                NormalizedEmail = "ADMIN@ADMIN.COM",
                 EmailConfirmed = true,
-                PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(null, "YourStrongPassword123!"),
+                PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(null, "Admin@11"),
                 FirstName = "Admin",
                 LastName = "User", 
                 Img = null,

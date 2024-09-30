@@ -148,7 +148,7 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DepartmentId")
+                    b.Property<string>("DeptId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DeptId")

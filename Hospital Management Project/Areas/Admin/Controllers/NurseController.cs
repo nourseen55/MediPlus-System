@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
@@ -193,3 +193,4 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
 
     }
 }
+*/

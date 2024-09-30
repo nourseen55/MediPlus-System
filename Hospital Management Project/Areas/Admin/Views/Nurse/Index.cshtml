@@ -45,13 +45,13 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td><img width="28" height="28" src="~/@item.Img" class="rounded-circle m-r-5" alt="">@item.Name</td>
+                                            <td><img width="28" height="28" src="~/@item.Img" class="rounded-circle m-r-5" alt="">@item.FullName</td>
                                             <td>@item.Age()</td>
                                             <td>@item.Gender</td>
                                             <td>@item.City</td>
                                             <td>@item.Email</td>
                                             <td>@item.UserName</td>
-                                            <td>@item.Doctor?.Name</td>
+                                            <td>@item.Doctor?.FullName</td>
                                             <td>@item.Departments?.DepartmentName</td>
                                             <!-- Action Icon and Dropdown -->
                                             <td class="text-right">

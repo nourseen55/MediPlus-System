@@ -48,7 +48,7 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             ViewBag.Doctors = doctors.Select(d => new SelectListItem
             {
                 Value = d.Id,
-                Text = d.Name
+                Text = d.FullName
             }).ToList();
 
             ViewBag.Dept = dept.Select(d => new SelectListItem
@@ -94,7 +94,7 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             ViewBag.Doctors = doctors.Select(d => new SelectListItem
             {
                 Value = d.Id,
-                Text = d.Name
+                Text = d.FullName
             }).ToList();
 
             ViewBag.Dept = dept.Select(d => new SelectListItem

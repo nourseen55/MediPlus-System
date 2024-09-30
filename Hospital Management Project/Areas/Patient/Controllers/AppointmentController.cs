@@ -92,7 +92,7 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
             ViewBag.Doctors = doctors.Select(d => new SelectListItem
             {
                 Value = d.Id.ToString(),
-                Text = d.Name
+                Text = d.FullName
             }).ToList();
 
             ViewBag.Patients = patients.Select(p => new SelectListItem

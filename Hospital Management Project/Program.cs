@@ -21,7 +21,7 @@ namespace Hospital_Management_Project
             builder.Services.AddRazorPages();
 
             #region Identity Configuration
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;
                 options.Password = new()

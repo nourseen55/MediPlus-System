@@ -17,7 +17,6 @@ namespace HospitalSystem.Core.Entities
         public string? Country { get; set; }
         public string? City { get; set; }
         public Gender Gender { get; set; }
-
         public DateTime DateOfBirth { get; set; }
         public int Age()
         {

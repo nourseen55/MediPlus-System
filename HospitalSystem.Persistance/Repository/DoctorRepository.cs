@@ -11,16 +11,21 @@ namespace HospitalSystem.Persistance.Repository
 
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserStore<ApplicationUser> _userStore;
+        private readonly IUserEmailStore<ApplicationUser> _emailStore;
 
-        public DoctorRepository(ApplicationDbContext context,UserManager<ApplicationUser> userManager)
+        public DoctorRepository(ApplicationDbContext context,UserManager<ApplicationUser> userManager, IUserStore<ApplicationUser> userStore)
         {
             _context = context;
             _userManager = userManager;
+            _userStore = userStore;
         }
-        public async Task AddEntityAsync(Doctor entity)
+        public async Task AddEntityAsync(Doctor entity)//VM + Confirm email
         {
-            
-                var result = await _userManager.CreateAsync(entity,"Admin@11");
+            await _userStore.SetUserNameAsync(entity, entity.Email, CancellationToken.None);
+/*            await _emailStore.SetEmailAsync(entity, entity.Email, CancellationToken.None);
+*/            var result = await _userManager.CreateAsync(entity,"Admin@11");
+
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(entity, UserRoles.Doctor.ToString());

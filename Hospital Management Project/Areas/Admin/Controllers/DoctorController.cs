@@ -39,7 +39,7 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             return View(doctor);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Doctor doctor, IFormFile Img)
+        public async Task<IActionResult> Create(Doctor doctor, IFormFile Img)//doctorVM
         {
             if (ModelState.IsValid)
             {
@@ -50,7 +50,9 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                     doctor.Img = await _imageService.SaveImageAsync(Img, path);
                 }
                 doctor.UserName = doctor.Email;
+                
                 await _doctorService.AddDoctorAsync(doctor);
+                
                 return RedirectToAction("Index");
             }
             IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();

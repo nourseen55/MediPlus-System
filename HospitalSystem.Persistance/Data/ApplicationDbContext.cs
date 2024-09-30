@@ -1,21 +1,23 @@
-﻿namespace HospitalSystem.Persistance.Data
-{
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
-    {
-       /* public ApplicationDbContext()
-        {
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
-        }*/
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
+namespace HospitalSystem.Persistance.Data
+{
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            
         }
-        public DbSet<Patient> Patients { set;get; }
-        public DbSet<Appointment> Appointments { set;get; }
-        public DbSet<Doctor> Doctors { set;get; }
-        public DbSet<MedicalRecord> MedicalRecords { set;get; }
-        public DbSet<Nurse> Nurses { set;get; }
-        public DbSet<Departments> Departments { set;get; }
+
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<Nurse> Nurses { get; set; }
+        public DbSet<Departments> Departments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,28 +28,65 @@
             modelBuilder.ApplyConfiguration(new NurseConfiguration());
             modelBuilder.ApplyConfiguration(new PatientConfiguration());
 
-            SeedRoles(modelBuilder);
+            var roles = SeedRoles(modelBuilder);
+            SeedUser(modelBuilder,roles);
         }
 
-
-        private void SeedRoles(ModelBuilder modelBuilder)
+        private Dictionary<string, string> SeedRoles(ModelBuilder modelBuilder)
         {
+            var roleIds = new Dictionary<string, string>();
+
             foreach (var role in Enum.GetValues(typeof(UserRoles)))
             {
-                string? roleName = role.ToString();
+                string roleName = role.ToString();
                 if (roleName == null) { continue; }
 
-                modelBuilder.Entity<IdentityRole>().HasData(
+                var roleId = Guid.NewGuid().ToString();
+                roleIds[roleName] = roleId; // Store the role name and ID in the dictionary
 
+                modelBuilder.Entity<IdentityRole>().HasData(
                     new IdentityRole
                     {
-                        Id = Guid.NewGuid().ToString(),
+                        Id = roleId,
                         Name = roleName,
                         NormalizedName = roleName.ToUpper()
                     }
                 );
             }
 
+            return roleIds;
+        }
+
+        private void SeedUser(ModelBuilder modelBuilder, Dictionary<string, string> roleIds)
+        {
+            var adminId = Guid.NewGuid().ToString();
+
+            var adminUser = new ApplicationUser
+            {
+                Id = adminId,
+                UserName = "admin@example.com",
+                NormalizedUserName = "ADMIN@EXAMPLE.COM",
+                Email = "admin@example.com",
+                NormalizedEmail = "ADMIN@EXAMPLE.COM",
+                EmailConfirmed = true,
+                PasswordHash = new PasswordHasher<ApplicationUser>().HashPassword(null, "YourStrongPassword123!"),
+                FirstName = "Admin",
+                LastName = "User", 
+                Img = null,
+                ZipCode = null,
+                Country = null,
+                City = null,
+                Gender = Gender.Male,
+                DateOfBirth = new DateTime(2003, 12, 20)
+            };
+
+            modelBuilder.Entity<ApplicationUser>().HasData(adminUser);
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = roleIds["Admin"],
+                UserId = adminId
+            });
         }
     }
 }

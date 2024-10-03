@@ -71,7 +71,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            // New properties for FirstName and LastName
+            // Add FirstName, LastName, and other fields from ApplicationUser
             [Required]
             [Display(Name = "First Name")]
             public string FirstName { get; set; }
@@ -79,7 +79,29 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "Gender")]
+            public Gender Gender { get; set; }
+
+            [Required]
+            [Display(Name = "Date of Birth")]
+            [DataType(DataType.Date)]
+            public DateTime DateOfBirth { get; set; }
+
+            [Display(Name = "Profile Image URL")]
+            public string Img { get; set; }
+
+            [Display(Name = "Zip Code")]
+            public string ZipCode { get; set; }
+
+            [Display(Name = "Country")]
+            public string Country { get; set; }
+
+            [Display(Name = "City")]
+            public string City { get; set; }
         }
+
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -91,12 +113,19 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
                     FirstName = Input.FirstName,
-                    LastName = Input.LastName
+                    LastName = Input.LastName,
+                    Gender = Input.Gender,
+                    DateOfBirth = Input.DateOfBirth,
+                    Img = Input.Img,
+                    ZipCode = Input.ZipCode,
+                    Country = Input.Country,
+                    City = Input.City
                 };
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -107,7 +136,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    // Assign the Patient role to the new user
+                    // Assign a default role to the user
                     await _userManager.AddToRoleAsync(user, UserRoles.Patient.ToString());
 
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -132,6 +161,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -141,6 +171,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+
 
 
         private IUserEmailStore<ApplicationUser> GetEmailStore()

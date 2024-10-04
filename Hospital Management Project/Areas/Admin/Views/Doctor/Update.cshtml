@@ -12,9 +12,14 @@
                 <!-- First Row: Name and Email -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" placeholder="Enter Name" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" placeholder="Enter Name" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="LastName" class="control-label"></label>
+                        <input asp-for="LastName" class="form-control" placeholder="Enter Name" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label asp-for="Email" class="control-label"></label>
@@ -26,9 +31,9 @@
                 <!-- Second Row: Password and Department -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" placeholder="Enter Password" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <label class="control-label">Password <span class="text-danger">*</span></label>
+                        <input asp-for="PasswordHash" class="form-control" type="password" required />
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label asp-for="DepartmentId" class="control-label">Department</label>

@@ -20,14 +20,18 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IDepartmentService _departmentService;
-        public DoctorController(IDoctorService doctorService, IImageService imageService, IDepartmentService departmentService,IMapper mapper, IWebHostEnvironment webHostEnvironment, UserManager<ApplicationUser> userManager)
+        private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
+
+        public DoctorController(IDoctorService doctorService, IPasswordHasher<ApplicationUser> passwordHasher, IImageService imageService, IDepartmentService departmentService,IMapper mapper, IWebHostEnvironment webHostEnvironment, UserManager<ApplicationUser> userManager)
         {
             _doctorService = doctorService;
             _webHostEnvironment = webHostEnvironment;
             _userManager = userManager;
             _imageService = imageService;
             this.mapper = mapper;
+
             _departmentService = departmentService;
+            _passwordHasher = passwordHasher;
         }
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -88,6 +92,8 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                 doctor.Gender = doctorvm.Gender;
                 IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
                 ViewBag.Departments = departments.Select(d => new SelectListItem { Value = d.Id, Text = d.DepartmentName });
+                doctor.UserName = doctor.Email;
+                doctor.PasswordHash = _passwordHasher.HashPassword(doctor, doctor.PasswordHash);
                 await _doctorService.UpdateDoctorAsync(doctor);
                 return RedirectToAction("Index");
             }

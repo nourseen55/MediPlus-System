@@ -12,19 +12,21 @@ using Microsoft.EntityFrameworkCore;
 namespace Hospital_Management_Project.Areas.Appoint.Controllers
 {
     [Area("Patient")]
-    [Authorize(Roles = nameof(UserRoles.Patient))]
+    //[Authorize(Roles = nameof(UserRoles.Patient))]
     public class AppointmentController : Controller
     {
        private readonly IAppointmentService _IAppointmentService;
         private readonly IDoctorService _IDoctorService;
         private readonly IPatientService _IPatientService;
         private readonly IDepartmentService _departmentService;
-        public AppointmentController(IAppointmentService IAppointmentService, IDoctorService IDoctorService, IPatientService IPatientService, IDepartmentService departmentService)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public AppointmentController(IAppointmentService IAppointmentService, UserManager<ApplicationUser> userManager,IDoctorService IDoctorService, IPatientService IPatientService, IDepartmentService departmentService)
         {
             _IAppointmentService = IAppointmentService;
             _IDoctorService = IDoctorService;
             _IPatientService = IPatientService;
             _departmentService = departmentService;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Index()
         {
@@ -43,15 +45,13 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
         [HttpGet]
         public async Task<IActionResult> Create(string DoctorID)
         {
-            var appoit = new Appointment()
+            var appointment = new Appointment()
             {
                 DoctorID = DoctorID,
-                PatientID = "98461dab-ec05-4974-864e-c65e11239338"
-                 
+                PatientID = _userManager.GetUserId(User) // Get the current user's ID
             };
 
-            
-            return View(appoit);
+            return View(appointment);
         }
 
         [HttpPost]
@@ -60,21 +60,22 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
         {
             if (ModelState.IsValid)
             {
-                Doctor doctor= await _IDoctorService.GetDoctorByIdAsync(appointment.DoctorID);
-                while (DateTime.Now < appointment.EndDateTime)
+                if (string.IsNullOrEmpty(appointment.DoctorID) || string.IsNullOrEmpty(appointment.PatientID))
                 {
-                    doctor.Status = false;
-
+                    ModelState.AddModelError(string.Empty, "Doctor and Patient information is required.");
+                    return View(appointment);
                 }
+
+                Doctor doctor = await _IDoctorService.GetDoctorByIdAsync(appointment.DoctorID);
+                //doctor.Status = false; // Change this logic based on your requirements
 
                 await _IAppointmentService.AddAppointmentAsync(appointment);
                 return RedirectToAction("Index");
             }
 
-        
-
             return View(appointment);
         }
+
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {

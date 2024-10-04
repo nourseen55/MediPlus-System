@@ -13,7 +13,6 @@
         public string? DoctorID { get; set; }
         public virtual Doctor? Doctor { get; set; }
         public string? DiagnosisDocument { get; set; }
-
         public bool IsUnderMedicalCare { get; set; }
         public bool HasDrugAllergies { get; set; }
         public bool HasFoodOrEnvironmentalAllergies { get; set; }

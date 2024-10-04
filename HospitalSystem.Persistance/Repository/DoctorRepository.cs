@@ -69,7 +69,7 @@ namespace HospitalSystem.Persistance.Repository
 
         public async Task<List<Doctor>> GetByDepartmentId(string Id)
         {
-            return await _context.Doctors.Where(x => x.DepartmentId == Id && x.Status == true).ToListAsync();
+            return await _context.Doctors.Where(x => x.DepartmentId == Id ).ToListAsync();
 
         }
 

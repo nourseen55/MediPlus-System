@@ -1,77 +1,43 @@
 ﻿@model Appointment
-<br />
-<br />
-<br />
-@{
-    ViewData["Title"] = "Create";
-}
+
 <div class="page-wrapper">
-<div class="Container">
-    <div class="row">
-        <div class="col-lg-8 offset-lg-2">
-            <h4 class="page-title">Add Appointment</h4>
+    <div class="Container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <h4 class="page-title">Add Appointment</h4>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-8 offset-lg-2">
-            <form asp-action="Create" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <!-- Hidden fields for PatientID and DoctorID -->
+                    <input type="hidden" asp-for="PatientID" />
+                    <input type="hidden" asp-for="DoctorID" />
+
                     <div class="form-group">
-                        <input type="hidden" asp-for="PatientID" />
                         <label>Patient Name</label>
                         <input type="text" class="form-control" value="@Model.Patient?.FirstName @Model.Patient?.LastName" readonly />
                     </div>
-                    <input type="hidden" asp-for="DoctorID" />
-                    <input type="hidden" asp-for="EndDateTime" />
 
                     <div class="form-group">
-                                <label asp-for="DateOfBirth">Date of Birth</label>
-                                <input asp-for="DateOfBirth" type="date" class="form-control" />
-                                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                            </div>
-                       
+                        <label asp-for="StartDateTime">Start Date & Time</label>
+                        <input asp-for="StartDateTime" type="datetime-local" class="form-control" />
+                        <span asp-validation-for="StartDateTime" class="text-danger"></span>
+                    </div>
 
-                <div class="row">
-
-                        @* <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="DoctorID">Doctor</label>
-                                <input asp-for="DoctorID" class="form-control" />
-                                <span asp-validation-for="DoctorID" class="text-danger"></span>
-                            </div>
-                        </div> *@
-                       @*   <div class="col-md-6">
-                             <div class="form-group">
-                                 <label asp-for="PatientID">Patient Name</label>
-                                 <input asp-for="PatientID" class="form-control" />
-                             </div>
-                         </div> *@
-                </div>
-                <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="StartDateTime">Start Date & Time</label>
-                                <input asp-for="StartDateTime" type="datetime-local" class="form-control" />
-                                <span asp-validation-for="StartDateTime" class="text-danger"></span>
-                            </div>
-                        </div>
-
-
-                </div>
-               
-               
-                <div class="m-t-20 text-center">
-                    <button class="btn btn-primary submit-btn">Create Appointment</button>
-                </div>
-
-            </form>
+                    <div class="m-t-20 text-center">
+                        <button class="btn btn-primary submit-btn">Create Appointment</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-</div>
-
-
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

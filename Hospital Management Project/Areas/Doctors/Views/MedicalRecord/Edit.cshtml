@@ -71,48 +71,47 @@
                         <tbody>
                             <tr>
                                 <td class="bg text-white" style="border-radius: 10px 0 0 0;">Are you currently under medical care?</td>
-                                <td class="y"><input type="radio" name="q1" /></td>
-                                <td class="y"><input type="radio" name="q1" /></td>
+                                <td class="y"><input asp-for="IsUnderMedicalCare" type="radio" value="true" /></td>
+                                <td class="y"><input asp-for="IsUnderMedicalCare" type="radio" value="false" /></td>
                             </tr>
                             <tr>
                                 <td class="bg text-white">Do you have any drug allergies?</td>
-                                <td class="y"><input type="radio" name="q2" /></td>
-                                <td class="y"><input type="radio" name="q2" /></td>
+                                <td class="y"><input asp-for="HasDrugAllergies" type="radio" value="true" /></td>
+                                <td class="y"><input asp-for="HasDrugAllergies" type="radio" value="false" /></td>
                             </tr>
                             <tr>
                                 <td class="bg text-white">Do you have any food or environmental allergies?</td>
-                                <td class="y"><input type="radio" name="q3" /></td>
-                                <td class="y"><input type="radio" name="q3" /></td>
-                            </tr>
-                            <tr>
-                                <td class="bg text-white">Have you ever had tuberculosis or had a positive tuberculosis test?</td>
-                                <td class="y"><input type="radio" name="q4" /></td>
-                                <td class="y"><input type="radio" name="q4" /></td>
+                                <td class="y"><input asp-for="HasFoodOrEnvironmentalAllergies" type="radio" value="true" /></td>
+                                <td class="y"><input asp-for="HasFoodOrEnvironmentalAllergies" type="radio" value="false" /></td>
                             </tr>
                             <tr>
                                 <td class="bg text-white">Have you ever been cared for by a mental health clinician?</td>
-                                <td class="y"><input type="radio" name="q5" /></td>
-                                <td class="y"><input type="radio" name="q5" /></td>
+                                <td class="y"><input asp-for="HasMentalHealthCareHistory" type="radio" value="true" /></td>
+                                <td class="y"><input asp-for="HasMentalHealthCareHistory" type="radio" value="false" /></td>
                             </tr>
                             <tr>
                                 <td class="bg text-white">Have you ever restricted your eating?</td>
-                                <td class="y"><input type="radio" name="q6" /></td>
-                                <td class="y"><input type="radio" name="q6" /></td>
+                                <td class="y"><input asp-for="HasRestrictedEating" type="radio" value="true" /></td>
+                                <td class="y"><input asp-for="HasRestrictedEating" type="radio" value="false" /></td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div class="form-group">
+                    <div class="form-group ml-2">
                         <label class="my-3">Is the patient diagnosed with chronic disease?</label>
-                        <select class="form-select">
-                            <option>Please Select</option>
-                            <option>Yes</option>
-                            <option>No</option>
-                        </select>
+                        <div>
+                            <label>
+                                <input type="radio" asp-for="PatientChronicDisease" value="true" /> Yes
+                            </label>
+                            <label>
+                                <input type="radio" asp-for="PatientChronicDisease" value="false" /> No
+                            </label>
+                        </div>
+                        <span asp-validation-for="PatientChronicDisease" class="text-danger"></span>
                     </div>
 
+
                     <div class="form-group my-5">
-                        <label class="my-3">If yes, please upload your diagnosis documents.</label>
                         <input asp-for="DiagnosisDocument" type="file" name="file" id="fileId" />
                     </div>
 

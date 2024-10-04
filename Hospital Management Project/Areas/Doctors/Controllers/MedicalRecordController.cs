@@ -31,7 +31,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-            var doctorId = "fb32f999-bea2-46cf-b83c-de3321000b91";
+            var doctorId = "bec8d3db-021d-40ce-a955-0332e56b8228";
 
             var patients = await _appointmentService.GetPatientsByDoctorAsync(doctorId);
             return View(patients);
@@ -58,7 +58,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
                 PatientID = patientId.ToString(),
                 Patient = patient,
                 DateOfEntry = DateTime.Now,
-                DoctorID = "fb32f999-bea2-46cf-b83c-de3321000b91"
+                DoctorID = "bec8d3db-021d-40ce-a955-0332e56b8228"
             };
 
             return View(record);

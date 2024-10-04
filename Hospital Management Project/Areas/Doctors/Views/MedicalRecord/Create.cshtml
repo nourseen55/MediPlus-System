@@ -4,14 +4,12 @@
     ViewData["Title"] = "Create Medical Record";
 }
 
-<div class="main-wrapper">
-    <div class="page-wrapper">
-        <div class="fav d-flex justify-content-center my-2 text-center">
-            <img src="~/assets/img/logo-dark.png" />
-        </div>
+<div class="parent" style="min-height:1500px;">
+    <div class="content">
         <div class="container">
-            <div class="form-container">
-                <h3 class="form-header fw-semibold my-3">Add Medical Record</h3>
+            <br/><br/><br/>
+            <div class="form-container my-5">
+                <h3 class="form-header fw-semibold my-2">Add Medical Record</h3>
                 <div class="line my-2"></div>
                 <form asp-action="Create" method="post" enctype="multipart/form-data">
                     <input type="hidden" asp-for="PatientID" value="@Model.PatientID" />

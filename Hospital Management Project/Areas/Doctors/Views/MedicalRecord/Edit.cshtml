@@ -4,38 +4,35 @@
     ViewData["Title"] = "Update Medical Record";
 }
 
-<div class="main-wrapper">
-    <div class="page-wrapper">
-        <div class="fav d-flex justify-content-center my-2 text-center">
-            <img src="~/assets/img/logo-dark.png" />
-        </div>
+<div class="parent" style="min-height:1500px;">
+    <div class="content">
         <div class="container">
+            <br /><br /><br />
             <div class="form-container">
                 <h3 class="form-header fw-semibold my-3">Update Medical Record</h3>
                 <div class="line my-2"></div>
                 <form asp-action="Edit" method="post" enctype="multipart/form-data">
                     <input type="hidden" asp-for="PatientID" value="@Model.PatientID" />
                     <input type="hidden" asp-for="DoctorID" value="@Model.DoctorID" />
-
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Patient Name</label>
-                                <input value="@Model.Patient.FirstName" class="form-control" type="text"/>
+                                <input value="@Model.Patient.FirstName" class="form-control" type="text" />
                                 <small class="form-text text-muted">First Name</small>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <br />
-                                <input value="@Model.Patient.LastName" class="form-control" type="text"/>
+                                <input value="@Model.Patient.LastName" class="form-control" type="text" />
                                 <small class="form-text text-muted">Last Name</small>
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Patient's health issue<span class="text-danger">*</span></label>
-                                <input asp-for="Diagnosis" class="form-control" type="text" required value="@Model.Diagnosis"/>
+                                <input asp-for="Diagnosis" class="form-control" type="text" required value="@Model.Diagnosis" />
                                 <span asp-validation-for="Diagnosis" class="text-danger"></span>
                             </div>
                         </div>

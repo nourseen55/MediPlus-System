@@ -2,7 +2,8 @@
 {
     public class MedicalRecord
     {
-        public int Id { get; set; }
+        [Key]
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Treatment { get; set; }
         public string Diagnosis { get; set; }
         public DateTime DateOfEntry { get; set; } = DateTime.Now;

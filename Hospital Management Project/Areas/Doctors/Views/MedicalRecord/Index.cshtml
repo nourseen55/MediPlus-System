@@ -4,16 +4,17 @@
     ViewData["Title"] = "Patients Record";
 }
 
-<div class="main-wrapper">
-    <div class="page-wrapper">
-        <div class="container-fluid">
-            <div class="form-container mx-auto" style="max-width: 1000px;" >
+<div class="parent">
+    <div class="content">
+        <br /><br /><br/>
+        <div class="container">
+            <div class="form-container mx-auto my-5" style="max-width: 1000px;" >
                 <h3 class="form-header fw-semibold my-3">Patient List</h3>
                 <div class="line my-2"></div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-border table-striped custom-table datatable mb-0">
+                            <table class="table table-border table-striped custom-table datatable mb-2">
                                 <thead class="bg-primary text-dark">
                                     <tr>
                                         <th>Name</th>
@@ -58,6 +59,7 @@
         </div>
     </div>
 </div>
+
 <div class="sidebar-overlay" data-reff=""></div>
 
 @section Scripts {

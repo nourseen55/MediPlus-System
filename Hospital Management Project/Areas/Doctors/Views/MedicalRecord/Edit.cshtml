@@ -14,6 +14,8 @@
                 <form asp-action="Edit" method="post" enctype="multipart/form-data">
                     <input type="hidden" asp-for="PatientID" value="@Model.PatientID" />
                     <input type="hidden" asp-for="DoctorID" value="@Model.DoctorID" />
+                    <input type="hidden" asp-for="DiagnosisDocument" value="@Model.DiagnosisDocument" />
+
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">

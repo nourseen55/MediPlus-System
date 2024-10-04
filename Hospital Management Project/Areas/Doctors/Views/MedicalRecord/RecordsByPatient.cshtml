@@ -14,7 +14,7 @@
                         <h4 class="mb-0">Patient Medical Records</h4>
                     </div>
                     <div class="card-body">
-                        <h5 class="mb-3">Patient: @Model.FirstOrDefault()?.Patient?.FirstName @Model.FirstOrDefault()?.Patient?.LastName </h5>
+                        <h5 class="mb-3">Patient name: @Model.FirstOrDefault()?.Patient?.FirstName @Model.FirstOrDefault()?.Patient?.LastName </h5>
                         @if (!Model.Any())
                         {
                             <div class="alert alert-warning" role="alert">
@@ -48,9 +48,9 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="d-flex text-left">
-                                                    <a asp-controller="MedicalRecord" asp-action="Details" asp-route-id="@record.Id" class="btn btn-info m-2">View</a>
-                                                    <a asp-controller="MedicalRecord" asp-action="Edit" asp-route-id="@record.Id" class="btn btn-warning m-2">Edit</a>
-                                                    <a asp-controller="MedicalRecord" asp-action="Delete" asp-route-id="@record.Id" class="btn btn-danger m-2">Delete</a>
+                                                    <a asp-controller="MedicalRecord" asp-action="Details" asp-route-id="@record.Id" class="btn btn-info m-2 text-white">View</a>
+                                                    <a asp-controller="MedicalRecord" asp-action="Edit" asp-route-id="@record.Id" class="btn btn-warning m-2 text-white">Edit</a>
+                                                    <a onclick=DeleteItem("/Doctors/MedicalRecord/Delete/@record.Id") class="btn btn-danger m-2 text-white">Delete</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -60,7 +60,7 @@
                         }
 
                         <div class="text-right mt-4">
-                            <a asp-action="Create" asp-controller="MedicalRecord" asp-route-patientId="@ViewBag.PatientId" class="btn btn-success">Add New Record</a>
+                            <a asp-action="Create" asp-controller="MedicalRecord" asp-route-patientId="@ViewBag.PatientId" class="btn btn-success text-white">Add New Record</a>
                         </div>
                     </div>
                 </div>

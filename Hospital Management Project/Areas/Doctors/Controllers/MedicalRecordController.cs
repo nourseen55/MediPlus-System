@@ -65,7 +65,8 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(MedicalRecord record, IFormFile file)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(MedicalRecord record, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +93,8 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(MedicalRecord record, IFormFile file)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(MedicalRecord record, IFormFile? file)
         {
             if (ModelState.IsValid)
             {

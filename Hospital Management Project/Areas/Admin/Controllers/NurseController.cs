@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 
 namespace Hospital_Management_Project.Areas.Admin.Controllers
 {
@@ -19,13 +20,16 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         private readonly IImageService _imageService;
         private readonly IDoctorService _DoctorService;
         private readonly IDepartmentService _departmentService;
-        public NurseController(INurseService nurseService, IMapper mapper, IImageService imageService, IDepartmentService departmentService, IDoctorService doctorService)
+        private readonly IPasswordHasher<ApplicationUser> _passwordHasher;
+
+        public NurseController(INurseService nurseService, IPasswordHasher<ApplicationUser> passwordHasher, IMapper mapper, IImageService imageService, IDepartmentService departmentService, IDoctorService doctorService)
         {
             _nurseService = nurseService;
             _mapper = mapper;
             _imageService = imageService;
             _DoctorService = doctorService;
             _departmentService = departmentService;
+            _passwordHasher = passwordHasher;
         }
         public async Task<IActionResult> Index()
         {
@@ -68,6 +72,8 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                 }
 
                 var nurse = new Nurse();
+                nurse.UserName = nurse.Email;
+
                 _mapper.Map(model, nurse);
 
                 await _nurseService.AddNurseAsync(nurse);
@@ -124,6 +130,8 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                     string imgPath = await _imageService.SaveImageAsync(Img, path);
                     nurse.Img = imgPath;
                 }
+                nurse.UserName = nurse.Email;
+                nurse.PasswordHash = _passwordHasher.HashPassword(nurse, nurse.PasswordHash);
                 await _nurseService.UpdateNurseAsync(nurse);
 
                 return RedirectToAction(nameof(Index));

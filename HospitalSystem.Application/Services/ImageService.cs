@@ -18,6 +18,20 @@ namespace HospitalSystem.Application.Services
             _webHostEnvironment = webHostEnvironment;
         }
 
+        public async Task DeleteFileAsync(string FilePath)
+        {
+            if (FilePath != null)
+            {
+                var RootPath = _webHostEnvironment.WebRootPath;
+                var oldFile = Path.Combine(RootPath, FilePath);
+
+                if (System.IO.File.Exists(oldFile))
+                {
+                    System.IO.File.Delete(oldFile); 
+                }
+            }
+        }
+
         public async Task<string> SaveImageAsync(IFormFile Img, string folderPath)
         {
             if (Img == null || Img.Length == 0)

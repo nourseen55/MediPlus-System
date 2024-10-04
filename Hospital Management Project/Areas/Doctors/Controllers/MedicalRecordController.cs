@@ -2,11 +2,12 @@
 using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Enums;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 
 namespace Hospital_Management_Project.Areas.Doctors.Controllers{
 
     [Area("Doctors")]
-    [Authorize(Roles =nameof(UserRoles.Doctor))]
+    /*[Authorize(Roles =nameof(UserRoles.Doctor))]*/
     public class MedicalRecordController : Controller
     {
         private readonly IMedicalRecordService _medicalRecordService;
@@ -30,7 +31,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-            var doctorId = user?.Id;
+            var doctorId = "fb32f999-bea2-46cf-b83c-de3321000b91";
 
             var patients = await _appointmentService.GetPatientsByDoctorAsync(doctorId);
             return View(patients);
@@ -57,7 +58,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
                 PatientID = patientId.ToString(),
                 Patient = patient,
                 DateOfEntry = DateTime.Now,
-                DoctorID =user?.Id
+                DoctorID = "fb32f999-bea2-46cf-b83c-de3321000b91"
             };
 
             return View(record);
@@ -82,7 +83,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(string id)
         {
             MedicalRecord record = await _medicalRecordService.GetMedicalRecordAndPatientDetails(id);
             if (record == null) return NotFound();
@@ -95,6 +96,11 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         {
             if (ModelState.IsValid)
             {
+                if(record.DiagnosisDocument != null)
+                {
+                    await _fileService.DeleteFileAsync(record.DiagnosisDocument);
+                }
+
                 if (file != null && file.Length > 0)
                 {
                     var path = @"DiagnosisDocument";
@@ -108,14 +114,22 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
             return View(record);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string id)
         {
+            MedicalRecord record = await _medicalRecordService.GetMedicalRecordByIdAsync(id);
+
+            if (record.DiagnosisDocument != null)
+            {
+                await _fileService.DeleteFileAsync(record.DiagnosisDocument);
+            }
+
             await _medicalRecordService.DeleteMedicalRecordAsync(id);
-            return RedirectToAction("Index");
+
+            return Json(new {success = true, message = "Medical Record has been Deleted Successfully"});
         }
 
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(string id)
         {
             MedicalRecord? record = await _medicalRecordService.GetMedicalRecordAndPatientDetails(id);
             return View(record);

@@ -1,22 +1,42 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
+
 namespace HospitalSystem.Persistance.Repository
 {
     public class NurseRepository : IGenericRepository<Nurse>
     {
 
         private readonly ApplicationDbContext _context;
-
-        public NurseRepository(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserStore<ApplicationUser> _userStore;
+        private readonly IUserEmailStore<ApplicationUser> _emailStore;
+        public NurseRepository(ApplicationDbContext context,UserManager<ApplicationUser> userManager, IUserStore<ApplicationUser> userStore)
         {
             _context = context;
+            _userManager = userManager;
+            _userStore = userStore;
         }
 
         public async Task AddEntityAsync(Nurse entity)
         {
-            _context.Nurses.Add(entity);
-            await _context.SaveChangesAsync();
-        }
+            await _userStore.SetUserNameAsync(entity, entity.Email, CancellationToken.None);
 
+            var result = await _userManager.CreateAsync(entity, entity.PasswordHash);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(entity, UserRoles.Nurse.ToString());
+
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(entity);
+
+                var confirmResult = await _userManager.ConfirmEmailAsync(entity, token);
+
+                if (confirmResult.Succeeded)
+                {
+                    await _context.SaveChangesAsync();
+                }
+            }
+        }
         public async Task<IEnumerable<Nurse>> GetAllEntityAsync()
         {
             return await _context.Nurses.Include(d=>d.Doctor).Include(x=>x.Departments).ToListAsync();

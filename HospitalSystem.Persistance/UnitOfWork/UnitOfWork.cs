@@ -28,7 +28,7 @@ namespace HospitalSystem.Persistance.UnitOfWork
             _userManager = userManager;
             _userStore = userStore;
             _patientRepository = new PatientRepository(applicationDbContext);
-            _nurseRepository = new NurseRepository(applicationDbContext);
+            _nurseRepository = new NurseRepository(applicationDbContext,_userManager,_userStore);
             _doctorRepository = new DoctorRepository(applicationDbContext,_userManager, _userStore);
             _appointmentRepository = new AppointmentRepository(applicationDbContext);
             _recordRepository = new MedicalRecordRepository(applicationDbContext);

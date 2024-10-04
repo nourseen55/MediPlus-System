@@ -9,13 +9,16 @@ input[type="file"]::file-selector-button {
     margin-right: 16px;
   }
 
-body {
-    background-image: url('../img/testi-bg.jpg');
+.parent {
+    background-image: url('../img/signup-bg.jpg');
     background-position: right;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-bottom:0px;
+    min-height:500px;
 }
+
 .empty{
     background-color: #b6d9f9 !important;
 
@@ -84,3 +87,4 @@ input:hover {
 select:hover {
     box-shadow: 0 0 0 2px #0d3977ae;
 }
+

@@ -11,9 +11,9 @@
                     <div class="col-sm-4 col-3">
                         <h4 class="page-title">Patients</h4>
                     </div>
-                    <div class="col-sm-8 col-9 text-right m-b-20">
+                   @*  <div class="col-sm-8 col-9 text-right m-b-20">
                         <a href="~/Admin/Patient/Create" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Patient</a>
-                    </div>
+                    </div> *@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -26,12 +26,11 @@
                                         <th>Age</th>
                                         <th>Gender</th>
                                         <th>City</th>
-                                        <th>Country</th>
                                         <th>Zip Code</th>
                                         <th>Email</th>
                                         <th>UserName</th>
-                                        <th class="text-right">Action</th>
-                                    </tr>
+@*                                         <th class="text-right">Action</th>
+ *@                                    </tr>
                                 </thead>
                                 <tbody>
                                  
@@ -50,12 +49,13 @@
                                                 <td>@item.Age()</td>
                                                 <td>@item.Gender</td>
                                                 <td>@item.City</td>
-                                                <td>@item.Country</td>
                                                 <td>@item.ZipCode</td>
                                                 <td>@item.Email</td>
                                                 <td>@item.UserName</td>
+                                        </tr>
+                                        }
                                             <!-- Action Icon and Dropdown -->
-                                            <td class="text-right">
+                                          @*   <td class="text-right">
                                                 <div class="dropdown dropdown-action">
                                                     <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                                         <i class="fa fa-ellipsis-v"></i>
@@ -68,7 +68,6 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
                                             <!-- Modal for Confirm Delete -->
                                             <div id="delete_patient_@item.Id" class="modal fade delete-modal" role="dialog">
                                                 <div class="modal-dialog modal-dialog-centered">
@@ -87,8 +86,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            
-                                        }
+                                             *@
+                                        
                                    } 
                                 </tbody>
                             </table>

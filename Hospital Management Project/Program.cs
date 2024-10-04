@@ -54,6 +54,17 @@ namespace Hospital_Management_Project
             builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
+
+            #region Configure Cookie-based Authentication
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login"; // Redirect to login if not authenticated
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied"; // Redirect if access is denied
+                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Set session timeout
+            });
+            #endregion
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -20,19 +20,25 @@ namespace HospitalSystem.Persistance.Repository
             _userManager = userManager;
             _userStore = userStore;
         }
-        public async Task AddEntityAsync(Doctor entity)//VM + Confirm email
+        public async Task AddEntityAsync(Doctor entity)
         {
             await _userStore.SetUserNameAsync(entity, entity.Email, CancellationToken.None);
-/*            await _emailStore.SetEmailAsync(entity, entity.Email, CancellationToken.None);
-*/            var result = await _userManager.CreateAsync(entity,"Admin@11");
+
+            var result = await _userManager.CreateAsync(entity, entity.PasswordHash);
 
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(entity, UserRoles.Doctor.ToString());
-                await _context.SaveChangesAsync();
+
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(entity);
+
+                var confirmResult = await _userManager.ConfirmEmailAsync(entity, token);
+
+                if (confirmResult.Succeeded)
+                {
+                    await _context.SaveChangesAsync();
+                }
             }
-                
-            
         }
 
         public async Task<IEnumerable<Doctor>> GetAllEntityAsync()

@@ -38,7 +38,6 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         {
             IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
             ViewBag.Departments = departments.Select(d => new SelectListItem { Value = d.Id, Text = d.DepartmentName });
-
             Doctor doctor = new Doctor();
             return View(doctor);
         }

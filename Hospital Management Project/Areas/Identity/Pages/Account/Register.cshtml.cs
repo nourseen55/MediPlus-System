@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Enums;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -19,6 +20,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using HospitalSystem.Core.Entities;
 
 namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 {
@@ -30,12 +32,12 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        private readonly IPatientService _patientService;
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<RegisterModel> logger, IPatientService patientService,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -44,6 +46,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _patientService = patientService;
         }
 
         [BindProperty]
@@ -116,7 +119,8 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser
+                // Directly create a Patient object instead of ApplicationUser
+                var patient = new HospitalSystem.Core.Entities.Patient
                 {
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
@@ -125,22 +129,25 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                     Img = Input.Img,
                     ZipCode = Input.ZipCode,
                     Country = Input.Country,
-                    City = Input.City
+                    City = Input.City,
+                    UserName = Input.Email,
+                    Email = Input.Email
                 };
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                // Use patient object for the creation
+                await _userStore.SetUserNameAsync(patient, Input.Email, CancellationToken.None);
+                await _emailStore.SetEmailAsync(patient, Input.Email, CancellationToken.None);
+                var result = await _userManager.CreateAsync(patient, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    // Assign a default role to the user
-                    await _userManager.AddToRoleAsync(user, UserRoles.Patient.ToString());
+                    // Assign a default role to the patient
+                    await _userManager.AddToRoleAsync(patient, UserRoles.Patient.ToString());
 
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var userId = await _userManager.GetUserIdAsync(patient);
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(patient);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
@@ -157,7 +164,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        await _signInManager.SignInAsync(patient, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
                 }
@@ -171,7 +178,6 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
-
 
 
         private IUserEmailStore<ApplicationUser> GetEmailStore()

@@ -36,10 +36,6 @@ namespace Hospital_Management_Project
                     RequireLowercase = false,
                     RequireNonAlphanumeric = false
                 };
-                #region 2FA
-                options.Tokens.AuthenticatorIssuer = null; 
-                options.Tokens.AuthenticatorTokenProvider = null;
-                #endregion
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();

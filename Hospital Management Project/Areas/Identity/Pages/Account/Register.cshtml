@@ -61,6 +61,12 @@
             </div>
 
             <div class="form-floating mb-3">
+                <input asp-for="Input.Country" class="form-control" placeholder="Country" />
+                <label asp-for="Input.Country">Country</label>
+                <span asp-validation-for="Input.Country" class="text-danger"></span>
+            </div>
+            
+            <div class="form-floating mb-3">
                 <input asp-for="Input.City" class="form-control" placeholder="City" />
                 <label asp-for="Input.City">City</label>
                 <span asp-validation-for="Input.City" class="text-danger"></span>
@@ -74,7 +80,6 @@
 
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
-
     </div>
 </div>
 

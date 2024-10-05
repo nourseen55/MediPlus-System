@@ -14,13 +14,15 @@ namespace Hospital_Management_Project
         {
             var builder = WebApplication.CreateBuilder(args);
             var connectionString = builder.Configuration.GetConnectionString("cs");
-
+            var connectionstring2 = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");
+            var connectionstring3 = builder.Configuration.GetConnectionString("cs3");
+            
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             // Configure Entity Framework with SQL Server
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseSqlServer(connectionstring3));
 
             // Identity configuration
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -34,6 +36,10 @@ namespace Hospital_Management_Project
                     RequireLowercase = false,
                     RequireNonAlphanumeric = false
                 };
+                #region 2FA
+                options.Tokens.AuthenticatorIssuer = null; 
+                options.Tokens.AuthenticatorTokenProvider = null;
+                #endregion
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
@@ -53,6 +59,7 @@ namespace Hospital_Management_Project
             builder.Services.AddScoped<IImageService, ImageService>();
             builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             builder.Services.AddSingleton<IEmailSender, EmailSender>();
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 
             #region Configure Cookie-based Authentication

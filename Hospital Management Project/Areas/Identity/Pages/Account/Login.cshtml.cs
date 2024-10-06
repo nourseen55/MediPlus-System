@@ -130,19 +130,19 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                         // Redirect based on the user's roles
                         if (userRoles.Contains("Admin"))
                         {
-                            return LocalRedirect("/AdminArea"); // Redirect to Admin area
+                            return LocalRedirect("/Admin"); // Redirect to Admin area
                         }
                         else if (userRoles.Contains("Doctor"))
                         {
-                            return LocalRedirect("/DoctorArea"); // Redirect to Doctor area
+                            return LocalRedirect("/Doctor"); // Redirect to Doctor area
                         }
                         else if (userRoles.Contains("Patient"))
                         {
-                            return LocalRedirect("/PatientArea"); // Redirect to Patient area
+                            return LocalRedirect("/Patient"); // Redirect to Patient area
                         }
                         else if (userRoles.Contains("Nurse"))
                         {
-                            return LocalRedirect("/NurseArea"); // Redirect to Nurse area
+                            return LocalRedirect("/Nurse"); // Redirect to Nurse area
                         }
                     }
 

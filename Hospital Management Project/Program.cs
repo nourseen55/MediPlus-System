@@ -22,6 +22,9 @@ namespace Hospital_Management_Project
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            var emalconfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+            builder.Services.AddSingleton(emalconfig);
+
             // Identity configuration
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -52,7 +55,7 @@ namespace Hospital_Management_Project
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
             builder.Services.AddScoped<IImageService, ImageService>();
             builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
-            builder.Services.AddSingleton<IEmailSender, EmailSender>();
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 
             #region Configure Cookie-based Authentication

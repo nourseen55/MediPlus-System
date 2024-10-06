@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Hospital_Management_Project.Areas.Appoint.Controllers
 {
     [Area("Patient")]
-    //[Authorize(Roles = nameof(UserRoles.Patient))]
+    [Authorize(Roles = nameof(UserRoles.Patient))]
     public class AppointmentController : Controller
     {
        private readonly IAppointmentService _IAppointmentService;

@@ -296,11 +296,56 @@ body{
 	color:#1A76D1;
 	margin-right:8px;
 }
+/*--------------------------------------------------------------------------------------------------------------*/
 .header .header-inner {
 	background:#fff;
 	z-index:999;
 	width:100%;
 }
+/*MAY BE CHANGED TO*/
+/*.header .header-inner {
+	background: #f8f9fa;*/ /* Light grey for a softer look */
+	/*z-index: 1000;*/ /* High enough to stay on top */
+	/*width: 100%;*/
+	/*max-width: 1200px;*/ /* Centering the header */
+	/*margin: 0 auto;*/ /* Centers the header */
+	/*padding:0*//* 10px 20px*//*;*/ /* Adds some padding */
+	/*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/ /* Subtle shadow for depth */
+/*}*/
+/* To ensure the navbar stretches across the full width */
+/*.header-inner {
+	background-color: #fff;  Change to your preferred background color 
+	width: 100%;
+	padding: 0;  Remove any default padding 
+}
+
+.navigation {
+	display: flex;
+	justify-content: space-between;*/ /* Space out menu items */
+/*}
+
+.nav.menu {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.nav.menu li {
+	list-style: none;
+	padding: 0 15px;*/ /* Adjust the spacing between the menu items */
+/*}
+
+.nav.menu li a {
+	display: inline-block;
+	padding: 15px 20px;*/ /* Adjust the padding for better spacing */
+	/*color: #333;
+	text-decoration: none;
+}
+
+.nav.menu li a:hover {
+	background-color: #f8f9fa;
+	color: #007bff;
+}*/
+/*--------------------------------------------------------------------------------------------------------------*/
 .get-quote{
 	margin-top:12px;
 }
@@ -1186,7 +1231,7 @@ body{
 	border-radius:4px;
 }
 .portfolio .single-pf:hover .btn{
-	opacity:1;
+	opacity:1; 
 	visibility:visible;
 }
 .portfolio .single-pf .btn:hover{

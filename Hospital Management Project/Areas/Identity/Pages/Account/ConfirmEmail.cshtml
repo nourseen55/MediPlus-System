@@ -1,8 +1,21 @@
 ﻿@page
-@model ConfirmEmailModel
+@model Hospital_Management_Project.Areas.Identity.Pages.Account.ConfirmEmailModel
+
 @{
-    ViewData["Title"] = "Confirm email";
+    ViewData["Title"] = "Confirm Email";
 }
 
 <h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+@if (Model.StatusMessage != null)
+{
+    <div class="alert alert-success" role="alert">
+        @Model.StatusMessage
+    </div>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        There was a problem confirming your email. Please try again later.
+    </div>
+}

@@ -7,7 +7,8 @@ using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 namespace Hospital_Management_Project.Areas.Doctors.Controllers{
 
     [Area("Doctors")]
-    /*[Authorize(Roles =nameof(UserRoles.Doctor))]*/
+    [Authorize(Roles =nameof(UserRoles.Doctor))]
+
     public class MedicalRecordController : Controller
     {
         private readonly IMedicalRecordService _medicalRecordService;
@@ -31,7 +32,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
-            var doctorId = "bec8d3db-021d-40ce-a955-0332e56b8228";
+            var doctorId = user.Id;
 
             var patients = await _appointmentService.GetPatientsByDoctorAsync(doctorId);
             return View(patients);
@@ -58,7 +59,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
                 PatientID = patientId.ToString(),
                 Patient = patient,
                 DateOfEntry = DateTime.Now,
-                DoctorID = "bec8d3db-021d-40ce-a955-0332e56b8228"
+                DoctorID = user.Id
             };
 
             return View(record);
@@ -101,6 +102,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
                 if(record.DiagnosisDocument != null)
                 {
                     await _fileService.DeleteFileAsync(record.DiagnosisDocument);
+                    record.DiagnosisDocument = null;
                 }
 
                 if (file != null && file.Length > 0)

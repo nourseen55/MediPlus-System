@@ -14,15 +14,15 @@ namespace Hospital_Management_Project
         {
             var builder = WebApplication.CreateBuilder(args);
             var connectionString = builder.Configuration.GetConnectionString("cs");
-            var connectionstring2 = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");
-            var connectionstring3 = builder.Configuration.GetConnectionString("cs3");
+            //var connectionstring2 = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");
+            //var connectionstring3 = builder.Configuration.GetConnectionString("cs3");
             
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             // Configure Entity Framework with SQL Server
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionstring3));
+                options.UseSqlServer(connectionString));
 
             var emalconfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
             builder.Services.AddSingleton(emalconfig);
@@ -83,12 +83,18 @@ namespace Hospital_Management_Project
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+				app.UseStatusCodePagesWithReExecute("/Error/{0}");
+			}
 
-            app.UseStaticFiles();
+
+			app.UseStaticFiles();
             app.UseRouting();
 
             // Ensure authentication and authorization middleware are in the correct order

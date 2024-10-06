@@ -28,6 +28,8 @@ namespace Hospital_Management_Project
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;
+
+                #region Password policy
                 options.Password = new PasswordOptions
                 {
                     RequiredLength = 8,
@@ -36,16 +38,24 @@ namespace Hospital_Management_Project
                     RequireLowercase = false,
                     RequireNonAlphanumeric = false
                 };
+                #endregion
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
+            // Add a lifetime for the generated token
+            builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromHours(1); // Token valid for 1 hour
+            });
+
             builder.Services.AddRazorPages();
 
-            // AutoMapper configuration
+            #region AutoMapper configuration
             builder.Services.AddAutoMapper(typeof(MappingProfile));
+            #endregion
 
-            // Register application services
+            #region Register application services
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IPatientService, PatientService>();
             builder.Services.AddScoped<IAppointmentService, AppointmentService>();
@@ -56,7 +66,7 @@ namespace Hospital_Management_Project
             builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             builder.Services.AddSingleton<IEmailSender, EmailSender>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
-
+            #endregion
 
             #region Configure Cookie-based Authentication
             builder.Services.ConfigureApplicationCookie(options =>
@@ -88,7 +98,7 @@ namespace Hospital_Management_Project
             //This middleware is to make all the requests with Admin area to be checked for its Authorization
             //app.UseMiddleware<AreaAuthorizationMiddleware>();
 
-            // Map controller routes
+            #region Map controller routes
             app.MapControllerRoute(
                 name: "areaRoute",
                 pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
@@ -96,6 +106,7 @@ namespace Hospital_Management_Project
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            #endregion
 
             app.Run();
         }

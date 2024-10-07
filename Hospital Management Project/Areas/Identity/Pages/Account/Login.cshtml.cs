@@ -134,7 +134,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                         }
                         else if (userRoles.Contains("Doctor"))
                         {
-                            return LocalRedirect("/Doctor"); // Redirect to Doctor area
+                            return LocalRedirect("/Doctors"); // Redirect to Doctor area
                         }
                         else if (userRoles.Contains("Patient"))
                         {

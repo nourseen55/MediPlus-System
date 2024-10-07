@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<HospitalSystem.Core.Entities.MedicalRecord>
 
 @{
-    ViewData["Title"] = "Patient Record";
+    ViewData["Title"] = $"{Model.FirstOrDefault()?.Patient?.FirstName} Medical Record";
 }
 
 <div class="parent">

@@ -6,7 +6,7 @@
     var user = await UserManager.GetUserAsync(User);
     var fullName = user != null ? user.FullName : "User";
 }
-<ul class="navbar-nav">
+
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
@@ -14,7 +14,7 @@
     </li>
     <li class="nav-item">
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">Logout</button>
+            <a id="logout" class="nav-link text-dark" href="~/Identity/Account/Logout">Logout</a>
         </form>
     </li>
 }
@@ -27,4 +27,4 @@ else
         <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
 }
-</ul>
+

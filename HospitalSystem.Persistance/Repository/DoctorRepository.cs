@@ -1,7 +1,4 @@
-﻿
-
-using HospitalSystem.Persistance.Migrations;
-using Microsoft.Identity.Client.Extensibility;
+﻿using Microsoft.Identity.Client.Extensibility;
 using System.Text;
 
 namespace HospitalSystem.Persistance.Repository

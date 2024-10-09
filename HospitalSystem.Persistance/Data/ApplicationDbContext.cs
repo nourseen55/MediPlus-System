@@ -18,6 +18,8 @@ namespace HospitalSystem.Persistance.Data
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<Nurse> Nurses { get; set; }
         public DbSet<Departments> Departments { get; set; }
+        public DbSet<Education> Educations { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

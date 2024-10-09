@@ -68,6 +68,7 @@ namespace Hospital_Management_Project
             builder.Services.AddScoped<IImageService, ImageService>();
             builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<DoctorService>();
             #endregion
 
             #region Configure Cookie-based Authentication

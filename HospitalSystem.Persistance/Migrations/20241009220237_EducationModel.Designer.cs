@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalSystem.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240930215903_init")]
-    partial class init
+    [Migration("20241009220237_EducationModel")]
+    partial class EducationModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,9 +123,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "58a96d45-a6d6-4575-b0e9-b4b8fedb3ca1",
+                            Id = "a8a4bb71-359d-4ee4-aef9-87f7d8405f53",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d1de68d3-a30f-4d25-b53a-af9ccd34dfb3",
+                            ConcurrencyStamp = "e7108f27-6994-49c3-8713-7d23a2b39d42",
                             DateOfBirth = new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
@@ -135,9 +135,9 @@ namespace HospitalSystem.Persistance.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPzJJ+147ypAeGwwslCBLgAERdjvldV/R9HEp97WwsLBJvxsVIPu9WVeNuL6WKGWVQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHVpT7EM2mW6f8xaPY+ngxvRYAAwHeoLEXsDdQo9/4hNUjlpioMfnAhVKe7DcYkFmQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "50a78e13-834d-4424-afe2-703020d2fdba",
+                            SecurityStamp = "58aaa532-58e7-4f82-bf1d-a1e253e31b21",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -198,13 +198,46 @@ namespace HospitalSystem.Persistance.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("HospitalSystem.Core.Entities.MedicalRecord", b =>
+            modelBuilder.Entity("HospitalSystem.Core.Entities.Education", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Degree")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DoctorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("EndYear")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FieldOfStudy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Institution")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StartYear")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("Educations");
+                });
+
+            modelBuilder.Entity("HospitalSystem.Core.Entities.MedicalRecord", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DateOfEntry")
                         .HasColumnType("datetime2");
@@ -221,6 +254,27 @@ namespace HospitalSystem.Persistance.Migrations
 
                     b.Property<string>("DoctorID")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("HasDiabetes")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasDrugAllergies")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasFoodOrEnvironmentalAllergies")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasMentalHealthCareHistory")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasRestrictedEating")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUnderMedicalCare")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("PatientChronicDisease")
+                        .HasColumnType("bit");
 
                     b.Property<string>("PatientID")
                         .HasColumnType("nvarchar(450)");
@@ -272,25 +326,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9b44a8dd-e65b-48d7-97ee-bfcbcc1d1bed",
+                            Id = "3547810f-37a2-43a5-a172-6f7442caa3a6",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "c1e6a868-53e0-4271-a0ef-c75d30e4654c",
+                            Id = "8a510e06-ba53-44ae-a4b5-079fb4cd0652",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         },
                         new
                         {
-                            Id = "41a0ccc0-f1ef-4416-baa8-81a4567d664f",
+                            Id = "1ad44c81-44b1-44c4-811d-4be3a26b544b",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "3cf343cf-d628-46c1-8134-efb006b6dc49",
+                            Id = "5e40a3d6-1ce7-4b51-b575-874b377a07fe",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -385,8 +439,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "58a96d45-a6d6-4575-b0e9-b4b8fedb3ca1",
-                            RoleId = "3cf343cf-d628-46c1-8134-efb006b6dc49"
+                            UserId = "a8a4bb71-359d-4ee4-aef9-87f7d8405f53",
+                            RoleId = "5e40a3d6-1ce7-4b51-b575-874b377a07fe"
                         });
                 });
 
@@ -471,6 +525,17 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("HospitalSystem.Core.Entities.Education", b =>
+                {
+                    b.HasOne("HospitalSystem.Core.Entities.Doctor", "Doctor")
+                        .WithMany("Educations")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.MedicalRecord", b =>
@@ -608,6 +673,8 @@ namespace HospitalSystem.Persistance.Migrations
             modelBuilder.Entity("HospitalSystem.Core.Entities.Doctor", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("Educations");
 
                     b.Navigation("MedicalRecords");
 

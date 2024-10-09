@@ -122,6 +122,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                     // Retrieve the user object from the UserManager
                     var user = await _userManager.FindByEmailAsync(Input.Email);
 
+                    //Home/
                     if (user != null)
                     {
                         // Retrieve the roles assigned to the user
@@ -130,19 +131,11 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                         // Redirect based on the user's roles
                         if (userRoles.Contains("Admin"))
                         {
-                            return LocalRedirect("/Admin"); // Redirect to Admin area
+                            return LocalRedirect("/Admin");
                         }
-                        else if (userRoles.Contains("Doctor"))
+                        else
                         {
-                            return LocalRedirect("/Doctors"); // Redirect to Doctor area
-                        }
-                        else if (userRoles.Contains("Patient"))
-                        {
-                            return LocalRedirect("/Patient"); // Redirect to Patient area
-                        }
-                        else if (userRoles.Contains("Nurse"))
-                        {
-                            return LocalRedirect("/Nurse"); // Redirect to Nurse area
+                            return LocalRedirect("/Home"); 
                         }
                     }
 

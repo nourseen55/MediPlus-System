@@ -1,0 +1,64 @@
+﻿@model HospitalSystem.Core.Entities.Education
+
+@{
+    ViewData["Title"] = "Add Education";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3 class="mb-0 text-primary">Doctor's Educational Information</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AddEducation">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <input type="hidden" asp-for="DoctorId" value="@Model.DoctorId" />
+
+                        <div class="form-group">
+                            <label asp-for="Institution" class="control-label font-weight-bold"></label>
+                            <input asp-for="Institution" class="form-control shadow-sm" />
+                            <span asp-validation-for="Institution" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Degree" class="control-label font-weight-bold"></label>
+                            <input asp-for="Degree" class="form-control shadow-sm" />
+                            <span asp-validation-for="Degree" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="FieldOfStudy" class="control-label font-weight-bold">Field Of Study</label>
+                            <input asp-for="FieldOfStudy" class="form-control shadow-sm" />
+                            <span asp-validation-for="FieldOfStudy" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="StartYear" class="control-label font-weight-bold"></label>
+                            <input asp-for="StartYear" class="form-control shadow-sm" />
+                            <span asp-validation-for="StartYear" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="EndYear" class="control-label font-weight-bold"></label>
+                            <input asp-for="EndYear" class="form-control shadow-sm" />
+                            <span asp-validation-for="EndYear" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <input type="submit" value="Save Education" class="btn btn-primary btn-lg px-4" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

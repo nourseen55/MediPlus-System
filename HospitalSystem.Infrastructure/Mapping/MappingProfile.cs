@@ -20,9 +20,9 @@ namespace HospitalSystem.Infrastructure.Mapping
             CreateMap<DoctorVM, Doctor>();
             CreateMap<NurseVM, Nurse>();
             CreateMap<Nurse, NurseVM>();
-            
-        }
-        
+            CreateMap<ApplicationUser , ContactFormVM>();
+			CreateMap<ApplicationUser, ContactFormVM>();
 
-    }
+		}
+	}
 }

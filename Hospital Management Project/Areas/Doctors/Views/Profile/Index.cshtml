@@ -1,4 +1,5 @@
 ﻿@model Doctor
+@inject UserManager<ApplicationUser> UserManager
 
 <div class="content">
     <div class="container">
@@ -28,7 +29,7 @@
                                     <ul class="personal-info">
                                         <li>
                                             <span class="title">Phone:</span>
-                                            <span class="text"><a href="#">@Model.PhoneNumber</a></span>
+                                            <span class="text"><a href="tel:@Model.PhoneNumber">@Model.PhoneNumber</a></span>
                                         </li>
                                         <li>
                                             <span class="title">Email:</span>
@@ -74,12 +75,20 @@
                                                     <div class="experience-content">
                                                         <div class="timeline-content">
                                                             <a href="#/" class="name">@education.Institution</a>
+                                                            <div>@education.FieldOfStudy</div>
                                                             <div>@education.Degree</div>
-                                                            <span class="time">@education.StartYear - @education.EndYear</span>
+                                                            <span class="time">@education.StartYear - @education.EndYear </span>
+                                                            @if (User.IsInRole("Doctor"))
+                                                            {
+
+                                                                <br />
+                                                                <a asp-action="EditEducation" asp-route-id="@education.Id">Edit</a>
+                                                            }
                                                         </div>
                                                     </div>
                                                 </li>
                                             }
+
                                         }
                                     </ul>
                                 </div>
@@ -91,8 +100,10 @@
         </div>
 </div>
 
-<div class="m-b-30 m-t-50 d-flex justify-content-center align-items-center">
-    <a href="/Doctors/Profile/Edit" class="btn btn-primary">Edit Profile</a>
-</div>
-
+@if (User.IsInRole("Doctor"))
+{
+    <div class="m-b-30 m-t-50 d-flex justify-content-center align-items-center">
+        <a href="/Doctors/Profile/AddEducation" class="btn btn-primary m-l-5 text-white">Add Education Informations</a>
+    </div>
+}
 

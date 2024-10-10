@@ -1,4 +1,5 @@
-﻿<!doctype html>
+﻿@inject UserManager<ApplicationUser> UserManager
+<!doctype html>
 <html class="no-js" lang="zxx">
     <head>
 		<meta charset="utf-8">
@@ -72,11 +73,12 @@
 						<div class="col-lg-6 col-md-5 col-12">
 							<!-- Contact -->
 							<ul class="top-link">
+
 								<li><a href="#">About</a></li>
 								<li><a href="#">Doctors</a></li>
 								<li><a href="#">Contact</a></li>
 								<li><a href="#">FAQ</a></li>
-								@await Html.PartialAsync("_LoginPartial")
+							@await Html.PartialAsync("_LoginPartial")
 
 							</ul>
 							<!-- End Contact -->
@@ -85,7 +87,7 @@
 							<!-- Top Contact -->
 							<ul class="top-contact">
 								<li><i class="fa fa-phone"></i>+880 1234 56789</li>
-								<li><i class="fa fa-envelope"></i><a href="mailto:support@yourmail.com">support@yourmail.com</a></li>
+							<li><i class="fa fa-envelope"></i><a href="mailto:hospitalmanagments@gmail.com">hospitalmanagments@gmail.com</a></li>
 							</ul>
 							<!-- End Top Contact -->
 						</div>
@@ -101,7 +103,7 @@
 							<div class="col-lg-3 col-md-3 col-12">
 								<!-- Start Logo -->
 								<div class="logo">
-									<a href="index.html"><img src="~/img/logo.png" alt="#"></a>
+									<a href="index.html"><img src="~/img/logo.png" alt="lgo"></a>
 								</div>
 								<!-- End Logo -->
 								<!-- Mobile Nav -->
@@ -113,35 +115,36 @@
 								<div class="main-menu">
 									<nav class="navigation">
 										<ul class="nav menu">
-											<li class="active"><a href="#">Home <i class="icofont-rounded-down"></i></a>
-												<ul class="dropdown">
-													<li><a href="index.html">Home Page 1</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Doctos </a></li>
-											<li><a href="#">Services </a></li>
-											<li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
-												<ul class="dropdown">
-													<li><a href="404.html">404 Error</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-												<ul class="dropdown">
-													<li><a href="blog-single.html">Blog Details</a></li>
-												</ul>
-											</li>
-											<li><a href="contact.html">Contact Us</a></li>
+											<li><a asp-action="Index" class="active" asp-controller="Home" asp-area="">Home</a></li>
+
+											@if (User.IsInRole("Doctor"))
+											{
+											   <li><a asp-area="Doctors" asp-action="Index" asp-controller="Profile">Profile</a></li>
+											   <li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
+												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
+
+											}
+											else
+											{
+												<li><a href="#">Doctor </a></li>
+												<li><a href="#">Services </a></li>
+											}
+
+											<li><a asp-controller="Blogs" asp-action="index" asp-area=""> Blogs</a></li>
+										   <li><a asp-controller="ContactUs" asp-action="index"  asp-area="">Contact Us</a></li>
 										</ul>
 									</nav>
 								</div>
 								<!--/ End Main Menu -->
 							</div>
+
 							<div class="col-lg-2 col-12">
 								<div class="get-quote">
-									<a href="appointment.html" class="btn">Book Appointment</a>
+								<a asp-action="Create" asp-controller="Appointment" asp-area="Patient" class="btn">Book Appointment</a>
 								</div>
 							</div>
-						</div>
+						
+					</div>
 					</div>
 				</div>
 			</div>
@@ -274,6 +277,12 @@
 		<script src="~/js/wow.min.js"></script>
 		<!-- Magnific Popup JS -->
 		<script src="~/js/jquery.magnific-popup.min.js"></script>
+	    <!-- Google Map API Key JS -->
+	   <script src="https://maps.google.com/maps/api/js?key=AIzaSyDGqTyqoPIvYxhn_Sa7ZrK5bENUWhpCo0w"></script>
+	   <!-- Gmaps JS -->
+	   <script src="js/gmaps.min.js"></script>
+	   <!-- Map Active JS -->
+	   <script src="js/map-active.js"></script>
 		<!-- Counter Up CDN JS -->
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
 		<!-- Bootstrap JS -->

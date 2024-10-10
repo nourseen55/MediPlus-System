@@ -39,6 +39,9 @@ namespace Hospital_Management_Project.Controllers
                 case 500:
                     ViewData["ErrorMessage"] = "Sorry, something went wrong on our end.";
                     return View("Error", errorViewModel);
+                case 403:
+                    ViewData["ErrorMessage"] = "You are not authorized to access this page";
+                    return View("Error", errorViewModel);
                 default:
                     ViewData["ErrorMessage"] = "An unexpected error occurred.";
                     return View("Error", errorViewModel);

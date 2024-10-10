@@ -21,7 +21,7 @@ namespace HospitalSystem.Infrastructure.Services
             message.From = new MailAddress(FromMail);
             message.Subject = subject;
             message.To.Add(email);
-            message.Body = $"<html><body><h3>{htmlMessage}</h3></body></html>";
+            message.Body = $"<html><body>{htmlMessage}</body></html>";
             message.IsBodyHtml = true;
 
             var smtpClient = new SmtpClient(_emailConfi.SmtpServer)

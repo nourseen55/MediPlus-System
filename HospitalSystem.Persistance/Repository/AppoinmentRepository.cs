@@ -46,6 +46,7 @@ namespace HospitalSystem.Persistance.Repository
         {
             return await _context.Appointments
                 .Include(a => a.Patient)
+                .OrderBy(a => a.StartDateTime)
                 .Where(a => a.DoctorID == doctorId && a.Patient != null)
                 .Select(a => a.Patient)
                 .Distinct()

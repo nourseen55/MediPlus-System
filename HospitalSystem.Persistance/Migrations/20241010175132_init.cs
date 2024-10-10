@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HospitalSystem.Persistance.Migrations
 {
     /// <inheritdoc />
-    public partial class newDB : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -58,21 +58,21 @@ namespace HospitalSystem.Persistance.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "620e1ef2-f635-47b8-bf60-d7fe7b7fa72e", null, "Patient", "PATIENT" },
-                    { "7c15fa01-92a1-4931-ac2f-954220ef0cce", null, "Doctor", "DOCTOR" },
-                    { "d7e0a967-3064-4459-8489-1e3e1a86a7d9", null, "Admin", "ADMIN" },
-                    { "ee35d020-d0a8-4cd7-82f4-7fbce01e42a1", null, "Nurse", "NURSE" }
+                    { "a6470bb7-3634-4f9e-9b05-4d0abd36edc4", null, "Doctor", "DOCTOR" },
+                    { "c9edebeb-d09c-4656-afd9-3e5d8d10438b", null, "Patient", "PATIENT" },
+                    { "e24d9d68-ba60-4de6-a959-856bbd3aaa05", null, "Nurse", "NURSE" },
+                    { "e96ddc09-9f86-478a-9560-051e9cefd261", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Country", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "Gender", "Img", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "ZipCode" },
-                values: new object[] { "3b4890c1-cb1b-490f-99f1-4b2e86b45f35", 0, null, "bad17dbb-19a5-41cf-93f2-d3b53dd38135", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEFekZe1kug+BKFDPBl8d0HFRoHzxJ6KLfKEcZ1vrW4q6mrNZ9gUWo+MExYerXxouAA==", null, false, "41b36cfe-9c1f-4db0-b3e8-5f3ee5816c29", false, "admin@admin.com", null });
+                values: new object[] { "6b40f393-6c32-48da-ae91-a42037dc9f7a", 0, null, "facfdffb-d3da-458b-8270-3fd704933991", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEKuTNGi4U+1OBLrOStv8TC+92cPkz/cB0cAe4Yv8L1cOK6bXOzxpXpQmnRpyRJ1w1A==", null, false, "7e979741-b9ce-4dfa-9804-bbd58b8ff4cb", false, "admin@admin.com", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "d7e0a967-3064-4459-8489-1e3e1a86a7d9", "3b4890c1-cb1b-490f-99f1-4b2e86b45f35" });
+                values: new object[] { "e96ddc09-9f86-478a-9560-051e9cefd261", "6b40f393-6c32-48da-ae91-a42037dc9f7a" });
         }
 
         /// <inheritdoc />
@@ -81,32 +81,32 @@ namespace HospitalSystem.Persistance.Migrations
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "620e1ef2-f635-47b8-bf60-d7fe7b7fa72e");
+                keyValue: "a6470bb7-3634-4f9e-9b05-4d0abd36edc4");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "7c15fa01-92a1-4931-ac2f-954220ef0cce");
+                keyValue: "c9edebeb-d09c-4656-afd9-3e5d8d10438b");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "ee35d020-d0a8-4cd7-82f4-7fbce01e42a1");
+                keyValue: "e24d9d68-ba60-4de6-a959-856bbd3aaa05");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
-                keyValues: new object[] { "d7e0a967-3064-4459-8489-1e3e1a86a7d9", "3b4890c1-cb1b-490f-99f1-4b2e86b45f35" });
+                keyValues: new object[] { "e96ddc09-9f86-478a-9560-051e9cefd261", "6b40f393-6c32-48da-ae91-a42037dc9f7a" });
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "d7e0a967-3064-4459-8489-1e3e1a86a7d9");
+                keyValue: "e96ddc09-9f86-478a-9560-051e9cefd261");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
-                keyValue: "3b4890c1-cb1b-490f-99f1-4b2e86b45f35");
+                keyValue: "6b40f393-6c32-48da-ae91-a42037dc9f7a");
 
             migrationBuilder.AlterColumn<string>(
                 name: "FieldOfStudy",

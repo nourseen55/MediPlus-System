@@ -19,7 +19,7 @@ namespace Hospital_Management_Project.Middlewares
             var area = context.GetRouteData()?.Values["area"]?.ToString();
 
             // If area is null or empty, skip authorization checks
-            if (string.IsNullOrEmpty(area))
+            if (string.IsNullOrEmpty(area) || area.Equals("Identity", StringComparison.OrdinalIgnoreCase))
             {
                 await _next(context);
                 return;

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Patient>
+
+@{
+    ViewData["Title"] = "All Patient Appointment";
+}
+
+<div class="parent">
+    <div class="content">
+        <br /><br /><br />
+        <div class="container">
+            <div class="form-container mx-auto my-5" style="max-width: 1000px;">
+                <h3 class="form-header fw-semibold my-3">Appointment List</h3>
+                <div class="line my-2"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-border table-striped custom-table datatable mb-2">
+                                <thead class="bg-primary text-dark">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Age</th>
+                                        <th>Gender</th>
+                                        <th>Address</th>
+                                        <th class="text-center">Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (!Model.Any())
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted">No patient records available</td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <img width="28" height="28" src="~/@item.Img" class="rounded-circle m-r-5" alt="">
+                                                    @(item.FirstName + " " + item.LastName)
+                                                </td>
+                                                <td>@item.Age()</td>
+                                                <td>@item.Gender</td>
+                                                <td>@item.City</td>
+                                                <td class="text-center">
+                                                    <a href="mailto:@item.Email" class="btn btn-primary text-white"><i class="icofont icofont-paper-plane"></i> Send Message</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sidebar-overlay" data-reff=""></div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

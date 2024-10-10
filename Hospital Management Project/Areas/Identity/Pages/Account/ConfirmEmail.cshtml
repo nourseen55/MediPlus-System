@@ -5,17 +5,54 @@
     ViewData["Title"] = "Confirm Email";
 }
 
-<h1>@ViewData["Title"]</h1>
+<style>
+    .custom-swal-title {
+        font-size: 18px; 
+    }
 
-@if (Model.StatusMessage != null)
-{
-    <div class="alert alert-success" role="alert">
-        @Model.StatusMessage
+    .custom-swal-content {
+        font-size: 14px; 
+    }
+</style>
+
+<div class="container">
+    <div class="content">
+
     </div>
-}
-else
-{
-    <div class="alert alert-danger" role="alert">
-        There was a problem confirming your email. Please try again later.
-    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var statusMessage = '@Model.StatusMessage';
+
+            if (statusMessage) {
+                Swal.fire({
+                    icon: 'success',
+                    title: statusMessage,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Ok',
+                    customClass: {
+                        title: 'custom-swal-title', 
+                        content: 'custom-swal-content' 
+                    },
+                }).then(() => {
+                    window.location.href = "/Identity/Account/login";
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'There was a problem confirming your email. Please try again later.',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Ok',
+                    customClass: {
+                        title: 'custom-swal-title',
+                        content: 'custom-swal-content'
+                    },
+                }).then(() => {
+                    window.location.href = "/Home/";
+                });
+            }
+        });
+    </script>
 }

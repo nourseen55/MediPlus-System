@@ -4,10 +4,15 @@
     ViewData["Title"] = "Register confirmation";
 }
 
-<h1>@ViewData["Title"]</h1>
-@{
-    <p>
-        Please check your email to confirm your account.
-    </p>
-}
+<div class="container text-center my-5">
+    <div class="content justify-content-center">
+        <h3 class="text-primary">@ViewData["Title"]</h3>
 
+        <p>
+            Please check your email to confirm your account.
+        </p>
+
+        <img src="~/img/Confirmed.gif" class="img-fluid my-2" alt="Email COnfirmation Image" style="width:450px;height:450px;" />
+
+    </div>
+</div>

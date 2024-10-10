@@ -75,7 +75,7 @@ namespace Hospital_Management_Project
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Identity/Account/Login"; // Redirect to login if not authenticated
-                options.AccessDeniedPath = "/Identity/Account/AccessDenied"; // Redirect if access is denied
+                options.AccessDeniedPath = "/Error/403"; // Redirect if access is denied
                 options.SlidingExpiration = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Set session timeout
             });

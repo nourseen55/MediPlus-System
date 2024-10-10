@@ -949,7 +949,7 @@ body{
 	padding:120px 0;
 }
 .fun-facts{
-	background:url('img/fun-bg.jpg');
+	background:url('/img/fun-bg.jpg');
 	background-size:cover;
 	background-repeat:no-repeat;
 }
@@ -1055,7 +1055,7 @@ body{
 .why-choose .choose-right{
 	height:100%;
 	width:100%;
-	background-image:url('img/video-bg.jpg');
+	background-image:url('/img/video-bg.jpg');
 	background-size:cover;
 	background-position:center;
 	background-repeat:no-repeat;
@@ -1075,7 +1075,7 @@ body{
 	margin-top: -35px;
 	font-size: 21px;
 	background: #1a76d1;
-	padding-left: 4px;
+	padding: 2px 4px 4px 4px;
 }
 .why-choose .choose-right .video:hover{
 	transform:scale(1.1);
@@ -1086,7 +1086,6 @@ body{
 	height: 200px;
 	background: #fff;
 	opacity: 0;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	border-radius: 100%;
 	-webkit-animation: waves 3s ease-in-out infinite;
 	animation: waves 3s ease-in-out infinite;
@@ -1115,7 +1114,7 @@ body{
 	Start Call to action CSS
 =================================*/
 .call-action{
-	background-image:url('img/call-bg.jpg');
+	background-image:url('/img/call-bg.jpg');
 	background-size:cover;
 	background-position:center;
 	position:relative;
@@ -1163,7 +1162,7 @@ body{
 	background:#fff;
 }
 .call-action .content .second:hover{
-	color:#1A76D1;
+	color:blue;
 	border-color:transparent;
 	background:#fff;
 }
@@ -1421,7 +1420,7 @@ body{
   font-size: 32px;
 }
 .service-details-inner-left {
-  background-image: url("img/signup-bg.jpg");
+  background-image: url("/img/signup-bg.jpg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -1457,7 +1456,7 @@ body{
 	Start Testimonials CSS
 ===============================*/
 .testimonials{
-	background-image:url('img/testi-bg.jpg');
+	background-image:url('/img/testi-bg.jpg');
 	background-size:cover;
 	background-position:center;
 	background-repeat:no-repeat;
@@ -1760,7 +1759,7 @@ body{
 	Start Clients CSS
 ==========================*/
 .clients{
-	background-image:url('img/client-bg.jpg');
+	background-image:url('/img/client-bg.jpg');
 	background-size:cover;
 	background-position:center;
 	padding:100px 0px;
@@ -1784,7 +1783,7 @@ body{
 	Start Team CSS
 ======================*/ 
 .team{
-	background-image:url('img/testi-bg.jpg');
+	background-image:url('/img/testi-bg.jpg');
 	background-size:cover;
 	background-position:center;
 	background-repeat:no-repeat;
@@ -2418,7 +2417,7 @@ body{
 }
 /* Blockqoute */
 .news-single blockquote {
-	background-image: url('img/blockqoute-bg.jpg');
+	background-image: url('/img/blockqoute-bg.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -2901,7 +2900,7 @@ body{
 	overflow:hidden;
 }
 .login .login-left{
-	background-image: url(img/signup-bg.jpg);
+	background-image: url(/img/signup-bg.jpg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -3056,7 +3055,7 @@ body{
 	overflow:hidden;
 }
 .register .register-left{
-	background-image: url(img/signup-bg.jpg);
+	background-image: url(/img/signup-bg.jpg);
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -3747,7 +3746,7 @@ body{
 .about-image {
   width: 100%;
   height: 100%;
-  background-image: url(img/about-img.jpg);
+  background-image: url(/img/about-img.jpg);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -3916,7 +3915,7 @@ body{
 .our-mission-image {
   width: 100%;
   height: 100%;
-  background-image: url(img/mission-img.jpg);
+  background-image: url(/img/mission-img.jpg);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -4215,3 +4214,4 @@ body{
 /*=========================
 	End Footer CSS
 ===========================*/
+

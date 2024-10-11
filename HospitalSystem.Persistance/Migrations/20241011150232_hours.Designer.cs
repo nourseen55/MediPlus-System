@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalSystem.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241010175132_init")]
-    partial class init
+    [Migration("20241011150232_hours")]
+    partial class hours
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,9 +123,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6b40f393-6c32-48da-ae91-a42037dc9f7a",
+                            Id = "2a58b05e-7df9-49c9-8d84-7406d2b311c8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "facfdffb-d3da-458b-8270-3fd704933991",
+                            ConcurrencyStamp = "62304197-8d3c-4fe7-a527-6d7ff59872e7",
                             DateOfBirth = new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
@@ -135,9 +135,9 @@ namespace HospitalSystem.Persistance.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKuTNGi4U+1OBLrOStv8TC+92cPkz/cB0cAe4Yv8L1cOK6bXOzxpXpQmnRpyRJ1w1A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJOd3dm7QcMGEBXN0as9R9VIe+uFfDlKD5kkLSLm4pQ+OoAX7n7g8uP3e5K+hukpsg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7e979741-b9ce-4dfa-9804-bbd58b8ff4cb",
+                            SecurityStamp = "f079002e-71d4-4361-91ea-0fd763aa1341",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -298,6 +298,31 @@ namespace HospitalSystem.Persistance.Migrations
                     b.ToTable("MedicalRecord", (string)null);
                 });
 
+            modelBuilder.Entity("HospitalSystem.Core.Entities.WorkingHours", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("EndHour")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StartHour")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("WorkingHours", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -327,25 +352,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a6470bb7-3634-4f9e-9b05-4d0abd36edc4",
+                            Id = "b6685d69-8bb2-4df0-b5f0-7a2d2844116e",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "e24d9d68-ba60-4de6-a959-856bbd3aaa05",
+                            Id = "610f5752-ddc7-4c99-bfaa-076b604ba0a4",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         },
                         new
                         {
-                            Id = "c9edebeb-d09c-4656-afd9-3e5d8d10438b",
+                            Id = "cfc7dbd4-97be-4e96-8cc2-65d8fdd8564a",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "e96ddc09-9f86-478a-9560-051e9cefd261",
+                            Id = "e58fafed-bd65-4b51-8fbf-b056071aee63",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -440,8 +465,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "6b40f393-6c32-48da-ae91-a42037dc9f7a",
-                            RoleId = "e96ddc09-9f86-478a-9560-051e9cefd261"
+                            UserId = "2a58b05e-7df9-49c9-8d84-7406d2b311c8",
+                            RoleId = "e58fafed-bd65-4b51-8fbf-b056071aee63"
                         });
                 });
 
@@ -558,6 +583,16 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("HospitalSystem.Core.Entities.WorkingHours", b =>
+                {
+                    b.HasOne("HospitalSystem.Core.Entities.Doctor", "Doctor")
+                        .WithMany("WorkingHours")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -680,6 +715,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Navigation("MedicalRecords");
 
                     b.Navigation("Nurses");
+
+                    b.Navigation("WorkingHours");
                 });
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.Patient", b =>

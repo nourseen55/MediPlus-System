@@ -8,6 +8,10 @@ namespace HospitalSystem.Persistance.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+/*        public ApplicationDbContext()
+        {
+            
+        }*/
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -19,7 +23,7 @@ namespace HospitalSystem.Persistance.Data
         public DbSet<Nurse> Nurses { get; set; }
         public DbSet<Departments> Departments { get; set; }
         public DbSet<Education> Educations { get; set; }
-
+        public DbSet<WorkingHours> WorkingHours { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,6 +33,7 @@ namespace HospitalSystem.Persistance.Data
             modelBuilder.ApplyConfiguration(new MedicalRecordConfiguration());
             modelBuilder.ApplyConfiguration(new NurseConfiguration());
             modelBuilder.ApplyConfiguration(new PatientConfiguration());
+            modelBuilder.ApplyConfiguration(new WorkingHoursConfiguration());
 
             var roles = SeedRoles(modelBuilder);
             SeedUser(modelBuilder,roles);
@@ -90,5 +95,9 @@ namespace HospitalSystem.Persistance.Data
                 UserId = adminId
             });
         }
+       /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+       {
+       optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=HosiptalDb;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
+       }*/
     }
 }

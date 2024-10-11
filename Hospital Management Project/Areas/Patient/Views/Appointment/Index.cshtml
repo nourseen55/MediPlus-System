@@ -24,8 +24,6 @@
                                     <th>Patient Name</th>
                                     <th>Age</th>
                                     <th>Doctor Name</th>
-                                    <th>StartDate Time</th>
-                                    <th>EndDate Time</th>
                                 
                                 <th class="text-right">Action</th>
                             </tr>
@@ -46,8 +44,6 @@
                                             <td>@item.Patient?.FullName</td>
                                             <td>@item.CalculateAge()</td>
                                             <td>@item.Doctor?.FullName</td>
-                                            <td>@item.StartDateTime</td>
-                                            <td>@item.SetDefaultEndDateTime()</td>
 
                                             <!-- Action Icon and Dropdown -->
                                             <td class="text-right">

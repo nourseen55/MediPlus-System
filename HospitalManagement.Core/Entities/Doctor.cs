@@ -12,6 +12,8 @@ namespace HospitalSystem.Core.Entities
         public virtual ICollection<Appointment>? Appointments { get; set; }
         public virtual ICollection<Nurse>? Nurses { get; set; }
         public virtual ICollection<Education>? Educations { get; set; }
+        public virtual ICollection<WorkingHours>? WorkingHours { get; set; }
+        
 
     }
 }

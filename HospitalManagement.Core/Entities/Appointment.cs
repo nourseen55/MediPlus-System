@@ -24,6 +24,8 @@ namespace HospitalSystem.Core.Entities
         public string? DeptId { get; set; }
         public virtual Departments? Department { get; set; }
 
+
+
         public DateTime DateOfBirth { get; set; }
 
         public int CalculateAge()
@@ -31,17 +33,6 @@ namespace HospitalSystem.Core.Entities
             return DateTime.Today.Year - DateOfBirth.Year;
         }
 
-        // Constructor to initialize EndDateTime based on StartDateTime
-        public DateTime? SetDefaultEndDateTime()
-        {
-            if (StartDateTime.HasValue)
-            {
-                EndDateTime = StartDateTime.Value.AddMinutes(3);
-                return EndDateTime;
-            }
-            return null;
-            
-
-        }
+        
     }
 }

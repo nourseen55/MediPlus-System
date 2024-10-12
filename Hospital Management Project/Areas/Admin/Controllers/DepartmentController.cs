@@ -1,4 +1,6 @@
 ﻿using HospitalSystem.Application.IServices;
+using HospitalSystem.Application.Services;
+using HospitalSystem.Core.Entities;
 using HospitalSystem.Core.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,24 +11,18 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
     public class DepartmentController : Controller
     {
        private readonly IDepartmentService _departmentService;
-        public DepartmentController(IDepartmentService departmentService)
+       private readonly IImageService _imageservice;
+        public DepartmentController(IDepartmentService departmentService,IImageService imageService)
         {
              _departmentService = departmentService;
+            _imageservice = imageService;
         }
         public async Task<IActionResult> Index()
         {
             var dept= await _departmentService.GetAllDepartmentsAsync();
             return View(dept);
         }
-        public async Task<IActionResult> Details(string id)
-        {
-            var dept= await _departmentService.GetDepartmentByIdAsync(id);
-            if (dept == null)
-            {
-                return NotFound();
-            }
-            return View(dept);
-        }
+     
         [HttpGet]
         public IActionResult Create()
         {
@@ -34,11 +30,18 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Departments departments)
+        public async Task<IActionResult> Create(Departments departments,IFormFile Img)
         {
             if (ModelState.IsValid)
             {
-                await _departmentService.AddDepartmentAsync(departments);
+                
+                    if (Img != null && Img.Length > 0)
+                    {
+                        var path = @"Images/Departments/";
+
+                        departments.Img = await _imageservice.SaveImageAsync(Img, path);
+                    }
+                    await _departmentService.AddDepartmentAsync(departments);
                 return RedirectToAction("Index");
             }
             return View(departments);

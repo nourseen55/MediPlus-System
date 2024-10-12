@@ -27,6 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Nurses\Data\" />
+    <Folder Include="Areas\Nurses\Models\" />
     <Folder Include="wwwroot\Images\Doctors\" />
     <Folder Include="wwwroot\Images\Departments\" />
     <Folder Include="wwwroot\Images\Posts\" />

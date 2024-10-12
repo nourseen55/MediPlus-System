@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace HospitalSystem.Persistance.Repository
 {
@@ -42,12 +43,15 @@ namespace HospitalSystem.Persistance.Repository
             return await _context.Nurses.Include(d=>d.Doctor).Include(x=>x.Departments).ToListAsync();
         }
 
-        public async Task<Nurse?> GetEntityByIdAsync(string id)
-        {
-            return await _context.Nurses.FindAsync(id);
-        }
+		public async Task<Nurse?> GetEntityByIdAsync(string id)
+		{
+			return await _context.Nurses
+				.Include(d => d.Doctor)
+				.Include(x => x.Departments)
+				.SingleOrDefaultAsync(nurse => nurse.Id == id);
+		}
 
-        public async Task UpdateEntityAsync(Nurse entity)
+		public async Task UpdateEntityAsync(Nurse entity)
         {
             _context.Nurses.Update(entity);
             await _context.SaveChangesAsync();

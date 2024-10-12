@@ -1,0 +1,200 @@
+﻿@model X.PagedList.IPagedList<Doctor>
+@using X.PagedList.Mvc;
+@using X.PagedList.Mvc.Core
+
+<div class="container">
+    <div class="row justify-content-center card-row">
+        @foreach (var doctor in Model)
+        {
+            <div class="card doctor-card">
+                <div class="photo-container" onmouseover="showAppointmentButton(this)" onmouseout="hideAppointmentButton(this)">
+                    <img src="~/@doctor.Img" alt="@doctor.UserName" class="card-img-top doctor-photo">
+                    <button class="appointment-button btn btn-primary" style="display: none;" onclick="goToCreateAppointment()">Make Appointment</button>
+                </div>
+                <div class="card-body">
+                    <p class="department-name">@doctor.Department?.DepartmentName</p>
+                    <h5 class="card-title doctor-name" onclick="goToDetails(event, '@Url.Action("Index", "Profile", new { id = doctor.Id })')">
+                        @doctor.FullName
+                    </h5>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Pagination controls -->
+    <div class="pagination-container" style="text-align: center;">
+        @if (Model.HasPreviousPage)
+        {
+            <a href="@Url.Action("ListOfDoctors", new { page = Model.PageNumber - 1 })" class="btn btn-outline-primary">Previous</a>
+        }
+        @if (Model.HasNextPage)
+        {
+            <a href="@Url.Action("ListOfDoctors", new { page = Model.PageNumber + 1 })" class="btn btn-outline-primary">See More</a>
+        }
+    </div>
+</div>
+<br />
+<br />
+
+<!-- Embedded CSS -->
+<style>
+    .container {
+        margin-top: 30px;
+    }
+
+    .card-row {
+        display: flex; /* Enable flexbox */
+        flex-wrap: wrap; /* Allow wrapping to next line */
+        justify-content: center; /* Center the cards */
+    }
+
+    .doctor-card {
+        flex: 0 1 calc(33.333% - 20px); /* Make cards take up 1/3 of the row, minus spacing */
+        margin: 10px; /* Add margin for spacing between cards */
+        max-width: 300px; /* Optional: set a max width for cards */
+        border: 1px solid #ddd;
+        border-radius: 13px; /* Add border-radius to cards */
+        padding: 0; /* Remove internal padding */
+        text-align: center;
+        transition: box-shadow 0.3s ease;
+        height: 450px; /* Fixed height for cards */
+    }
+
+    .doctor-card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .photo-container {
+        position: relative; /* For positioning the button */
+        height: 550px; /* Set a fixed height for image container */
+        overflow: hidden; /* Hide overflow */
+    }
+
+    .doctor-photo {
+        height: 100%; /* Full height */
+        width: 100%; /* Full width */
+        object-fit: cover; /* Maintain aspect ratio and cover the area */
+        cursor: pointer; /* Change cursor to indicate clickable */
+        transition: filter 0.3s; /* Smooth transition for filter */
+    }
+
+    .doctor-photo:hover {
+        filter: brightness(70%); /* Darken the photo on hover */
+    }
+
+    .appointment-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        transition: opacity 0.3s, background-color 0.3s, border-color 0.3s; /* Add border-color transition */
+        opacity: 1;
+        background-color: #007bff; /* Button background color */
+        border: 2px solid #007bff; /* Initial border color */
+        border-radius: 5px; /* Rounded corners */
+        padding: 10px 20px; /* Padding around the text */
+        color: white; /* Text color */
+        font-size: 16px; /* Font size */
+        cursor: pointer; /* Change cursor to pointer */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a shadow */
+    }
+
+    .appointment-button:hover {
+        background-color: black; /* Change color to black on hover */
+        border-color: black; /* Change border color to black on hover */
+    }
+
+    .department-name {
+        font-weight: bold; /* Make department name bold */
+        color: gray; /* Optional styling */
+        margin: 0; /* Remove default margin */
+        margin-bottom: 10px; /* Add spacing between department and doctor name */
+    }
+
+    .card-title.doctor-name {
+        font-size: 18px;
+        cursor: pointer;
+        color: black;
+        transition: color 0.3s;
+    }
+
+    .card-title.doctor-name:hover {
+        color: blue;
+    }
+
+    /* Media query to ensure responsiveness */
+    @@media (max-width: 768px) {
+        .doctor-card {
+            flex: 0 1 calc(50% - 20px); /* 2 cards per row on smaller screens */
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .doctor-card {
+            flex: 0 1 100%; /* 1 card per row on extra small screens */
+        }
+    }
+
+    /* Pagination Controls */
+    .pagination-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .pagination-container a {
+        color: #007bff;
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 0 4px;
+        border: 1px solid #ddd;
+    }
+
+    .pagination-container a:hover {
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+    }
+
+    .pagination-container .active {
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        padding: 8px 16px;
+    }
+</style>
+
+@section Scripts {
+    <script type="text/javascript">
+        function showAppointmentButton(container) {
+            const button = container.querySelector('.appointment-button');
+            const image = container.querySelector('.doctor-photo');
+            button.style.display = 'block'; // Show button on hover
+            image.style.filter = 'brightness(70%)'; // Darken the image on hover
+            button.style.backgroundColor = '#007bff'; // Set button color to blue on image hover
+            button.style.borderColor = '#007bff'; // Set border color to blue on image hover
+        }
+
+        function hideAppointmentButton(container) {
+            const button = container.querySelector('.appointment-button');
+            const image = container.querySelector('.doctor-photo');
+            button.style.display = 'none'; // Hide button when not hovering
+            image.style.filter = 'brightness(100%)'; // Restore the image brightness
+            button.style.borderColor = 'transparent'; // Restore border color
+        }
+
+        function goToDetails(event, detailViewUrl) {
+            event.stopPropagation(); // Prevent photo click from firing
+            const doctorName = event.target;
+            doctorName.style.color = 'blue'; // Change color to blue
+
+            // Redirect to the details view
+            window.location.href = detailViewUrl;
+        }
+
+        function goToCreateAppointment() {
+            // Redirect to the Create action of the Appointment controller
+            window.location.href = '@Url.Action("Create", "Appointment", new { area = "Patient" })';
+        }
+    </script>
+}

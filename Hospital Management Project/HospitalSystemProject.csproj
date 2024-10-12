@@ -28,6 +28,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Images\Doctors\" />
+    <Folder Include="wwwroot\Images\Departments\" />
+    <Folder Include="wwwroot\Images\Posts\" />
     <Folder Include="wwwroot\Images\Nurses\" />
   </ItemGroup>
 

@@ -20,7 +20,15 @@ namespace Hospital_Management_Project.Controllers
             var department=await _departmentService.GetAllDepartmentsAsync();
 			return View(department);
         }
-
+        public async Task<IActionResult> Details(string Id)
+        {
+            var dept = await _departmentService.GetDepartmentByIdAsync(Id);
+            if (dept == null)
+            {
+                return NotFound();
+            }
+            return View(dept);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         [Route("Error/{statusCode}")]
         public IActionResult Error(int statusCode)

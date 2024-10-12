@@ -1,0 +1,245 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@model X.PagedList.IPagedList<NewsPost>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<div id="main-content" class="blog-page">
+    <div class="container">
+        <div class="card-form">
+            <div class=" left-box">
+                <div class="post-list">
+                    @foreach (var item in Model)
+                    {
+                        @Html.Partial("_NewsPostsList", item)
+                        // Render each individual post
+                    }
+                </div>
+
+                <!-- Pagination -->
+                <div class="container px-4 px-lg-5 mt-5">
+                    <ul class="pagination pagination-primary justify-content-center">
+                        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }),
+                                 new PagedListRenderOptions
+                        {
+                            LiElementClasses = new string[] { "page-item" },
+                            PageClasses = new string[] { "page-link" }
+                        })
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (!User.IsInRole(UserRoles.Patient.ToString()))
+{
+    <div class="card-form-button">
+        <div class="body-form">
+            <form id="add-post-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="text" name="Title" id="post-title" class="form-control" placeholder="Title" required />
+                </div>
+                <div class="form-group">
+                    <textarea id="post-content" class="form-control" name="Content" placeholder="Content" required></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="file" id="post-image" class="form-control-file" name="postImage" />
+                </div>
+                <button type="submit" class="btn btn-royalblue">Add Post</button>
+            </form>
+        </div>
+    </div>
+
+}
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+                $(document).ready(function () {
+                    $('#add-post-form').on('submit', function (e) {
+                        e.preventDefault();
+
+                        var formData = new FormData(this);
+        \
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("Create", "News")',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (data) {
+                                $('#news-posts').prepend(data);
+                                $('#add-post-form')[0].reset(); // Reset the form
+                                $('#post-image').val(''); // Clear the file input (optional)
+                            },
+                            error: function (xhr, status, error) {
+                                console.log(xhr.responseText); // Log error
+                            }
+                        });
+                    });
+                });
+    </script>
+}
+<style>
+        /* Card container */
+        .card-form {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 30px auto;
+            width: 100%;
+    /*          max-width: 600px;
+     */    }
+
+        .card-form-button {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 30px auto;
+            width: 100%;
+                     max-width: 600px;
+
+        }
+            .card-form-button .body-form {
+                padding: 20px;
+            }
+
+        /* Input field styling */
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .form-control-file {
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+       /*   .form-control:focus {
+             border-color: royalblue;
+             box-shadow: 0 0 5px rgba(65, 105, 225, 0.5);
+         }
+     */
+        textarea.form-control {
+            height: 120px;
+            resize: none;
+        }
+
+        /* Button styling */
+        .btn-royalblue {
+            background-color: royalblue;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-royalblue:hover {
+                background-color: darkblue;
+            }
+
+        .social-icons {
+            display: flex; /* Use flexbox for alignment */
+            justify-content: left; /* Center align the icons */
+            gap: 15px; /* Space between icons */
+        }
+
+        .social-icon {
+            text-decoration: none; /* Remove underline */
+            color: #333; /* Icon color */
+            font-size: 24px; /* Icon size */
+            transition: color 0.3s; /* Transition for hover effect */
+        }
+
+            .social-icon:hover {
+                color: royalblue; /* Change color on hover */
+            }
+
+        .card {
+            background: #fff;
+            transition: .5s;
+            border: 0;
+            margin-bottom: 30px;
+            border-radius: .55rem;
+            position: relative;
+            width: 100%;
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+        }
+
+            .card .body {
+                color: #444;
+                padding: 20px;
+                font-weight: 400;
+            }
+
+        .single_post .body {
+            padding: 30px;
+        }
+
+        .single_post .img-post {
+            position: relative;
+            overflow: hidden;
+            max-height: 500px;
+            margin-bottom: 30px;
+        }
+
+            .single_post .img-post > img {
+                transform: scale(1.01);
+                opacity: 1;
+                transition: transform .4s ease, opacity .4s ease;
+                max-width: 100%;
+            }
+
+           /*   .single_post .img-post:hover img {
+                 transform: scale(1.02);
+                 opacity: .7;
+                 filter: grayscale(1);
+                 transition: all .8s ease-in-out;
+             } */
+
+        /* Post info styling */
+        .post-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .user-photo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-name {
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .post-date {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .left-box {
+            display: flex; /* Enable flexbox */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center children horizontally */
+            width: 100%; /* Ensure it takes the full width */
+        }
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+</style>

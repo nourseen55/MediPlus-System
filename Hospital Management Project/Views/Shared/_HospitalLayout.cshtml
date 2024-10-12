@@ -1,4 +1,12 @@
 ﻿@inject UserManager<ApplicationUser> UserManager
+@{
+	ApplicationUser? user = null;
+
+	if (User.Identity.IsAuthenticated)
+	{
+		user = await UserManager.GetUserAsync(User);
+	}
+}
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
@@ -73,8 +81,31 @@
 						<div class="col-lg-6 col-md-5 col-12">
 							<!-- Contact -->
 							<ul class="top-link">
+							@if (User.Identity.IsAuthenticated) // Check if the user is authenticated
+							{
+								<div class="profile-pic">
+									@if (User.IsInRole("Nurse"))
+									{
+										<a asp-area="Nurses" asp-controller="Profile" asp-action="Index">
+											<img src="@(user != null && user.Img != null ? Url.Content("~/" + user.Img) : Url.Content("~/img/person.png"))" alt="Profile Picture">
 
-								
+										</a>
+									}
+									else if(User.IsInRole("Doctor")){
+										<a asp-area="Doctors" asp-controller="Profile" asp-action="Index">
+											<img src="@(user != null && user.Img != null ? Url.Content("~/" + user.Img) : Url.Content("~/img/person.png"))" alt="Profile Picture">
+
+										</a>
+									}
+									else
+									{
+										<img src="@(user != null && user.Img != null ? Url.Content("~/" + user.Img) : Url.Content("~/img/person.png"))" alt="Profile Picture">
+
+									}
+
+								</div>
+							}
+
 							@await Html.PartialAsync("_LoginPartial")
 
 							</ul>
@@ -241,7 +272,21 @@
 			<!--/ End Copyright -->
 		</footer>
 		<!--/ End Footer Area -->
-		
+		<style>
+		.profile-pic {
+			width: 50px; /* عرض الدائرة */
+			height: 50px; /* ارتفاع الدائرة */
+			border-radius: 50%; /* يجعل الصورة دائرية */
+			overflow: hidden; /* يخفي الأجزاء الزائدة من الصورة */
+			border: 2px solid #ccc; /* حدود الدائرة */
+			margin-left:40px
+		}
+
+			.profile-pic img {
+				width: 100%; /* يضمن أن الصورة تملأ الدائرة */
+				height: auto; /* يحافظ على نسبة العرض إلى الارتفاع */
+			}
+		</style>
 		<!-- jquery Min JS -->
         <script src="~/js/jquery.min.js"></script>
 		<!-- jquery Migrate JS -->

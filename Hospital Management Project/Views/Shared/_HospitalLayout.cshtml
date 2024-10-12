@@ -74,10 +74,7 @@
 							<!-- Contact -->
 							<ul class="top-link">
 
-								<li><a href="#">About</a></li>
-								<li><a href="#">Doctors</a></li>
-								<li><a href="#">Contact</a></li>
-								<li><a href="#">FAQ</a></li>
+								
 							@await Html.PartialAsync("_LoginPartial")
 
 							</ul>
@@ -124,14 +121,15 @@
 												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
 
 											}
-											else
+											else if(User.IsInRole("Admin"))
 											{
-												<li><a href="#">Doctor </a></li>
-												<li><a href="#">Services </a></li>
+											<li><a asp-controller="Patient" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
+
 											}
 
-											<li><a asp-controller="Blogs" asp-action="index" asp-area=""> Blogs</a></li>
 										   <li><a asp-controller="ContactUs" asp-action="index"  asp-area="">Contact Us</a></li>
+										<li><a asp-controller="News" asp-action="index" asp-area=""> News</a></li>
+
 										</ul>
 									</nav>
 								</div>

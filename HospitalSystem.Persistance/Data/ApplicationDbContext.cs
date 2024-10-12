@@ -24,6 +24,7 @@ namespace HospitalSystem.Persistance.Data
         public DbSet<Departments> Departments { get; set; }
         public DbSet<Education> Educations { get; set; }
         public DbSet<WorkingHours> WorkingHours { get; set; }
+        public DbSet<NewsPost> NewsPosts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

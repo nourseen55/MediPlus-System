@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalSystem.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241011144501_init")]
-    partial class init
+    [Migration("20241012131424_newcol")]
+    partial class newcol
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,9 +123,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3a3a7b23-630e-4504-8f5a-357b904c4fa5",
+                            Id = "7c85954a-76fe-4461-ae7d-b660cb346ec7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "05695c86-3c66-4886-95a5-4ee95c008113",
+                            ConcurrencyStamp = "3a06eef8-9470-4aa6-9ae5-ea75e3b9cdab",
                             DateOfBirth = new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
@@ -135,9 +135,9 @@ namespace HospitalSystem.Persistance.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL+pZ3UyD9CS7Aiwe5jRNFcvTSlLE6FaldwrWFgTnhmeJ6yfvJyGbYXU83yO/DB7Mw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENvCtDxhAh/FTbLw8z48PGp2+GKOiuILfcwXGPxE6S8iMgU27NEwxPV+ukS/vyvrJA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2fd7987e-3c2b-4ca8-a69e-d2aa16122499",
+                            SecurityStamp = "0c058c17-fa87-4973-a452-cf2efc26ec3f",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -191,6 +191,9 @@ namespace HospitalSystem.Persistance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Img")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -298,6 +301,60 @@ namespace HospitalSystem.Persistance.Migrations
                     b.ToTable("MedicalRecord", (string)null);
                 });
 
+            modelBuilder.Entity("HospitalSystem.Core.Entities.NewsPost", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DatePosted")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PostImg")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("NewsPosts");
+                });
+
+            modelBuilder.Entity("HospitalSystem.Core.Entities.WorkingHours", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("EndHour")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StartHour")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("WorkingHours", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -327,25 +384,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "646b55a9-7c09-4260-8276-25d78c600813",
+                            Id = "a4c99ded-6d34-4065-a007-fe4dac2686c3",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "4e145f86-5ead-42f7-8f4f-3c422b9f3c2c",
+                            Id = "c07acf4a-8842-4be2-9eb4-5864c4458d6e",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         },
                         new
                         {
-                            Id = "962fbc0e-6c25-4295-968a-bf528c6d108a",
+                            Id = "8e14a056-2123-4ba6-be2f-623b83e16329",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "4fef6139-eda9-4f0f-8acd-02fbe425fff8",
+                            Id = "c5d1181b-5a74-4abb-a443-b3b997344dbc",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -440,8 +497,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "3a3a7b23-630e-4504-8f5a-357b904c4fa5",
-                            RoleId = "4fef6139-eda9-4f0f-8acd-02fbe425fff8"
+                            UserId = "7c85954a-76fe-4461-ae7d-b660cb346ec7",
+                            RoleId = "c5d1181b-5a74-4abb-a443-b3b997344dbc"
                         });
                 });
 
@@ -558,6 +615,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("HospitalSystem.Core.Entities.NewsPost", b =>
+                {
+                    b.HasOne("HospitalSystem.Core.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HospitalSystem.Core.Entities.WorkingHours", b =>
+                {
+                    b.HasOne("HospitalSystem.Core.Entities.Doctor", "Doctor")
+                        .WithMany("WorkingHours")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -680,6 +756,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Navigation("MedicalRecords");
 
                     b.Navigation("Nurses");
+
+                    b.Navigation("WorkingHours");
                 });
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.Patient", b =>

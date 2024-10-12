@@ -1,0 +1,109 @@
+﻿@model X.PagedList.IPagedList<Feedback>
+
+@{
+    ViewData["Title"] = "Feedback";
+}
+<br />
+<br />
+
+<div class="large-feedback-container" style="max-width: 800px; margin: 0 auto; border: 1px solid #ddd; padding: 40px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white;">
+    <h3 style="font-size: 24px; margin-bottom: 20px;">All Feedbacks</h3>
+
+
+    @if (Model.Any())
+    {
+        @foreach (var feedback in Model)
+        {
+            <div class="feedback-item" style="border-bottom: 1px solid #eee; padding: 20px; margin-bottom: 30px; position: relative;">
+                <div class="user-info" style="display: flex; align-items: center; margin-bottom: 10px;">
+                    @if (feedback.ApplicationUser.Img==null)
+                    {
+                        <img src="~/assets/img/user.jpg" alt="User Image" class="user-image" style="border-radius: 50%; width: 60px; height: 60px; margin-right: 20px;" />
+                    }
+                    else{
+                         <img src="@feedback.ApplicationUser.Img" alt="User Image" class="user-image" style="border-radius: 50%; width: 60px; height: 60px; margin-right: 20px;" />
+                    }
+                    
+                    <div class="user-details">
+                        <div class="user-name" style="font-weight: 600; font-size: 18px;">@($"{feedback.ApplicationUser?.FirstName} {feedback.ApplicationUser?.LastName}")</div>
+                        <div class="feedback-date" style="font-size: 14px; color: #888;">
+                            <i class="fa fa-calendar"></i>
+                            @feedback.DateFeedback.ToString("MMMM dd, yyyy hh:mm tt")
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="feedback-comment" style="font-size: 15px; color: #555; margin-top: 10px; word-wrap: break-word; white-space: normal;">
+                    <strong>@feedback.Comments</strong>
+                </div>
+
+
+                @if (User.IsInRole(UserRoles.Admin.ToString()))
+                {
+                    <button class="btn btn-danger btn-sm" style="position: absolute; right: 20px; top: 20px;" data-toggle="modal" data-target="#delete_patient_@feedback.Id">
+                        <i class="fa fa-trash-o m-r-5"></i> Delete
+                    </button>
+
+                    <div id="delete_patient_@feedback.Id" class="modal fade delete-modal" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                                    <h3>Are you sure you want to delete this feedback?</h3>
+                                    <div class="m-t-20">
+                                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                        <form asp-action="ConfirmDelete" method="post" style="display:inline;">
+                                            <input type="hidden" name="id" value="@feedback.Id" />
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+
+        <!-- Pagination controls -->
+        <div style="margin-top: 20px; text-align: center;">
+            @if (Model.HasPreviousPage)
+            {
+                <a href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" class="btn btn-outline-primary">Previous</a>
+            }
+            @if (Model.HasNextPage)
+            {
+                <a href="@Url.Action("Index", new { page = Model.PageNumber + 1 })" class="btn btn-outline-primary">See More</a>
+            }
+        </div>
+    }
+    else
+    {
+        <p>No feedback available.</p>
+    }
+</div>
+
+@if (User.IsInRole(UserRoles.Patient.ToString()))
+{
+    <div class="leave-comment-section" style="max-width: 800px; margin: 30px auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); background-color: white;">
+        <h3 style="font-size: 24px; margin-bottom: 20px;">Leave Feedback</h3>
+
+        <form asp-action="Index" method="post">
+            <div asp-validation-summary="All" class="text-danger" style="margin-bottom: 15px;"></div>
+
+            <div class="form-group" style="margin-bottom: 20px;">
+                <textarea id="Comments" name="Comments" class="form-control" placeholder="Write your comments..." required style="width: 100%; padding: 10px; height: 120px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="background-color: #007bff; color: white; padding: 10px 20px; border-radius: 5px; border: none;">
+                Submit Feedback
+            </button>
+        </form>
+    </div>
+}
+<br />
+<br />
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+}

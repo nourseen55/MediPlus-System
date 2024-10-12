@@ -145,9 +145,8 @@
 										<ul class="nav menu">
 											<li><a asp-action="Index" class="active" asp-controller="Home" asp-area="">Home</a></li>
 
-											@if (User.IsInRole("Doctor"))
+										@if (User.IsInRole("Doctor") || User.IsInRole("Nurse"))
 											{
-											   <li><a asp-area="Doctors" asp-action="Index" asp-controller="Profile">Profile</a></li>
 											   <li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
 												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
 
@@ -156,9 +155,13 @@
 											{
 											<li><a asp-controller="Patient" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
 
-											}
+										}
+										else
+										{
+											<li><a asp-controller="ContactUs" asp-action="index" asp-area="">Contact Us</a></li>
 
-										   <li><a asp-controller="ContactUs" asp-action="index"  asp-area="">Contact Us</a></li>
+										}
+
 										<li><a asp-controller="News" asp-action="index" asp-area=""> News</a></li>
 										<li><a asp-controller="Feedback" asp-action="Index" asp-area=""> Feedbacks</a></li>
 

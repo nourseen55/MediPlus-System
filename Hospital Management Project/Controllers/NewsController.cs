@@ -37,7 +37,7 @@ namespace HospitalSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(NewsPost newsPost, IFormFile postImage)
+        public async Task<IActionResult> Index(NewsPost newsPost, IFormFile postImage)
         {
             if (ModelState.IsValid)
             {
@@ -50,7 +50,7 @@ namespace HospitalSystem.Controllers
                 await _context.SaveChangesAsync();
 
                 // Return the newly created post as a partial view
-                return PartialView("_NewsPostsList", newsPost);
+                return RedirectToAction("Index");
             }
 
             return BadRequest();

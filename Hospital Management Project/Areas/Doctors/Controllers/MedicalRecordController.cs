@@ -7,23 +7,25 @@ using Microsoft.AspNetCore.Authorization;
 namespace Hospital_Management_Project.Areas.Doctors.Controllers{
 
     [Area("Doctors")]
-    [Authorize(Roles =nameof(UserRoles.Doctor))]
-
-    public class MedicalRecordController : Controller
+	[Authorize(Roles = "Doctor,Nurse")]
+	public class MedicalRecordController : Controller
     {
         private readonly IMedicalRecordService _medicalRecordService;
         private readonly IPatientService _patientService;
         private readonly IAppointmentService _appointmentService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IImageService _fileService;
+        private readonly INurseService _nurseService;
 
-        public MedicalRecordController(IMedicalRecordService medicalRecordService, IImageService fileService, IPatientService patientService , IAppointmentService appointmentService , UserManager<ApplicationUser> userManager)
+        public MedicalRecordController(IMedicalRecordService medicalRecordService, INurseService nurseService,IImageService fileService, IPatientService patientService , IAppointmentService appointmentService , UserManager<ApplicationUser> userManager)
         {
             _medicalRecordService = medicalRecordService;
             _patientService = patientService;
+
             _appointmentService = appointmentService;
             _userManager = userManager;
             _fileService = fileService;
+            _nurseService = nurseService;
             
             
         }
@@ -31,10 +33,21 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            
             var user = await _userManager.GetUserAsync(User);
-            var doctorId = user.Id;
+            string doctorId = null;
 
-            var patients = await _appointmentService.GetPatientsByDoctorAsync(doctorId);
+			if (User.IsInRole("Doctor"))
+            {
+				 doctorId = user.Id;
+
+			}else if(User.IsInRole("Nurse"))
+            {
+                Nurse nurse = await _nurseService.GetNurseByIdAsync(user.Id);
+                doctorId = nurse.DoctorID;
+            }
+
+			var patients = await _appointmentService.GetPatientsByDoctorAsync(doctorId);
             return View(patients);
         }
 

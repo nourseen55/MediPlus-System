@@ -1,4 +1,5 @@
 ﻿@inject UserManager<ApplicationUser> UserManager
+
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
@@ -113,10 +114,12 @@
 									<nav class="navigation">
 										<ul class="nav menu">
 											<li><a asp-action="Index" class="active" asp-controller="Home" asp-area="">Home</a></li>
+										<li><a asp-area="Doctors" asp-action="ListOfDoctors" asp-controller="Profile">Doctors</a></li>
 
-											@if (User.IsInRole("Doctor"))
+
+										@if (User.IsInRole("Doctor"))
 											{
-											   <li><a asp-area="Doctors" asp-action="Index" asp-controller="Profile">Profile</a></li>
+											   @* <li><a asp-area="Doctors" asp-action="Index" asp-controller="Profile" as-route-id="">Profile</a></li> *@
 											   <li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
 												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
 

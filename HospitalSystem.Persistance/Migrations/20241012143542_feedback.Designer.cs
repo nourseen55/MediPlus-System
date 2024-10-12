@@ -4,6 +4,7 @@ using HospitalSystem.Persistance.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalSystem.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241012143542_feedback")]
+    partial class feedback
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,9 +123,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "22e7cd88-254d-4d27-a2c9-29e6586c8ee0",
+                            Id = "ac53451b-3abe-417b-ba33-cf3360253d89",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4264f990-d8b7-4704-a8cd-1b6375a83225",
+                            ConcurrencyStamp = "dec0b1eb-13e4-4900-bbb4-758229309d83",
                             DateOfBirth = new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
@@ -132,9 +135,9 @@ namespace HospitalSystem.Persistance.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECtXOsGhb8eH1/9laKqZSVmpMGeKhEFd6F2bmeDctZIHBuClQAZiYschDTyVO90f/A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHc65RXZIQKt8d42iLTYk07jC16R0khPli2F6nmBj4rsuXm0/TlGGtjMCFUjaEQhIA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4039a117-dadf-4667-9786-ee54b3e73a65",
+                            SecurityStamp = "e361752c-a819-4427-b878-0bfd65221d0a",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -190,9 +193,6 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Img")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Departments");
@@ -240,6 +240,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Comments")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -248,11 +251,11 @@ namespace HospitalSystem.Persistance.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("feedbacks");
                 });
@@ -403,25 +406,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "19c5a0c3-3552-468f-8498-3689331da259",
+                            Id = "adfced05-7d0c-4243-a0d9-0d39e987cf17",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "6c27ecca-ce21-414b-9808-b1c05fe4d37a",
+                            Id = "fc88576c-1a1f-4886-8c22-123ecec98b8d",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         },
                         new
                         {
-                            Id = "33e3582a-4d10-40d9-a2fa-a3539d93f809",
+                            Id = "3b97bd3a-e89e-451c-804a-592eae5746a6",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "f94d5f17-7588-4c66-806c-b003c10fb5d0",
+                            Id = "bfecdab5-ff93-4129-bf73-457932eb6b6d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -516,8 +519,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "22e7cd88-254d-4d27-a2c9-29e6586c8ee0",
-                            RoleId = "f94d5f17-7588-4c66-806c-b003c10fb5d0"
+                            UserId = "ac53451b-3abe-417b-ba33-cf3360253d89",
+                            RoleId = "bfecdab5-ff93-4129-bf73-457932eb6b6d"
                         });
                 });
 
@@ -619,7 +622,7 @@ namespace HospitalSystem.Persistance.Migrations
                 {
                     b.HasOne("HospitalSystem.Core.Entities.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ApplicationUserId");
 
                     b.Navigation("ApplicationUser");
                 });

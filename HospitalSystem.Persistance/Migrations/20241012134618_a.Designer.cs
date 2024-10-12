@@ -4,6 +4,7 @@ using HospitalSystem.Persistance.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalSystem.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241012134618_a")]
+    partial class a
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,9 +123,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "22e7cd88-254d-4d27-a2c9-29e6586c8ee0",
+                            Id = "0888e6a8-6a8d-44b7-81d8-fcf1e1224b4e",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4264f990-d8b7-4704-a8cd-1b6375a83225",
+                            ConcurrencyStamp = "b472cf23-b4a0-4961-9a30-b01066bf64bb",
                             DateOfBirth = new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
@@ -132,9 +135,9 @@ namespace HospitalSystem.Persistance.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECtXOsGhb8eH1/9laKqZSVmpMGeKhEFd6F2bmeDctZIHBuClQAZiYschDTyVO90f/A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIp8+lR9Xpn5ubVjPveJiqIPge0O7ipI3uhkt2QJ9xVGPwnJYSKbRP8fRMgHJ6W8JQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4039a117-dadf-4667-9786-ee54b3e73a65",
+                            SecurityStamp = "2053c32b-4355-417b-85f0-fd28b85dd465",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -190,9 +193,6 @@ namespace HospitalSystem.Persistance.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Img")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Departments");
@@ -233,28 +233,6 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("Educations");
-                });
-
-            modelBuilder.Entity("HospitalSystem.Core.Entities.Feedback", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Comments")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateFeedback")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("feedbacks");
                 });
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.MedicalRecord", b =>
@@ -403,25 +381,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "19c5a0c3-3552-468f-8498-3689331da259",
+                            Id = "129dc55a-991d-420b-87ce-923001baadf2",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "6c27ecca-ce21-414b-9808-b1c05fe4d37a",
+                            Id = "bfcaaeed-501a-435e-b12d-f9f813ca0d80",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         },
                         new
                         {
-                            Id = "33e3582a-4d10-40d9-a2fa-a3539d93f809",
+                            Id = "b411c37e-77e9-4934-acc8-0066abb936fd",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "f94d5f17-7588-4c66-806c-b003c10fb5d0",
+                            Id = "aec66af4-cce1-44c0-a849-30d8a6acb969",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -516,8 +494,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "22e7cd88-254d-4d27-a2c9-29e6586c8ee0",
-                            RoleId = "f94d5f17-7588-4c66-806c-b003c10fb5d0"
+                            UserId = "0888e6a8-6a8d-44b7-81d8-fcf1e1224b4e",
+                            RoleId = "aec66af4-cce1-44c0-a849-30d8a6acb969"
                         });
                 });
 
@@ -613,15 +591,6 @@ namespace HospitalSystem.Persistance.Migrations
                         .IsRequired();
 
                     b.Navigation("Doctor");
-                });
-
-            modelBuilder.Entity("HospitalSystem.Core.Entities.Feedback", b =>
-                {
-                    b.HasOne("HospitalSystem.Core.Entities.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.MedicalRecord", b =>

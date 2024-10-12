@@ -120,9 +120,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7c85954a-76fe-4461-ae7d-b660cb346ec7",
+                            Id = "ccee3fc8-777a-4204-902f-49c5c21409e2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3a06eef8-9470-4aa6-9ae5-ea75e3b9cdab",
+                            ConcurrencyStamp = "5ab5c9a9-a87c-4402-a9e5-0f9eba366fd6",
                             DateOfBirth = new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
@@ -132,9 +132,9 @@ namespace HospitalSystem.Persistance.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENvCtDxhAh/FTbLw8z48PGp2+GKOiuILfcwXGPxE6S8iMgU27NEwxPV+ukS/vyvrJA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAKzHCV4yd6pE2VZ7IOeR+XxJT/v3GclsMV5KBXFj+oMDdn9FgQrucYjMoqPaEebPg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0c058c17-fa87-4973-a452-cf2efc26ec3f",
+                            SecurityStamp = "fb019775-b2ab-421e-bf58-94d42d0972d4",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -233,6 +233,28 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasIndex("DoctorId");
 
                     b.ToTable("Educations");
+                });
+
+            modelBuilder.Entity("HospitalSystem.Core.Entities.Feedback", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Comments")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateFeedback")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("feedbacks");
                 });
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.MedicalRecord", b =>
@@ -381,25 +403,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a4c99ded-6d34-4065-a007-fe4dac2686c3",
+                            Id = "21bff96a-aaa5-4b33-94ae-43918902216f",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "c07acf4a-8842-4be2-9eb4-5864c4458d6e",
+                            Id = "0f3d9d32-7b4c-4527-91e5-8e55f8554603",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         },
                         new
                         {
-                            Id = "8e14a056-2123-4ba6-be2f-623b83e16329",
+                            Id = "b57e8c1f-a29b-45b6-ba76-06d54edc54e3",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "c5d1181b-5a74-4abb-a443-b3b997344dbc",
+                            Id = "bd8bf413-3283-42d7-bfa6-87fcce075e7f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -494,8 +516,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "7c85954a-76fe-4461-ae7d-b660cb346ec7",
-                            RoleId = "c5d1181b-5a74-4abb-a443-b3b997344dbc"
+                            UserId = "ccee3fc8-777a-4204-902f-49c5c21409e2",
+                            RoleId = "bd8bf413-3283-42d7-bfa6-87fcce075e7f"
                         });
                 });
 
@@ -591,6 +613,15 @@ namespace HospitalSystem.Persistance.Migrations
                         .IsRequired();
 
                     b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("HospitalSystem.Core.Entities.Feedback", b =>
+                {
+                    b.HasOne("HospitalSystem.Core.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.MedicalRecord", b =>

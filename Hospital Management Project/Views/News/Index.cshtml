@@ -31,7 +31,7 @@
         </div>
     </div>
 </div>
-@if (!User.IsInRole(UserRoles.Patient.ToString()))
+@if (User.IsInRole(UserRoles.Admin.ToString())||User.IsInRole("Nurse")||User.IsInRole(UserRoles.Doctor.ToString()))
 {
     <div class="card-form-button">
         <div class="body-form">
@@ -54,29 +54,28 @@
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-                $(document).ready(function () {
-                    $('#add-post-form').on('submit', function (e) {
-                        e.preventDefault();
+        $(document).ready(function () {
+            $('#add-post-form').on('submit', function (e) {
+                e.preventDefault();
+                var formData = new FormData(this); // Use FormData for file upload
 
-                        var formData = new FormData(this);
-        \
-                        $.ajax({
-                            type: 'POST',
-                            url: '@Url.Action("Create", "News")',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success: function (data) {
-                                $('#news-posts').prepend(data);
-                                $('#add-post-form')[0].reset(); // Reset the form
-                                $('#post-image').val(''); // Clear the file input (optional)
-                            },
-                            error: function (xhr, status, error) {
-                                console.log(xhr.responseText); // Log error
-                            }
-                        });
-                    });
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Create", "News")',
+                    data: formData,
+                    processData: false, // Important: prevent jQuery from processing the data
+                    contentType: false, // Important: prevent jQuery from setting content type
+                    success: function (data) {
+                        $('#news-posts').prepend(data); // Prepend new post to the top
+                        $('#add-post-form')[0].reset(); // Reset the form
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr.responseText); // Log error
+                    }
                 });
+            });
+
+        });
     </script>
 }
 <style>
@@ -176,8 +175,8 @@
 
             .card .body {
                 color: #444;
-                padding: 20px;
-                font-weight: 400;
+/*                 padding: 20px;
+ */                font-weight: 400;
             }
 
         .single_post .body {
@@ -208,7 +207,7 @@
         /* Post info styling */
         .post-info {
             display: flex;
-            align-items: center;
+            align-items: left;
             margin-bottom: 15px;
         }
 

@@ -7,9 +7,18 @@
             <img class="d-block img-fluid" src="@Model.PostImg" alt="Post Image" />
         </div>
         <div class="post-info">
-            <img src="@Model.User?.Img" alt="User Photo" class="user-photo" />
+            @if(Model.User.Img == null)
+            {
+                <img src="~/img/person.png" alt="User Photo" class="user-photo" />
+
+            }
+            else
+            {
+                <img src="@Model.User?.Img" alt="User Photo" class="user-photo" />
+
+            }
             <span class="user-name">Posted by: @Model.User.FullName</span>
-            <span class="post-date">on @Model.DatePosted.ToString("MMMM dd, yyyy")</span>
+            <span class="post-date">on @Model.DatePosted.ToString("MMMM dd, yyyy hh:mm tt")</span>
         </div>
         <h3><a href="blog-details.html">@Model.Title</a></h3>
         <p>@Model.Content</p>

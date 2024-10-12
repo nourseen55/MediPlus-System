@@ -6,7 +6,6 @@ using X.PagedList;
 
 namespace Hospital_Management_Project.Controllers
 {
-    [Authorize]
     public class FeedbackController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

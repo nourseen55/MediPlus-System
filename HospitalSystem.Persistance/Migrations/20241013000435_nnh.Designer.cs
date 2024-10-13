@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalSystem.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241012155340_as")]
-    partial class @as
+    [Migration("20241013000435_nnh")]
+    partial class nnh
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,9 +123,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3d62137e-f8b6-4a31-ad9c-79dea4ad1372",
+                            Id = "71ce38a9-e72d-4209-9c36-cfcf1dbf2519",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3a200313-489a-4904-a8e4-3a58fd495c63",
+                            ConcurrencyStamp = "4af67a64-bbe1-4d79-98f1-83f9da8a5b9b",
                             DateOfBirth = new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
@@ -135,9 +135,9 @@ namespace HospitalSystem.Persistance.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIEaU0VHnsuG1wYkht5nzGHsGhsc+aYlySWG5aS+VqlpMfeqKf42XFs78Pp2aw1qAA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMt94JbZ4FwfnI/ymddD2wvPyTw7693hWLBeco9ypraN2TuOgTewhz0hv1F/f4keGA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1eea1e65-9e39-44a8-952c-5f81d2e701d2",
+                            SecurityStamp = "ac551d82-b912-48e0-861f-ba55c6ab0957",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -191,6 +191,9 @@ namespace HospitalSystem.Persistance.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Img")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -403,25 +406,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "90aa44ff-7b50-4a8e-8cac-7304ea1155f2",
+                            Id = "c41d5cc4-6b53-4d58-86c7-13dfce079b2a",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "d8ebd5d2-4b89-48dd-9c68-282f9b40ffbf",
+                            Id = "3ad342de-f79b-454c-ab2d-4c340250a560",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         },
                         new
                         {
-                            Id = "87502ae8-3c94-4f21-b31c-a83ccbc392e3",
+                            Id = "188c2140-dfb7-4802-97ea-f13d49201bb8",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "452c6910-1a20-46a2-bfc9-33b898399f1f",
+                            Id = "5b0ccf3d-1ca0-4d3c-8e89-bc3cfc0be6cc",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -516,8 +519,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "3d62137e-f8b6-4a31-ad9c-79dea4ad1372",
-                            RoleId = "452c6910-1a20-46a2-bfc9-33b898399f1f"
+                            UserId = "71ce38a9-e72d-4209-9c36-cfcf1dbf2519",
+                            RoleId = "5b0ccf3d-1ca0-4d3c-8e89-bc3cfc0be6cc"
                         });
                 });
 

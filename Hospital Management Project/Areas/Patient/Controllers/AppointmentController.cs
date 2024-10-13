@@ -4,6 +4,7 @@ using HospitalSystem.Core.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
+using X.PagedList;
 
 
 namespace Hospital_Management_Project.Areas.Appoint.Controllers
@@ -31,6 +32,14 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
         {
             var app= await _IAppointmentService.GetAllAppointmentsAsync();
             return View(app);
+        }
+        public async Task<IActionResult> IndexTopatient(int? page)
+        {
+            int pageNum = page ?? 1;
+            int pageSize = 4;
+            var app = await _IAppointmentService.GetAllAppointmentsAsync();
+            var pagenatedapp=app.ToPagedList(pageNum, pageSize);
+            return View(pagenatedapp);
         }
         public async Task<IActionResult> Details(string id)
         {

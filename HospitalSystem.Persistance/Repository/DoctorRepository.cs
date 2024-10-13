@@ -40,7 +40,7 @@ namespace HospitalSystem.Persistance.Repository
 
         public async Task<IEnumerable<Doctor>> GetAllEntityAsync()
         {
-            return await _context.Doctors.ToListAsync();
+            return await _context.Doctors.Include(p=>p.Department).ToListAsync();
         }
 
         public async Task<Doctor?> GetEntityByIdAsync(string id)

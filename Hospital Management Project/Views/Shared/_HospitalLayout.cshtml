@@ -1,4 +1,12 @@
 ﻿@inject UserManager<ApplicationUser> UserManager
+@{
+	ApplicationUser? user = null;
+
+	if (User.Identity.IsAuthenticated)
+	{
+		user = await UserManager.GetUserAsync(User);
+	}
+}
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
@@ -73,8 +81,31 @@
 						<div class="col-lg-6 col-md-5 col-12">
 							<!-- Contact -->
 							<ul class="top-link">
+							@if (User.Identity.IsAuthenticated) // Check if the user is authenticated
+							{
+								<div class="profile-pic">
+									@if (User.IsInRole("Nurse"))
+									{
+										<a asp-area="Nurses" asp-controller="Profile" asp-action="Index">
+											<img src="@(user != null && user.Img != null ? Url.Content("~/" + user.Img) : Url.Content("~/img/person.png"))" alt="Profile Picture">
 
-								
+										</a>
+									}
+									else if(User.IsInRole("Doctor")){
+										<a asp-area="Doctors" asp-controller="Profile" asp-action="Index">
+											<img src="@(user != null && user.Img != null ? Url.Content("~/" + user.Img) : Url.Content("~/img/person.png"))" alt="Profile Picture">
+
+										</a>
+									}
+									else
+									{
+										<img src="@(user != null && user.Img != null ? Url.Content("~/" + user.Img) : Url.Content("~/img/person.png"))" alt="Profile Picture">
+
+									}
+
+								</div>
+							}
+
 							@await Html.PartialAsync("_LoginPartial")
 
 							</ul>
@@ -113,21 +144,31 @@
 									<nav class="navigation">
 										<ul class="nav menu">
 											<li><a asp-action="Index" class="active" asp-controller="Home" asp-area="">Home</a></li>
-
-											@if (User.IsInRole("Doctor"))
+											<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
+										
+											@if (User.IsInRole("Doctor") || User.IsInRole("Nurse"))
 											{
-											   <li><a asp-area="Doctors" asp-action="Index" asp-controller="Profile">Profile</a></li>
-											   <li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
+												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
 												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
 
 											}
-											else if(User.IsInRole("Admin"))
+											else if (User.IsInRole("Patient"))
 											{
-											<li><a asp-controller="Patient" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
+												
+											<li><a asp-area="Patient" asp-action="IndexTopatient" asp-controller="Appointment"> Appointments </a></li>
+											<li><a asp-area="Patient" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
+											}
+											else if(User.IsInRole("Admin"))
+												{
+												<li><a asp-controller="Patient" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
+
+											}
+											else
+											{
+												<li><a asp-controller="ContactUs" asp-action="index" asp-area="">Contact Us</a></li>
 
 											}
 
-										   <li><a asp-controller="ContactUs" asp-action="index"  asp-area="">Contact Us</a></li>
 										<li><a asp-controller="News" asp-action="index" asp-area=""> News</a></li>
 										<li><a asp-controller="Feedback" asp-action="Index" asp-area=""> Feedbacks</a></li>
 
@@ -241,7 +282,21 @@
 			<!--/ End Copyright -->
 		</footer>
 		<!--/ End Footer Area -->
-		
+		<style>
+		.profile-pic {
+			width: 50px; /* عرض الدائرة */
+			height: 50px; /* ارتفاع الدائرة */
+			border-radius: 50%; /* يجعل الصورة دائرية */
+			overflow: hidden; /* يخفي الأجزاء الزائدة من الصورة */
+			border: 2px solid #ccc; /* حدود الدائرة */
+			margin-left:40px
+		}
+
+			.profile-pic img {
+				width: 100%; /* يضمن أن الصورة تملأ الدائرة */
+				height: auto; /* يحافظ على نسبة العرض إلى الارتفاع */
+			}
+		</style>
 		<!-- jquery Min JS -->
         <script src="~/js/jquery.min.js"></script>
 		<!-- jquery Migrate JS -->

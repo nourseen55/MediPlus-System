@@ -27,7 +27,7 @@ namespace HospitalSystem.Core.ViewModels
         public string? PhoneNumber { get; set; }
         public string? DoctorID { get; set; }
         public string? DepartmentID { get; set; }
-        public  IEnumerable<Departments>? Departments { get; set; }
+        public  IEnumerable<Departments>? Departmentss { get; set; }
         public IEnumerable<Doctor>? Doctors { get; set; }
     }
 }

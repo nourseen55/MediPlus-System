@@ -1,6 +1,7 @@
 using HospitalSystem.Application.IServices;
 using HospitalSystem.Application.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace Hospital_Management_Project.Controllers
 {
@@ -8,14 +9,16 @@ namespace Hospital_Management_Project.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IDepartmentService _departmentService;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger,IDepartmentService departmentService)
+        public HomeController(ILogger<HomeController> logger,IDepartmentService departmentService,UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _departmentService = departmentService;
+            _userManager = userManager;
         }
-
-        public async Task< IActionResult> Index()
+		
+		public async Task< IActionResult> Index()
         {
             var department=await _departmentService.GetAllDepartmentsAsync();
 			return View(department);

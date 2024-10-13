@@ -8,11 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HospitalSystem.Persistance.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:HospitalSystem.Persistance/Migrations/20241012195843_init.cs
-    public partial class init : Migration
-========
-    public partial class nnn : Migration
->>>>>>>> 2404d73acbe551eec4fd5ec25ff9f363e61b5993:HospitalSystem.Persistance/Migrations/20241012193145_nnn.cs
+    public partial class nnh : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -425,36 +421,21 @@ namespace HospitalSystem.Persistance.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:HospitalSystem.Persistance/Migrations/20241012195843_init.cs
-                    { "0f3d9d32-7b4c-4527-91e5-8e55f8554603", null, "Nurse", "NURSE" },
-                    { "21bff96a-aaa5-4b33-94ae-43918902216f", null, "Doctor", "DOCTOR" },
-                    { "b57e8c1f-a29b-45b6-ba76-06d54edc54e3", null, "Patient", "PATIENT" },
-                    { "bd8bf413-3283-42d7-bfa6-87fcce075e7f", null, "Admin", "ADMIN" }
-========
-                    { "226ffbac-e5db-49f0-8708-724ee92f0fda", null, "Doctor", "DOCTOR" },
-                    { "348dd507-ebb6-4d3d-be92-b89d2a49ca11", null, "Admin", "ADMIN" },
-                    { "6ab2f1fb-6fd8-47b6-a88d-14f926ce84dc", null, "Nurse", "NURSE" },
-                    { "71e06b99-6396-46aa-8cf2-4bc95e99f0c3", null, "Patient", "PATIENT" }
->>>>>>>> 2404d73acbe551eec4fd5ec25ff9f363e61b5993:HospitalSystem.Persistance/Migrations/20241012193145_nnn.cs
+                    { "188c2140-dfb7-4802-97ea-f13d49201bb8", null, "Patient", "PATIENT" },
+                    { "3ad342de-f79b-454c-ab2d-4c340250a560", null, "Nurse", "NURSE" },
+                    { "5b0ccf3d-1ca0-4d3c-8e89-bc3cfc0be6cc", null, "Admin", "ADMIN" },
+                    { "c41d5cc4-6b53-4d58-86c7-13dfce079b2a", null, "Doctor", "DOCTOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Country", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "Gender", "Img", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "ZipCode" },
-<<<<<<<< HEAD:HospitalSystem.Persistance/Migrations/20241012195843_init.cs
-                values: new object[] { "ccee3fc8-777a-4204-902f-49c5c21409e2", 0, null, "5ab5c9a9-a87c-4402-a9e5-0f9eba366fd6", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEAKzHCV4yd6pE2VZ7IOeR+XxJT/v3GclsMV5KBXFj+oMDdn9FgQrucYjMoqPaEebPg==", null, false, "fb019775-b2ab-421e-bf58-94d42d0972d4", false, "admin@admin.com", null });
-========
-                values: new object[] { "fd29f7f9-e735-4bd1-86d4-3a174eeb0f24", 0, null, "bb19e497-28ab-4a74-b850-01978586c64f", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEEEHzvHpDzcFd86WfRFC31XE3DJREGIbmjab5/Co/y1jTV2p+igoOkCyidq4jKXjkw==", null, false, "45fbc1d8-ce03-4d04-bc5d-08e3c3505c70", false, "admin@admin.com", null });
->>>>>>>> 2404d73acbe551eec4fd5ec25ff9f363e61b5993:HospitalSystem.Persistance/Migrations/20241012193145_nnn.cs
+                values: new object[] { "71ce38a9-e72d-4209-9c36-cfcf1dbf2519", 0, null, "4af67a64-bbe1-4d79-98f1-83f9da8a5b9b", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEMt94JbZ4FwfnI/ymddD2wvPyTw7693hWLBeco9ypraN2TuOgTewhz0hv1F/f4keGA==", null, false, "ac551d82-b912-48e0-861f-ba55c6ab0957", false, "admin@admin.com", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-<<<<<<<< HEAD:HospitalSystem.Persistance/Migrations/20241012195843_init.cs
-                values: new object[] { "bd8bf413-3283-42d7-bfa6-87fcce075e7f", "ccee3fc8-777a-4204-902f-49c5c21409e2" });
-========
-                values: new object[] { "348dd507-ebb6-4d3d-be92-b89d2a49ca11", "fd29f7f9-e735-4bd1-86d4-3a174eeb0f24" });
->>>>>>>> 2404d73acbe551eec4fd5ec25ff9f363e61b5993:HospitalSystem.Persistance/Migrations/20241012193145_nnn.cs
+                values: new object[] { "5b0ccf3d-1ca0-4d3c-8e89-bc3cfc0be6cc", "71ce38a9-e72d-4209-9c36-cfcf1dbf2519" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointment_DepartmentId",

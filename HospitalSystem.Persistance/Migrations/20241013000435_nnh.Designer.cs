@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalSystem.Persistance.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241012163117_department")]
-    partial class department
+    [Migration("20241013000435_nnh")]
+    partial class nnh
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -123,9 +123,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "22e7cd88-254d-4d27-a2c9-29e6586c8ee0",
+                            Id = "71ce38a9-e72d-4209-9c36-cfcf1dbf2519",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4264f990-d8b7-4704-a8cd-1b6375a83225",
+                            ConcurrencyStamp = "4af67a64-bbe1-4d79-98f1-83f9da8a5b9b",
                             DateOfBirth = new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
@@ -135,9 +135,9 @@ namespace HospitalSystem.Persistance.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECtXOsGhb8eH1/9laKqZSVmpMGeKhEFd6F2bmeDctZIHBuClQAZiYschDTyVO90f/A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMt94JbZ4FwfnI/ymddD2wvPyTw7693hWLBeco9ypraN2TuOgTewhz0hv1F/f4keGA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4039a117-dadf-4667-9786-ee54b3e73a65",
+                            SecurityStamp = "ac551d82-b912-48e0-861f-ba55c6ab0957",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -406,25 +406,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "19c5a0c3-3552-468f-8498-3689331da259",
+                            Id = "c41d5cc4-6b53-4d58-86c7-13dfce079b2a",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "6c27ecca-ce21-414b-9808-b1c05fe4d37a",
+                            Id = "3ad342de-f79b-454c-ab2d-4c340250a560",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         },
                         new
                         {
-                            Id = "33e3582a-4d10-40d9-a2fa-a3539d93f809",
+                            Id = "188c2140-dfb7-4802-97ea-f13d49201bb8",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "f94d5f17-7588-4c66-806c-b003c10fb5d0",
+                            Id = "5b0ccf3d-1ca0-4d3c-8e89-bc3cfc0be6cc",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -519,8 +519,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "22e7cd88-254d-4d27-a2c9-29e6586c8ee0",
-                            RoleId = "f94d5f17-7588-4c66-806c-b003c10fb5d0"
+                            UserId = "71ce38a9-e72d-4209-9c36-cfcf1dbf2519",
+                            RoleId = "5b0ccf3d-1ca0-4d3c-8e89-bc3cfc0be6cc"
                         });
                 });
 

@@ -144,7 +144,7 @@
 									<nav class="navigation">
 										<ul class="nav menu">
 											<li><a asp-action="Index" class="active" asp-controller="Home" asp-area="">Home</a></li>
-
+										<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 										@if (User.IsInRole("Doctor") || User.IsInRole("Nurse"))
 											{
 											   <li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>

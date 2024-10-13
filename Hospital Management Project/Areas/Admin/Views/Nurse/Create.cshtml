@@ -93,7 +93,7 @@
                                 <label asp-for="DepartmentID" class="control-label">Department</label>
                                 <select asp-for="DepartmentID" class="form-control" id="DepartmentSelect">
                                     <option value="">Select Department</option>
-                                    @foreach (var department in Model.Departments)
+                                    @foreach (var department in Model.Departmentss)
                                     {
                                         <option value="@department.Id">@department.DepartmentName</option>
                                     }

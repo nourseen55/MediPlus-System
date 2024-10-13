@@ -7,7 +7,7 @@
 <div class="parent" style="min-height:2700px;">
     <div class="content">
         <div class="container">
-            <br /><br /><br />
+            <br />
             <div class="form-container">
                 <h3 class="form-header fw-semibold my-3">Medical Record Details</h3>
                 <div class="line my-2"></div>
@@ -17,25 +17,21 @@
                         <div class="d-flex gap-2 justify-content-between">
                             <div class="one">
                                 <input type="text" class="form-control" value="@Model.Patient.FirstName" disabled>
-                                <label class="name">First Name</label>
                             </div>
                             <div class="one pl-4">
                                 <input type="text" class="form-control" value="@Model.Patient.LastName" disabled>
-                                <label class="name">Last Name</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group col-md-6">
                         <label>Date of Birth</label>
                         <input type="text" class="form-control" value="@Model.Patient.DateOfBirth.ToShortDateString()" disabled>
-                        <label class="name">Date</label>
                     </div>
                 </div>
 
                 <div class="form-group my-5">
                     <label class="my-1">Address <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" value="@Model.Patient.City" disabled>
-                    <label class="name">Street Address</label>
                 </div>
 
                 <div class="row">
@@ -53,12 +49,10 @@
                     <div class="form-group col-md-6 my-3">
                         <label for="address" class="my-2">City <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" value="@Model.Patient.City" disabled>
-                        <label class="name">City</label>
                     </div>
                     <div class="form-group col-md-6 my-3">
                         <label for="address" class="my-2">Zip Code <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" value="@Model.Patient.ZipCode" disabled>
-                        <label class="name">Postal / Zip Code</label>
                     </div>
                 </div>
 
@@ -214,7 +208,7 @@
                     <label class="my-3">Is the patient diagnosed with chronic disease?</label>
                     <div>
                         <label>
-                            <input type="radio" asp-for="PatientChronicDisease" value="true" disabled/> Yes
+                            <input type="radio" asp-for="PatientChronicDisease" value="true" disabled /> Yes
                         </label>
                         <label>
                             <input type="radio" asp-for="PatientChronicDisease" value="false" disabled /> No
@@ -263,5 +257,68 @@
                 </div>
             </div>
         </div>
+        @if (User.IsInRole("Doctor"))
+        {
+            <div class="my-5 text-center">
+                <a class="btn btn-success fw-semibold" href="@Url.Action("RecordsByPatient", "MedicalRecord", new {id=Model.PatientID, area = "Doctors" })">Back</a>
+            </div>
+        }
+        else if (User.IsInRole("Patient"))
+        {
+            <div class="my-5 text-center">
+                <a class="btn btn-success fw-semibold" href="@Url.Action("Index", "MedicalRecord", new { area = "Patient" })">Back</a>
+            </div>
+        }
+
     </div>
 </div>
+
+
+
+<style>
+    .form-container {
+        background-color: white; /* White background for the card */
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+        border: 1px solid #ddd; /* Light grey border */
+        border-radius: 5px; /* Rounded corners for inputs */
+        padding: 10px; /* Padding inside inputs */
+    }
+
+        .form-control:focus {
+            border-color: #007bff; /* Blue border on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue shadow on focus */
+        }
+
+    .bg {
+        background-color: #007bff; /* Background color for table headers */
+    }
+
+    .text-white {
+        color: white; /* White text for table headers */
+    }
+
+    .table th,
+    .table td {
+        padding: 10px; /* Padding for table cells */
+    }
+
+    .btn {
+        background-color: #007bff; /* Button color */
+        border: none; /* No border for button */
+    }
+
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+    .line {
+        height: 2px; /* Line height */
+        background-color: #007bff; /* Line color */
+        border-radius: 5px; /* Rounded corners for line */
+    }
+</style>

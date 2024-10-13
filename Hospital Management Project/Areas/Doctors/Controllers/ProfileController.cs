@@ -20,16 +20,30 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             _doctorService = doctorService;
             _context = context;
         }
-        public async Task<IActionResult> ListOfDoctors(int? page)
+        public async Task<IActionResult> ListOfDoctors(string keyword, int? page)
         {
             int pageNum = page ?? 1;
             int pageSize = 6;
 
             var doctor = await _doctorService.GetAllDoctorsAsync();
-            var PagenatedDoctors = doctor.ToPagedList(pageNum, pageSize);
 
-            return View(PagenatedDoctors);
+            // Convert the keyword to lowercase for case-insensitive searching
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                string lowerCaseKeyword = keyword.ToLower();
+
+                doctor = doctor.Where(d => d.FullName.ToLower().Contains(lowerCaseKeyword) ||
+                                           d.Department.DepartmentName.ToLower().Contains(lowerCaseKeyword));
+            }
+            var doctors = doctor.OrderBy(d => d.FullName).ToPagedList(pageNum, pageSize);
+
+            ViewBag.Keyword = keyword;
+
+            return View(doctors);
         }
+
+
+
 
         //[AllowAnonymous]
         public async Task<IActionResult> Index(string id)

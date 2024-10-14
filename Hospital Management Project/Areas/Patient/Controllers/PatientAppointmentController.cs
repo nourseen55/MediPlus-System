@@ -32,15 +32,6 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
             var app= await _IAppointmentService.GetAllAppointmentsAsync();
             return View(app);
         }
-        public async Task<IActionResult> Details(string id)
-        {
-            var app = await _IAppointmentService.GetAppointmentByIdAsync(id);
-            if (app == null)
-            {
-                return NotFound();
-            }
-            return View(app);
-        }
         [HttpGet]
         public IActionResult Create()
         {

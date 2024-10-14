@@ -36,7 +36,8 @@
                     <span class="dash-widget-bg3"><i class="fa fa-hospital-o" aria-hidden="true"></i></span>
                     <div class="dash-widget-info text-right ml-2">
                         <h3>@ViewBag.DepartmentCount</h3>
-                        <span class="widget-title3">Departments <i class="fa fa-check" aria-hidden="true"></i></span>
+                        <!-- تأكد من أن النص والأيقونة على نفس السطر -->
+                        <span class="widget-title3" style="display: flex; align-items: center;">Departments <i class="fa fa-check" aria-hidden="true" style="margin-left: 5px;"></i></span>
                     </div>
                 </div>
             </div>
@@ -55,16 +56,14 @@
         </div>
     </div>
 
-    <!-- الرسوم البيانية تحت الأيقونات -->
-    <div class="row">
+
+    <div class="row" style="margin-left:50px">
         <div class="col-12 col-md-6 col-lg-6 col-xl-6 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <div class="chart-title">
-                        <h4>Patient Total</h4>
-                        <span class="float-right"><i class="fa fa-caret-up" aria-hidden="true"></i> 15% Higher than Last Month</span>
-                    </div>	
-                    <canvas id="linegraph" width="796" height="397" style="display: block; height: 318px; width: 637px;" class="chartjs-render-monitor"></canvas>
+                    <h4>Patient Total</h4>
+                    <span class="float-right"><i class="fa fa-caret-up" aria-hidden="true"></i> 15% Higher than Last Month</span>
+                    <img src="~/Images/Dashboard/1.jpg" alt="Patient Total Image" style="width: 100%; height: auto; margin-bottom: 15px;">
                 </div>
             </div>
         </div>
@@ -72,21 +71,24 @@
         <div class="col-12 col-md-6 col-lg-6 col-xl-6 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <div class="chart-title">
-                        <h4>Patients In</h4>
-                        <div class="float-right">
-                            <ul class="chat-user-total" style="list-style-type: none; padding: 0; margin: 0;">
-                                <li style="display: inline; margin-right: 10px;"><i class="fa fa-circle current-users" aria-hidden="true"></i> ICU</li>
-                                <li style="display: inline; margin-right: 10px;"><i class="fa fa-circle old-users" aria-hidden="true"></i> OPD</li>
-                            </ul>
-                        </div>
-                    </div>	
-                    <canvas id="bargraph" width="796" height="397" style="display: block; height: 318px; width: 637px;" class="chartjs-render-monitor"></canvas>
+                    <h4>Patients In</h4>
+                    <div class="float-right">
+                        <ul class="chat-user-total" style="list-style-type: none; padding: 0; margin: 0;">
+                            <li style="display: inline; margin-right: 10px;"><i class="fa fa-circle current-users" aria-hidden="true"></i> ICU</li>
+                            <li style="display: inline; margin-right: 10px;"><i class="fa fa-circle old-users" aria-hidden="true"></i> OPD</li>
+                        </ul>
+                    </div>
+                    <!-- إضافة الصورة فوق الرسم البياني -->
+                    <img src="~/Images/Dashboard/2.png" alt="Patients In Image" style="width: 100%; height: auto; margin-bottom: 15px;">
+                    
+                   
                 </div>
             </div>
         </div>
     </div>
+
 </div>
+@await Html.PartialAsync("UpcomingAppointmentsPartial")
 
 <style>
     .dash-widget {
@@ -111,55 +113,4 @@
 <!-- تأكد من تضمين مكتبة Chart.js في رأس الصفحة أو قبل إغلاق وسم </body> -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
-    // الكود الخاص بالرسوم البيانية
-    const ctxLine = document.getElementById('linegraph').getContext('2d');
-    const lineChart = new Chart(ctxLine, {
-        type: 'line',
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'Patients Total',
-                data: [12, 19, 3, 5, 2, 3, 10],
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
 
-    const ctxBar = document.getElementById('bargraph').getContext('2d');
-    const barChart = new Chart(ctxBar, {
-        type: 'bar',
-        data: {
-            labels: ['ICU', 'OPD'],
-            datasets: [{
-                label: 'Patients In',
-                data: [12, 19],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script>

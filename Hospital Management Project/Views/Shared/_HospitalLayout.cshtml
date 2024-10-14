@@ -154,17 +154,13 @@
 											}
 											else if (User.IsInRole("Patient"))
 											{
-<<<<<<< HEAD
-											<li><a asp-controller="Dashboard" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
-=======
 												
 											<li><a asp-area="Patient" asp-action="IndexTopatient" asp-controller="Appointment"> Appointments </a></li>
 											<li><a asp-area="Patient" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
 											}
 											else if(User.IsInRole("Admin"))
-												{
-												<li><a asp-controller="Patient" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
->>>>>>> 537e6887efbe71e4e7b951ee9bbb1598d8b6226b
+											{
+											<li><a asp-controller="Dashboard" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
 
 											}
 											else

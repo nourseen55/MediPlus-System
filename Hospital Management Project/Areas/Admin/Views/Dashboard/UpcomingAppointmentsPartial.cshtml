@@ -1,0 +1,51 @@
+﻿<div class="col-12 col-md-6 col-lg-5 col-xl-4" style="margin-left: 13%; margin-top: 20px;">
+    <!-- تحسين المسافات -->
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title d-inline-block">Upcoming Appointments</h4>
+            <a href="/Appointments/Index" class="btn btn-primary float-right">View all</a>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead class="d-none">
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Doctor Name</th>
+                            <th>Timing</th>
+                            <th class="text-right">Status</th>
+                        </tr>
+                    </thead>
+                    @* <tbody>
+                        <!-- Loop through appointments -->
+                        @foreach (var appointment in Model)
+                        {
+                            <tr>
+                                <td style="min-width: 200px;">
+                                    <a class="avatar" href="/Patients/Details/@appointment.PatientID">@appointment.Patient.FirstName[0]</a>
+                                    <h2>
+                                        <a href="/Patients/Details/@appointment.PatientID">
+                                            @appointment.Patient.FirstName @appointment.Patient.LastName
+                                            <span>@appointment.Patient.City, @appointment.Patient.Country</span>
+                                        </a>
+                                    </h2>
+                                </td>
+                                <td>
+                                    <h5 class="time-title p-0">Appointment With</h5>
+                                    <p>@appointment.Doctor.FirstName @appointment.Doctor.LastName</p>
+                                </td>
+                                <td>
+                                    <h5 class="time-title p-0">Timing</h5>
+                                    <p>@appointment.StartDateTime?.ToString("hh:mm tt")</p>
+                                </td>
+                                <td class="text-right">
+                                    <a href="/Appointments/Details/@appointment.AppointmentID" class="btn btn-outline-primary take-btn">Take up</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody> *@
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

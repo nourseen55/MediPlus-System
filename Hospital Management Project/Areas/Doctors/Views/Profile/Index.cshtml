@@ -2,42 +2,42 @@
  @inject UserManager<ApplicationUser> UserManager
 
 
-<style>
-    .header {
-        background-image: linear-gradient(rgba(48, 129, 209, 0.829), rgba(48, 129, 209, 0.927)), url('/img/bread-bg.077ec224.jpg');
-        background-size: cover;
-        position: relative;
-        height: 40vh;
-        background-position: center;
-        background-repeat:no-repeat;
-    }
+ <style>
+     .header {
+         background-image: linear-gradient(rgba(48, 129, 209, 0.829), rgba(48, 129, 209, 0.927)), url('/img/bread-bg.077ec224.jpg');
+        background-repeat: no-repeat;
+         background-size: cover;
+         position: relative;
+         height: 35vh;
+         background-position: center;
+     }
 
-    .info {
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+     .info {
+         background-color: #fff;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+     }
 
-    .line {
-        width: 100%;
-        height: 1px;
-        background-color: rgba(128, 128, 128, 0.299);
-    }
+     .line {
+         width: 100%;
+         height: 1px;
+         background-color: rgba(128, 128, 128, 0.299);
+     }
 
-    .dc {
-        flex-direction: row;
-        gap: 10px;
-    }
+     .dc {
+         flex-direction: row;
+         gap: 10px;
+     }
 
-    .main {
-        color: #2f60bd;
-    }
+     .main {
+         color: #2f60bd;
+     }
 </style>
 
 <header class="header bg-primary text-white text-center py-5">
     <h1>Doctor Details</h1>
     <div class="d-flex dc align-items-center justify-content-center text-center">
-        <h6>Home</h6>
+        <h6><a href="/Home/Index" style="text-decoration:none; color:white">Home</a></h6>
         <i class="fa-solid fa-angle-right fa-sm"></i>
         <h6>Doctor Details</h6>
     </div>
@@ -64,7 +64,7 @@
                         <a class="btn btn-outline-secondary btn-floating m-1" href="#" role="button">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a class="btn btn-outline-secondary btn-floating m-1" href="#" role="button">
+                        <a class="btn btn-outline-secondary btn-floating m-1" href="mailto:@Model.Email" role="button">
                             <i class="fab fa-google-plus-g"></i>
                         </a>
                         <a class="btn btn-outline-secondary btn-floating m-1" href="#" role="button">
@@ -94,16 +94,10 @@
             </div>
         </div>
 
-        <div class="col-md-7 mt-3">
+        <div class="col-md-7 main">
             <h3>@Model.FullName</h3>
-            <h5 class="text-muted">@Model.Department</h5>
-            <p class="text-muted">@Model.Department</p>
-
-            
-            <h5 class="main">Biography</h5>
-            <p class="text-muted">
-                
-            </p>
+             <h5 class="text-muted">@Model.Department.DepartmentName</h5>
+             <p class="text-muted">@Model.Department.Description</p>
 
             <h5 class="main">Education</h5>
             <div class="experience-box">

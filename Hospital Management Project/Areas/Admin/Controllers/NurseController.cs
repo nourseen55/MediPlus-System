@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Numerics;
 
 namespace Hospital_Management_Project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = nameof(UserRoles.Admin))]
     public class NurseController : Controller
     {
         private readonly INurseService _nurseService;

@@ -12,6 +12,7 @@ using static System.Net.Mime.MediaTypeNames;
 namespace Hospital_Management_Project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = nameof(UserRoles.Admin))]
     public class DoctorController : Controller
     {
         private readonly IDoctorService _doctorService;

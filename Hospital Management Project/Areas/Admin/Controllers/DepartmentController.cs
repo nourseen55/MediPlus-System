@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Hospital_Management_Project.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = nameof(UserRoles.Admin))]
     public class DepartmentController : Controller
     {
        private readonly IDepartmentService _departmentService;

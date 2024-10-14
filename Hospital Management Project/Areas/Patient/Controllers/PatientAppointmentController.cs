@@ -30,31 +30,13 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var app= await _IAppointmentService.GetAllAppointmentsAsync();
-            return View(app);
-        }
-<<<<<<< HEAD:Hospital Management Project/Areas/Patient/Controllers/PatientAppointmentController.cs
-=======
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        public async Task<IActionResult> IndexTopatient(int? page)
-        {
-            int pageNum = page ?? 1;
-            int pageSize = 4;
-            var app = await _IAppointmentService.GetAllAppointmentsAsync();
-            var pagenatedapp=app.ToPagedList(pageNum, pageSize);
-            return View(pagenatedapp);
-        }
-        public async Task<IActionResult> Details(string id)
-        {
-            var app = await _IAppointmentService.GetAppointmentByIdAsync(id);
-            if (app == null)
-            {
-                return NotFound();
-            }
-            return View(app);
-        }
+			// Fetch the appointments for the logged-in patient
+			var appointments = await _IAppointmentService.GetAppointmentsByPatientIdAsync(userId);
 
->>>>>>> be68106f708441db33865f5dae7568eea0d5c64e:Hospital Management Project/Areas/Patient/Controllers/AppointmentController.cs
+			return View(appointments);
+		}
         [HttpGet]
         public IActionResult Create()
         {

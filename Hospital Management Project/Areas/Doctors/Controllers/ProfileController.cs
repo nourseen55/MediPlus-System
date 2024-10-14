@@ -25,22 +25,24 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             int pageNum = page ?? 1;
             int pageSize = 6;
 
+            // Fetch all doctors asynchronously
             var doctor = await _doctorService.GetAllDoctorsAsync();
 
             // Convert the keyword to lowercase for case-insensitive searching
             if (!string.IsNullOrEmpty(keyword))
             {
                 string lowerCaseKeyword = keyword.ToLower();
-
-                doctor = doctor.Where(d => d.FullName.ToLower().Contains(lowerCaseKeyword) ||
-                                           d.Department.DepartmentName.ToLower().Contains(lowerCaseKeyword));
+                doctor = doctor.Where(d => d.FullName.ToLower().StartsWith(lowerCaseKeyword) ||
+                                           d.Department.DepartmentName.ToLower().StartsWith(lowerCaseKeyword));
             }
+
             var doctors = doctor.OrderBy(d => d.FullName).ToPagedList(pageNum, pageSize);
 
             ViewBag.Keyword = keyword;
 
             return View(doctors);
         }
+
 
         //[AllowAnonymous]
         public async Task<IActionResult> Index(string id)

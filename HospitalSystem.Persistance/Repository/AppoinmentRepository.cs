@@ -55,7 +55,7 @@ namespace HospitalSystem.Persistance.Repository
         }
 		public async Task<IEnumerable<Appointment>> GetAppointmentsByPatientIdAsync(string patientId)
 		{
-			return await _context.Set<Appointment>()
+			return await _context.Set<Appointment>().Include(p=>p.Doctor).Include(p=>p.Department)
 								 .Where(a => a.PatientID == patientId)
 								 .ToListAsync();
 		}

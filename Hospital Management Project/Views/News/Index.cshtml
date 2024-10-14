@@ -3,6 +3,24 @@
 
 @model X.PagedList.IPagedList<NewsPost>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Our News</h2>
+                    <ul class="bread-list">
+                        <li><a href="~/Home">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">News</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <div id="main-content" class="blog-page">
     <div class="container">
@@ -62,20 +80,24 @@
                         </div>
                     }
                 </div>
+                
+            </div>
+            <div style="margin-top: 20px; text-align: center;">
+                @if (Model.HasPreviousPage)
+                {
+                    <a href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" class="btn btn-outline-primary">Previous</a>
+                }
+                @if (Model.HasNextPage)
+                {
+                    <a href="@Url.Action("Index", new { page = Model.PageNumber + 1 })" class="btn btn-outline-primary">See More</a>
+                }
             </div>
         </div>
+
+        
     </div>
 </div>
-<div style="margin-top: 20px; text-align: center;">
-    @if (Model.HasPreviousPage)
-    {
-        <a href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" class="btn btn-outline-primary">Previous</a>
-    }
-    @if (Model.HasNextPage)
-    {
-        <a href="@Url.Action("Index", new { page = Model.PageNumber + 1 })" class="btn btn-outline-primary">See More</a>
-    }
-</div>
+
 @if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole("Nurse") || User.IsInRole(UserRoles.Doctor.ToString()))
 {
     <div class="card-form-button">

@@ -1,4 +1,6 @@
 ﻿
+using HospitalSystem.Core.IRepository;
+
 namespace HospitalSystem.Persistance.Repository
 {
     public class AppointmentRepository : IAppointmentRepository
@@ -51,5 +53,11 @@ namespace HospitalSystem.Persistance.Repository
                 .Distinct()
                 .ToListAsync();
         }
-    }
+		public async Task<IEnumerable<Appointment>> GetAppointmentsByPatientIdAsync(string patientId)
+		{
+			return await _context.Set<Appointment>()
+								 .Where(a => a.PatientID == patientId)
+								 .ToListAsync();
+		}
+	}
 }

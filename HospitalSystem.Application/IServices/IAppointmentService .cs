@@ -8,5 +8,7 @@
         Task UpdateAppointmentAsync(Appointment Appointment);
         Task DeleteAppointmentAsync(string id);
         Task<IEnumerable<Patient>> GetPatientsByDoctorAsync(string doctorId);
-    }
+		Task<IEnumerable<Appointment>> GetAppointmentsByPatientIdAsync(string patientId);
+
+	}
 }

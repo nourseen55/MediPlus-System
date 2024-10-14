@@ -1,0 +1,75 @@
+﻿@model X.PagedList.IPagedList<MedicalRecord>
+<br />
+<br />
+<style>
+    .card {
+        border-radius: 15px; /* Adjust the border radius as needed */
+        height: 350px; /* Set the height for the card */
+        transition: transform 0.2s; /* Smooth transition for the hover effect */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    }
+
+        .card:hover {
+            transform: translateY(-10px); /* Move the card up when hovered */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+        }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Space out the content */
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center; /* Center the button */
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        @foreach (var record in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <!-- Doctor Photo, Name, and Area -->
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="~/@record.Doctor.Img" alt="Doctor Photo" class="rounded-circle" width="50" height="50" />
+                            <div class="ml-3">
+                                <h5 class="mb-0">Doctor: @record.Doctor.FullName</h5> <!-- Specifying that it's a doctor name -->
+                            </div>
+                        </div>
+
+                        <!-- Date of Entry -->
+                        <p><strong>Diagnosis:</strong> @record.Diagnosis</p>
+                        <p><strong>Treatment:</strong> @record.Treatment</p> <!-- Display treatment details -->
+                        <div class="feedback-date" style="font-size: 14px; color: #888;">
+                            <p><strong>Date of Entry: </strong><i class="fa fa-calendar"></i> @record.DateOfEntry.ToString("dddd, MMMM d,h:mm tt")</p>
+                        </div>
+                        
+
+                        <!-- Button Container -->
+                        <div class="button-container">
+                            <a href="@Url.Action("Details", "MedicalRecord", new { area = "Doctors", id = record.Id })" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<br />
+<!-- Pagination controls -->
+<div class="pagination-container" style="text-align: center;">
+    @if (Model.HasPreviousPage)
+    {
+        <a href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" class="btn btn-outline-primary">Previous</a>
+    }
+    @if (Model.HasNextPage)
+    {
+        <a href="@Url.Action("Index", new { page = Model.PageNumber + 1 })" class="btn btn-outline-primary">See More</a>
+    }
+</div>
+<br />

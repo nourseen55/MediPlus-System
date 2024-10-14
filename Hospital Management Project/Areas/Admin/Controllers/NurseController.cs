@@ -54,7 +54,7 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         {
             var model = new NurseVM
             {
-                Departments = await _departmentService.GetAllDepartmentsAsync(),
+                Departmentss = await _departmentService.GetAllDepartmentsAsync(),
                 Doctors = await _DoctorService.GetAllDoctorsAsync()
             };
             return View(model);
@@ -82,7 +82,7 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            model.Departments = await _departmentService.GetAllDepartmentsAsync();
+            model.Departmentss = await _departmentService.GetAllDepartmentsAsync();
             return View(model);
         }
 
@@ -90,7 +90,7 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            var nurse = await _nurseService.GetNurseByIdAsync(id);
+            Nurse nurse = await _nurseService.GetNurseByIdAsync(id);
             if (nurse == null)
             {
                 return NotFound();

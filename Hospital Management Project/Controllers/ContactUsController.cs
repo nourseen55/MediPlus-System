@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hospital_Management_Project.Controllers
 {
-	[Authorize]
 	public class ContactUsController : Controller
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
@@ -21,6 +20,10 @@ namespace Hospital_Management_Project.Controllers
         public async Task<IActionResult> Index()
 		{
 			var user = await _userManager.GetUserAsync(User);
+			if(user == null)
+			{
+				return View(new ContactFormVM());
+			}
 			ContactFormVM contactForm =  _mapper.Map<ContactFormVM>(user);
 			return View(contactForm);
 		}

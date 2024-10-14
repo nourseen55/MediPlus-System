@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Hospital_Management_Project.Areas.Doctors.Controllers{
 
     [Area("Doctors")]
-	[Authorize(Roles = "Doctor,Nurse")]
+	
 	public class MedicalRecordController : Controller
     {
         private readonly IMedicalRecordService _medicalRecordService;
@@ -29,7 +29,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
             
             
         }
-
+        [Authorize(Roles = "Doctor,Nurse")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -50,7 +50,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
 			var patients = await _appointmentService.GetPatientsByDoctorAsync(doctorId);
             return View(patients);
         }
-
+        [Authorize(Roles = "Doctor,Nurse")]
         [HttpGet]
         public async Task<IActionResult> RecordsByPatient(string id)
         {
@@ -58,7 +58,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
             ViewBag.PatientId = id;
             return View(records);
         }
-
+        [Authorize(Roles = "Doctor")]
         [HttpGet]
         public async Task<IActionResult> Create(string patientId)
         {
@@ -96,7 +96,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
             }
             return View(record);
         }
-
+        [Authorize(Roles = "Doctor")]
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
@@ -130,7 +130,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
             }
             return View(record);
         }
-
+        [Authorize(Roles = "Doctor")]
         [HttpDelete]
         public async Task<IActionResult> Delete(string id)
         {
@@ -145,7 +145,6 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
 
             return Json(new {success = true, message = "Medical Record has been Deleted Successfully"});
         }
-
         public async Task<IActionResult> Details(string id)
         {
             MedicalRecord? record = await _medicalRecordService.GetMedicalRecordAndPatientDetails(id);

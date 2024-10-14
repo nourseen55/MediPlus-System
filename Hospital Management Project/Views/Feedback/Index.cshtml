@@ -67,6 +67,17 @@
         }
 
         <!-- Pagination controls -->
+        <div class="pagination-container" style="text-align: center;">
+            @if (Model.HasPreviousPage)
+            {
+                <a href="@Url.Action("Index", new { page = Model.PageNumber - 1 })" class="btn btn-outline-primary">Previous</a>
+            }
+            @if (Model.HasNextPage)
+            {
+                <a href="@Url.Action("Index", new { page = Model.PageNumber + 1 })" class="btn btn-outline-primary">See More</a>
+            }
+        </div>
+
      
     }
     else

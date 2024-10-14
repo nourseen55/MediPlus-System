@@ -8,12 +8,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <header>
-                <img src="~/img/logout.jpg" class="img-fluid my-2" alt="Logout Image" style="width:450px;height:450px;"/>
-                    <form class="form-inline d-flex justify-content-center" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                        <button type="submit" class="nav-link btn btn-primary text-white">Click here to Logout</button>
-                    </form>
+                <img src="~/img/logout.jpg" class="img-fluid my-2" alt="Logout Image" style="width:450px;height:450px;" />
+                <a href="javascript:void(0)" class="nav-link btn btn-primary text-white" onclick="document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+                <form id="logout-form" class="d-none" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                </form>
             </header>
         </div>
     </div>
 </div>
-

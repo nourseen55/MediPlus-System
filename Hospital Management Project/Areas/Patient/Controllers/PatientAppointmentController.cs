@@ -7,11 +7,11 @@ using System.Security.Claims;
 using X.PagedList;
 
 
-namespace Hospital_Management_Project.Areas.Appoint.Controllers
+namespace Hospital_Management_Project.Areas.Patient.Controllers
 {
     [Area("Patient")]
     [Authorize(Roles = nameof(UserRoles.Patient))]
-    public class AppointmentController : Controller
+    public class PatientAppointmentController : Controller
     {
        private readonly IAppointmentService _IAppointmentService;
         private readonly IDoctorService _IDoctorService;
@@ -19,7 +19,7 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
         private readonly IDepartmentService _departmentService;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public AppointmentController(IAppointmentService IAppointmentService, UserManager<ApplicationUser> userManager,IDoctorService IDoctorService, IPatientService IPatientService, IDepartmentService departmentService,ApplicationDbContext Context)
+        public PatientAppointmentController(IAppointmentService IAppointmentService, UserManager<ApplicationUser> userManager,IDoctorService IDoctorService, IPatientService IPatientService, IDepartmentService departmentService,ApplicationDbContext Context)
         {
             _IAppointmentService = IAppointmentService;
             _IDoctorService = IDoctorService;
@@ -33,26 +33,6 @@ namespace Hospital_Management_Project.Areas.Appoint.Controllers
             var app= await _IAppointmentService.GetAllAppointmentsAsync();
             return View(app);
         }
-<<<<<<< HEAD:Hospital Management Project/Areas/Patient/Controllers/PatientAppointmentController.cs
-=======
-        public async Task<IActionResult> IndexTopatient(int? page)
-        {
-            int pageNum = page ?? 1;
-            int pageSize = 4;
-            var app = await _IAppointmentService.GetAllAppointmentsAsync();
-            var pagenatedapp=app.ToPagedList(pageNum, pageSize);
-            return View(pagenatedapp);
-        }
-        public async Task<IActionResult> Details(string id)
-        {
-            var app = await _IAppointmentService.GetAppointmentByIdAsync(id);
-            if (app == null)
-            {
-                return NotFound();
-            }
-            return View(app);
-        }
->>>>>>> 537e6887efbe71e4e7b951ee9bbb1598d8b6226b:Hospital Management Project/Areas/Patient/Controllers/AppointmentController.cs
         [HttpGet]
         public IActionResult Create()
         {

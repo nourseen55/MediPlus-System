@@ -11,7 +11,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 {
     [Area("Patient")]
     [Authorize(Roles = nameof(UserRoles.Patient))]
-    public class PatientAppointmentController : Controller
+    public class AppointmentController : Controller
     {
        private readonly IAppointmentService _IAppointmentService;
         private readonly IDoctorService _IDoctorService;
@@ -19,7 +19,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
         private readonly IDepartmentService _departmentService;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public PatientAppointmentController(IAppointmentService IAppointmentService, UserManager<ApplicationUser> userManager,IDoctorService IDoctorService, IPatientService IPatientService, IDepartmentService departmentService,ApplicationDbContext Context)
+        public AppointmentController(IAppointmentService IAppointmentService, UserManager<ApplicationUser> userManager,IDoctorService IDoctorService, IPatientService IPatientService, IDepartmentService departmentService,ApplicationDbContext Context)
         {
             _IAppointmentService = IAppointmentService;
             _IDoctorService = IDoctorService;
@@ -30,13 +30,22 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
         }
         public async Task<IActionResult> Index()
         {
+<<<<<<< HEAD:Hospital Management Project/Areas/Patient/Controllers/PatientAppointmentController.cs
 			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+=======
+            var app = await _IAppointmentService.GetAllAppointmentsAsync();
+            return View(app);
+        }
+>>>>>>> 7792b3037ee97070d0068123b064c6a9b15d8a23:Hospital Management Project/Areas/Patient/Controllers/AppointmentController.cs
 
 			// Fetch the appointments for the logged-in patient
 			var appointments = await _IAppointmentService.GetAppointmentsByPatientIdAsync(userId);
 
+<<<<<<< HEAD:Hospital Management Project/Areas/Patient/Controllers/PatientAppointmentController.cs
 			return View(appointments);
 		}
+=======
+>>>>>>> 7792b3037ee97070d0068123b064c6a9b15d8a23:Hospital Management Project/Areas/Patient/Controllers/AppointmentController.cs
         [HttpGet]
         public IActionResult Create()
         {

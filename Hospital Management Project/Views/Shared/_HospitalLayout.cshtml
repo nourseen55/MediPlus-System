@@ -167,22 +167,36 @@
 											}
 											else if(User.IsInRole("Patient"))
 											{
+<<<<<<< HEAD
 
 
 											<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 												<li><a asp-area="Patient" asp-action="IndexTopatient" asp-controller="Appointment"> Appointments </a></li>
 												<li><a asp-area="Patient" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
 
+=======
+											<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
+												<li><a asp-area="Patient" asp-action="IndexTopatient" asp-controller="Appointment"> Appointments </a></li>
+												<li><a asp-area="Patient" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
+>>>>>>> 7792b3037ee97070d0068123b064c6a9b15d8a23
 												
 
 											}
 											else if(User.IsInRole("Admin"))
 											{
+<<<<<<< HEAD
 
 
 												<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 												<li><a asp-controller="Dashboard" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
 
+=======
+											<li><a asp-controller="Dashboard" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
+
+												<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
+												<li><a asp-controller="Patient" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
+
+>>>>>>> 7792b3037ee97070d0068123b064c6a9b15d8a23
 
 											}
 											else

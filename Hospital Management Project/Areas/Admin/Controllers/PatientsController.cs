@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Hospital_Management_Project.Areas.Patient.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = nameof(UserRoles.Admin))]
     public class PatientController : Controller
     {
         private readonly IMapper _mapper;

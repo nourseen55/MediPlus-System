@@ -11,7 +11,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 {
     [Area("Patient")]
     [Authorize(Roles = nameof(UserRoles.Patient))]
-    public class PatientAppointmentController : Controller
+    public class AppointmentController : Controller
     {
        private readonly IAppointmentService _IAppointmentService;
         private readonly IDoctorService _IDoctorService;
@@ -19,7 +19,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
         private readonly IDepartmentService _departmentService;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public PatientAppointmentController(IAppointmentService IAppointmentService, UserManager<ApplicationUser> userManager,IDoctorService IDoctorService, IPatientService IPatientService, IDepartmentService departmentService,ApplicationDbContext Context)
+        public AppointmentController(IAppointmentService IAppointmentService, UserManager<ApplicationUser> userManager,IDoctorService IDoctorService, IPatientService IPatientService, IDepartmentService departmentService,ApplicationDbContext Context)
         {
             _IAppointmentService = IAppointmentService;
             _IDoctorService = IDoctorService;
@@ -30,11 +30,9 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var app= await _IAppointmentService.GetAllAppointmentsAsync();
+            var app = await _IAppointmentService.GetAllAppointmentsAsync();
             return View(app);
         }
-<<<<<<< HEAD:Hospital Management Project/Areas/Patient/Controllers/PatientAppointmentController.cs
-=======
 
         public async Task<IActionResult> IndexTopatient(int? page)
         {
@@ -54,7 +52,6 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
             return View(app);
         }
 
->>>>>>> be68106f708441db33865f5dae7568eea0d5c64e:Hospital Management Project/Areas/Patient/Controllers/AppointmentController.cs
         [HttpGet]
         public IActionResult Create()
         {

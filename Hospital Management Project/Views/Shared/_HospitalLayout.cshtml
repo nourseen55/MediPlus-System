@@ -167,24 +167,19 @@
 											}
 											else if(User.IsInRole("Patient"))
 											{
-<<<<<<< HEAD
-=======
 											<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 												<li><a asp-area="Patient" asp-action="IndexTopatient" asp-controller="Appointment"> Appointments </a></li>
 												<li><a asp-area="Patient" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
->>>>>>> be68106f708441db33865f5dae7568eea0d5c64e
 												
 
 											}
 											else if(User.IsInRole("Admin"))
 											{
-<<<<<<< HEAD
 											<li><a asp-controller="Dashboard" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
-=======
+
 												<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 												<li><a asp-controller="Patient" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
 
->>>>>>> be68106f708441db33865f5dae7568eea0d5c64e
 
 											}
 											else

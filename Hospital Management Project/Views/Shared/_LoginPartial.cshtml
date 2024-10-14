@@ -13,9 +13,10 @@
         <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@fullName</a>
     </li>
     <li class="nav-item">
-        <!-- Logout Link triggers POST request via JavaScript -->
-        <a id="logout" class="nav-link text-dark" href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">Logout</a>
-        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" style="display:none;">
+        <a href="javascript:void(0)" style="text-decoration:none;" onclick="document.getElementById('logoutForm').submit();">
+            Logout
+        </a>
+        <form id="logoutForm" method="post" class="d-none" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
         </form>
     </li>
 }

@@ -42,23 +42,21 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             return View(doctors);
         }
 
-
-
-
         //[AllowAnonymous]
         public async Task<IActionResult> Index(string id)
         {
             Doctor doctor = null;
-           
             if (User.IsInRole(UserRoles.Doctor.ToString())){
                 var user = await _userManager.GetUserAsync(User);
-                doctor = _context.Doctors.Include(d => d.Educations).SingleOrDefault(d => d.Id == user.Id);
-            }else if (User.IsInRole(UserRoles.Patient.ToString()))
+                doctor = _context.Doctors.Include(d => d.Educations).Include(d => d.Department).SingleOrDefault(d => d.Id == user.Id);
+            }
+            else if (User.IsInRole(UserRoles.Patient.ToString()))
             {
-                doctor = await _doctorService.GetDoctorByIdAsync(id);
+                doctor = _context.Doctors.Include(d => d.Educations).Include(d => d.Department).SingleOrDefault(d => d.Id == id);
             }
             return View(doctor);
         }
+
         [Authorize(Roles = nameof(UserRoles.Doctor))]
         [HttpGet]
         public async Task<IActionResult> AddEducation()

@@ -87,9 +87,10 @@
 						<div class="col-lg-6 col-md-5 col-12">
 							<!-- Contact -->
 							<ul class="top-link">
+							<div class="d-flex align-items-center">
 							@if (User.Identity.IsAuthenticated) // Check if the user is authenticated
 							{
-								<div class="profile-pic">
+								<div class="profile-pic me-2">
 									@if (User.IsInRole("Nurse"))
 									{
 										<a asp-area="Nurses" asp-controller="Profile" asp-action="Index">
@@ -113,6 +114,7 @@
 							}
 
 							@await Html.PartialAsync("_LoginPartial")
+							</div>
 
 							</ul>
 							<!-- End Contact -->
@@ -150,31 +152,38 @@
 									<nav class="navigation">
 										<ul class="nav menu">
 											<li><a asp-action="Index" class="active" asp-controller="Home" asp-area="">Home</a></li>
-											<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
-										
-											@if (User.IsInRole("Doctor") || User.IsInRole("Nurse"))
+											
+											@if (User.IsInRole("Nurse"))
 											{
+												<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
 												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
 
 											}
-											else if (User.IsInRole("Patient"))
+											else if(User.IsInRole("Doctor")){
+												<li><a asp-controller="Profile" asp-action="Index" asp-area="Doctors" asp-route-id="user.Id">Profile</a></li>
+												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
+												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
+
+											}
+											else if(User.IsInRole("Patient"))
 											{
-<<<<<<< HEAD
-											<li><a asp-controller="Dashboard" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
-=======
+											<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
+												<li><a asp-area="Patient" asp-action="IndexTopatient" asp-controller="Appointment"> Appointments </a></li>
+												<li><a asp-area="Patient" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
 												
-											<li><a asp-area="Patient" asp-action="IndexTopatient" asp-controller="Appointment"> Appointments </a></li>
-											<li><a asp-area="Patient" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
+
 											}
 											else if(User.IsInRole("Admin"))
-												{
+											{
+												<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 												<li><a asp-controller="Patient" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
->>>>>>> 537e6887efbe71e4e7b951ee9bbb1598d8b6226b
+
 
 											}
 											else
 											{
+												<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 												<li><a asp-controller="ContactUs" asp-action="index" asp-area="">Contact Us</a></li>
 
 											}

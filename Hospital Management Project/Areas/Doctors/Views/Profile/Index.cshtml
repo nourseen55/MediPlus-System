@@ -1,4 +1,4 @@
-﻿@model Doctor
+﻿@* @model Doctor
 @inject UserManager<ApplicationUser> UserManager
 
 <div class="content">
@@ -107,3 +107,166 @@
     </div>
 }
 
+
+ *@
+
+ @model Doctor
+ @inject UserManager<ApplicationUser> UserManager
+
+
+<style>
+    .header {
+        background-image: linear-gradient(rgba(48, 129, 209, 0.829), rgba(48, 129, 209, 0.927)), url('/img/bread-bg.077ec224.jpg');
+        background-size: cover;
+        position: relative;
+        height: 40vh;
+        background-position: center;
+        background-repeat:no-repeat;
+    }
+
+    .info {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .line {
+        width: 100%;
+        height: 1px;
+        background-color: rgba(128, 128, 128, 0.299);
+    }
+
+    .dc {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .main {
+        color: #2f60bd;
+    }
+</style>
+
+<header class="header bg-primary text-white text-center py-5">
+    <h1>Doctor Details</h1>
+    <div class="d-flex dc align-items-center justify-content-center text-center">
+        <h6>Home</h6>
+        <i class="fa-solid fa-angle-right fa-sm"></i>
+        <h6>Doctor Details</h6>
+    </div>
+</header>
+
+<div class="container my-5">
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-md-5">
+            <div class="info mt-4">
+                <img src="~/@Model.Img" class="img-fluid rounded-4 w-100" alt="Doctor">
+                <div class="inf p-5">
+                    <h4>Contact Info</h4>
+                    <p><i class="fa-solid fa-phone" style="color: #1c83d8;"></i> Call: @Model.PhoneNumber</p>
+                    <p>
+                        <i class="fa-solid fa-envelope" style="color: #1c83d8;"></i> <span class="text">Email: <a href="mailto:@Model.Email">@Model.Email</a></span>
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-location-dot" style="color: #1c83d8;"></i> @Model.City
+                    </p>
+                    <section class="mb-4">
+                        <a class="btn btn-outline-secondary btn-floating m-1" href="#" role="button">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="btn btn-outline-secondary btn-floating m-1" href="#" role="button">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="btn btn-outline-secondary btn-floating m-1" href="#" role="button">
+                            <i class="fab fa-google-plus-g"></i>
+                        </a>
+                        <a class="btn btn-outline-secondary btn-floating m-1" href="#" role="button">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    </section>
+
+                    @* Working Hours *@
+                    <h4 class="mb-4 mt-3">Working hours</h4>
+                    <div class="d-flex justify-content-between">
+                        <p>Monday - Fridayp</p>
+                        <p>8.00-20.00</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Saturday</p>
+                        <p>9.00-18.30</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Monday - Thusday</p>
+                        <p>9.00-15.00</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p>Monday - Fridayp</p>
+                        <p>8.00-20.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 mt-3">
+            <h3>@Model.FullName</h3>
+            <h5 class="text-muted">@Model.Department</h5>
+            <p class="text-muted">@Model.Department</p>
+
+            
+            <h5 class="main">Biography</h5>
+            <p class="text-muted">
+                
+            </p>
+
+            <h5 class="main">Education</h5>
+            <div class="experience-box">
+                <ul class="experience-list">
+                    @if (Model.Educations != null)
+                    {
+                        @foreach (var education in Model.Educations)
+                        {
+                            <li>
+                                <div class="experience-user">
+                                    <div class="before-circle"></div>
+                                </div>
+                                <div class="experience-content">
+                                    <div class="timeline-content">
+                                        <a href="#/" class="name">@education.Institution</a>
+                                        <div>@education.FieldOfStudy</div>
+                                        <div>@education.Degree</div>
+                                        <span class="time">@education.StartYear - @education.EndYear </span>
+                                        @if (User.IsInRole("Doctor"))
+                                        {
+
+                                            <br />
+                                            <a asp-action="EditEducation" asp-route-id="@education.Id">Edit</a>
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+                        }
+
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (User.IsInRole("Doctor"))
+{
+    <div class="m-b-30 m-t-50 d-flex justify-content-center align-items-center">
+        <a href="/Doctors/Profile/AddEducation" class="btn btn-primary m-l-5 text-white">Add Education Informations</a>
+    </div>
+}
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+}

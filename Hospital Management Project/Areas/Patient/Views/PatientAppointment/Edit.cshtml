@@ -1,0 +1,70 @@
+﻿@model Appointment  
+
+@{
+    ViewData["Title"] = "Edit Appointment";
+}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <h4 class="page-title">Edit Appointment</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <form asp-action="Edit" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="AppointmentID" class="form-control" type="text" hidden />
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="DateOfBirth">Date of Birth</label>
+                                    <input asp-for="DateOfBirth" type="date" class="form-control" />
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="DoctorID">Doctor</label>
+                                <select asp-for="DoctorID" asp-items="ViewBag.Doctors" class="select form-control" size="1"></select>
+                                <span asp-validation-for="DoctorID" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PatientID">Patient Name</label>
+                                <select asp-for="PatientID" asp-items="ViewBag.Patients" class="select form-control" size="1"></select>
+                                <span asp-validation-for="PatientID" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="DeptId">Deprtment Name</label>
+                                <select asp-for="DeptId" asp-items="ViewBag.Department" class="select form-control" size="1"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-t-20 text-center">
+                        <button class="btn btn-primary submit-btn">Update Appointment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

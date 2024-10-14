@@ -1,0 +1,77 @@
+﻿@model AppoinmentVM
+
+
+
+<h2>Create Appointment</h2>
+
+<form asp-action="Create" method="post">
+    @* Hidden field to store the current patient ID *@
+    <input type="hidden" asp-for="PatientID" />
+
+    <div class="form-group">
+        <label asp-for="SelectedDepartmentID">Department</label>
+        <select id="DepartmentId" class="form-control" asp-for="SelectedDepartmentID" asp-items="Model.Departments">
+            <option value="">Select Department</option>
+        </select>
+        <span asp-validation-for="SelectedDepartmentID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SelectedDoctorID">Doctor</label>
+        <select id="DoctorId" class="form-control" asp-for="SelectedDoctorID">
+            <option value="">Select Doctor</option>
+        </select>
+        <span asp-validation-for="SelectedDoctorID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SelectedWorkingHoursID">Working Hours</label>
+        <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID">
+            <option value="">Select Working Hours</option>
+        </select>
+        <span asp-validation-for="SelectedWorkingHoursID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create Appointment</button>
+    </div>
+</form>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Load doctors based on selected department
+            $('#DepartmentId').change(function () {
+                var departmentId = $(this).val();
+                $.getJSON('/Appointments/GetDoctorsByDepartment', { departmentId: departmentId }, function (data) {
+                    var doctorSelect = $('#DoctorId');
+                    doctorSelect.empty();
+                    doctorSelect.append('<option value="">Select Doctor</option>');
+                    $.each(data, function (i, doctor) {
+                        doctorSelect.append($('<option>', {
+                            value: doctor.value,
+                            text: doctor.text
+                        }));
+                    });
+                });
+            });
+
+            // Load working hours based on selected doctor
+            $('#DoctorId').change(function () {
+                var doctorId = $(this).val();
+                $.getJSON('/Appointments/GetWorkingHoursByDoctor', { doctorId: doctorId }, function (data) {
+                    var workingHoursSelect = $('#WorkingHoursId');
+                    workingHoursSelect.empty();
+                    workingHoursSelect.append('<option value="">Select Working Hours</option>');
+                    $.each(data, function (i, hours) {
+                        workingHoursSelect.append($('<option>', {
+                            value: hours.value,
+                            text: hours.text
+                        }));
+                    });
+                });
+            });
+        });
+    </script>
+}

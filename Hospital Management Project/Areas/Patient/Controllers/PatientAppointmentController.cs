@@ -11,7 +11,7 @@ using X.PagedList;
 namespace Hospital_Management_Project.Areas.Patient.Controllers
 {
 	[Area("Patient")]
-	[Authorize(Roles = nameof(UserRoles.Admin))]
+	[Authorize(Roles = nameof(UserRoles.Patient))]
 	public class PatientAppointmentController : Controller
 	{
 		private readonly IAppointmentService _appointmentService;
@@ -36,14 +36,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 			_context = context;
 			_userManager = userManager;
 		}
-
 		public async Task<IActionResult> Index(int? page)
-		{
-			var appointments = await _appointmentService.GetAllAppointmentsAsync();
-			return View(appointments);
-		}
-
-		public async Task<IActionResult> IndexToPatient(int? page)
 		{
 			int pageNum = page ?? 1;
 			int pageSize = 4;

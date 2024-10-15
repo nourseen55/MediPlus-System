@@ -1,0 +1,31 @@
+﻿<div class="col-12 col-md-8 col-lg-5 col-xl-4" style="margin-left: 64%; margin-top: -98px">
+    <div class="card">
+        <div class="card-header bg-white">
+            <h4 class="card-title mb-0">Doctors</h4>
+        </div>
+        <div class="card-body p-0">
+            <ul class="contact-list">
+                @* @foreach (var doctor in Model)
+                {
+                    <li>
+                        <div class="contact-cont">
+                            <div class="float-left user-img m-r-10">
+                                <a href="/Doctors/Details/@doctor.Id" title="@doctor.FullName">
+                                    <img src="~/Images/Doctors/@doctor.ImagePath" alt="@doctor.FullName" class="w-30 rounded-circle"> <!-- تغير الحجم هنا -->
+                                    <span class="status @(doctor.Status ? "online" : "offline")"></span>
+                                </a>
+                            </div>
+                            <div class="contact-info">
+                                <span class="contact-name text-ellipsis">@doctor.FullName</span>
+                                <span class="contact-date">@doctor.Department?.Name</span> <!-- استخدام القسم -->
+                            </div>
+                        </div>
+                    </li>
+                } *@
+            </ul>
+        </div>
+        <div class="card-footer text-center bg-white">
+            <a href="~/Admin/Doctor" class="text-muted">View all Doctors</a>
+        </div>
+    </div>
+</div>

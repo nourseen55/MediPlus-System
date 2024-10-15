@@ -151,42 +151,61 @@
 									<nav class="navigation">
 										<ul class="nav menu">
 											<li><a asp-action="Index" class="active" asp-controller="Home" asp-area="">Home</a></li>
+										<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 											
 											@if (User.IsInRole("Nurse"))
-											{
-												<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
-												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
-												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
+										{
+											<li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
+											<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
+
+										}
+										else if (User.IsInRole("Doctor"))
+										{
+											<li><a asp-controller="Profile" asp-action="Index" asp-area="Doctors" asp-route-id="user.Id">Profile</a></li>
+											<li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
+											<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
+
+										}
+										
+										else if (User.IsInRole("Patient"))
+										{
+											<li><a asp-area="Patient" asp-action="Index" asp-controller="PatientAppointment"> Appointments </a></li>
+											<li><a asp-area="Patient" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
+										}
+												
 
 											}
-											else if(User.IsInRole("Doctor")){
-												<li><a asp-controller="Profile" asp-action="Index" asp-area="Doctors" asp-route-id="user.Id">Profile</a></li>
-												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
-												<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
+												
 
 											}
-											else if(User.IsInRole("Patient"))
-											{
-											<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
-												<li><a asp-area="Patient" asp-action="IndexTopatient" asp-controller="Appointment"> Appointments </a></li>
-												<li><a asp-area="Patient" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
+												
+
+											}
+												
+
+											}
+												
+
+											}
 												
 
 											}
 											else if(User.IsInRole("Admin"))
 											{
+<<<<<<< HEAD
 											<li><a asp-controller="Dashboard" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
+=======
 												<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 												<li><a asp-controller="Patient" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
 
+>>>>>>> be68106f708441db33865f5dae7568eea0d5c64e
 
-											}
-											else
-											{
-												<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
-												<li><a asp-controller="ContactUs" asp-action="index" asp-area="">Contact Us</a></li>
-
-											}
+										}
+										else
+										{
+											<li><a asp-controller="ContactUs" asp-action="index" asp-area="">Contact Us</a></li>
+										}
+										
 
 										<li><a asp-controller="News" asp-action="index" asp-area=""> News</a></li>
 										<li><a asp-controller="Feedback" asp-action="Index" asp-area=""> Feedbacks</a></li>

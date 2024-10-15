@@ -7,13 +7,16 @@
     <div class="row justify-content-center" style="margin-top: 40px; margin-left: 110px;">
         <!-- First Row -->
         <div class="col-md-6 col-lg-6 col-xl-3 mb-4">
+            
             <div class="dash-widget" style="margin-top: 20px;">
                 <div class="d-flex align-items-center">
                     <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+                    <a href="~/admin/Doctor/Index">
                     <div class="dash-widget-info text-right ml-2">
                         <h3>@ViewBag.DoctorCount</h3>
                         <span class="widget-title1">Doctors <i class="fa fa-check" aria-hidden="true"></i></span>
                     </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -22,10 +25,12 @@
             <div class="dash-widget" style="margin-top: 20px;">
                 <div class="d-flex align-items-center">
                     <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+                    <a href="~/admin/patient">
                     <div class="dash-widget-info text-right ml-2">
                         <h3>@ViewBag.PatientCount</h3>
                         <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
                     </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -34,11 +39,12 @@
             <div class="dash-widget" style="margin-top: 20px;">
                 <div class="d-flex align-items-center">
                     <span class="dash-widget-bg3"><i class="fa fa-hospital-o" aria-hidden="true"></i></span>
+                    <a href="~/admin/Department">
                     <div class="dash-widget-info text-right ml-2">
                         <h3>@ViewBag.DepartmentCount</h3>
-                        <!-- تأكد من أن النص والأيقونة على نفس السطر -->
                         <span class="widget-title3" style="display: flex; align-items: center;">Departments <i class="fa fa-check" aria-hidden="true" style="margin-left: 5px;"></i></span>
                     </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -47,10 +53,12 @@
             <div class="dash-widget" style="margin-top: 20px;">
                 <div class="d-flex align-items-center">
                     <span class="dash-widget-bg4"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+                    <a href="~/Admin/Nurse">
                     <div class="dash-widget-info text-right ml-2">
                         <h3>@ViewBag.NurseCount</h3>
                         <span class="widget-title4">Nurses <i class="fa fa-check" aria-hidden="true"></i></span>
                     </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -61,9 +69,11 @@
         <div class="col-12 col-md-6 col-lg-6 col-xl-6 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h4>Patient Total</h4>
-                    <span class="float-right"><i class="fa fa-caret-up" aria-hidden="true"></i> 15% Higher than Last Month</span>
-                    <img src="~/Images/Dashboard/1.jpg" alt="Patient Total Image" style="width: 100%; height: auto; margin-bottom: 15px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">Patient Total</h4>
+                        <span><i class="fa fa-caret-up" aria-hidden="true"></i> 15% Higher than Last Month</span>
+                    </div>
+                    <img src="~/Images/Dashboard/1.jpg" alt="Patient Total Image" style="width: 100%; height: auto; margin-top: 15px;">
                 </div>
             </div>
         </div>
@@ -71,24 +81,29 @@
         <div class="col-12 col-md-6 col-lg-6 col-xl-6 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <h4>Patients In</h4>
-                    <div class="float-right">
-                        <ul class="chat-user-total" style="list-style-type: none; padding: 0; margin: 0;">
-                            <li style="display: inline; margin-right: 10px;"><i class="fa fa-circle current-users" aria-hidden="true"></i> ICU</li>
-                            <li style="display: inline; margin-right: 10px;"><i class="fa fa-circle old-users" aria-hidden="true"></i> OPD</li>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">Patients In</h4>
+                        <ul class="chat-user-total d-flex mb-0" style="list-style-type: none; padding: 0; margin: 0;">
+                            <li class="d-flex align-items-center mr-3">
+                                <i class="fa fa-circle current-users" aria-hidden="true"></i> ICU
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <i class="fa fa-circle old-users" aria-hidden="true"></i> OPD
+                            </li>
                         </ul>
                     </div>
-                    <!-- إضافة الصورة فوق الرسم البياني -->
-                    <img src="~/Images/Dashboard/2.png" alt="Patients In Image" style="width: 100%; height: auto; margin-bottom: 15px;">
-                    
-                   
+                    <!-- Adding the image below the line -->
+                    <img src="~/Images/Dashboard/2.png" alt="Patients In Image" style="width: 100%; height: auto; margin-top: 15px;">
                 </div>
             </div>
         </div>
     </div>
 
 </div>
-@await Html.PartialAsync("UpcomingAppointmentsPartial")
+<div class="row" ">
+    @await Html.PartialAsync("UpcomingAppointmentsPartial")
+    @await Html.PartialAsync("DoctorsPartial")
+</div>
 
 <style>
     .dash-widget {

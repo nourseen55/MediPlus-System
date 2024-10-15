@@ -1,4 +1,5 @@
 ﻿using HospitalSystem.Application.Interfaces;
+using HospitalSystem.Core.IRepository;
 
 namespace HospitalSystem.Application.Services
 {
@@ -40,5 +41,9 @@ namespace HospitalSystem.Application.Services
         {
             return await _unitOfWork._appointmentRepository.GetPatientsByDoctorAsync(doctorId);
         }
-    }
+		public async Task<IEnumerable<Appointment>> GetAppointmentsByPatientIdAsync(string patientId)
+		{
+			return await _unitOfWork._appointmentRepository.GetAppointmentsByPatientIdAsync(patientId);
+		}
+	}
 }

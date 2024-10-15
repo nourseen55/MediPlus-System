@@ -44,14 +44,16 @@
                                                 <td>@item.Gender</td>
                                                 <td>@item.PhoneNumber</td>
                                                 <td class="text-center">
-                                                    <a asp-action="RecordsByPatient" asp-controller="MedicalRecord" asp-route-Id="@item.Id" class="btn btn-info">View Records</a>
-                                                    <a asp-action="Create" asp-controller="MedicalRecord" asp-route-patientId="@item.Id" class="btn btn-primary">Create Record</a>
+                                                    <a asp-action="RecordsByPatient" asp-controller="MedicalRecord" asp-route-Id="@item.Id" class="btn btn-info text-white">View Records</a>
+                                                    <a asp-action="Create" asp-controller="MedicalRecord" asp-route-patientId="@item.Id" class="btn btn-primary text-white">Create Record</a>
                                                 </td>
                                             </tr>
                                         }
+
                                     }
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>

@@ -131,7 +131,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                         // Redirect based on the user's roles
                         if (userRoles.Contains("Admin"))
                         {
-                            return LocalRedirect("/Admin");
+                            return LocalRedirect("/Admin/Dashboard");
                         }
                         else
                         {

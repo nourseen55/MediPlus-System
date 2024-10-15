@@ -90,7 +90,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Profile Image")]
-            public IFormFile Img { get; set; } // Change to IFormFile for file upload
+            public IFormFile Img { get; set; } 
 
             [Display(Name = "Zip Code")]
             public string ZipCode { get; set; }
@@ -131,8 +131,8 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                 // Handle image upload
                 if (Input.Img != null && Input.Img.Length > 0)
                 {
-                    var path = @"Images/Patients/"; // Specify your directory
-                    patient.Img = await _imageService.SaveImageAsync(Input.Img, path); // Use the image service to save the image
+                    var path = @"Images/Patients/";
+                    patient.Img = await _imageService.SaveImageAsync(Input.Img, path);
                 }
 
                 var result = await _userManager.CreateAsync(patient, Input.Password);

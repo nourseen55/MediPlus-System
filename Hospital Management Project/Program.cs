@@ -105,7 +105,7 @@ namespace Hospital_Management_Project
             app.MapRazorPages();
 
             //This middleware is to make all the requests with Admin area to be checked for its Authorization
-            app.UseMiddleware<AreaAuthorizationMiddleware>();
+            //app.UseMiddleware<AreaAuthorizationMiddleware>();
 
             #region Map controller routes
             app.MapControllerRoute(

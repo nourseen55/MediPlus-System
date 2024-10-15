@@ -702,13 +702,13 @@ textarea.form-control {
 -----------------------*/
 
 .header {
-	background-color: #009efb;
+	background-color: #fff;
 	left: 0;
 	position: fixed;
 	right: 0;
 	top: 0;
 	z-index: 1039;
-/*	height: 50px;*/
+	height: 50px;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .header .header-left {

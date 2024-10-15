@@ -152,10 +152,11 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    // Use the generated email body
+                    var emailBody = GenerateEmailBody(callbackUrl, Input.Email);
 
-                    // Remove automatic sign-in
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", emailBody);
+
                     return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl });
                 }
 
@@ -168,6 +169,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             return Page();
         }
 
+
         private IUserEmailStore<ApplicationUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
@@ -176,5 +178,92 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             }
             return (IUserEmailStore<ApplicationUser>)_userStore;
         }
+        private string GenerateEmailBody(string callbackUrl, string email)
+        {
+            return $@"
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <style>
+            body {{
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f7;
+                color: #333333;
+                margin: 0;
+                padding: 0;
+            }}
+            .container {{
+                width: 100%;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }}
+            .header {{
+                text-align: center;
+                padding: 20px 0;
+            }}
+            .header img {{
+                width: 100px;
+                margin-bottom: 20px;
+            }}
+            .content {{
+                padding: 20px;
+            }}
+            .content h1 {{
+                color: #111111;
+                font-size: 24px;
+                margin-bottom: 20px;
+            }}
+            .content p {{
+                font-size: 16px;
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }}
+            .btn {{
+                display: inline-block;
+                padding: 12px 25px;
+                color: #ffffff;
+                background-color: #007bff;
+                border-radius: 5px;
+                text-decoration: none;
+                font-size: 16px;
+            }}
+            .btn:hover {{
+                background-color: #0056b3;
+            }}
+            .footer {{
+                text-align: center;
+                padding: 20px 0;
+                font-size: 14px;
+                color: #888888;
+            }}
+        </style>
+    </head>
+    <body>
+        <div class='container'>
+            <img src='https://th.bing.com/th/id/OIP.byIdD-ZjaQ9DaGLcIR0OuwAAAA?rs=1&pid=ImgDetMain' width='100%' alt='Company Logo'>
+            <div class='content'>
+                <h1>Email Confirmation</h1>
+                <p>Hello {HtmlEncoder.Default.Encode(email)},</p>
+                <p>Thank you for registering an account with us. Please confirm your email by clicking the button below:</p>
+                <p style='text-align: center;'>
+                    <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' class='btn'>Confirm Email</a>
+                </p>
+                <p>If you did not request this, please ignore this email.</p>
+            </div>
+            <div class='footer'>
+                <p>&copy; {DateTime.Now.Year} Mediplus. All rights reserved.</p>
+                <p>If you need help, contact our <a href='mailto:hospitalmanagments@gmail.com'>support team</a>.</p>
+            </div>
+        </div>
+    </body>
+    </html>";
+        }
+
     }
 }

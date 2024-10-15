@@ -1,12 +1,14 @@
 ﻿@model X.PagedList.IPagedList<Doctor>
 @using X.PagedList.Mvc;
 @using X.PagedList.Mvc.Core
+
+<br />
 <div class="breadcrumbs overlay">
     <div class="container">
         <div class="bread-inner">
             <div class="row">
                 <div class="col-12">
-                    <h2>Our Doctors</h2>
+                    <h2>Meet Our Qualified Doctors</h2>
                     <ul class="bread-list">
                         <li><a href="~/Home">Home</a></li>
                         <li><i class="icofont-simple-right"></i></li>
@@ -17,6 +19,7 @@
         </div>
     </div>
 </div>
+
 <div class="container">
     <!-- Search Box -->
     <div class="row">
@@ -176,21 +179,21 @@
         border-radius: 5px; /* Rounded corners */
         padding: 10px 20px; /* Padding around the text */
         color: white; /* Text color */
-        font-size: 16px; /* Font size */
-        cursor: pointer; /* Change cursor to pointer */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a shadow */
+        font-size: 16px; 
+        cursor: pointer; 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
     }
 
     .appointment-button:hover {
-        background-color: black; /* Change color to black on hover */
-        border-color: black; /* Change border color to black on hover */
+        background-color: black; 
+        border-color: black;
     }
 
     .department-name {
-        font-weight: bold; /* Make department name bold */
-        color: gray; /* Optional styling */
-        margin: 0; /* Remove default margin */
-        margin-bottom: 10px; /* Add spacing between department and doctor name */
+        font-weight: bold; 
+        color: gray; 
+        margin: 0; 
+        margin-bottom: 10px; 
     }
 
     .card-title.doctor-name {
@@ -207,17 +210,16 @@
     /* Media query to ensure responsiveness */
     @@media (max-width: 768px) {
         .doctor-card {
-            flex: 0 1 calc(50% - 20px); /* 2 cards per row on smaller screens */
+            flex: 0 1 calc(50% - 20px); 
         }
     }
 
     @@media (max-width: 480px) {
         .doctor-card {
-            flex: 0 1 100%; /* 1 card per row on extra small screens */
+            flex: 0 1 100%; 
         }
     }
 
-    /* Pagination Controls */
     .pagination-container {
         text-align: center;
         margin-top: 20px;

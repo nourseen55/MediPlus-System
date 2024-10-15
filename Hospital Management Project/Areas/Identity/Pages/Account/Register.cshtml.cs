@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using HospitalSystem.Application.Services;
+using HospitalSystem.Application.IServices;
+using HospitalSystem.Core.Entities;
 using HospitalSystem.Core.Enums;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using HospitalSystem.Core.Entities;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.Linq;
 
 namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 {
@@ -27,13 +27,15 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IImageService _imageService; // Image service for handling images
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IImageService imageService) // Inject IImageService
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -41,6 +43,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _imageService = imageService; // Initialize IImageService
         }
 
         [BindProperty]
@@ -85,9 +88,9 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             [DataType(DataType.Date)]
             public DateTime DateOfBirth { get; set; }
 
-            [Display(Name = "Profile Image URL")]
-            [ValidateNever]
-            public string Img { get; set; }
+            [Required]
+            [Display(Name = "Profile Image")]
+            public IFormFile Img { get; set; } // Change to IFormFile for file upload
 
             [Display(Name = "Zip Code")]
             public string ZipCode { get; set; }
@@ -118,13 +121,19 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     Gender = Input.Gender,
                     DateOfBirth = Input.DateOfBirth,
-                    Img = Input.Img,
                     ZipCode = Input.ZipCode,
                     Country = Input.Country,
                     City = Input.City,
                     UserName = Input.Email,
                     Email = Input.Email
                 };
+
+                // Handle image upload
+                if (Input.Img != null && Input.Img.Length > 0)
+                {
+                    var path = @"Images/Patients/"; // Specify your directory
+                    patient.Img = await _imageService.SaveImageAsync(Input.Img, path); // Use the image service to save the image
+                }
 
                 var result = await _userManager.CreateAsync(patient, Input.Password);
 

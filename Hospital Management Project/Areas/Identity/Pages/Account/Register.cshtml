@@ -5,85 +5,124 @@
     Layout = "~/Views/Shared/_HospitalLayout.cshtml";
 }
 
-<h1 class="text-center mb-4">@ViewData["Title"]</h1>
-
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2 class="text-center">Create a new account</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="Input.FirstName" class="form-control" placeholder="First Name" />
-                <label asp-for="Input.FirstName">First Name</label>
-                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+<section class="register section">
+    <div class="container">
+        <div class="inner">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="register-left">
+                        <h2>Welcome to Our Platform</h2>
+                        <p>Join us to enjoy the best services.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="register-form">
+                        <h2>Register Here</h2>
+                        <p>Already have an account? <a asp-area="Identity" asp-page="/Account/Login">Login Here</a></p>
+                        <form class="form" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input asp-for="Input.FirstName" placeholder="First Name" type="text" class="form-control" />
+                                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input asp-for="Input.LastName" placeholder="Last Name" type="text" class="form-control" />
+                                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input asp-for="Input.Email" placeholder="Email" type="email" class="form-control" />
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input asp-for="Input.Password" placeholder="Password" type="password" class="form-control" />
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input asp-for="Input.ConfirmPassword" placeholder="Confirm Password" type="password" class="form-control" />
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <select asp-for="Input.Gender" class="form-control">
+                                            <option value="">Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input asp-for="Input.DateOfBirth" placeholder="Date of Birth" type="date" class="form-control" />
+                                        <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input asp-for="Input.ZipCode" placeholder="Zip Code" type="text" class="form-control" />
+                                        <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input asp-for="Input.Country" placeholder="Country" type="text" class="form-control" />
+                                        <span asp-validation-for="Input.Country" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <input asp-for="Input.City" placeholder="City" type="text" class="form-control" />
+                                        <span asp-validation-for="Input.City" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Avatar</label>
+                                    <div class="profile-upload">
+                                        <div class="upload-img">
+                                            <img src="~/assets/img/user.jpg" alt="Default Image" id="ImagePreview" />
+                                        </div>
+                                        <div class="upload-input">
+                                            <input asp-for="Input.Img" type="file" class="form-control" id="imgfile" onchange="Image(event);" name="Img" />
+                                        </div>
+                                        <span asp-validation-for="Input.Img" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group login-btn">
+                                    <button class="btn btn-primary btn-lg" type="submit">Register</button>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" />
+                                        <label class="form-check-label" for="flexCheckDefault">Yes, I agree with all</label>
+                                    </div>
+                                    <a class="terms" href="#">Terms & Conditions</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="Input.LastName" class="form-control" placeholder="Last Name" />
-                <label asp-for="Input.LastName">Last Name</label>
-                <span asp-validation-for="Input.LastName" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" placeholder="Email" />
-                <label asp-for="Input.Email">Email</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" placeholder="Password" />
-                <label asp-for="Input.Password">Password</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" placeholder="Confirm Password" />
-                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="Input.DateOfBirth" class="form-control" type="date" placeholder="Date of Birth" />
-                <label asp-for="Input.DateOfBirth">Date of Birth</label>
-                <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating mb-3">
-                <select asp-for="Input.Gender" class="form-select">
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-                <label asp-for="Input.Gender">Gender</label>
-                <span asp-validation-for="Input.Gender" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Country" class="form-control" placeholder="Country" />
-                <label asp-for="Input.Country">Country</label>
-                <span asp-validation-for="Input.Country" class="text-danger"></span>
-            </div>
-            
-            <div class="form-floating mb-3">
-                <input asp-for="Input.City" class="form-control" placeholder="City" />
-                <label asp-for="Input.City">City</label>
-                <span asp-validation-for="Input.City" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating mb-3">
-                <input asp-for="Input.ZipCode" class="form-control" placeholder="Zip Code" />
-                <label asp-for="Input.ZipCode">Zip Code</label>
-                <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
-            </div>
-
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
+        </div>
     </div>
-</div>
+</section>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        var Image = function (event) {
+            var img = document.getElementById("ImagePreview");
+            img.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
 }

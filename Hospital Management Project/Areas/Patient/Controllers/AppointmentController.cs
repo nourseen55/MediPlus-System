@@ -33,8 +33,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
             var app= await _IAppointmentService.GetAllAppointmentsAsync();
             return View(app);
         }
-<<<<<<< HEAD:Hospital Management Project/Areas/Patient/Controllers/PatientAppointmentController.cs
-=======
+
 
         public async Task<IActionResult> IndexTopatient(int? page)
         {
@@ -54,7 +53,6 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
             return View(app);
         }
 
->>>>>>> be68106f708441db33865f5dae7568eea0d5c64e:Hospital Management Project/Areas/Patient/Controllers/AppointmentController.cs
         [HttpGet]
         public IActionResult Create()
         {

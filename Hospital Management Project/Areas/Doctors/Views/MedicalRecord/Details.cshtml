@@ -74,21 +74,6 @@
                     </div>
                 </div>
 
-                <div class="form-section">
-                    <h5>HEALTH HISTORY</h5>
-                    <div class="line my-3"></div>
-                    <div class="row my-4">
-                        <div class="form-group col-md-6">
-                            <label class="my-3 fw-bold">Height</label>
-                            <input type="text" class="form-control" placeholder="e.g., 5'7">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="my-3 fw-bold">Weight</label>
-                            <input type="text" class="form-control" placeholder="e.g., 123">
-                        </div>
-                    </div>
-                </div>
-
                 <h5>Please give information about the patient's health.</h5>
                 <table class="table">
                     <thead>
@@ -101,126 +86,32 @@
                     <tbody>
                         <tr>
                             <td class="bg text-white" style="border-radius: 10px 0 0 0;">Are you currently under medical care?</td>
-                            <td class="y"><input asp-for="IsUnderMedicalCare" type="radio" value="true" /></td>
-                            <td class="y"><input asp-for="IsUnderMedicalCare" type="radio" value="false" /></td>
+                            <td class="y"><input asp-for="IsUnderMedicalCare" type="radio" value="true" disabled /></td>
+                            <td class="y"><input asp-for="IsUnderMedicalCare" type="radio" value="false" disabled /></td>
                         </tr>
                         <tr>
                             <td class="bg text-white">Do you have any drug allergies?</td>
-                            <td class="y"><input asp-for="HasDrugAllergies" type="radio" value="true" /></td>
-                            <td class="y"><input asp-for="HasDrugAllergies" type="radio" value="false" /></td>
+                            <td class="y"><input asp-for="HasDrugAllergies" type="radio" value="true" disabled/></td>
+                            <td class="y"><input asp-for="HasDrugAllergies" type="radio" value="false" disabled /></td>
                         </tr>
                         <tr>
                             <td class="bg text-white">Do you have any food or environmental allergies?</td>
-                            <td class="y"><input asp-for="HasFoodOrEnvironmentalAllergies" type="radio" value="true" /></td>
-                            <td class="y"><input asp-for="HasFoodOrEnvironmentalAllergies" type="radio" value="false" /></td>
+                            <td class="y"><input asp-for="HasFoodOrEnvironmentalAllergies" type="radio" value="true" disabled /></td>
+                            <td class="y"><input asp-for="HasFoodOrEnvironmentalAllergies" type="radio" value="false" disabled /></td>
                         </tr>
                         <tr>
                             <td class="bg text-white">Have you ever been cared for by a mental health clinician?</td>
-                            <td class="y"><input asp-for="HasMentalHealthCareHistory" type="radio" value="true" /></td>
-                            <td class="y"><input asp-for="HasMentalHealthCareHistory" type="radio" value="false" /></td>
+                            <td class="y"><input asp-for="HasMentalHealthCareHistory" type="radio" value="true" disabled /></td>
+                            <td class="y"><input asp-for="HasMentalHealthCareHistory" type="radio" value="false" disabled /></td>
                         </tr>
                         <tr>
                             <td class="bg text-white">Have you ever restricted your eating?</td>
-                            <td class="y"><input asp-for="HasRestrictedEating" type="radio" value="true" /></td>
-                            <td class="y"><input asp-for="HasRestrictedEating" type="radio" value="false" /></td>
+                            <td class="y"><input asp-for="HasRestrictedEating" type="radio" value="true" disabled /></td>
+                            <td class="y"><input asp-for="HasRestrictedEating" type="radio" value="false" disabled /></td>
                         </tr>
                     </tbody>
                 </table>
 
-                  <div class="form-section">
-                     <h5>FAMILY HEALTH HISTORY</h5>
-                     <div class="line"></div>
-                     <p class="col my-3">Information about family members.</p>
-                     <table class="table">
-                         <thead>
-                             <tr>
-                                 <th class="empty border-0"></th>
-                                 <th class="bg text-white" style="border-radius: 10px 0 0 0;">Age</th>
-                                 <th class="bg text-white">In Good Health?</th>
-                                 <th class="bg text-white">Known Health Problems</th>
-                                 <th class="bg text-white" style="border-radius: 0 10px 0 0;">Alive?</th>
-                             </tr>
-                         </thead>
-                         <tbody>
-                             <tr>
-                                 <td class="bg text-white" style="border-radius: 10px 0 0 0;">Mother</td>
-                                 <td><input type="text" class="form-control"></td>
-                                 <td>
-                                     <select class="form-select">
-                                         <option></option>
-                                         <option>Yes</option>
-                                         <option>No</option>
-                                     </select>
-                                 </td>
-                                 <td><input type="text" class="form-control"></td>
-                                 <td>
-                                     <select class="form-select">
-                                         <option></option>
-                                         <option>Yes</option>
-                                         <option>No</option>
-                                     </select>
-                                 </td>
-                             </tr>
-                             <tr>
-                                 <td class="bg text-white">Father</td>
-                                 <td><input type="text" class="form-control"></td>
-                                 <td>
-                                     <select class="form-select">
-                                         <option></option>
-                                         <option>Yes</option>
-                                         <option>No</option>
-                                     </select>
-                                 </td>
-                                 <td><input type="text" class="form-control"></td>
-                                 <td>
-                                     <select class="form-select">
-                                         <option></option>
-                                         <option>Yes</option>
-                                         <option>No</option>
-                                     </select>
-                                 </td>
-                             </tr>
-                             <tr>
-                                 <td class="bg text-white">Brother</td>
-                                 <td><input type="text" class="form-control"></td>
-                                 <td>
-                                     <select class="form-select">
-                                         <option></option>
-                                         <option>Yes</option>
-                                         <option>No</option>
-                                     </select>
-                                 </td>
-                                 <td><input type="text" class="form-control"></td>
-                                 <td>
-                                     <select class="form-select">
-                                         <option></option>
-                                         <option>Yes</option>
-                                         <option>No</option>
-                                     </select>
-                                 </td>
-                             </tr>
-                             <tr>
-                                 <td class="bg text-white">Sister</td>
-                                 <td><input type="text" class="form-control"></td>
-                                 <td>
-                                     <select class="form-select">
-                                         <option></option>
-                                         <option>Yes</option>
-                                         <option>No</option>
-                                     </select>
-                                 </td>
-                                 <td><input type="text" class="form-control"></td>
-                                 <td>
-                                     <select class="form-select">
-                                         <option></option>
-                                         <option>Yes</option>
-                                         <option>No</option>
-                                     </select>
-                                 </td>
-                             </tr>
-                         </tbody>
-                     </table>
-                 </div>
 
                 <div class="form-group ml-2">
                     <label class="my-3">Is the patient diagnosed with chronic disease?</label>

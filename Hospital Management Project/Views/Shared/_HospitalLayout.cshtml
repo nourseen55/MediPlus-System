@@ -144,18 +144,20 @@
 							<div class="mobile-nav"></div>
 							<!-- End Mobile Nav -->
 						</div>
-						<div class="col-lg-7 col-md-9 col-12">
+						<div class="col-lg-8 col-md-10 col-12">
 							<!-- Main Menu -->
 							<div class="main-menu">
 								<nav class="navigation">
 									<ul class="nav menu">
 										<li><a asp-action="Index" class="active" asp-controller="Home" asp-area="">Home</a></li>
-										<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
-
 										@if (User.IsInRole("Nurse"))
 										{
+											<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 											<li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
 											<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
+											<li><a asp-controller="News" asp-action="index" asp-area=""> News</a></li>
+											<li><a asp-controller="Feedback" asp-action="Index" asp-area=""> Feedbacks</a></li>
+											<li><a asp-controller="ContactUs" asp-action="index" asp-area="">Contact Us</a></li>
 
 										}
 										else if (User.IsInRole("Doctor"))
@@ -163,33 +165,40 @@
 											<li><a asp-controller="Profile" asp-action="Index" asp-area="Doctors" asp-route-id="user.Id">Profile</a></li>
 											<li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
 											<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
+											<li><a asp-controller="News" asp-action="index" asp-area=""> News</a></li>
+											<li><a asp-controller="Feedback" asp-action="Index" asp-area=""> Feedbacks</a></li>
+											<li><a asp-controller="ContactUs" asp-action="index" asp-area="">Contact Us</a></li>
 
 										}
 
 										else if (User.IsInRole("Patient"))
 										{
+											<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
 											<li><a asp-area="Patient" asp-action="Index" asp-controller="PatientAppointment"> Appointments </a></li>
 											<li><a asp-area="Patient" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
+											<li><a asp-controller="News" asp-action="index" asp-area=""> News</a></li>
+											<li><a asp-controller="Feedback" asp-action="Index" asp-area=""> Feedbacks</a></li>
+											<li><a asp-controller="ContactUs" asp-action="index" asp-area="">Contact Us</a></li>
 										}
 
 
 										else if (User.IsInRole("Admin"))
 										{
 											<li><a asp-controller="Dashboard" asp-action="index" asp-area="Admin"> Admin Dashboard</a></li>
-
-											<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
-										
-
+											<li><a asp-controller="News" asp-action="index" asp-area=""> News</a></li>
+											<li><a asp-controller="Feedback" asp-action="Index" asp-area=""> Feedbacks</a></li>
 
 										}
 										else
 										{
+
+											<li><a asp-controller="Profile" asp-action="ListOfDoctors" asp-area="Doctors"> Doctors</a></li>
+											<li><a asp-controller="News" asp-action="index" asp-area=""> News</a></li>
+											<li><a asp-controller="Feedback" asp-action="Index" asp-area=""> Feedbacks</a></li>
 											<li><a asp-controller="ContactUs" asp-action="index" asp-area="">Contact Us</a></li>
 										}
 
 
-										<li><a asp-controller="News" asp-action="index" asp-area=""> News</a></li>
-										<li><a asp-controller="Feedback" asp-action="Index" asp-area=""> Feedbacks</a></li>
 
 									</ul>
 								</nav>
@@ -197,11 +206,11 @@
 							<!--/ End Main Menu -->
 						</div>
 
-						<div class="col-lg-2 col-12">
+					@* 	<div class="col-lg-2 col-12">
 							<div class="get-quote">
 								<a asp-action="Create" asp-controller="PatientAppointment" asp-area="Patient" class="btn btn-primary">Book Appointment</a>
 							</div>
-						</div>
+						</div> *@
 
 					</div>
 				</div>

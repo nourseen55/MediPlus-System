@@ -98,7 +98,7 @@ namespace HospitalSystem.Persistance.Data
                 UserId = adminId
             });
         }
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+       /* protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=HosiptalDb;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
         }*/

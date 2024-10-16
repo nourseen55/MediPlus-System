@@ -74,22 +74,16 @@
 
                     @* Working Hours *@
                     <h4 class="mb-4 mt-3">Working hours</h4>
-                    <div class="d-flex justify-content-between">
-                        <p>Monday - Fridayp</p>
-                        <p>8.00-20.00</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <p>Saturday</p>
-                        <p>9.00-18.30</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <p>Monday - Thusday</p>
-                        <p>9.00-15.00</p>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <p>Monday - Fridayp</p>
-                        <p>8.00-20.00</p>
-                    </div>
+                    @if (Model.WorkingHours != null)
+                    {
+                        @foreach (var item in Model.WorkingHours)
+                        {
+                            <div class="d-flex justify-content-between">
+                                <p>@item.Day</p>
+                                <p>@item.StartHour-@item.EndHour</p>
+                            </div>
+                        }
+                    }
                 </div>
             </div>
         </div>

@@ -78,11 +78,21 @@ namespace Hospital_Management_Project
                 options.AccessDeniedPath = "/Error/403"; // Redirect if access is denied
                 options.SlidingExpiration = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Set session timeout
+
             });
             #endregion
 
+            //builder.Services.AddAuthentication()
+            //    .AddGoogle(options =>
+            //    {
+            //        var googleSection = builder.Configuration.GetSection("Authentication:Google");
+            //        options.ClientId = googleSection["ClientId"];
+            //        options.ClientSecret = googleSection["ClientSecret"];
+            //        options.CallbackPath = "/Identity/Account/Login/google";
+            //        });
+            //builder.Services.AddSession();
             var app = builder.Build();
-
+            //app.UseSession();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

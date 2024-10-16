@@ -2,76 +2,112 @@
 
 
 
-<h2>Create Appointment</h2>
+<div class="container my-5">
+    <div class="row">
+        <h2>Create Appointment</h2>
+    <div class="col-7">
+        <form asp-action="Create" method="post">
+            <input type="hidden" asp-for="PatientID" />
 
-<form asp-action="Create" method="post">
-    @* Hidden field to store the current patient ID *@
-    <input type="hidden" asp-for="PatientID" />
+            <div class="form-group">
+                <label asp-for="SelectedDepartmentID">Department</label>
+                <select id="DepartmentSelect" class="form-control" asp-for="SelectedDepartmentID" asp-items="Model.Departments" onchange="fetchDoctors(this.value)">
+                    <option value="">Select Department</option>
+                </select>
+                <span asp-validation-for="SelectedDepartmentID" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="SelectedDepartmentID">Department</label>
-        <select id="DepartmentId" class="form-control" asp-for="SelectedDepartmentID" asp-items="Model.Departments">
-            <option value="">Select Department</option>
-        </select>
-        <span asp-validation-for="SelectedDepartmentID" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="SelectedDoctorID">Doctor</label>
+                <select id="DoctorId" class="form-control" asp-for="SelectedDoctorID" onchange="fetchWorkingHours(this.value)" style="display: none;">
+                </select>
+                <span asp-validation-for="SelectedDoctorID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SelectedWorkingHoursID">Working Hours</label>
+                <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID" style="display: none;">
+                </select>
+                <span asp-validation-for="SelectedWorkingHoursID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create Appointment</button>
+            </div>
+        </form>
     </div>
 
-    <div class="form-group">
-        <label asp-for="SelectedDoctorID">Doctor</label>
-        <select id="DoctorId" class="form-control" asp-for="SelectedDoctorID">
-            <option value="">Select Doctor</option>
-        </select>
-        <span asp-validation-for="SelectedDoctorID" class="text-danger"></span>
-    </div>
 
-    <div class="form-group">
-        <label asp-for="SelectedWorkingHoursID">Working Hours</label>
-        <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID">
-            <option value="">Select Working Hours</option>
-        </select>
-        <span asp-validation-for="SelectedWorkingHoursID" class="text-danger"></span>
+    <div class="col-5" id="workingHoursCard" style="display: none;">
+        <div class="wbook">
+            <div class="wcover">
+                Working Hours
+            </div>
+            <div>
+                <p class="wp" id="workingHoursText"></p>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create Appointment</button>
-    </div>
-</form>
+</div>
+</div>
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Load doctors based on selected department
-            $('#DepartmentId').change(function () {
-                var departmentId = $(this).val();
-                $.getJSON('/Appointments/GetDoctorsByDepartment', { departmentId: departmentId }, function (data) {
-                    var doctorSelect = $('#DoctorId');
-                    doctorSelect.empty();
-                    doctorSelect.append('<option value="">Select Doctor</option>');
-                    $.each(data, function (i, doctor) {
-                        doctorSelect.append($('<option>', {
-                            value: doctor.value,
-                            text: doctor.text
-                        }));
-                    });
-                });
-            });
 
-            // Load working hours based on selected doctor
-            $('#DoctorId').change(function () {
-                var doctorId = $(this).val();
-                $.getJSON('/Appointments/GetWorkingHoursByDoctor', { doctorId: doctorId }, function (data) {
-                    var workingHoursSelect = $('#WorkingHoursId');
-                    workingHoursSelect.empty();
-                    workingHoursSelect.append('<option value="">Select Working Hours</option>');
-                    $.each(data, function (i, hours) {
-                        workingHoursSelect.append($('<option>', {
-                            value: hours.value,
-                            text: hours.text
-                        }));
-                    });
-                });
-            });
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.fetchDoctors = function (departmentId) {
+                const doctorDropdown = document.getElementById('DoctorId');
+                doctorDropdown.innerHTML = '<option value="">Select Doctor</option>';
+
+                if (departmentId) {
+                    fetch(`/Patient/PatientAppointment/GetDoctorsByDepartment?departmentId=${departmentId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (Array.isArray(data) && data.length > 0) {
+                                data.forEach(doctor => {
+                                    let option = document.createElement('option');
+                                    option.value = doctor.value;
+                                    option.text = doctor.text;
+                                    doctorDropdown.appendChild(option);
+                                });
+                                doctorDropdown.style.display = "block";  
+                            }
+                        })
+                        .catch(error => console.error('Error fetching doctors:', error));
+                }
+            };
+
+            window.fetchWorkingHours = function (doctorId) {
+                const workingHoursDropdown = document.getElementById('WorkingHoursId');
+                workingHoursDropdown.innerHTML = '<option value="">Select Working Hours</option>';
+
+                if (doctorId) {
+                    fetch(`/Patient/PatientAppointment/GetWorkingHoursByDoctor?doctorId=${doctorId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (Array.isArray(data) && data.length > 0) {
+                                let workingHoursText = '';
+                                data.forEach(hours => {
+                                    let option = document.createElement('option');
+                                    option.value = hours.value;
+                                    option.text = hours.text;
+                                    workingHoursDropdown.appendChild(option);
+                                    workingHoursText += `${hours.text}<br/>`;
+                                });
+                                workingHoursDropdown.style.display = "block";  
+                                $('#workingHoursText').html(workingHoursText);  
+                                $('#workingHoursCard').show(); 
+                            } else {
+                                $('#workingHoursCard').hide();  
+                            }
+                        })
+                        .catch(error => console.error('Error fetching working hours:', error));
+                } else {
+                    $('#workingHoursCard').hide();  
+                }
+            };
         });
     </script>
 }

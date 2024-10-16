@@ -1,4 +1,6 @@
-﻿<div class="col-12 col-md-8 col-lg-7 col-xl-6" style="margin-left: 14%; margin-top: -18px;">
+﻿@model IEnumerable<Appointment>
+
+<div class="col-12 col-md-8 col-lg-7 col-xl-6" style="margin-left: 14%; margin-top: -18px;">
     <!-- تحسين المسافات -->
     <div class="card">
         <div class="card-header">
@@ -16,36 +18,57 @@
                             <th class="text-right">Status</th>
                         </tr>
                     </thead>
-                    @* <tbody>
+                    <tbody>
                         <!-- Loop through appointments -->
-                        @foreach (var appointment in Model)
+                        @if(Model!=null && Model.Any())
                         {
-                            <tr>
-                                <td style="min-width: 200px;">
-                                    <a class="avatar" href="/Patients/Details/@appointment.PatientID">@appointment.Patient.FirstName[0]</a>
-                                    <h2>
-                                        <a href="/Patients/Details/@appointment.PatientID">
-                                            @appointment.Patient.FirstName @appointment.Patient.LastName
-                                            <span>@appointment.Patient.City, @appointment.Patient.Country</span>
-                                        </a>
-                                    </h2>
-                                </td>
-                                <td>
-                                    <h5 class="time-title p-0">Appointment With</h5>
-                                    <p>@appointment.Doctor.FirstName @appointment.Doctor.LastName</p>
-                                </td>
-                                <td>
-                                    <h5 class="time-title p-0">Timing</h5>
-                                    <p>@appointment.StartDateTime?.ToString("hh:mm tt")</p>
-                                </td>
-                                <td class="text-right">
-                                    <a href="/Appointments/Details/@appointment.AppointmentID" class="btn btn-outline-primary take-btn">Take up</a>
-                                </td>
-                            </tr>
+                            @foreach (var appointment in Model)
+                            {
+                                <tr>
+                                    <td style="min-width: 200px;">
+                                        <a class="avatar" href="/Patients/Details/@appointment.PatientID">@appointment.Patient.FirstName[0]</a>
+                                        <h2>
+                                            <a href="/Patients/Details/@appointment.PatientID">
+                                                @appointment.Patient.FirstName @appointment.Patient.LastName
+                                                <span>@appointment.Patient.City, @appointment.Patient.Country</span>
+                                            </a>
+                                        </h2>
+                                    </td>
+                                    <td>
+                                        <h5 class="time-title p-0">Appointment With</h5>
+                                        <p>@appointment.Doctor.FirstName @appointment.Doctor.LastName</p>
+                                    </td>
+                                    <td>
+                                        <h5 class="time-title p-0">Timing</h5>
+                                        <p>@appointment.StartDateTime?.ToString("hh:mm tt")</p>
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="/Appointments/Details/@appointment.AppointmentID" class="btn btn-outline-primary take-btn">Take up</a>
+                                    </td>
+                                </tr>
+                            }
                         }
-                    </tbody> *@
+                        else
+                        {
+                            <li style="list-style: none;">
+                                <div class="doctor-item p-2">
+                                    <p>No Appointment available</p>
+                                </div>
+                            </li>
+                        }
+
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // عند تحميل الصفحة، يمكنك استدعاء الأكشن هنا
+        $.get("@Url.Action("UpcomingAppointmentsPartial", "Dashboard")", function (data) {
+            $("#AppointmentContainer").html(data);
+        });
+    });
+</script>

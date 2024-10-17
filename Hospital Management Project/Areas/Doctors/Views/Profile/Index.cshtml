@@ -3,14 +3,7 @@
 
 
  <style>
-     .header {
-         background-image: linear-gradient(rgba(48, 129, 209, 0.829), rgba(48, 129, 209, 0.927)), url('/img/bread-bg.077ec224.jpg');
-        background-repeat: no-repeat;
-         background-size: cover;
-         position: relative;
-         height: 35vh;
-         background-position: center;
-     }
+    
 
      .info {
          background-color: #fff;
@@ -34,14 +27,6 @@
      }
 </style>
 
-<header class="header bg-primary text-white text-center py-5">
-    <h1>Doctor Details</h1>
-    <div class="d-flex dc align-items-center justify-content-center text-center">
-        <h6><a href="/Home/Index" style="text-decoration:none; color:white">Home</a></h6>
-        <i class="fa-solid fa-angle-right fa-sm"></i>
-        <h6>Doctor Details</h6>
-    </div>
-</header>
 
 <div class="container my-5">
     <div class="row d-flex align-items-center justify-content-center">
@@ -115,6 +100,10 @@
 
                                             <br />
                                             <a asp-action="EditEducation" asp-route-id="@education.Id">Edit</a>
+                                            <form asp-action="DeleteEducation" asp-route-id="@education.Id" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this education?');">
+                                                <button type="submit" class=" custom-delete-btn">Delete</button>
+                                            </form>
+
                                         }
                                     </div>
                                 </div>
@@ -135,7 +124,17 @@
         <a href="/Doctors/Profile/AddEducation" class="btn btn-primary m-l-5 text-white">Add Education Informations</a>
     </div>
 }
+<style>
+    .custom-delete-btn {
 
+        border: none;
+        margin:7px;
+        border-radius: 4px;
+        cursor: pointer; }
+
+    
+
+</style>
 
 @section Scripts{
     @{

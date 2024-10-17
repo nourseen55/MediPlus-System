@@ -1,4 +1,5 @@
-﻿using HospitalSystem.Application.Services;
+﻿using HospitalSystem.Application.IServices;
+using HospitalSystem.Application.Services;
 using HospitalSystem.Core.Entities;
 using HospitalSystem.Core.Enums;
 using Microsoft.AspNetCore.Authorization;
@@ -12,23 +13,26 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
     public class ProfileController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly DoctorService _doctorService;
-        private readonly ApplicationDbContext _context;
+        private readonly IDoctorService _doctorService;
+        private readonly IEducationService _educationService;
+        private readonly ApplicationDbContext _context; 
+            
+            
 
-        public ProfileController(UserManager<ApplicationUser> userManager , DoctorService doctorService , ApplicationDbContext context) {
+        public ProfileController(UserManager<ApplicationUser> userManager , IEducationService educationService,IDoctorService doctorService , ApplicationDbContext context) {
             _userManager = userManager;
             _doctorService = doctorService;
             _context = context;
+            _doctorService= doctorService;
+            _educationService = educationService;
         }
         public async Task<IActionResult> ListOfDoctors(string keyword, int? page)
         {
             int pageNum = page ?? 1;
             int pageSize = 6;
 
-            // Fetch all doctors asynchronously
             var doctor = await _doctorService.GetAllDoctorsAsync();
 
-            // Convert the keyword to lowercase for case-insensitive searching
             if (!string.IsNullOrEmpty(keyword))
             {
                 string lowerCaseKeyword = keyword.ToLower();
@@ -49,11 +53,11 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             Doctor doctor = null;
             if (User.IsInRole(UserRoles.Doctor.ToString())){
                 var user = await _userManager.GetUserAsync(User);
-                doctor = _context.Doctors.Include(d => d.Educations).Include(d => d.Department).Include(d => d.WorkingHours).SingleOrDefault(d => d.Id == user.Id);
+                doctor = await _doctorService.GetDoctorByIdAsync (user.Id);
             }
             else
             {
-                doctor = _context.Doctors.Include(d => d.Educations).Include(d => d.Department).Include(d => d.WorkingHours).SingleOrDefault(d => d.Id == id);
+                doctor = await _doctorService.GetDoctorByIdAsync(id);
             }
             return View(doctor);
         }
@@ -65,15 +69,16 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             var user = await _userManager.GetUserAsync(User);
             Education education = new Education();
             education.DoctorId = user.Id;
+
             return View(education);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddEducation(Education educations)
         {
+
             if(ModelState.IsValid) {
-                _context.Educations.Add(educations);
-                _context.SaveChanges();
+               await _educationService.AddEducationAsync(educations);
                 return RedirectToAction("Index");
             }
 
@@ -82,9 +87,9 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
 
         [Authorize(Roles = nameof(UserRoles.Doctor))]
         [HttpGet]
-        public async Task<IActionResult> EditEducation(int id)
+        public async Task<IActionResult> EditEducation(string id)
         {
-            var education = await _context.Educations.FindAsync(id);
+            var education = await _educationService.GetEducationIdAsync(id);
             if (education == null)
             {
                 return NotFound();
@@ -100,11 +105,18 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Educations.Update(education);
-                await _context.SaveChangesAsync();
+                await _educationService.UpdateEducationAsync(education);
                 return RedirectToAction("Index");
             }
             return View(education);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteEducation(string id)
+        {
+           await _educationService.DeleteEducationAsync(id);
+            return RedirectToAction(nameof(Index));
         }
 
     }

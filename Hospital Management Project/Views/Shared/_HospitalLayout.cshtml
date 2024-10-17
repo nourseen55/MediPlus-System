@@ -164,12 +164,11 @@
 										}
 										else if (User.IsInRole("Doctor"))
 										{
-											<li><a asp-controller="Profile" asp-action="Index" asp-area="Doctors" asp-route-id="user.Id">Profile</a></li>
+											<li><a asp-controller="WorkingHour" asp-action="Index" asp-area="Doctors" >Working Hour</a></li>
 											<li><a asp-area="Doctors" asp-action="Index" asp-controller="Medicalrecord">Medical Records </a></li>
 											<li><a asp-area="Doctors" asp-action="Index" asp-controller="Appointment">Appointments </a></li>
 											<li><a asp-controller="News" asp-action="index" asp-area=""> News</a></li>
 											<li><a asp-controller="Feedback" asp-action="Index" asp-area=""> Feedbacks</a></li>
-											<li><a asp-controller="ContactUs" asp-action="index" asp-area="">Contact Us</a></li>
 
 										}
 

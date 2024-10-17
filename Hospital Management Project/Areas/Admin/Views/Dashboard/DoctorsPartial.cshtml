@@ -1,27 +1,35 @@
-﻿<div class="col-12 col-md-8 col-lg-5 col-xl-4" style="margin-left: 64%; margin-top: -98px">
+﻿@model IEnumerable<Doctor>
+
+<div class="col-12 col-md-8 col-lg-6 col-xl-5" style="margin-left: 95%;">
     <div class="card">
         <div class="card-header bg-white">
             <h4 class="card-title mb-0">Doctors</h4>
         </div>
         <div class="card-body p-0">
-            <ul class="contact-list">
-                @* @foreach (var doctor in Model)
+            <ul class="contact-list" style="max-height: 400px; overflow-y: auto; padding: 0; margin: 0;">
+                @if (Model != null && Model.Any())
                 {
-                    <li>
-                        <div class="contact-cont">
-                            <div class="float-left user-img m-r-10">
-                                <a href="/Doctors/Details/@doctor.Id" title="@doctor.FullName">
-                                    <img src="~/Images/Doctors/@doctor.ImagePath" alt="@doctor.FullName" class="w-30 rounded-circle"> <!-- تغير الحجم هنا -->
-                                    <span class="status @(doctor.Status ? "online" : "offline")"></span>
-                                </a>
+                    @foreach (var doctor in Model)
+                    {
+                        <li style="list-style: none;">
+                            <div class="doctor-item p-3 border-bottom d-flex align-items-center">
+                                <img src="~/@doctor.Img" alt="Doctor Image" style="width: 70px; height: 70px; border-radius: 50%; margin-right: 15px;" />
+                                <div>
+                                    <h5 style="margin: 0;">@(doctor.FullName ?? "No Name")</h5>
+                                    <p style="margin: 0;">@(doctor.Department?.DepartmentName ?? "No Department")</p>
+                                </div>
                             </div>
-                            <div class="contact-info">
-                                <span class="contact-name text-ellipsis">@doctor.FullName</span>
-                                <span class="contact-date">@doctor.Department?.Name</span> <!-- استخدام القسم -->
-                            </div>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <li style="list-style: none;">
+                        <div class="doctor-item p-2">
+                            <p>No doctors available</p>
                         </div>
                     </li>
-                } *@
+                }
             </ul>
         </div>
         <div class="card-footer text-center bg-white">
@@ -29,3 +37,48 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // عند تحميل الصفحة، يمكنك استدعاء الأكشن هنا
+        $.get("@Url.Action("DoctorsPartial", "Dashboard")", function (data) {
+            $("#doctorsContainer").html(data);
+        });
+    });
+</script>
+
+
+<style>
+    .contact-list {
+        max-height: 400px; /* زيادة الارتفاع لعرض المزيد من الأطباء */
+        overflow-y: auto; /* تفعيل التمرير العمودي إذا كانت القائمة طويلة */
+    }
+
+    .doctor-item {
+        display: flex;
+        align-items: center; /* محاذاة العناصر بشكل مركزي */
+    }
+
+        .doctor-item img {
+            border-radius: 50%; /* شكل دائري للصورة */
+            width: 70px; /* حجم الصورة */
+            height: 70px; /* ارتفاع الصورة */
+            margin-right: 15px; /* تباعد بين الصورة والنص */
+        }
+
+    .card {
+        margin: 20px 0; /* تباعد بين الكروت */
+    }
+
+    .card-header {
+        font-weight: bold; /* جعل العنوان غامق */
+        font-size: 1.25rem; /* زيادة حجم الخط */
+    }
+
+    .card-footer {
+        background-color: #f8f9fa; /* لون الخلفية للكارد */
+    }
+
+
+</style>

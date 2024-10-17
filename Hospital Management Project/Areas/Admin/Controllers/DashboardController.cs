@@ -47,16 +47,13 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                                 .OrderBy(a => a.StartDateTime)
                                 .Take(5) 
                                 .ToList();
-            return PartialView("UpcomingAppointmentsPartial", upcomingAppointments);
+            return PartialView( upcomingAppointments);
         }
         public async Task<IActionResult> DoctorsPartial()
         {
-            var doctors = await _IdoctorService.GetAllDoctorsAsync();
-            foreach (var doctor in doctors)
-            {
-                doctor.Department = await _IdepartmentService.GetDepartmentByIdAsync(doctor.DepartmentId);
-            }
-            return PartialView("DoctorsPartial", doctors);
-        }
+			var doctors = await _IdoctorService.GetAllDoctorsAsync();
+			var orderedDoctors = doctors.Take(6).ToList();
+            return PartialView(orderedDoctors);
+		}
     }
 }

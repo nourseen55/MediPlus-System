@@ -100,10 +100,16 @@
     </div>
 
 </div>
-<div class="row" ">
-    @await Html.PartialAsync("UpcomingAppointmentsPartial")
-    @await Html.PartialAsync("DoctorsPartial")
+<div class="row" style="margin-top: -20px; margin-left: 3%;">
+    <div id="AppointmentContainer" class="col-12 col-md-6 col-lg-10 col-xl-10" style="margin-right: 10%;">
+        @await Html.PartialAsync("UpcomingAppointmentsPartial")
+    </div>
+
+    <div id="doctorsContainer" class="col-12 col-md-6 col-lg-9 col-xl-9" style="margin-top: -190px; margin-left:-10%">
+        @await Html.PartialAsync("DoctorsPartial")
+    </div>
 </div>
+
 
 <style>
     .dash-widget {

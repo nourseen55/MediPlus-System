@@ -267,8 +267,9 @@ namespace HospitalSystem.Persistance.Migrations
                 columns: table => new
                 {
                     AppointmentID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EndDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    StartDateTime = table.Column<TimeSpan>(type: "time", nullable: true),
+                    Day = table.Column<int>(type: "int", nullable: false),
+                    EndDateTime = table.Column<TimeSpan>(type: "time", nullable: true),
                     PatientID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DoctorID = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     DeptId = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -301,8 +302,7 @@ namespace HospitalSystem.Persistance.Migrations
                 name: "Educations",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Institution = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Degree = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FieldOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -400,9 +400,9 @@ namespace HospitalSystem.Persistance.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Day = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartHour = table.Column<int>(type: "int", nullable: false),
-                    EndHour = table.Column<int>(type: "int", nullable: false),
+                    Day = table.Column<int>(type: "int", nullable: false),
+                    StartHour = table.Column<TimeSpan>(type: "time", nullable: false),
+                    EndHour = table.Column<TimeSpan>(type: "time", nullable: false),
                     DoctorId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -421,21 +421,21 @@ namespace HospitalSystem.Persistance.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3fd009ea-c561-4d2c-b726-796339b4dbcb", null, "Patient", "PATIENT" },
-                    { "8b149cf0-4b21-40b4-88bc-7c06589d0c53", null, "Nurse", "NURSE" },
-                    { "908df7b0-6a3f-4c61-a28d-86dd28f4852d", null, "Doctor", "DOCTOR" },
-                    { "ccbd9d6a-77e2-4c8e-b49b-37e9577f3c21", null, "Admin", "ADMIN" }
+                    { "1d78208a-f9f7-4c0f-a0fa-bf22864d0007", null, "Nurse", "NURSE" },
+                    { "3d73032a-170f-443f-b846-c12e98bd57f4", null, "Admin", "ADMIN" },
+                    { "bf4b8cdd-1852-4c9f-b60b-1ce0b3984fe4", null, "Patient", "PATIENT" },
+                    { "e2d984f4-4762-4565-a4dd-074512422b2e", null, "Doctor", "DOCTOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Country", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "Gender", "Img", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "ZipCode" },
-                values: new object[] { "dc5cbc9b-2554-41e2-bbb3-2e247b2e1334", 0, null, "852a0eb1-2a24-46b2-a3e7-5cdf0ceb2b05", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEBMl5lX38BYlakZR7jipTNE1PGg9Juwo3JYnPKcm/CmKekEcXXxYRoOwrFE2CehYsw==", null, false, "cdd6d50a-67b0-444b-b537-52cf3fe6b697", false, "admin@admin.com", null });
+                values: new object[] { "740d1b07-0317-45c9-a068-b3e713daff28", 0, null, "95e25d73-71ff-4b14-8581-481e60135da7", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEJyqZcTqO3lQ4yj8iKX8wgMDVjYD1Mh5j0t7k4SJ7Kuy3DA9Hf3V3nqQrKyz6MtgSg==", null, false, "5d0b122a-8d34-421f-9ded-4c84ffd77bcb", false, "admin@admin.com", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "ccbd9d6a-77e2-4c8e-b49b-37e9577f3c21", "dc5cbc9b-2554-41e2-bbb3-2e247b2e1334" });
+                values: new object[] { "3d73032a-170f-443f-b846-c12e98bd57f4", "740d1b07-0317-45c9-a068-b3e713daff28" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointment_DepartmentId",

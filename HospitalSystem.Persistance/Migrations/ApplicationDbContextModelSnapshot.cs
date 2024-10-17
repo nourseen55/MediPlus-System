@@ -120,9 +120,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "26353145-28eb-4e76-8541-3ca8d75e4085",
+                            Id = "740d1b07-0317-45c9-a068-b3e713daff28",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "98506dd5-811c-4092-8ad1-cd8f6db44564",
+                            ConcurrencyStamp = "95e25d73-71ff-4b14-8581-481e60135da7",
                             DateOfBirth = new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
@@ -132,9 +132,9 @@ namespace HospitalSystem.Persistance.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKD2eMYc1riV5Cz5+A8f/0qUoZZPgSQPWDuEzQJikDwCD3yA9Z+BDrVG1aWN8XKKbg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJyqZcTqO3lQ4yj8iKX8wgMDVjYD1Mh5j0t7k4SJ7Kuy3DA9Hf3V3nqQrKyz6MtgSg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "81b0e5a2-a9b1-4488-8f13-b371773e77fe",
+                            SecurityStamp = "5d0b122a-8d34-421f-9ded-4c84ffd77bcb",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -203,11 +203,8 @@ namespace HospitalSystem.Persistance.Migrations
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.Education", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Degree")
                         .IsRequired()
@@ -354,11 +351,8 @@ namespace HospitalSystem.Persistance.Migrations
 
             modelBuilder.Entity("HospitalSystem.Core.Entities.WorkingHours", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Day")
                         .HasColumnType("int");
@@ -408,25 +402,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "e0419a23-d2cd-42e9-b817-1bd5ba49518f",
+                            Id = "e2d984f4-4762-4565-a4dd-074512422b2e",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "e5799438-da75-404d-94f3-07d3c79f5310",
+                            Id = "1d78208a-f9f7-4c0f-a0fa-bf22864d0007",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         },
                         new
                         {
-                            Id = "83d541f0-1042-4dc5-9868-baf9a76b9894",
+                            Id = "bf4b8cdd-1852-4c9f-b60b-1ce0b3984fe4",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "721bec3a-7a2f-4877-9617-09cd7305d346",
+                            Id = "3d73032a-170f-443f-b846-c12e98bd57f4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -521,8 +515,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "26353145-28eb-4e76-8541-3ca8d75e4085",
-                            RoleId = "721bec3a-7a2f-4877-9617-09cd7305d346"
+                            UserId = "740d1b07-0317-45c9-a068-b3e713daff28",
+                            RoleId = "3d73032a-170f-443f-b846-c12e98bd57f4"
                         });
                 });
 

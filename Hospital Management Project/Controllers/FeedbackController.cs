@@ -9,26 +9,20 @@ namespace Hospital_Management_Project.Controllers
     public class FeedbackController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ApplicationDbContext _context;
-
-        public FeedbackController(UserManager<ApplicationUser> userManager,ApplicationDbContext context )
+        private readonly IFeedbackService _feedbackService;
+        public FeedbackController(UserManager<ApplicationUser> userManager,IFeedbackService feedbackService )
         {
             _userManager = userManager;
-            _context = context;
+            _feedbackService = feedbackService;
         }
         [HttpGet]
-        public IActionResult Index(int? page)
+        public async Task< IActionResult> Index(int? page)
         {
             int pageNum = page ?? 1;
             int pageSize = 4;
-
-
-            var feedback =_context.feedbacks
-                .Include(n => n.ApplicationUser)
-                .OrderByDescending(n => n.DateFeedback)
-                .ToPagedList(pageNum, pageSize);
-
-            return View(feedback);
+            IEnumerable<Feedback> feedbacks = await _feedbackService.GetAllfeedbacksAsync();
+            var list=feedbacks.ToPagedList(pageNum, pageSize);
+			return View(list);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -38,11 +32,7 @@ namespace Hospital_Management_Project.Controllers
             {
                 feedback.UserId = _userManager.GetUserId(User);
                 feedback.DateFeedback = DateTime.Now;   
-
-
-                _context.feedbacks.Add(feedback);
-                await _context.SaveChangesAsync();
-
+               await _feedbackService.AddFeedbackAsync(feedback);
                 return RedirectToAction("Index");
             }
 
@@ -52,10 +42,7 @@ namespace Hospital_Management_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmDelete(string id)
         {
-            Feedback feedback = _context.feedbacks.FirstOrDefault(x => x.Id == id);
-
-            _context.feedbacks.Remove(feedback);
-            await _context.SaveChangesAsync();
+            await _feedbackService.DeleteFeedbackAsync(id);
             return RedirectToAction("Index");
 
         }

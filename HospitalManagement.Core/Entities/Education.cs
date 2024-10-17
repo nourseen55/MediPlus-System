@@ -10,7 +10,7 @@ namespace HospitalSystem.Core.Entities
         public class Education
         {
             [Key]
-            public int Id { get; set; }
+            public string Id { get; set; }=Guid.NewGuid().ToString();
             [Required]
             public string Institution { get; set; }
             [Required]

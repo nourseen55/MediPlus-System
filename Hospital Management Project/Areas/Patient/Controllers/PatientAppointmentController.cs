@@ -92,35 +92,34 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 			return View(model);
 		}
 
-		[HttpGet]
-		public JsonResult GetDoctorsByDepartment(string departmentId)
-		{
-			var doctors = _context.Doctors
-				.Where(d => d.DepartmentId == departmentId)
-				.Select(d => new SelectListItem
-				{
-					Value = d.Id.ToString(),
-					Text = d.FirstName + " " + d.LastName
-				}).ToList();
+        [HttpGet]
+        public JsonResult GetDoctorsByDepartment(string departmentId)
+        {
+            var doctors = _context.Doctors
+                .Where(d => d.DepartmentId == departmentId)
+                .Select(d => new { value = d.Id, text = d.FullName })
+                .ToList();
 
-			return Json(doctors);
-		}
+            return Json(doctors);
+        }
 
-		[HttpGet]
-		public JsonResult GetWorkingHoursByDoctor(string doctorId)
-		{
-			var workingHours = _context.WorkingHours
-				.Where(wh => wh.DoctorId == doctorId)
-				.Select(wh => new SelectListItem
-				{
-					Value = wh.Id.ToString(),
-					Text = $"{wh.Day}: {wh.StartHour} - {wh.EndHour}"
-				}).ToList();
 
-			return Json(workingHours);
-		}
+        [HttpGet]
+        public JsonResult GetWorkingHoursByDoctor(string doctorId)
+        {
+            var workingHours = _context.WorkingHours
+                .Where(w => w.DoctorId == doctorId)
+                .Select(w => new
+                {
+                    value = w.Id,
+                    text = w.Day + ": " + w.StartHour + " - " + w.EndHour
+                })
+                .ToList();
 
-		[HttpGet]
+            return Json(workingHours);
+        }
+
+        [HttpGet]
 		public async Task<IActionResult> Edit(string id)
 		{
 			var appointment = await _appointmentService.GetAppointmentByIdAsync(id);

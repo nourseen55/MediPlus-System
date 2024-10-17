@@ -8,10 +8,10 @@ namespace HospitalSystem.Core.Entities
 {
     public class WorkingHours
     { 
-        public string Id {  get; set; } = Guid.NewGuid().ToString();
-        public string Day { get; set; }
-        public int StartHour { get; set; } 
-        public int EndHour { get; set; }
+        public int Id {  get; set; }
+        public DayOfWeek Day { get; set; }
+        public TimeSpan StartHour { get; set; } 
+        public TimeSpan EndHour { get; set; }
         public string? DoctorId { get; set; }
         public virtual Doctor? Doctor { get; set; }
 

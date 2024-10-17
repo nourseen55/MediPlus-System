@@ -10,10 +10,10 @@ namespace HospitalSystem.Core.Entities
         public string AppointmentID { get; set; } = Guid.NewGuid().ToString();
 
         [Display(Name = "Start Date")]
-        public DateTime? StartDateTime { get; set; }
-
+        public TimeSpan? StartDateTime { get; set; }
+        public DayOfWeek Day { get; set; }
         [Display(Name = "End Date")]
-        public DateTime? EndDateTime { get; set; }
+        public TimeSpan? EndDateTime { get; set; }
         public string PatientID { get; set; }
 
         [ValidateNever]

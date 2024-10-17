@@ -13,10 +13,10 @@ namespace HospitalSystem.Core.ViewModels
         public string PatientID { get; set; }
         public string SelectedDepartmentID { get; set; }
         public string SelectedDoctorID { get; set; }
-        public string SelectedWorkingHoursID { get; set; }
+        public int SelectedWorkingHoursID { get; set; }
 
-        public IEnumerable<SelectListItem> Departments { get; set; }
-        public IEnumerable<SelectListItem> Doctors { get; set; }
-        public IEnumerable<SelectListItem> WorkingHours { get; set; }
+        public IEnumerable<SelectListItem>? Departments { get; set; }
+        public IEnumerable<SelectListItem>? Doctors { get; set; }
+        public IEnumerable<SelectListItem>? WorkingHours { get; set; }
     }
 }

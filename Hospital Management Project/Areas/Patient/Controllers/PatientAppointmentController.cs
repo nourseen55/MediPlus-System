@@ -90,8 +90,9 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 					Day = work.Day,
 					Department = dept
 				};
-				await _appointmentService.AddAppointmentAsync(appointment);
-				await _workingHourstService.DeletehoursAsync(model.SelectedWorkingHoursID);
+                work.IsValid = false;
+				await _workingHourstService.UpdatehoursAsync(work);
+                await _appointmentService.AddAppointmentAsync(appointment);
 
                 return RedirectToAction("Index");
 			}
@@ -120,7 +121,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
             IEnumerable<WorkingHours> workingHours = await _workingHourstService.GetAllWorkingHoursAsync();
 
             var filteredWorkingHours = workingHours
-                .Where(w => w.DoctorId == doctorId)
+                .Where(w => w.DoctorId == doctorId && w.IsValid == true)
                 .Select(w => new
                 {
                     value = w.Id.ToString(),

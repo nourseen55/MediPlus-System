@@ -3,57 +3,76 @@
 @{
     ViewData["Title"] = "All Patient Record";
 }
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Doctor Medical Record</h2>
+                    <ul class="bread-list">
+                        <li><a href="~/Home">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">Medical Records</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
 
-<div class="parent">
+<div class="parent" style="background-color: #ffffff;">
     <div class="content">
-        <br /><br /><br/>
         <div class="container">
-            <div class="form-container mx-auto my-5" style="max-width: 1000px;" >
-                <h3 class="form-header fw-semibold my-3">Patient List</h3>
+            <div class="form-container mx-auto my-5" style="max-width: 1000px;">
+                <h3 class="form-header fw-semibold my-3" style="font-family: 'Poppins', sans-serif; color: #007BFF;">Patient List</h3>
                 <div class="line my-2"></div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-border table-striped custom-table datatable mb-2">
-                                <thead class="bg-primary text-dark">
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Age</th>
-                                        <th>Gender</th>
-                                        <th>Phone Number</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (!Model.Any())
-                                    {
-                                        <tr>
-                                            <td colspan="5" class="text-center text-muted">No patient records available</td>
-                                        </tr>
-                                    }
-                                    else
-                                    {
-                                        @foreach (var item in Model)
-                                        {
+                        <div class="table-container" style="background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);">
+                            <div class="table-responsive">
+                                <div class="table-wrapper" style="background-color: #ffffff; padding: 20px; border-radius: 10px;">
+                                    <table class="table table-border table-striped custom-table datatable mb-2">
+                                        <thead class="bg-primary text-dark">
                                             <tr>
-                                                <td>
-                                                    <img width="28" height="28" src="~/@item.Img" class="rounded-circle m-r-5" alt="">
-                                                    @(item.FirstName + " " + item.LastName)
-                                                </td>
-                                                <td>@item.Age()</td>
-                                                <td>@item.Gender</td>
-                                                <td>@item.PhoneNumber</td>
-                                                <td class="text-center">
-                                                    <a asp-action="RecordsByPatient" asp-controller="MedicalRecord" asp-route-Id="@item.Id" class="btn btn-info text-white">View Records</a>
-                                                    <a asp-action="Create" asp-controller="MedicalRecord" asp-route-patientId="@item.Id" class="btn btn-primary text-white">Create Record</a>
-                                                </td>
+                                                <th>Name</th>
+                                                <th>Age</th>
+                                                <th>Gender</th>
+                                                <th>Phone Number</th>
+                                                <th class="text-center">Action</th>
                                             </tr>
-                                        }
-
-                                    }
-                                </tbody>
-                            </table>
-
+                                        </thead>
+                                        <tbody>
+                                            @if (!Model.Any())
+                                            {
+                                                <tr>
+                                                    <td colspan="5" class="text-center text-muted">No patient records available</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <img width="28" height="28" src="~/@item.Img" class="rounded-circle m-r-5" alt="">
+                                                            @(item.FirstName + " " + item.LastName)
+                                                        </td>
+                                                        <td>@item.Age()</td>
+                                                        <td>@item.Gender</td>
+                                                        <td>@item.PhoneNumber</td>
+                                                        <td class="text-center">
+                                                            <a asp-action="RecordsByPatient" asp-controller="MedicalRecord" asp-route-Id="@item.Id" class="btn btn-custom" style="border-radius: 20px;">View Records</a>
+                                                            <a asp-action="Create" asp-controller="MedicalRecord" asp-route-patientId="@item.Id" class="btn btn-custom" style="border-radius: 20px;">Create Record</a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -64,8 +83,57 @@
 
 <div class="sidebar-overlay" data-reff=""></div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+<style>
+    /* General body styling */
+    body {
+        background-color: #ffffff; /* White background for the entire page */
+        font-family: 'Poppins', sans-serif; /* Poppins font for consistency */
     }
-}
+
+    /* Styling for the table and buttons */
+    .table {
+        border-radius: 10px;
+        overflow: hidden;
+        border-collapse: collapse; /* Ensures borders do not overlap */
+    }
+
+        .table th, .table td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .table th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+    .btn-custom {
+        padding: 10px 15px;
+        border-radius: 20px;
+        background-color: #ffffff; /* White background for buttons */
+        border: 1px solid #007BFF; /* Border to match table */
+        color: #007BFF; /* Text color */
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+        .btn-custom:hover {
+            background-color: #007BFF; /* Blue background on hover */
+            color: white; /* White text on hover */
+        }
+
+    .table-container {
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-header {
+        color: #007BFF; /* Header color */
+    }
+
+    .line {
+        border-bottom: 2px solid #007BFF; /* Line under the header */
+        width: 50px; /* Line width */
+        margin: 10px auto; /* Centering the line */
+    }
+</style>

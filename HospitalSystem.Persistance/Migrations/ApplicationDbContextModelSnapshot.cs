@@ -120,9 +120,9 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d6e8bfca-8455-4a51-9535-2c477e166b62",
+                            Id = "2763f0a8-16f5-41ae-9f41-ec6573f63fbe",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5cf3cc1a-1cad-4bb8-9787-0550c7771c11",
+                            ConcurrencyStamp = "c810fca9-d996-42eb-9b78-82d18b3ebc87",
                             DateOfBirth = new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
@@ -132,9 +132,9 @@ namespace HospitalSystem.Persistance.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELVjUSPex6SjG3dMlbPK7+eBgu824jF4kFXvU7FyRzS0jTv4ytF/wgH/2Ikvnc44DA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA6kuWXz9/jKP/MdvbQNIrhZTyNgBqieB+1dWfcIMx2qOvJWWS4dxlG9WRIXomNsUA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0f2886b9-d63a-46da-a4d0-137403c8b716",
+                            SecurityStamp = "99d77502-a0ee-4708-9cf0-4d6b91dacaff",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -405,25 +405,25 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7c5dbcc1-65ce-4f03-8224-d7ec3b3bc973",
+                            Id = "f0aff8b4-e03e-476b-ad21-845062936045",
                             Name = "Doctor",
                             NormalizedName = "DOCTOR"
                         },
                         new
                         {
-                            Id = "04e65c4d-654a-4ff1-83cc-dcf938431b51",
+                            Id = "e4366c11-edf8-43e7-8fad-cf9112b88a9a",
                             Name = "Nurse",
                             NormalizedName = "NURSE"
                         },
                         new
                         {
-                            Id = "92cd79d0-cba0-4c0e-8663-2ec4bf113716",
+                            Id = "70a99a11-c3f5-406c-ad84-30aa08c98554",
                             Name = "Patient",
                             NormalizedName = "PATIENT"
                         },
                         new
                         {
-                            Id = "9afc8dbf-bce3-4b9d-b64e-a647648316f7",
+                            Id = "c950a33e-c86b-4251-9868-2560d3c4523d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -518,8 +518,8 @@ namespace HospitalSystem.Persistance.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "d6e8bfca-8455-4a51-9535-2c477e166b62",
-                            RoleId = "9afc8dbf-bce3-4b9d-b64e-a647648316f7"
+                            UserId = "2763f0a8-16f5-41ae-9f41-ec6573f63fbe",
+                            RoleId = "c950a33e-c86b-4251-9868-2560d3c4523d"
                         });
                 });
 

@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Hospital_Management_Project.Areas.Doctors.Controllers{
 
     [Area("Doctors")]
-	
-	public class MedicalRecordController : Controller
+    public class MedicalRecordController : Controller
     {
         private readonly IMedicalRecordService _medicalRecordService;
         private readonly IPatientService _patientService;
@@ -17,7 +16,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         private readonly IImageService _fileService;
         private readonly INurseService _nurseService;
 
-        public MedicalRecordController(IMedicalRecordService medicalRecordService, INurseService nurseService,IImageService fileService, IPatientService patientService , IAppointmentService appointmentService , UserManager<ApplicationUser> userManager)
+        public MedicalRecordController(IMedicalRecordService medicalRecordService, INurseService nurseService, IImageService fileService, IPatientService patientService, IAppointmentService appointmentService, UserManager<ApplicationUser> userManager)
         {
             _medicalRecordService = medicalRecordService;
             _patientService = patientService;
@@ -26,28 +25,29 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
             _userManager = userManager;
             _fileService = fileService;
             _nurseService = nurseService;
-            
-            
+
+
         }
         [Authorize(Roles = "Doctor,Nurse")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            
+
             var user = await _userManager.GetUserAsync(User);
             string doctorId = null;
 
-			if (User.IsInRole("Doctor"))
+            if (User.IsInRole("Doctor"))
             {
-				 doctorId = user.Id;
+                doctorId = user.Id;
 
-			}else if(User.IsInRole("Nurse"))
+            }
+            else if (User.IsInRole("Nurse"))
             {
                 Nurse nurse = await _nurseService.GetNurseByIdAsync(user.Id);
                 doctorId = nurse.DoctorID;
             }
 
-			var patients = await _appointmentService.GetPatientsByDoctorAsync(doctorId);
+            var patients = await _appointmentService.GetPatientsByDoctorAsync(doctorId);
             return View(patients);
         }
         [Authorize(Roles = "Doctor,Nurse")]
@@ -112,7 +112,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
         {
             if (ModelState.IsValid)
             {
-                if(record.DiagnosisDocument != null)
+                if (record.DiagnosisDocument != null)
                 {
                     await _fileService.DeleteFileAsync(record.DiagnosisDocument);
                     record.DiagnosisDocument = null;
@@ -143,7 +143,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
 
             await _medicalRecordService.DeleteMedicalRecordAsync(id);
 
-            return Json(new {success = true, message = "Medical Record has been Deleted Successfully"});
+            return Json(new { success = true, message = "Medical Record has been Deleted Successfully" });
         }
         public async Task<IActionResult> Details(string id)
         {
@@ -151,4 +151,5 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers{
             return View(record);
         }
     }
+
 }

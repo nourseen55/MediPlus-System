@@ -8,7 +8,7 @@ namespace HospitalSystem.Core.Entities
 {
     public class WorkingHours
     { 
-        public int Id {  get; set; }
+        public string Id {  get; set; }= Guid.NewGuid().ToString();
         public DayOfWeek Day { get; set; }
         public TimeSpan StartHour { get; set; } 
         public TimeSpan EndHour { get; set; }

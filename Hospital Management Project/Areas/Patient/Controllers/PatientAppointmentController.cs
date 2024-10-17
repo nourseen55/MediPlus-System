@@ -67,7 +67,10 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create(AppoinmentVM model)
 		{
-			if (ModelState.IsValid)
+			WorkingHours? work = _context.WorkingHours.SingleOrDefault(x => x.Id == model.SelectedWorkingHoursID);
+			Departments? dept = _context.Departments.SingleOrDefault(d => d.Id == model.SelectedDepartmentID);
+
+            if (ModelState.IsValid)
 			{
 				var appointment = new Appointment
 				{
@@ -75,7 +78,10 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 					PatientID = model.PatientID,
 					DoctorID = model.SelectedDoctorID,
 					DeptId = model.SelectedDepartmentID,
-					// Save other appointment data like Date, etc.
+					StartDateTime = work.StartHour,
+					EndDateTime = work.EndHour,
+					Day = work.Day,
+					Department = dept
 				};
 
 				_context.Appointments.Add(appointment);
@@ -111,7 +117,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
                 .Where(w => w.DoctorId == doctorId)
                 .Select(w => new
                 {
-                    value = w.Id,
+                    value = w.Id.ToString(),
                     text = w.Day + ": " + w.StartHour + " - " + w.EndHour
                 })
                 .ToList();

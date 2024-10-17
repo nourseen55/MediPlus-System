@@ -44,7 +44,6 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         {
             var appointments = await _IappointmentService.GetAllAppointmentsAsync();
             var upcomingAppointments = appointments
-                                .Where(a => a.StartDateTime > DateTime.Now)
                                 .OrderBy(a => a.StartDateTime)
                                 .Take(5) 
                                 .ToList();

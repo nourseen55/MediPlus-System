@@ -268,7 +268,7 @@ namespace HospitalSystem.Persistance.Migrations
                 {
                     AppointmentID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     StartDateTime = table.Column<TimeSpan>(type: "time", nullable: true),
-                    Day = table.Column<int>(type: "int", nullable: false),
+                    Day = table.Column<DateOnly>(type: "date", nullable: false),
                     EndDateTime = table.Column<TimeSpan>(type: "time", nullable: true),
                     PatientID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DoctorID = table.Column<string>(type: "nvarchar(450)", nullable: true),
@@ -400,10 +400,11 @@ namespace HospitalSystem.Persistance.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Day = table.Column<int>(type: "int", nullable: false),
+                    Day = table.Column<DateOnly>(type: "date", nullable: false),
                     StartHour = table.Column<TimeSpan>(type: "time", nullable: false),
                     EndHour = table.Column<TimeSpan>(type: "time", nullable: false),
-                    DoctorId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    DoctorId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    IsValid = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -421,36 +422,21 @@ namespace HospitalSystem.Persistance.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:HospitalSystem.Persistance/Migrations/20241017142341_init.cs
-                    { "1d78208a-f9f7-4c0f-a0fa-bf22864d0007", null, "Nurse", "NURSE" },
-                    { "3d73032a-170f-443f-b846-c12e98bd57f4", null, "Admin", "ADMIN" },
-                    { "bf4b8cdd-1852-4c9f-b60b-1ce0b3984fe4", null, "Patient", "PATIENT" },
-                    { "e2d984f4-4762-4565-a4dd-074512422b2e", null, "Doctor", "DOCTOR" }
-========
-                    { "36de25fc-dab6-4400-8af0-03ad1d2a5d86", null, "Doctor", "DOCTOR" },
-                    { "a4604425-d39b-4eef-8568-072441b27299", null, "Nurse", "NURSE" },
-                    { "f54a4afb-a468-4fd0-bf76-3387a1323655", null, "Patient", "PATIENT" },
-                    { "f84106fc-bf34-4e4f-b92d-045ab2cc3bea", null, "Admin", "ADMIN" }
->>>>>>>> 3086c3e858c42269ad2439a8f027a90b8d36b864:HospitalSystem.Persistance/Migrations/20241017072646_init.cs
+                    { "04e65c4d-654a-4ff1-83cc-dcf938431b51", null, "Nurse", "NURSE" },
+                    { "7c5dbcc1-65ce-4f03-8224-d7ec3b3bc973", null, "Doctor", "DOCTOR" },
+                    { "92cd79d0-cba0-4c0e-8663-2ec4bf113716", null, "Patient", "PATIENT" },
+                    { "9afc8dbf-bce3-4b9d-b64e-a647648316f7", null, "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Country", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "Gender", "Img", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "ZipCode" },
-<<<<<<<< HEAD:HospitalSystem.Persistance/Migrations/20241017142341_init.cs
-                values: new object[] { "740d1b07-0317-45c9-a068-b3e713daff28", 0, null, "95e25d73-71ff-4b14-8581-481e60135da7", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEJyqZcTqO3lQ4yj8iKX8wgMDVjYD1Mh5j0t7k4SJ7Kuy3DA9Hf3V3nqQrKyz6MtgSg==", null, false, "5d0b122a-8d34-421f-9ded-4c84ffd77bcb", false, "admin@admin.com", null });
-========
-                values: new object[] { "08c385eb-0d12-4fd9-afbe-077d14fa5f8b", 0, null, "baab2f0b-c858-4943-bb23-f68ead762d12", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEGbtOdsW8MYITjWKabKMKwH7Pqb28QvV9vdBAqO5z8rVt4CBEshoR+fvd3ZpaZnvAg==", null, false, "5bf94dbc-32f6-42a2-b54e-bdec0a0cbe27", false, "admin@admin.com", null });
->>>>>>>> 3086c3e858c42269ad2439a8f027a90b8d36b864:HospitalSystem.Persistance/Migrations/20241017072646_init.cs
+                values: new object[] { "d6e8bfca-8455-4a51-9535-2c477e166b62", 0, null, "5cf3cc1a-1cad-4bb8-9787-0550c7771c11", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAELVjUSPex6SjG3dMlbPK7+eBgu824jF4kFXvU7FyRzS0jTv4ytF/wgH/2Ikvnc44DA==", null, false, "0f2886b9-d63a-46da-a4d0-137403c8b716", false, "admin@admin.com", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-<<<<<<<< HEAD:HospitalSystem.Persistance/Migrations/20241017142341_init.cs
-                values: new object[] { "3d73032a-170f-443f-b846-c12e98bd57f4", "740d1b07-0317-45c9-a068-b3e713daff28" });
-========
-                values: new object[] { "f84106fc-bf34-4e4f-b92d-045ab2cc3bea", "08c385eb-0d12-4fd9-afbe-077d14fa5f8b" });
->>>>>>>> 3086c3e858c42269ad2439a8f027a90b8d36b864:HospitalSystem.Persistance/Migrations/20241017072646_init.cs
+                values: new object[] { "9afc8dbf-bce3-4b9d-b64e-a647648316f7", "d6e8bfca-8455-4a51-9535-2c477e166b62" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointment_DepartmentId",

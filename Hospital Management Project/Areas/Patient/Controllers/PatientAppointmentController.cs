@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using X.PagedList;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hospital_Management_Project.Areas.Patient.Controllers
 {
@@ -18,23 +19,26 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 		private readonly IDoctorService _doctorService;
 		private readonly IPatientService _patientService;
 		private readonly IDepartmentService _departmentService;
-		private readonly ApplicationDbContext _context;
+		private readonly IWorkingHourstService _workingHourstService;
 		private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
 
-		public PatientAppointmentController(
+        public PatientAppointmentController(
 			IAppointmentService appointmentService,
 			UserManager<ApplicationUser> userManager,
 			IDoctorService doctorService,
 			IPatientService patientService,
+			ApplicationDbContext context,
 			IDepartmentService departmentService,
-			ApplicationDbContext context)
+			IWorkingHourstService workingHourstService)
 		{
 			_appointmentService = appointmentService;
 			_doctorService = doctorService;
 			_patientService = patientService;
 			_departmentService = departmentService;
-			_context = context;
 			_userManager = userManager;
+			_context = context;
+			_workingHourstService = workingHourstService;
 		}
 		public async Task<IActionResult> Index(int? page)
 		{
@@ -47,13 +51,16 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult Create()
+		public async Task< IActionResult> Create()
 		{
 			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			IEnumerable<Departments> departments =await _departmentService.GetAllDepartmentsAsync();
+			List<Departments> departments1= departments.ToList();
+			
 			var viewModel = new AppoinmentVM
 			{
 				PatientID = userId,
-				Departments = _context.Departments.Select(d => new SelectListItem
+				Departments = departments1.Select(d => new SelectListItem
 				{
 					Value = d.Id.ToString(),
 					Text = d.DepartmentName
@@ -67,8 +74,8 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create(AppoinmentVM model)
 		{
-			WorkingHours? work = _context.WorkingHours.SingleOrDefault(x => x.Id == model.SelectedWorkingHoursID);
-			Departments? dept = _context.Departments.SingleOrDefault(d => d.Id == model.SelectedDepartmentID);
+			WorkingHours? work = await _workingHourstService.GethoursByIdAsync(model.SelectedWorkingHoursID);
+			Departments? dept = await _departmentService.GetDepartmentByIdAsync(model.SelectedDepartmentID);
 
             if (ModelState.IsValid)
 			{
@@ -83,14 +90,13 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 					Day = work.Day,
 					Department = dept
 				};
+				await _appointmentService.AddAppointmentAsync(appointment);
+				await _workingHourstService.DeletehoursAsync(model.SelectedWorkingHoursID);
 
-				_context.Appointments.Add(appointment);
-				await _context.SaveChangesAsync();
-				return RedirectToAction("Index");
+                return RedirectToAction("Index");
 			}
-
-			// Reload departments if something goes wrong
-			model.Departments = _context.Departments.Select(d => new SelectListItem
+			IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
+			model.Departments = departments.Select(d => new SelectListItem
 			{
 				Value = d.Id.ToString(),
 				Text = d.DepartmentName
@@ -99,21 +105,21 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 		}
 
         [HttpGet]
-        public JsonResult GetDoctorsByDepartment(string departmentId)
+        public async Task<JsonResult >GetDoctorsByDepartment(string departmentId)
         {
-            var doctors = _context.Doctors
-                .Where(d => d.DepartmentId == departmentId)
-                .Select(d => new { value = d.Id, text = d.FullName })
-                .ToList();
+            var doctors = await _doctorService.GetByDepartmentId(departmentId);
 
-            return Json(doctors);
+            var doctorList = doctors.Select(d => new { value = d.Id, text = d.FullName }).ToList();
+            return Json(doctorList);
         }
 
 
         [HttpGet]
-        public JsonResult GetWorkingHoursByDoctor(string doctorId)
+        public async Task<JsonResult> GetWorkingHoursByDoctor(string doctorId)
         {
-            var workingHours = _context.WorkingHours
+            IEnumerable<WorkingHours> workingHours = await _workingHourstService.GetAllWorkingHoursAsync();
+
+            var filteredWorkingHours = workingHours
                 .Where(w => w.DoctorId == doctorId)
                 .Select(w => new
                 {
@@ -122,7 +128,13 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
                 })
                 .ToList();
 
-            return Json(workingHours);
+            if (!filteredWorkingHours.Any())
+            {
+                Console.WriteLine("No working hours found for this doctor.");
+            }
+
+            return Json(filteredWorkingHours);
+
         }
 
         [HttpGet]

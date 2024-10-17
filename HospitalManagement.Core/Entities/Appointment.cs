@@ -26,8 +26,6 @@ namespace HospitalSystem.Core.Entities
         public string? DeptId { get; set; }
         public virtual Departments? Department { get; set; }
 
-
-
         public DateTime DateOfBirth { get; set; }
 
         public int CalculateAge()

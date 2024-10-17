@@ -31,11 +31,11 @@
             border-radius: 10px;
             background-color: #f9f9f9;
             margin-bottom: 20px;
-            padding: 10px; /* Reduced padding */
+            padding: 10px;
             height: auto;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px; /* Set a max width to make the card smaller */
-            margin: 10px; /* Margin for spacing between cards */
+            max-width: 400px;
+            margin: 10px;
         }
 
         .rounded-circle {
@@ -45,9 +45,9 @@
 
         .appointment-header {
             font-weight: bold;
-            font-size: 1.3em; /* Keep the header size */
-            margin-bottom: 10px; /* Adjust margin */
-            color: #007bff; /* Changed color to blue */
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #007bff;
         }
 
         .doctor-info {
@@ -61,23 +61,28 @@
         }
 
         .appointment-details {
-            margin-top: 10px; /* Adjusted margin */
-            font-size: 0.9em; /* Slightly smaller font size */
+            margin-top: 10px;
+            font-size: 0.9em;
         }
 
         .calendar-icon {
-            color: #007bff; /* Blue color for the icon */
-            margin-right: 5px; /* Reduced margin */
-            font-size: 1.2em; /* Smaller icon size */
+            color: #007bff;
+            margin-right: 5px;
+            font-size: 1.2em;
         }
 
         .doctor-info .calendar-icon {
-            margin-left: 10px; /* Add margin to the left of the icon */
+            margin-left: 10px;
         }
 
-        /* Added spacing between attributes */
         .attribute {
-            margin-bottom: 5px; /* Space between attributes */
+            margin-bottom: 5px;
+        }
+
+        .btn-actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -98,6 +103,26 @@
                             <strong>Start Date Time:</strong> <span class="attribute">@appointment.StartDateTime</span><br />
                             <strong>End Date Time:</strong> <span class="attribute">@appointment.EndDateTime</span>
                         </p>
+                        <a data-toggle="modal" data-target="#delete_doctor_@appointment.AppointmentID" style="color: #007bff";>
+                            <i class="fa fa-trash-o m-r-5"></i> Cancel Appointment
+                        </a>
+                        <div id="delete_doctor_@appointment.AppointmentID" class="modal fade delete-modal" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                                        <h3>Are you sure you want to delete this Doctor?</h3>
+                                        <div class="m-t-20">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                            <form asp-action="ConfirmDelete" method="post" style="display:inline;">
+                                                <input type="hidden" name="id" value="@appointment.AppointmentID" />
+                                                <button type="submit" class="btn btn-danger">Cancel</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End of Modal -->
                     </div>
                 </div>
             }

@@ -40,15 +40,6 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             ViewBag.NurseCount = nurses.Count();
             return View();
         }
-        public async Task<IActionResult> UpcomingAppointmentsPartial()
-        {
-            var appointments = await _IappointmentService.GetAllAppointmentsAsync();
-            var upcomingAppointments = appointments
-                                .OrderBy(a => a.StartDateTime)
-                                .Take(5) 
-                                .ToList();
-            return PartialView( upcomingAppointments);
-        }
         public async Task<IActionResult> DoctorsPartial()
         {
 			var doctors = await _IdoctorService.GetAllDoctorsAsync();

@@ -106,7 +106,7 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 		}
 
         [HttpGet]
-        public async Task<JsonResult >GetDoctorsByDepartment(string departmentId)
+        public async Task<JsonResult>GetDoctorsByDepartment(string departmentId)
         {
             var doctors = await _doctorService.GetByDepartmentId(departmentId);
 
@@ -138,59 +138,20 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 
         }
 
-        [HttpGet]
-		public async Task<IActionResult> Edit(string id)
-		{
-			var appointment = await _appointmentService.GetAppointmentByIdAsync(id);
-			if (appointment == null)
-			{
-				return NotFound();
-			}
-
-			var doctors = await _doctorService.GetAllDoctorsAsync();
-			var patients = await _patientService.GetAllPatientsAsync();
-			var departments = await _departmentService.GetAllDepartmentsAsync();
-
-			ViewBag.Doctors = doctors.Select(d => new SelectListItem
-			{
-				Value = d.Id.ToString(),
-				Text = d.FullName
-			}).ToList();
-
-			ViewBag.Patients = patients.Select(p => new SelectListItem
-			{
-				Value = p.Id.ToString(),
-				Text = p.UserName
-			}).ToList();
-
-			ViewBag.Departments = departments.Select(p => new SelectListItem
-			{
-				Value = p.Id.ToString(),
-				Text = p.DepartmentName
-			}).ToList();
-
-			ViewBag.StatusList = new SelectList(Enum.GetValues(typeof(Status)));
-
-			return View(appointment);
-		}
-
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(Appointment appointment)
-		{
-			if (ModelState.IsValid)
-			{
-				await _appointmentService.UpdateAppointmentAsync(appointment);
-				return RedirectToAction("Index");
-			}
-			return View(appointment);
-		}
-
-		[HttpPost]
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> ConfirmDelete(string id)
 		{
-			await _appointmentService.DeleteAppointmentAsync(id);
+			 var appointment=await _appointmentService.GetAppointmentByIdAsync(id);
+			var workingHours = await _workingHourstService.GetAllWorkingHoursAsync();
+			var filteredWorkingHours = workingHours.FirstOrDefault(a=>a.DoctorId==appointment.DoctorID && a.Day==appointment.Day
+			&& a.StartHour==appointment.StartDateTime && a.EndHour==appointment.EndDateTime);
+			if (filteredWorkingHours != null)
+			{
+				filteredWorkingHours.IsValid = true;
+			}
+			 await _appointmentService.DeleteAppointmentAsync(id);
+
 			return RedirectToAction("Index");
 		}
 

@@ -41,6 +41,7 @@ namespace HospitalSystem.Persistance.Repository
             var Appointment = await GetEntityByIdAsync(id);
             if (Appointment != null)
             {
+                
                 _context.Appointments.Remove(Appointment);
                 await _context.SaveChangesAsync();
             }

@@ -7,6 +7,7 @@ namespace HospitalSystem.Persistance.UnitOfWork
     {
 
         private readonly ApplicationDbContext _context;
+            
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserStore<ApplicationUser> _userStore;
 
@@ -22,6 +23,14 @@ namespace HospitalSystem.Persistance.UnitOfWork
 
         public IGenericRepository<Departments> _departmentsRepository { get; private set; }
 
+		public IGenericRepository<Feedback> _feedbacksRepository { get; private set; }
+
+		public IGenericRepository<NewsPost> _newsRepository { get; private set; }
+
+		public IGenericRepository<WorkingHours> _hoursRepository { get; private set; }
+
+        public IGenericRepository<Education> _educationRepository {  get; private set; }
+
         public UnitOfWork(ApplicationDbContext applicationDbContext,UserManager<ApplicationUser> userManager, IUserStore<ApplicationUser> userStore)
         {
             _context = applicationDbContext;
@@ -33,7 +42,10 @@ namespace HospitalSystem.Persistance.UnitOfWork
             _appointmentRepository = new AppointmentRepository(applicationDbContext);
             _recordRepository = new MedicalRecordRepository(applicationDbContext);
             _departmentsRepository = new DpartmentRepository(applicationDbContext);
-            
+            _feedbacksRepository=new FeedbackRepository(applicationDbContext);
+            _newsRepository=new NewsRepository(applicationDbContext);
+            _hoursRepository =new WorkingHoursRepository(applicationDbContext);
+            _educationRepository =new EducationRepository(applicationDbContext);
 
         }
         public int Complete()

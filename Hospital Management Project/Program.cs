@@ -65,6 +65,10 @@ namespace Hospital_Management_Project
             builder.Services.AddScoped<IDoctorService, DoctorService>();
             builder.Services.AddScoped<INurseService, NurseService>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IFeedbackService, FeedbackService>();
+            builder.Services.AddScoped<INewsService, NewsService>();
+            builder.Services.AddScoped<IWorkingHourstService, WorkingHoursService>();
+            builder.Services.AddScoped<IEducationService, EducationService>();
             builder.Services.AddScoped<IImageService, ImageService>();
             builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();

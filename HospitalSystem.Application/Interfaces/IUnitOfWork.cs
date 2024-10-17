@@ -8,6 +8,10 @@
         IAppointmentRepository _appointmentRepository { get; }
         IMedicalRecordRepository _recordRepository { get; }
         IGenericRepository<Departments> _departmentsRepository { get; }
+        IGenericRepository<Feedback> _feedbacksRepository { get; }
+        IGenericRepository<NewsPost> _newsRepository { get; }
+        IGenericRepository<WorkingHours> _hoursRepository { get; }
+        IGenericRepository<Education> _educationRepository { get; }
         int Complete();
 
     }

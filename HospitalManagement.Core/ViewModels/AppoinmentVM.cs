@@ -10,6 +10,7 @@ namespace HospitalSystem.Core.ViewModels
 {
     public class AppoinmentVM
     {
+        public string AppointemntId {  get; set; }=Guid.NewGuid().ToString();
         public string PatientID { get; set; }
         public string SelectedDepartmentID { get; set; }
         public string SelectedDoctorID { get; set; }

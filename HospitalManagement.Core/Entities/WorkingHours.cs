@@ -9,11 +9,14 @@ namespace HospitalSystem.Core.Entities
     public class WorkingHours
     { 
         public string Id {  get; set; }= Guid.NewGuid().ToString();
-        public DayOfWeek Day { get; set; }
-        public TimeSpan StartHour { get; set; } 
+        [DataType(DataType.Date)]  // Date only
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateOnly Day { get; set; }
+        public TimeSpan StartHour { get; set; }
         public TimeSpan EndHour { get; set; }
         public string? DoctorId { get; set; }
         public virtual Doctor? Doctor { get; set; }
+        public bool IsValid { get; set; } = true;
 
     }
 }

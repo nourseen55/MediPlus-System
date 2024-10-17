@@ -9,13 +9,13 @@
         <br /><br /><br />
         <div class="container">
             <div class="form-container mx-auto my-5" style="max-width: 1000px;">
-                <h3 class="form-header fw-semibold my-3">Appointment List</h3>
-                <div class="line my-2"></div>
+                <h3 class="form-header fw-semibold my-3 text-center">Appointment List</h3>
+                <div class="line my-4 mx-auto" style="width: 50%; height: 2px; background-color: #007bff;"></div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
-                            <table class="table table-border table-striped custom-table datatable mb-2">
-                                <thead class="bg-primary text-dark">
+                            <table class="table table-bordered table-hover custom-table datatable mb-2">
+                                <thead class="bg-primary text-white">
                                     <tr>
                                         <th>Name</th>
                                         <th>Age</th>
@@ -36,15 +36,17 @@
                                         @foreach (var item in Model)
                                         {
                                             <tr>
-                                                <td>
-                                                    <img width="28" height="28" src="~/@item.Img" class="rounded-circle m-r-5" alt="">
-                                                    @(item.FirstName + " " + item.LastName)
+                                                <td class="align-middle">
+                                                    <img width="40" height="40" src="~/@item.Img" class="rounded-circle me-2" alt="">
+                                                    <span>@(item.FirstName + " " + item.LastName)</span>
                                                 </td>
-                                                <td>@item.Age()</td>
-                                                <td>@item.Gender</td>
-                                                <td>@item.City</td>
-                                                <td class="text-center">
-                                                    <a href="mailto:@item.Email" class="btn btn-primary text-white"><i class="icofont icofont-paper-plane"></i> Send Message</a>
+                                                <td class="align-middle">@item.Age()</td>
+                                                <td class="align-middle">@item.Gender</td>
+                                                <td class="align-middle">@item.City</td>
+                                                <td class="text-center align-middle">
+                                                    <a href="mailto:@item.Email" class="btn btn-sm btn-primary text-white">
+                                                        <i class="icofont icofont-paper-plane"></i> Send Message
+                                                    </a>
                                                 </td>
                                             </tr>
                                         }
@@ -66,3 +68,57 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+<style>
+    /* Enhancing the style */
+    .custom-table {
+        border-collapse: separate;
+        border-spacing: 0 10px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .custom-table th, .custom-table td {
+            border: none;
+            padding: 12px 15px;
+        }
+
+        .custom-table th {
+            background-color: #007bff;
+            color: white;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .custom-table td {
+            background-color: #fff;
+            vertical-align: middle;
+        }
+
+        .custom-table img {
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .custom-table tbody tr:hover {
+            background-color: #f1f3f5;
+        }
+
+    .form-header {
+        color: #007bff;
+        font-size: 24px;
+    }
+
+    .table-responsive {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .line {
+        background-color: #007bff;
+        height: 2px;
+        margin-top: 20px;
+    }
+</style>

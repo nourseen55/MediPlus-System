@@ -1,0 +1,50 @@
+﻿@model HospitalSystem.Core.Entities.WorkingHours
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 style="text-align: center;">Create</h1>
+
+<h4 style="text-align: center;">WorkingHours</h4>
+<hr />
+<div style="display: flex; justify-content: center; margin-top: 30px;">
+    <div style="width: 50%; padding: 20px; background-color: #f9f9f9; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" style="color: red; text-align: center;"></div>
+            <input type="hidden" asp-for="DoctorId" />
+
+            <div style="margin-bottom: 15px;">
+                <label asp-for="Day" style="display: block; margin-bottom: 5px;"></label>
+                <input asp-for="Day" type="number" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" />
+                <span asp-validation-for="Day" style="color: red;"></span>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label asp-for="StartHour" style="display: block; margin-bottom: 5px;"></label>
+                <input asp-for="StartHour" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" />
+                <span asp-validation-for="StartHour" style="color: red;"></span>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label asp-for="EndHour" style="display: block; margin-bottom: 5px;"></label>
+                <input asp-for="EndHour" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" />
+                <span asp-validation-for="EndHour" style="color: red;"></span>
+            </div>
+
+            <div style="text-align: center;">
+                <input type="submit" value="Create" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a asp-action="Index" style="color: #007BFF; text-decoration: none;">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

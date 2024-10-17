@@ -1,0 +1,113 @@
+﻿@model IEnumerable<WorkingHours>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="create-button-container">
+    <a class="create-button" asp-action="Create">Create New</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Day</th>
+            <th>Start Hour</th>
+            <th>End Hour</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Day</td>
+                <td>@item.StartHour</td>
+                <td>@item.EndHour</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a data-toggle="modal" data-target="#delete_doctor_@item.Id">
+                        <i class="fa fa-trash-o m-r-5"></i> Delete
+                    </a>
+                </td>
+            </tr>
+            <div id="delete_doctor_@item.Id" class="modal fade delete-modal" role="dialog">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                            <h3>Are you sure you want to delete this Working Hours?</h3>
+                            <div class="m-t-20">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <form asp-action="ConfirmDelete" method="post" style="display:inline;">
+                                    <input type="hidden" name="id" value="@item.Id" />
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of Modal -->
+        }
+    </tbody>
+</table>
+
+<style>
+    .create-button-container {
+        text-align: center; /* Align the button to the right */
+        margin: 20px 0; /* Add space around the button */
+    }
+
+    /* Styling for the create button */
+    .create-button {
+        background-color: #4CAF50; /* Green background */
+        color: white; /* White text */
+        padding: 10px 20px; /* Add padding to make the button larger */
+        text-decoration: none; /* Remove underline */
+        font-size: 16px; /* Larger font for the button */
+        border-radius: 5px; /* Rounded corners */
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    }
+
+        /* Hover effect for the create button */
+        .create-button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+    /* Basic table styling */
+    table {
+        width: 80%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    a {
+        text-decoration: none;
+@*         color: #007BFF;
+ *@    }
+
+</style>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

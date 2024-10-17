@@ -1,0 +1,39 @@
+﻿@model HospitalSystem.Core.Entities.WorkingHours
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<br />
+
+<h4 style="text-align: center;"> Edit WorkingHours</h4>
+<hr />
+<div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+    <div style="width: 60%; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div style="margin-bottom: 15px;">
+                <label asp-for="Day" style="font-weight: bold;"></label>
+                <input asp-for="Day" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" />
+                <span asp-validation-for="Day" class="text-danger"></span>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label asp-for="StartHour" style="font-weight: bold;"></label>
+                <input asp-for="StartHour" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" />
+                <span asp-validation-for="StartHour" class="text-danger"></span>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label asp-for="EndHour" style="font-weight: bold;"></label>
+                <input asp-for="EndHour" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" />
+                <span asp-validation-for="EndHour" class="text-danger"></span>
+            </div>
+            <div style="text-align: center;">
+                <input type="submit" value="Save" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+    <a asp-action="Index" style="text-decoration: none; color: #007bff;">Back to List</a>
+</div>

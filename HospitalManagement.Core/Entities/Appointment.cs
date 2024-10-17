@@ -11,7 +11,9 @@ namespace HospitalSystem.Core.Entities
 
         [Display(Name = "Start Date")]
         public TimeSpan? StartDateTime { get; set; }
-        public DayOfWeek Day { get; set; }
+        [DataType(DataType.Date)]  // Date only
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateOnly Day { get; set; }
         [Display(Name = "End Date")]
         public TimeSpan? EndDateTime { get; set; }
         public string PatientID { get; set; }
@@ -33,6 +35,6 @@ namespace HospitalSystem.Core.Entities
             return DateTime.Today.Year - DateOfBirth.Year;
         }
 
-        
+
     }
 }

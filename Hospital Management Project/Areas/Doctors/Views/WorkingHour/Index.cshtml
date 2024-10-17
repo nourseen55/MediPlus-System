@@ -4,10 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-
 <div class="create-button-container">
     <a class="create-button" asp-action="Create">Create New</a>
 </div>
+<br />
 
 <table>
     <thead>
@@ -22,12 +22,12 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Day</td>
+                <td>@item.Day.ToShortDateString()</td>
                 <td>@item.StartHour</td>
                 <td>@item.EndHour</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a data-toggle="modal" data-target="#delete_doctor_@item.Id">
+                    <a class="action-link edit-link" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="action-link delete-link" data-toggle="modal" data-target="#delete_doctor_@item.Id">
                         <i class="fa fa-trash-o m-r-5"></i> Delete
                     </a>
                 </td>
@@ -54,25 +54,28 @@
 </table>
 
 <style>
-    .create-button-container {
-        text-align: center; /* Align the button to the right */
-        margin: 20px 0; /* Add space around the button */
-    }
-
     /* Styling for the create button */
-    .create-button {
-        background-color: #4CAF50; /* Green background */
-        color: white; /* White text */
-        padding: 10px 20px; /* Add padding to make the button larger */
-        text-decoration: none; /* Remove underline */
-        font-size: 16px; /* Larger font for the button */
-        border-radius: 5px; /* Rounded corners */
-        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    .create-button-container {
+        text-align: center;
+        margin: 20px 0;
     }
 
-        /* Hover effect for the create button */
+    .create-button {
+        background-color: #ffffff; /* White background */
+        color: #007BFF; /* Blue text */
+        padding: 12px 25px;
+        font-size: 18px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-family: 'Poppins', sans-serif; /* Cute font */
+        transition: background-color 0.3s ease, color 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 2px solid #007BFF;
+    }
+
         .create-button:hover {
-            background-color: #45a049; /* Darker green on hover */
+            background-color: #007BFF; /* Blue background on hover */
+            color: white; /* White text on hover */
         }
 
     /* Basic table styling */
@@ -84,30 +87,48 @@
     }
 
     th {
-        background-color: #4CAF50;
-        color: white;
-        padding: 10px;
+        background-color: #e0f7fa; /* Light blue background */
+        color: #007BFF; /* Blue text */
+        padding: 12px;
         text-align: left;
         font-weight: bold;
+        font-size: 16px;
+        font-family: 'Poppins', sans-serif;
     }
 
     td {
-        padding: 10px;
+        padding: 12px;
         border-bottom: 1px solid #ddd;
+        font-family: 'Poppins', sans-serif;
     }
 
     tr:hover {
-        background-color: #f5f5f5;
+        background-color: #f9f9f9;
     }
 
-    a {
+    /* Action link styling */
+    .action-link {
         text-decoration: none;
-@*         color: #007BFF;
- *@    }
+        color: #007BFF;
+        font-weight: bold;
+        font-family: 'Poppins', sans-serif;
+        transition: color 0.3s ease;
+    }
 
+        .action-link:hover {
+            color: #0056b3;
+        }
+
+    .edit-link:hover {
+        color: #4CAF50;
+    }
+
+    .delete-link:hover {
+        color: #ff5252;
+    }
 </style>
+
 @section Scripts {
     @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

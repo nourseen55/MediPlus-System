@@ -1,39 +1,111 @@
 ﻿@model HospitalSystem.Core.Entities.WorkingHours
 
-@{
-    ViewData["Title"] = "Edit";
-}
-<br />
 
-<h4 style="text-align: center;"> Edit WorkingHours</h4>
-<hr />
-<div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-    <div style="width: 60%; padding: 20px; background-color: #f9f9f9; border-radius: 10px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
+
+<h1 style="text-align: center; font-family: 'Poppins', sans-serif; color: #007BFF;">Edit Working Hours</h1>
+
+<div style="display: flex; justify-content: center; margin-top: 30px;">
+    <div style="width: 50%; padding: 30px; background-color: #ffffff; border-radius: 15px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
         <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly" style="color: red; text-align: center;"></div>
             <input type="hidden" asp-for="Id" />
-            <div style="margin-bottom: 15px;">
-                <label asp-for="Day" style="font-weight: bold;"></label>
-                <input asp-for="Day" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" />
-                <span asp-validation-for="Day" class="text-danger"></span>
+
+            <!-- Date picker for the Day field -->
+            <div style="margin-bottom: 20px;">
+                <label asp-for="Day" style="display: block; font-family: 'Poppins', sans-serif; color: #007BFF; margin-bottom: 10px;">Select Day</label>
+                <input asp-for="Day" type="date" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 10px;" />
+                <span asp-validation-for="Day" style="color: red;"></span>
             </div>
-            <div style="margin-bottom: 15px;">
-                <label asp-for="StartHour" style="font-weight: bold;"></label>
-                <input asp-for="StartHour" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" />
-                <span asp-validation-for="StartHour" class="text-danger"></span>
+
+            <!-- Time picker for StartHour field -->
+            <div style="margin-bottom: 20px;">
+                <label asp-for="StartHour" style="display: block; font-family: 'Poppins', sans-serif; color: #007BFF; margin-bottom: 10px;">Start Hour</label>
+                <input asp-for="StartHour" type="time" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 10px;" />
+                <span asp-validation-for="StartHour" style="color: red;"></span>
             </div>
-            <div style="margin-bottom: 15px;">
-                <label asp-for="EndHour" style="font-weight: bold;"></label>
-                <input asp-for="EndHour" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc;" />
-                <span asp-validation-for="EndHour" class="text-danger"></span>
+
+            <!-- Time picker for EndHour field -->
+            <div style="margin-bottom: 20px;">
+                <label asp-for="EndHour" style="display: block; font-family: 'Poppins', sans-serif; color: #007BFF; margin-bottom: 10px;">End Hour</label>
+                <input asp-for="EndHour" type="time" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 10px;" />
+                <span asp-validation-for="EndHour" style="color: red;"></span>
             </div>
+
+            <!-- Submit button -->
             <div style="text-align: center;">
-                <input type="submit" value="Save" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;" />
+                <input type="submit" value="Save" class="submit-button" />
             </div>
         </form>
     </div>
 </div>
 
+<!-- Back to List button -->
 <div style="text-align: center; margin-top: 20px;">
-    <a asp-action="Index" style="text-decoration: none; color: #007bff;">Back to List</a>
+    <form asp-action="Index" method="get" style="display: inline;">
+        <button type="submit" class="back-button">
+            Back to List
+        </button>
+    </form>
 </div>
+<br />
+
+<style>
+    /* Styling for the submit button */
+    .submit-button {
+        background-color: #ffffff; /* White background */
+        color: #007BFF; /* Blue text */
+        padding: 12px 25px;
+        border: 2px solid #007BFF;
+        border-radius: 50px;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif; /* Cute font */
+        transition: background-color 0.3s ease, color 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .submit-button:hover {
+            background-color: #007BFF; /* Blue background on hover */
+            color: white; /* White text on hover */
+        }
+
+    /* Styling for the back button */
+    .back-button {
+        padding: 12px 25px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        transition: background-color 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+    /* Input field styling */
+    input[type="date"], input[type="time"] {
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    /* Labels styling */
+    label {
+        font-size: 16px;
+        color: #007BFF;
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

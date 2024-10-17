@@ -49,7 +49,7 @@
                                             <div class="col-md-12">
                                                 <div class="d-flex text-left">
                                                     <a asp-controller="MedicalRecord" asp-action="Details" asp-route-id="@record.Id" class="btn btn-info m-2 text-white">View</a>
-                                                    <a asp-controller="MedicalRecord" asp-action="Edit" asp-route-id="@record.Id" class="btn btn-warning m-2 text-white">Edit</a>
+                                                    <a asp-controller="MedicalRecord" asp-action="Edit" asp-route-id="@record.Id" class="btn btn-primary m-2 text-white">Edit</a>
                                                     <a onclick=DeleteItem("/Doctors/MedicalRecord/Delete/@record.Id") class="btn btn-danger m-2 text-white">Delete</a>
                                                 </div>
                                             </div>
@@ -60,7 +60,7 @@
                         }
 
                         <div class="text-right mt-4">
-                            <a asp-action="Create" asp-controller="MedicalRecord" asp-route-patientId="@ViewBag.PatientId" class="btn btn-success text-white">Add New Record</a>
+                            <a asp-action="Create" asp-controller="MedicalRecord" asp-route-patientId="@ViewBag.PatientId" class="btn btn-primary text-white">Add New Record</a>
                             <a asp-action="Index" asp-controller="MedicalRecord" asp-route-patientId="@ViewBag.PatientId" class="btn btn-info text-white">Back</a>
 
                         </div>

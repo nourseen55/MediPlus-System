@@ -13,16 +13,11 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
     public class AppointmentController : Controller
     {
        private readonly IAppointmentService _IAppointmentService;
-        private readonly IDoctorService _IDoctorService;
-        private readonly IPatientService _IPatientService;
-        private readonly IDepartmentService _departmentService;
         private readonly UserManager<ApplicationUser> _userManager;
-        public AppointmentController(IAppointmentService IAppointmentService, UserManager<ApplicationUser> userManager,IDoctorService IDoctorService, IPatientService IPatientService, IDepartmentService departmentService)
+        
+        public AppointmentController(IAppointmentService IAppointmentService, UserManager<ApplicationUser> userManager)
         {
             _IAppointmentService = IAppointmentService;
-            _IDoctorService = IDoctorService;
-            _IPatientService = IPatientService;
-            _departmentService = departmentService;
             _userManager = userManager;
         }
         public async Task<IActionResult> Index()
@@ -31,13 +26,7 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             return View(app);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(string id)
-        {
-            await _IAppointmentService.DeleteAppointmentAsync(id);
-            return RedirectToAction("Index");
-        }
-		
-	}
+       
+
+    }
 }

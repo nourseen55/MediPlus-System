@@ -8,7 +8,7 @@ namespace HospitalSystem.Persistance.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        /*public ApplicationDbContext()
+       /* public ApplicationDbContext()
         {
 
         }*/

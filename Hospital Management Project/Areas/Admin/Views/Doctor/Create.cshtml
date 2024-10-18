@@ -9,6 +9,11 @@
 <br />
 <br />
 <div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <h4 class="page-title text-center mb-4">Add Doctor</h4>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form asp-action="Create" method="post" enctype="multipart/form-data" class="shadow p-4 rounded bg-light">
@@ -103,8 +108,9 @@
                     </div>
                 </div>
 
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary btn-block">Create</button>
+                <div class="text-center mt-4">
+                    <button class="btn btn-primary submit-btn" type="submit">Create</button>
+                </div>
             </form>
 
             <div class="text-center mt-3">
@@ -125,3 +131,14 @@
         </script>
     }
 }
+<style>
+    .submit-btn {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+    }
+</style>

@@ -33,6 +33,7 @@
             <th>Day</th>
             <th>Start Hour</th>
             <th>End Hour</th>
+            <th>Status</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -43,6 +44,15 @@
                 <td>@item.Day.ToShortDateString()</td>
                 <td>@item.StartHour</td>
                 <td>@item.EndHour</td>
+                <td>
+                    @if(item.IsValid){
+                        <span class="custom-badge status-green">Active</span>
+                    }
+                    else
+                    {
+                        <span class="custom-badge status-red">Inactive</span>
+                    }
+                </td>
                 <td>
                     <a class="action-link edit-link" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                     <a class="action-link delete-link" data-toggle="modal" data-target="#delete_doctor_@item.Id">

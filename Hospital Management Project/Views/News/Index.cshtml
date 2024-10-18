@@ -20,6 +20,8 @@
         </div>
     </div>
 </div>
+<br />
+<br />
 
 <div id="main-content" class="blog-page">
     <div class="container">
@@ -45,9 +47,8 @@
                                     <span class="user-name">Posted by: @item.User.FullName</span>
                                     <span class="post-date">on @item.DatePosted.ToString("MMMM dd, yyyy hh:mm tt")</span>
                                 </div>
-                                <h3 class="text-center"><a href="blog-details.html">@item.Title</a></h3> <!-- Center the title -->
-                                <p class="post-content">@item.Content</p>
-
+                                <h3 class="custom-title">@item.Title</h3>
+                                <p class="custom-description">@item.Content</p>
                                 @if (!User.IsInRole(UserRoles.Patient.ToString()))
                                 {
                                     <a class="dropdown-item delete-link" data-toggle="modal" data-target="#delete_patient_@item.Id" style="font-size: 14px;">
@@ -90,26 +91,28 @@
     </div>
 </div>
 
-@if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole("Nurse") || User.IsInRole(UserRoles.Doctor.ToString()))
+@if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole(UserRoles.Doctor.ToString()))
 {
-    <div class="card-form-button">
-        <div class="body-form">
-            <form asp-action="Index" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <input type="text" name="Title" id="post-title" class="form-control" placeholder="Title" required />
-                </div>
-                <div class="form-group">
-                    <textarea id="post-content" class="form-control" name="Content" placeholder="Content" required></textarea>
-                </div>
-                <div class="form-group">
-                    <input type="file" id="post-image" class="form-control-file" name="postImage" />
-                </div>
-                <button type="submit" class="btn btn-royalblue">Add Post</button>
-            </form>
+    <div class="card-form-wrapper">
+        <div class="card-form-container">
+            <div class="body-form">
+                <form asp-action="Index" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="text" name="Title" id="post-title" class="form-control" placeholder="Title" required />
+                    </div>
+                    <div class="form-group">
+                        <textarea id="post-content" class="form-control" name="Content" placeholder="Content" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" id="post-image" class="form-control-file" name="postImage" />
+                    </div>
+                    <button type="submit" class="btn btn-royalblue">Add Post</button>
+                </form>
+            </div>
         </div>
     </div>
 }
-
+<br />
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 }
@@ -119,22 +122,17 @@
         display: flex;
         align-items: center;
         margin-bottom: 10px;
-        margin-left: 15px;
-    }
-
-    .single_post .body {
-        padding: 20px;
-        margin-left: 15px;
-    }
-
-    h3 {
-        margin-left: 15px;
-        font-size: 18px;
+        margin-left: 5px; /* Adjusted to move more to the left */
+        margin-top: 10px; /* Added to create space below the image */
     }
 
     .post-content {
         margin-left: 15px;
         margin-bottom: 10px;
+        text-align: justify;
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
     }
 
     .delete-link {
@@ -148,12 +146,11 @@
         }
 
     .card {
-        background: #f9f9f9;
+        background: #fff;
         transition: .5s;
         border: 1px solid #ccc;
         margin-bottom: 20px;
         border-radius: .55rem;
-        position: relative;
         width: 100%;
         box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
         padding: 20px;
@@ -161,14 +158,13 @@
 
     .img-post {
         position: relative;
-        overflow: hidden;
-        max-height: 200px; /* Set a max height for the image */
+        overflow: hidden; /* Optional: can be kept if you want to control overflow */
     }
 
         .img-post > img {
-            width: 100%; /* Set width to 100% for responsiveness */
-            height: auto;
-            object-fit: cover;
+            width: 100%; /* Ensures the image scales to the width of its container */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: contain; /* Ensures the whole image fits within the container */
         }
 
     .user-photo {
@@ -181,6 +177,7 @@
     .user-name {
         font-weight: bold;
         margin-right: 10px;
+        color: #333;
     }
 
     .post-date {
@@ -188,21 +185,63 @@
         font-size: 12px;
     }
 
-    .row {
-        margin: 0 -15px; /* To adjust for the column padding */
+    .card h3.custom-title {
+        font-size: 26px; /* Increased the font size */
+        text-align: center;
+        font-weight: bold;
+        color: #007bff; /* Changed color to make it stand out */
+        background-color: #f1f1f1; /* Added background to make the title pop */
+        padding: 10px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added subtle shadow for emphasis */
     }
 
-    .card h3 {
-        text-align: center; /* Center the title */
-        font-weight: bold; /* Make title bold */
-        color: #333; /* Change title color */
-        margin-bottom: 15px; /* Space below title */
+    .custom-description {
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
     }
 
-    .left-box {
+    .card-form-wrapper {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
+        margin-top: 40px;
+    }
+
+    .card-form-container {
+        background-color: white; /* White div around the form */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow */
+        max-width: 600px; /* Increase max width of the form */
         width: 100%;
     }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control, .form-control-file {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .btn-royalblue {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+        .btn-royalblue:hover {
+            background-color: #0056b3;
+        }
 </style>

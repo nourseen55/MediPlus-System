@@ -15,6 +15,8 @@ namespace HospitalSystem.Core.ViewModels
         public string SelectedDepartmentID { get; set; }
         public string SelectedDoctorID { get; set; }
         public string SelectedWorkingHoursID { get; set; }
+        public string SelectedDepartmentName { get; set; } // لاسم القسم
+        public string SelectedDoctorName { get; set; }
 
         public IEnumerable<SelectListItem>? Departments { get; set; }
         public IEnumerable<SelectListItem>? Doctors { get; set; }

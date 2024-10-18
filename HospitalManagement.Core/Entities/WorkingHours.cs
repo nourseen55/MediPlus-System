@@ -9,7 +9,7 @@ namespace HospitalSystem.Core.Entities
     public class WorkingHours
     { 
         public string Id {  get; set; }= Guid.NewGuid().ToString();
-        [DataType(DataType.Date)]  // Date only
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateOnly Day { get; set; }
         public TimeSpan StartHour { get; set; }

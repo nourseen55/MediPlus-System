@@ -29,28 +29,24 @@
             <div asp-validation-summary="ModelOnly" style="color: red; text-align: center;"></div>
             <input type="hidden" asp-for="DoctorId" />
 
-            <!-- Date picker for the Day field -->
             <div style="margin-bottom: 20px;">
                 <label asp-for="Day" style="display: block; font-family: 'Poppins', sans-serif; color: #007BFF; margin-bottom: 10px;">Select Day</label>
                 <input asp-for="Day" type="date" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 10px;" />
                 <span asp-validation-for="Day" style="color: red;"></span>
             </div>
 
-            <!-- Time picker for StartHour field -->
             <div style="margin-bottom: 20px;">
                 <label asp-for="StartHour" style="display: block; font-family: 'Poppins', sans-serif; color: #007BFF; margin-bottom: 10px;">Start Hour</label>
                 <input asp-for="StartHour" type="time" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 10px;" />
                 <span asp-validation-for="StartHour" style="color: red;"></span>
             </div>
 
-            <!-- Time picker for EndHour field -->
             <div style="margin-bottom: 20px;">
                 <label asp-for="EndHour" style="display: block; font-family: 'Poppins', sans-serif; color: #007BFF; margin-bottom: 10px;">End Hour</label>
                 <input asp-for="EndHour" type="time" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 10px;" />
                 <span asp-validation-for="EndHour" style="color: red;"></span>
             </div>
 
-            <!-- Submit button -->
             <div style="text-align: center;">
                 <input type="submit" value="Create" class="submit-button" />
             </div>
@@ -58,7 +54,7 @@
     </div>
 </div>
 
-<!-- Back to List button -->
+
 <div style="text-align: center; margin-top: 20px;">
     <form asp-action="Index" method="get" style="display: inline;">
         <button type="submit" class="back-button">
@@ -69,10 +65,10 @@
 <br />
 
 <style>
-    /* Styling for the submit button */
+
     .submit-button {
-        background-color: #ffffff; /* White background */
-        color: #007BFF; /* Blue text */
+        background-color: #ffffff;
+        color: #007BFF;
         padding: 12px 25px;
         border: 2px solid #007BFF;
         border-radius: 50px;
@@ -83,11 +79,11 @@
     }
 
         .submit-button:hover {
-            background-color: #007BFF; /* Blue background on hover */
-            color: white; /* White text on hover */
+            background-color: #007BFF;
+            color: white; 
         }
 
-    /* Styling for the back button */
+
     .back-button {
         padding: 12px 25px;
         background-color: #007BFF;
@@ -104,7 +100,7 @@
             background-color: #0056b3;
         }
 
-    /* Input field styling */
+
     input[type="date"], input[type="time"] {
         font-family: 'Poppins', sans-serif;
         font-size: 16px;
@@ -115,7 +111,6 @@
         padding: 10px;
     }
 
-    /* Labels styling */
     label {
         font-size: 16px;
         color: #007BFF;

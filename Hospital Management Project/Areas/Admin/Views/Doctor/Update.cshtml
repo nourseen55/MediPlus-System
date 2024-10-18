@@ -16,7 +16,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form asp-action="Update" method="post" enctype="multipart/form-data" class="shadow p-4 rounded bg-light">
-                <!-- First Row: Name and Email -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label asp-for="FirstName" class="control-label"></label>
@@ -35,7 +34,6 @@
                     </div>
                 </div>
 
-                <!-- Second Row: Password and Department -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label">Password <span class="text-danger">*</span></label>
@@ -51,7 +49,6 @@
                     </div>
                 </div>
 
-                <!-- Third Row: ZipCode and City -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label asp-for="ZipCode" class="control-label"></label>
@@ -65,7 +62,6 @@
                     </div>
                 </div>
 
-                <!-- Fourth Row: Gender and DateOfBirth -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label asp-for="Gender" class="control-label d-block">Gender</label>
@@ -103,7 +99,6 @@
                     </div>
                 </div>
 
-                <!-- Fifth Row: PhoneNumber and Avatar Image -->
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label asp-for="PhoneNumber" class="control-label"></label>

@@ -52,7 +52,7 @@ namespace HospitalSystem.Persistance.Data
                 if (roleName == null) { continue; }
 
                 var roleId = Guid.NewGuid().ToString();
-                roleIds[roleName] = roleId; // Store the role name and ID in the dictionary
+                roleIds[roleName] = roleId;
 
                 modelBuilder.Entity<IdentityRole>().HasData(
                     new IdentityRole

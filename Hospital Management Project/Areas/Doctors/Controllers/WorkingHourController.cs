@@ -22,15 +22,15 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
         public async Task< IActionResult> Index()
         {
             var hours = await _hourservice.GetAllWorkingHoursAsync();
-            var user = await _usermanager.GetUserAsync(User);  // انتظار النتيجة بشكل صحيح
-            var myhours = hours.Where(x => x.DoctorId == user.Id).ToList();  // تصحيح عملية المقارنة
+            var user = await _usermanager.GetUserAsync(User);  
+            var myhours = hours.Where(x => x.DoctorId == user.Id).ToList(); 
 
             return View(myhours);
         }
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var user = await _usermanager.GetUserAsync(User);  // انتظار النتيجة بشكل صحيح
+            var user = await _usermanager.GetUserAsync(User);  
             WorkingHours workingHours=new WorkingHours();
             workingHours.DoctorId = user.Id;
             return View(workingHours);

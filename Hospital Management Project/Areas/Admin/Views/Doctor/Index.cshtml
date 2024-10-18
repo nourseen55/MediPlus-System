@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Doctor>
 
 @{
-    Layout = "_docLayout";  // Use your desired layout here.
+    Layout = "_docLayout";
 }
 
 <div class="page-wrapper">
@@ -39,14 +39,11 @@
                             </div>
                         </div>
 
-                        <!-- Doctor Details -->
                         <h4 class="doctor-name text-ellipsis"><a href="profile.html">@doctor.FullName</a></h4>
                         <div class="user-country">
                             <i class="fa fa-map-marker"></i> @doctor.City
                         </div>
                     </div>
-
-                    <!-- Modal for Confirm Delete -->
                     <div id="delete_doctor_@doctor.Id" class="modal fade delete-modal" role="dialog">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -63,12 +60,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- End of Modal -->
-                </div> <!-- End of Column -->
+                    </div> 
+                </div>
             }
-        </div> <!-- End of Doctor Grid -->
-    </div> <!-- End of Content -->
-</div> <!-- End of Page Wrapper -->
+        </div>
+    </div> 
+</div> 
 
 <div class="sidebar-overlay" data-reff=""></div>
 

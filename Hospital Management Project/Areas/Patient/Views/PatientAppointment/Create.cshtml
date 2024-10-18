@@ -27,10 +27,6 @@
                     <label asp-for="SelectedDepartmentID">Department</label>
                     <select id="DepartmentSelect" class="form-control" asp-for="SelectedDepartmentID" asp-items="Model.Departments" onchange="fetchDoctors(this.value)">
                         <option value="">Select Department</option>
-                        @if (!string.IsNullOrEmpty(Model.SelectedDepartmentID))
-                        {
-                            <option value="@Model.SelectedDepartmentID" selected>@Model.SelectedDepartmentName</option>
-                        }
                     </select>
                     <span asp-validation-for="SelectedDepartmentID" class="text-danger"></span>
                 </div>
@@ -39,10 +35,6 @@
                     <label asp-for="SelectedDoctorID">Doctor</label>
                     <select id="DoctorId" class="form-control" asp-for="SelectedDoctorID" onchange="fetchWorkingHours(this.value)">
                         <option value="">Select Doctor</option>
-                        @if (!string.IsNullOrEmpty(Model.SelectedDoctorID))
-                        {
-                            <option value="@Model.SelectedDoctorID" selected>@Model.SelectedDoctorName</option>
-                        }
                     </select>
                     <span asp-validation-for="SelectedDoctorID" class="text-danger"></span>
                 </div>
@@ -75,15 +67,13 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            // Function to fetch doctors based on department
+
             window.fetchDoctors = function (departmentId) {
                 const doctorDropdown = document.getElementById('DoctorId');
-                doctorDropdown.innerHTML = '<option value="">Select Doctor</option>'; // Reset the dropdown
+                doctorDropdown.innerHTML = '<option value="">Select Doctor</option>';
 
                 if (departmentId) {
                     fetch(`/Patient/PatientAppointment/GetDoctorsByDepartment?departmentId=${departmentId}`)
@@ -98,19 +88,18 @@
                                 });
                                 doctorDropdown.style.display = "block";
                             } else {
-                                doctorDropdown.style.display = "none"; // Hide if the list is empty
-                                $('#workingHoursCard').hide();  // Hide working hours card
-                                $('#workingHoursText').html("No Appointment Available"); // Message no appointments available
+                                doctorDropdown.style.display = "none"; 
+                                $('#workingHoursCard').hide();  
+                                $('#workingHoursText').html("No Appointment Available");
                             }
                         })
                         .catch(error => console.error('Error fetching doctors:', error));
                 }
             };
 
-            // Function to fetch working hours based on selected doctor
             window.fetchWorkingHours = function (doctorId) {
                 const workingHoursDropdown = document.getElementById('WorkingHoursId');
-                workingHoursDropdown.innerHTML = '<option value="">Select Working Hours</option>'; // Reset the dropdown
+                workingHoursDropdown.innerHTML = '<option value="">Select Working Hours</option>';
 
                 if (doctorId) {
                     fetch(`/Patient/PatientAppointment/GetWorkingHoursByDoctor?doctorId=${doctorId}`)
@@ -129,8 +118,8 @@
                                 $('#workingHoursText').html(workingHoursText);
                                 $('#workingHoursCard').show();
                             } else {
-                                $('#workingHoursCard').show();  // Show working hours card
-                                $('#workingHoursText').html("No Appointment Available"); // Message no appointments available
+                                $('#workingHoursCard').show();  
+                                $('#workingHoursText').html("No Appointment Available"); 
                             }
                         })
                         .catch(error => console.error('Error fetching working hours:', error));
@@ -139,12 +128,10 @@
                 }
             };
 
-            // If a doctor is selected when the page loads, call the fetchWorkingHours function
             if ('@Model.SelectedDoctorID' !== '') {
                 fetchWorkingHours('@Model.SelectedDoctorID');
             }
 
-            // If a department is selected when the page loads, call the fetchDoctors function
             if ('@Model.SelectedDepartmentID' !== '') {
                 fetchDoctors('@Model.SelectedDepartmentID');
             }

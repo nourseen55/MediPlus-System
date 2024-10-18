@@ -11,7 +11,7 @@ namespace HospitalSystem.Core.Entities
 
         [Display(Name = "Start Date")]
         public TimeSpan? StartDateTime { get; set; }
-        [DataType(DataType.Date)]  // Date only
+        [DataType(DataType.Date)] 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateOnly Day { get; set; }
         [Display(Name = "End Date")]

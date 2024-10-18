@@ -145,7 +145,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                 }
 
                 // If login failed, display an error message
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                ModelState.AddModelError(string.Empty, "Email or Password is invalid!");
                 return Page();
             }
             return Page();

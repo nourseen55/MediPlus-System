@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 {
@@ -53,6 +54,15 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
+        public List<SelectListItem> GenderList => Enum.GetValues(typeof(Gender))
+            .Cast<Gender>()
+            .Select(g => new SelectListItem
+            {
+                Value = g.ToString(),
+                Text = g.ToString()
+            })
+            .ToList();
+
         public class InputModel
         {
             [Required]
@@ -70,6 +80,11 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Phone]
+            [Display(Name = "Phone Number")]
+            public string PhoneNumber { get; set; }
 
             [Required]
             [Display(Name = "First Name")]
@@ -90,7 +105,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 
             [Required]
             [Display(Name = "Profile Image")]
-            public IFormFile Img { get; set; } 
+            public IFormFile Img { get; set; }
 
             [Display(Name = "Zip Code")]
             public string ZipCode { get; set; }
@@ -125,7 +140,8 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                     Country = Input.Country,
                     City = Input.City,
                     UserName = Input.Email,
-                    Email = Input.Email
+                    Email = Input.Email,
+                    PhoneNumber = Input.PhoneNumber,
                 };
 
                 // Handle image upload
@@ -169,7 +185,6 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             return Page();
         }
 
-
         private IUserEmailStore<ApplicationUser> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
@@ -178,6 +193,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             }
             return (IUserEmailStore<ApplicationUser>)_userStore;
         }
+
         private string GenerateEmailBody(string callbackUrl, string email)
         {
             return $@"
@@ -246,24 +262,19 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
     </head>
     <body>
         <div class='container'>
-            <img src='https://th.bing.com/th/id/OIP.byIdD-ZjaQ9DaGLcIR0OuwAAAA?rs=1&pid=ImgDetMain' width='100%' alt='Company Logo'>
+            <img src='https://th.bing.com/th/id/OIP.byIdD-ZjaQ9DaGLcIR0OuwAAAA?rs=1&pid=ImgDetMain' width='100' alt='Logo' />
             <div class='content'>
-                <h1>Email Confirmation</h1>
-                <p>Hello {HtmlEncoder.Default.Encode(email)},</p>
-                <p>Thank you for registering an account with us. Please confirm your email by clicking the button below:</p>
-                <p style='text-align: center;'>
-                    <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' class='btn'>Confirm Email</a>
-                </p>
-                <p>If you did not request this, please ignore this email.</p>
+                <h1>Confirm your email</h1>
+                <p>Thank you for registering with us! Please confirm your email by clicking the button below:</p>
+                <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' class='btn'>Confirm Email</a>
+                <p>If you did not create an account, no further action is required.</p>
             </div>
             <div class='footer'>
-                <p>&copy; {DateTime.Now.Year} Mediplus. All rights reserved.</p>
-                <p>If you need help, contact our <a href='mailto:hospitalmanagments@gmail.com'>support team</a>.</p>
+                <p>&copy; {DateTime.UtcNow.Year} Your Company. All rights reserved.</p>
             </div>
         </div>
     </body>
     </html>";
         }
-
     }
 }

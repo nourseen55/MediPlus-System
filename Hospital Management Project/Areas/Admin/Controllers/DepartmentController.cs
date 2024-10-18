@@ -87,12 +87,6 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             return View(departments);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Delete(string id)
-        {
-            var dept = await _departmentService.GetDepartmentByIdAsync(id);
-            return View(dept);
-        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmDelete(string id)

@@ -43,7 +43,7 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             return View(doctor);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Doctor doctor, IFormFile Img)//doctorVM
+        public async Task<IActionResult> Create(Doctor doctor, IFormFile Img)
         {
             if (ModelState.IsValid)
             {

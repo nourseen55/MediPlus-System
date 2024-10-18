@@ -87,7 +87,7 @@
 						<!-- Contact -->
 						<ul class="top-link">
 							<div class="d-flex align-items-center">
-								@if (User.Identity.IsAuthenticated) // Check if the user is authenticated
+								@if (User.Identity.IsAuthenticated)
 								{
 									<div class="profile-pic me-2">
 										@if (User.IsInRole("Nurse"))
@@ -207,11 +207,7 @@
 							<!--/ End Main Menu -->
 						</div>
 
-					@* 	<div class="col-lg-2 col-12">
-							<div class="get-quote">
-								<a asp-action="Create" asp-controller="PatientAppointment" asp-area="Patient" class="btn btn-primary">Book Appointment</a>
-							</div>
-						</div> *@
+				
 
 					</div>
 				</div>
@@ -271,17 +267,6 @@
 							</ul>
 						</div>
 					</div>
-			@* <div class="col-lg-3 col-md-6 col-12">
-					<div class="single-footer">
-					<h2>Newsletter</h2>
-					<p>subscribe to our newsletter to get allour news in your inbox.. Lorem ipsum dolor sit amet, consectetur adipisicing elit,</p>
-					<form action="mail/mail.php" method="get" target="_blank" class="newsletter-inner">
-					<input name="email" placeholder="Email Address" class="common-input" onfocus="this.placeholder = ''"
-					onblur="this.placeholder = 'Your email address'" required="" type="email">
-					<button class="button"><i class="icofont icofont-paper-plane"></i></button>
-					</form>
-					</div>
-					</div> *@
 				</div>
 			</div>
 		</div>
@@ -303,17 +288,17 @@
 	<!--/ End Footer Area -->
 	<style>
 		.profile-pic {
-			width: 50px; /* عرض الدائرة */
-			height: 50px; /* ارتفاع الدائرة */
-			border-radius: 50%; /* يجعل الصورة دائرية */
-			overflow: hidden; /* يخفي الأجزاء الزائدة من الصورة */
-			border: 2px solid #ccc; /* حدود الدائرة */
+			width: 50px; 
+			height: 50px; 
+			border-radius: 50%;
+			overflow: hidden;
+			border: 2px solid #ccc;
 			margin-left: 40px
 		}
 
 		.profile-pic img {
-			width: 100%; /* يضمن أن الصورة تملأ الدائرة */
-			height: auto; /* يحافظ على نسبة العرض إلى الارتفاع */
+			width: 100%;
+			height: auto; 
 		}
 	</style>
 	<!-- jquery Min JS -->

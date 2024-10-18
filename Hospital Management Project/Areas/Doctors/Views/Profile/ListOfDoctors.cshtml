@@ -21,7 +21,7 @@
 </div>
 
 <div class="container">
-    <!-- Search Box -->
+ 
     <div class="row">
     <div class="col-md-12 d-flex justify-content-end my-4">
         <div class="search-container" style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); display: flex; align-items: center; width: 300px;">
@@ -34,7 +34,6 @@
 </div>
 
 
-    <!-- Display Doctors -->
     <div class="row justify-content-center card-row" id="doctorResults">
         @foreach (var doctor in Model)
         {
@@ -53,7 +52,6 @@
         }
     </div>
 
-    <!-- Pagination controls -->
     <div class="pagination-container" style="text-align: center;">
         @if (Model.HasPreviousPage)
         {
@@ -90,59 +88,56 @@
         function showAppointmentButton(container) {
             const button = container.querySelector('.appointment-button');
             const image = container.querySelector('.doctor-photo');
-            button.style.display = 'block'; // Show button on hover
-            image.style.filter = 'brightness(70%)'; // Darken the image on hover
-            button.style.backgroundColor = '#007bff'; // Set button color to blue on image hover
-            button.style.borderColor = '#007bff'; // Set border color to blue on image hover
+            button.style.display = 'block';
+            image.style.filter = 'brightness(70%)'; 
+            button.style.backgroundColor = '#007bff';
+            button.style.borderColor = '#007bff'; 
         }
 
         function hideAppointmentButton(container) {
             const button = container.querySelector('.appointment-button');
             const image = container.querySelector('.doctor-photo');
-            button.style.display = 'none'; // Hide button when not hovering
-            image.style.filter = 'brightness(100%)'; // Restore the image brightness
-            button.style.borderColor = 'transparent'; // Restore border color
+            button.style.display = 'none'; 
+            image.style.filter = 'brightness(100%)';
+            button.style.borderColor = 'transparent';
         }
 
         function goToDetails(event, detailViewUrl) {
-            event.stopPropagation(); // Prevent photo click from firing
+            event.stopPropagation(); 
             const doctorName = event.target;
-            doctorName.style.color = 'blue'; // Change color to blue
+            doctorName.style.color = 'blue'; 
 
-            // Redirect to the details view
             window.location.href = detailViewUrl;
         }
 
         function goToCreateAppointment(doctorId) {
-            // Redirect to the Create action of the Appointment controller, passing the doctor ID
             window.location.href = '@Url.Action("Create", "PatientAppointment", new { area = "Patient" })' + '?DoctorId=' + doctorId;
         }
 
     </script>
 }
 
-<!-- Embedded CSS -->
 <style>
     .container {
         margin-top: 30px;
     }
 
     .card-row {
-        display: flex; /* Enable flexbox */
-        flex-wrap: wrap; /* Allow wrapping to next line */
-        justify-content: center; /* Center the cards */
+        display: flex; 
+        flex-wrap: wrap;
+        justify-content: center; 
     }
 
     .doctor-card {
-        flex: 0 1 calc(33.333% - 20px); /* Make cards take up 1/3 of the row, minus spacing */
-        margin: 10px; /* Add margin for spacing between cards */
-        max-width: 300px; /* Optional: set a max width for cards */
+        flex: 0 1 calc(33.333% - 20px); 
+        margin: 10px; 
+        max-width: 300px; 
         border: 1px solid #ddd;
-        border-radius: 13px; /* Add border-radius to cards */
-        padding: 0; /* Remove internal padding */
+        border-radius: 13px;
+        padding: 0; 
         text-align: center;
         transition: box-shadow 0.3s ease;
-        height: 450px; /* Fixed height for cards */
+        height: 450px;
     }
 
     .doctor-card:hover {
@@ -150,21 +145,21 @@
     }
 
     .photo-container {
-        position: relative; /* For positioning the button */
-        height: 550px; /* Set a fixed height for image container */
-        overflow: hidden; /* Hide overflow */
+        position: relative; 
+        height: 550px; 
+        overflow: hidden;
     }
 
     .doctor-photo {
-        height: 100%; /* Full height */
-        width: 100%; /* Full width */
-        object-fit: cover; /* Maintain aspect ratio and cover the area */
-        cursor: pointer; /* Change cursor to indicate clickable */
-        transition: filter 0.3s; /* Smooth transition for filter */
+        height: 100%;
+        width: 100%; 
+        object-fit: cover; 
+        cursor: pointer; 
+        transition: filter 0.3s;
     }
 
     .doctor-photo:hover {
-        filter: brightness(70%); /* Darken the photo on hover */
+        filter: brightness(70%);
     }
 
     .appointment-button {
@@ -173,13 +168,13 @@
         left: 50%;
         transform: translate(-50%, -50%);
         display: none;
-        transition: opacity 0.3s, background-color 0.3s, border-color 0.3s; /* Add border-color transition */
+        transition: opacity 0.3s, background-color 0.3s, border-color 0.3s;
         opacity: 1;
-        background-color: #007bff; /* Button background color */
-        border: 2px solid #007bff; /* Initial border color */
-        border-radius: 5px; /* Rounded corners */
-        padding: 10px 20px; /* Padding around the text */
-        color: white; /* Text color */
+        background-color: #007bff; 
+        border: 2px solid #007bff;
+        border-radius: 5px;
+        padding: 10px 20px; 
+        color: white; 
         font-size: 16px; 
         cursor: pointer; 
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
@@ -208,7 +203,6 @@
         color: blue;
     }
 
-    /* Media query to ensure responsiveness */
     @@media (max-width: 768px) {
         .doctor-card {
             flex: 0 1 calc(50% - 20px); 

@@ -29,17 +29,15 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
             var Patient = await _patientService.GetAllPatientsAsync();
             return View(Patient);
         }
-        public async Task<IActionResult> Details(string id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmDelete(string id)
         {
-            var Patient = await _patientService.GetPatientByIdAsync(id);
-            if (Patient == null)
-            {
-                return NotFound();
-            }
-            return View(Patient);
+            await _patientService.DeletePatientAsync(id);
+            return RedirectToAction(nameof(Index));
         }
 
-      
-       
+
+
     }
 }

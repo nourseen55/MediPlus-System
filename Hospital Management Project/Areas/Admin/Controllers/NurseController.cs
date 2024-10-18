@@ -38,17 +38,6 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             var Nurse = await _nurseService.GetAllNursesAsync();
             return View(Nurse);
         }
-        public async Task<IActionResult> Details(string id)
-        {
-            var Nurse = await _nurseService.GetNurseByIdAsync(id);
-            if (Nurse == null)
-            {
-                return NotFound();
-            }
-            return View(Nurse);
-        }
-
-
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -149,8 +138,6 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             await _nurseService.DeleteNurseAsync(id);
             return RedirectToAction(nameof(Index));
         }
-
-
 
     }
 }

@@ -22,7 +22,6 @@ namespace HospitalSystem.Controllers
             _imageService = imageService;
         }
 
-        // GET: News
         public async Task< IActionResult> Index(int? page)
         {
             int pageNum = page ?? 1; 
@@ -38,14 +37,12 @@ namespace HospitalSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Save the image
-                var folderPath = "Images/Posts"; // Set the folder where images will be saved
-                newsPost.PostImg = await _imageService.SaveImageAsync(postImage, folderPath); // Save image and set path
-                newsPost.UserId = _userManager.GetUserId(User); // Get the logged-in user ID
+                var folderPath = "Images/Posts";
+                newsPost.PostImg = await _imageService.SaveImageAsync(postImage, folderPath); 
+                newsPost.UserId = _userManager.GetUserId(User);
 
                await _newsService.AddNewsAsync(newsPost);
 
-                // Return the newly created post as a partial view
                 return RedirectToAction("Index");
             }
 

@@ -10,11 +10,10 @@ namespace HospitalSystem.Persistance.Configurations
         {
             public void Configure(EntityTypeBuilder<Patient> builder)
             {
-                // Table Name
+                
                 builder.ToTable("Patients");
 
 
-                // Properties
                 builder.Property(p => p.FirstName)
                        .IsRequired();
                
@@ -38,7 +37,6 @@ namespace HospitalSystem.Persistance.Configurations
                        .IsRequired();
 
 
-            // Relationships
             builder.HasMany(p => p.Appointments)
                        .WithOne(a => a.Patient)
                        .HasForeignKey(a => a.PatientID)

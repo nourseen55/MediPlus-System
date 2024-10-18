@@ -32,9 +32,6 @@
                 }
             </ul>
         </div>
-        <div class="card-footer text-center bg-white">
-            <a href="~/Admin/Doctor" class="text-muted">View all Doctors</a>
-        </div>
     </div>
 </div>
 
@@ -51,34 +48,37 @@
 
 <style>
     .contact-list {
-        max-height: 400px; /* زيادة الارتفاع لعرض المزيد من الأطباء */
-        overflow-y: auto; /* تفعيل التمرير العمودي إذا كانت القائمة طويلة */
+        max-height: 400px;
+        overflow-y: auto; 
     }
 
     .doctor-item {
         display: flex;
-        align-items: center; /* محاذاة العناصر بشكل مركزي */
+        align-items: center; 
     }
 
         .doctor-item img {
-            border-radius: 50%; /* شكل دائري للصورة */
-            width: 70px; /* حجم الصورة */
-            height: 70px; /* ارتفاع الصورة */
-            margin-right: 15px; /* تباعد بين الصورة والنص */
+            border-radius: 50%; 
+            width: 70px; 
+            height: 70px;
+            margin-right: 15px; 
         }
 
     .card {
-        margin: 20px 0; /* تباعد بين الكروت */
+        margin: 20px 0; 
     }
 
     .card-header {
-        font-weight: bold; /* جعل العنوان غامق */
-        font-size: 1.25rem; /* زيادة حجم الخط */
+        font-weight: bold; 
+        font-size: 1.25rem; 
     }
 
     .card-footer {
-        background-color: #f8f9fa; /* لون الخلفية للكارد */
+        background-color: #f8f9fa;
     }
 
+    .a {
+        pointer-events: auto;
+    }
 
 </style>

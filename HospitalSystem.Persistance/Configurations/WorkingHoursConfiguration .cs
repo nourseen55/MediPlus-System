@@ -9,9 +9,9 @@ namespace HospitalSystem.Persistance.Configurations
 
             builder.ToTable("WorkingHours");
                 builder
-                .HasOne(w => w.Doctor) // Each WorkingHours has one Doctor
-                .WithMany(d => d.WorkingHours) // Doctor has many WorkingHours
-                .HasForeignKey(w => w.DoctorId) // Foreign key in WorkingHours
+                .HasOne(w => w.Doctor)
+                .WithMany(d => d.WorkingHours) 
+                .HasForeignKey(w => w.DoctorId) 
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

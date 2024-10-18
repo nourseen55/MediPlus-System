@@ -4,58 +4,73 @@
     ViewData["Title"] = "All Patient Appointment";
 }
 
-<div class="parent">
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Patient Appointment List</h2>
+                    <ul class="bread-list">
+                        <li><a href="~/Home">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">Appointments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+<div class="parent" style="background-color: #ffffff;">
     <div class="content">
-        <br /><br /><br />
         <div class="container">
             <div class="form-container mx-auto my-5" style="max-width: 1000px;">
-                <h3 class="form-header fw-semibold my-3 text-center">Appointment List</h3>
-                <div class="line my-4 mx-auto" style="width: 50%; height: 2px; background-color: #007bff;"></div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover custom-table datatable mb-2">
-                                <thead class="bg-primary text-white">
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Age</th>
-                                        <th>Gender</th>
-                                        <th>Address</th>
-                                        <th class="text-center">Email</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if (!Model.Any())
-                                    {
-                                        <tr>
-                                            <td colspan="5" class="text-center text-muted">No patient records available</td>
-                                        </tr>
-                                    }
-                                    else
-                                    {
-                                        @foreach (var item in Model)
-                                        {
+                <h3 class="form-header fw-semibold my-3" style="font-family: 'Poppins', sans-serif; color: #007BFF;">Appointment List</h3>
+                            <div class="table-responsive">
+                                <div class="table-wrapper" style="background-color: #ffffff; padding: 20px; border-radius: 10px;">
+                                    <table class="table table-bordered table-hover custom-table datatable mb-2">
+                                        <thead class="bg-primary text-white">
                                             <tr>
-                                                <td class="align-middle">
-                                                    <img width="40" height="40" src="~/@item.Img" class="rounded-circle me-2" alt="">
-                                                    <span>@(item.FirstName + " " + item.LastName)</span>
-                                                </td>
-                                                <td class="align-middle">@item.Age()</td>
-                                                <td class="align-middle">@item.Gender</td>
-                                                <td class="align-middle">@item.City</td>
-                                                <td class="text-center align-middle">
-                                                    <a href="mailto:@item.Email" class="btn btn-sm btn-primary text-white">
-                                                        <i class="icofont icofont-paper-plane"></i> Send Message
-                                                    </a>
-                                                </td>
+                                                <th>Name</th>
+                                                <th>Age</th>
+                                                <th>Gender</th>
+                                                <th>Address</th>
+                                                <th class="text-center">Email</th>
                                             </tr>
-                                        }
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                                        </thead>
+                                        <tbody>
+                                            @if (!Model.Any())
+                                            {
+                                                <tr>
+                                                    <td colspan="5" class="text-center text-muted">No patient records available</td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td class="align-middle">
+                                                            <img width="40" height="40" src="~/@item.Img" class="rounded-circle me-2" alt="">
+                                                            <span>@(item.FirstName + " " + item.LastName)</span>
+                                                        </td>
+                                                        <td class="align-middle">@item.Age()</td>
+                                                        <td class="align-middle">@item.Gender</td>
+                                                        <td class="align-middle">@item.City</td>
+                                                        <td class="text-center align-middle">
+                                                            <a href="mailto:@item.Email" class="btn btn-custom " style="border-radius: 20px;">
+                                                                <i class="icofont icofont-paper-plane"></i> Send Message
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
             </div>
         </div>
     </div>
@@ -63,14 +78,15 @@
 
 <div class="sidebar-overlay" data-reff=""></div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+
 
 <style>
-    /* Enhancing the style */
+    /* General body styling */
+    body {
+        background-color: #ffffff; /* White background for the entire page */
+        font-family: 'Poppins', sans-serif; /* Poppins font for consistency */
+    }
+
     .custom-table {
         border-collapse: separate;
         border-spacing: 0 10px;
@@ -82,12 +98,12 @@
         .custom-table th, .custom-table td {
             border: none;
             padding: 12px 15px;
+            text-align: center;
         }
 
         .custom-table th {
-            background-color: #007bff;
+            background-color: #007BFF;
             color: white;
-            text-align: left;
             font-weight: 600;
         }
 
@@ -106,8 +122,14 @@
         }
 
     .form-header {
-        color: #007bff;
-        font-size: 24px;
+        color: #007BFF; /* Header color */
+        font-size: 24px; /* Header font size */
+    }
+
+    .line {
+        border-bottom: 2px solid #007BFF; /* Line under the header */
+        width: 50%; /* Line width */
+        margin: 10px auto; /* Centering the line */
     }
 
     .table-responsive {
@@ -116,9 +138,18 @@
         overflow: hidden;
     }
 
-    .line {
-        background-color: #007bff;
-        height: 2px;
-        margin-top: 20px;
+    .btn-custom {
+        padding: 10px 15px;
+        border-radius: 20px;
+        background-color: #ffffff; /* White background for buttons */
+        border: 1px solid #007BFF; /* Border to match table */
+        color: #007BFF; /* Text color */
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
+
+        .btn-custom:hover {
+            background-color: #007BFF; /* Blue background on hover */
+            color: white; /* White text on hover */
+        }
+
 </style>

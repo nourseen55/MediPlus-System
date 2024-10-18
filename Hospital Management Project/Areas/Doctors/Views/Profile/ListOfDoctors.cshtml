@@ -113,10 +113,11 @@
             window.location.href = detailViewUrl;
         }
 
-        function goToCreateAppointment() {
-            // Redirect to the Create action of the Appointment controller
-            window.location.href = '@Url.Action("Create", "PatientAppointment", new { area = "Patient" })';
+        function goToCreateAppointment(doctorId) {
+            // Redirect to the Create action of the Appointment controller, passing the doctor ID
+            window.location.href = '@Url.Action("Create", "PatientAppointment", new { area = "Patient" })' + '?DoctorId=' + doctorId;
         }
+
     </script>
 }
 

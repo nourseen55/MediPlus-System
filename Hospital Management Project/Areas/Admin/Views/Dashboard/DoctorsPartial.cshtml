@@ -32,9 +32,9 @@
                 }
             </ul>
         </div>
-        <div class="card-footer text-center bg-white">
-            <a href="~/Admin/Doctor" class="text-muted">View all Doctors</a>
-        </div>
+       @*  <div class="card-footer text-center bg-white">
+            <a href="@Url.Action("Index", "Doctor", new { area = "Admin" })" class="btn ">View all Doctors</a>
+        </div> *@
     </div>
 </div>
 
@@ -80,5 +80,8 @@
         background-color: #f8f9fa; /* لون الخلفية للكارد */
     }
 
+    .a {
+        pointer-events: auto;
+    }
 
 </style>

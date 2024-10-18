@@ -27,6 +27,10 @@
                     <label asp-for="SelectedDepartmentID">Department</label>
                     <select id="DepartmentSelect" class="form-control" asp-for="SelectedDepartmentID" asp-items="Model.Departments" onchange="fetchDoctors(this.value)">
                         <option value="">Select Department</option>
+                        @if (!string.IsNullOrEmpty(Model.SelectedDepartmentID))
+                        {
+                            <option value="@Model.SelectedDepartmentID" selected>@Model.SelectedDepartmentName</option>
+                        }
                     </select>
                     <span asp-validation-for="SelectedDepartmentID" class="text-danger"></span>
                 </div>
@@ -35,6 +39,10 @@
                     <label asp-for="SelectedDoctorID">Doctor</label>
                     <select id="DoctorId" class="form-control" asp-for="SelectedDoctorID" onchange="fetchWorkingHours(this.value)">
                         <option value="">Select Doctor</option>
+                        @if (!string.IsNullOrEmpty(Model.SelectedDoctorID))
+                        {
+                            <option value="@Model.SelectedDoctorID" selected>@Model.SelectedDoctorName</option>
+                        }
                     </select>
                     <span asp-validation-for="SelectedDoctorID" class="text-danger"></span>
                 </div>
@@ -67,13 +75,15 @@
 </div>
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script type="text/javascript">
-
+        $(document).ready(function () {
+            
             window.fetchDoctors = function (departmentId) {
                 const doctorDropdown = document.getElementById('DoctorId');
-                doctorDropdown.innerHTML = '<option value="">Select Doctor</option>';
+                doctorDropdown.innerHTML = '<option value="">Select Doctor</option>'; 
 
                 if (departmentId) {
                     fetch(`/Patient/PatientAppointment/GetDoctorsByDepartment?departmentId=${departmentId}`)
@@ -89,17 +99,18 @@
                                 doctorDropdown.style.display = "block";
                             } else {
                                 doctorDropdown.style.display = "none"; 
-                                $('#workingHoursCard').hide();  
-                                $('#workingHoursText').html("No Appointment Available");
+                                $('#workingHoursCard').hide(); 
+                                $('#workingHoursText').html("No Appointment Available"); 
                             }
                         })
                         .catch(error => console.error('Error fetching doctors:', error));
                 }
             };
 
+           
             window.fetchWorkingHours = function (doctorId) {
                 const workingHoursDropdown = document.getElementById('WorkingHoursId');
-                workingHoursDropdown.innerHTML = '<option value="">Select Working Hours</option>';
+                workingHoursDropdown.innerHTML = '<option value="">Select Working Hours</option>'; 
 
                 if (doctorId) {
                     fetch(`/Patient/PatientAppointment/GetWorkingHoursByDoctor?doctorId=${doctorId}`)
@@ -128,10 +139,12 @@
                 }
             };
 
+          
             if ('@Model.SelectedDoctorID' !== '') {
                 fetchWorkingHours('@Model.SelectedDoctorID');
             }
 
+           
             if ('@Model.SelectedDepartmentID' !== '') {
                 fetchDoctors('@Model.SelectedDepartmentID');
             }

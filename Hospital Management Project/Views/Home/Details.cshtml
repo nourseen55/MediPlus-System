@@ -15,37 +15,62 @@
 		</div>
 	</div>
 </div>
-<section class="pf-details section">
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<div class="inner-content">
-					<div class="image">
-						<img src="~/@Model.Img" alt="#" style="border-radius: 10px;">
 
-					</div>
-					@* <div class="date">
-						<ul>
-							<li><span>Category :</span> Heart Surgery</li>
-							<li><span>Date :</span> April 20, 2019</li>
-							<li><span>Client :</span> Suke Agency</li>
-							<li><span>Ags :</span> Typo</li>
-						</ul>
-					</div> *@
-					<div class="body-text">
-						<h1 style="margin:5px">@Model.DepartmentName</h1>
-						<p style="font-size:18px!important">@Model.Description</p>
-						<div class="share">
-							<h4>Share Now -</h4>
-							<ul>
-								<li><a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-								<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-							</ul>
-						</div>
-					</div>
+<section class="pf-details section" style="padding: 50px 0;">
+	<div class="container">
+		<div class="row align-items-center" style="background-color: #f9f9f9; border-radius: 10px; padding: 20px;">
+			<div class="col-md-6">
+				<div class="image" style="text-align: center;">
+					<img src="~/@Model.Img" alt="Department Image" style="max-width: 100%; height: auto; border-radius: 10px;">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="body-text" style="padding: 20px;">
+					<h1 style="margin-bottom: 20px; font-size: 28px; color: #333;">@Model.DepartmentName</h1>
+					<p style="font-size: 18px; line-height: 1.8; color: #666;">@Model.Description</p>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
+<style>
+	.pf-details {
+		padding: 50px 0;
+	}
+
+		.pf-details .row {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.pf-details .image img {
+			border-radius: 10px;
+		}
+
+		.pf-details .body-text {
+			font-family: 'Arial', sans-serif;
+			color: #444;
+		}
+
+			.pf-details .body-text h1 {
+				font-weight: bold;
+				font-size: 32px;
+				color: #333;
+				margin-bottom: 15px;
+			}
+
+			.pf-details .body-text p {
+				font-size: 18px;
+				line-height: 1.8;
+				color: #555;
+			}
+
+		.pf-details .container {
+			background-color: #fff;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			border-radius: 10px;
+			padding: 20px;
+		}
+</style>

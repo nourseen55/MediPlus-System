@@ -71,7 +71,8 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
             {
-                return RedirectToPage("./ResetPasswordConfirmation");
+                ModelState.AddModelError(string.Empty, "This email is invalid! Please try again");
+                return Page();
             }
 
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
@@ -80,7 +81,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                 await _userManager.UpdateSecurityStampAsync(user);
                 await _signInManager.SignOutAsync();
 
-                return RedirectToPage("./ResetPasswordConfirmation");
+                return RedirectToPage("./login");
             }
 
             foreach (var error in result.Errors)

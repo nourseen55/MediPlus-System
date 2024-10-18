@@ -83,6 +83,13 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             }
             return View(workingHours);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ConfirmDelete(string id)
+        {
+            await _hourservice.DeletehoursAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }

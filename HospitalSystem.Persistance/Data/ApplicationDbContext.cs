@@ -8,10 +8,10 @@ namespace HospitalSystem.Persistance.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
+        /*public ApplicationDbContext()
         {
 
-        }
+        }*/
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
@@ -98,9 +98,9 @@ namespace HospitalSystem.Persistance.Data
                 UserId = adminId
             });
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=HosiptalDb;Integrated Security=True;Encrypt=True;TrustServerCertificate=True");
-        }
+        }*/
     }
 }

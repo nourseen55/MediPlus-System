@@ -41,7 +41,7 @@
             <div class="card doctor-card">
                 <div class="photo-container" onmouseover="showAppointmentButton(this)" onmouseout="hideAppointmentButton(this)">
                     <img src="~/@doctor.Img" alt="@doctor.UserName" class="card-img-top doctor-photo">
-                    <button class="appointment-button btn btn-primary" style="display: none;" onclick="goToCreateAppointment()">Make Appointment</button>
+                    <button class="appointment-button btn btn-primary" style="display: none;" onclick="goToCreateAppointment('@doctor.Id')">Make Appointment</button>
                 </div>
                 <div class="card-body">
                     <p class="department-name">@doctor.Department?.DepartmentName</p>
@@ -113,10 +113,11 @@
             window.location.href = detailViewUrl;
         }
 
-        function goToCreateAppointment() {
-            // Redirect to the Create action of the Appointment controller
-            window.location.href = '@Url.Action("Create", "Appointment", new { area = "Patient" })';
+        function goToCreateAppointment(doctorId) {
+            // Redirect to the Create action of the Appointment controller, passing the doctor ID
+            window.location.href = '@Url.Action("Create", "PatientAppointment", new { area = "Patient" })' + '?DoctorId=' + doctorId;
         }
+
     </script>
 }
 

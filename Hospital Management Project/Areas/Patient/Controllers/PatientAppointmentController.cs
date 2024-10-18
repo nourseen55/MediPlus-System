@@ -50,27 +50,46 @@ namespace Hospital_Management_Project.Areas.Patient.Controllers
 			return View(paginatedAppointments);
 		}
 
-		[HttpGet]
-		public async Task< IActionResult> Create()
-		{
-			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-			IEnumerable<Departments> departments =await _departmentService.GetAllDepartmentsAsync();
-			List<Departments> departments1= departments.ToList();
-			
-			var viewModel = new AppoinmentVM
-			{
-				PatientID = userId,
-				Departments = departments1.Select(d => new SelectListItem
-				{
-					Value = d.Id.ToString(),
-					Text = d.DepartmentName
-				}).ToList()
-			};
+        [HttpGet]
+        public async Task<IActionResult> Create(string? DoctorId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
+            List<Departments> departments1 = departments.ToList();
 
-			return View(viewModel);
-		}
+            string selectedDoctorName = null;
+            string selectedDepartmentName = null;
+            string selectedDepartmentID = null; 
 
-		[HttpPost]
+            if (!string.IsNullOrEmpty(DoctorId))
+            {
+                var doctor = await _doctorService.GetDoctorByIdAsync(DoctorId);
+                selectedDoctorName = doctor?.FullName; 
+                selectedDepartmentID = doctor.DepartmentId;
+                selectedDepartmentName = departments1.FirstOrDefault(d => d.Id.ToString() == selectedDepartmentID)?.DepartmentName;
+
+
+            }
+
+            var viewModel = new AppoinmentVM
+            {
+                PatientID = userId,
+                Departments = departments1.Select(d => new SelectListItem
+                {
+                    Value = d.Id.ToString(),
+                    Text = d.DepartmentName
+                }).Distinct().ToList(),
+                SelectedDoctorID = DoctorId,
+                SelectedDoctorName = selectedDoctorName,
+                SelectedDepartmentID = selectedDepartmentID,
+                SelectedDepartmentName = selectedDepartmentName
+            };
+
+            return View(viewModel);
+        }
+
+
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create(AppoinmentVM model)
 		{

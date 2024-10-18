@@ -1,96 +1,107 @@
-﻿@model HospitalSystem.Core.Entities.MedicalRecord 
- 
-@{ 
-    ViewData["Title"] = "Update Medical Record"; 
-} 
- 
-<div class="parent" style="min-height:1500px;"> 
-    <div class="content"> 
-        <div class="container"> 
-            <br /><br /><br /> 
-            <div class="form-container"> 
-                <h3 class="form-header fw-semibold my-3">Update Medical Record</h3> 
-                <div class="line my-2"></div> 
-                <form asp-action="Edit" method="post" enctype="multipart/form-data"> 
-                    <input type="hidden" asp-for="PatientID" value="@Model.PatientID" /> 
-                    <input type="hidden" asp-for="DoctorID" value="@Model.DoctorID" /> 
-                    <input type="hidden" asp-for="DiagnosisDocument" value="@Model.DiagnosisDocument" /> 
- 
-                    <div class="row"> 
-                        <div class="col-sm-6"> 
-                            <div class="form-group"> 
-                                <label>Patient Name</label> 
-                                <input value="@Model.Patient.FirstName" class="form-control" type="text" /> 
-                                <small class="form-text text-muted">First Name</small> 
-                            </div> 
-                        </div> 
-                        <div class="col-sm-6"> 
-                            <div class="form-group"> 
-                                <br /> 
-                                <input value="@Model.Patient.LastName" class="form-control" type="text" /> 
-                                <small class="form-text text-muted">Last Name</small> 
-                            </div> 
-                        </div> 
-                        <div class="col-sm-12"> 
-                            <div class="form-group"> 
-                                <label>Patient's health issue<span class="text-danger">*</span></label> 
-                                <input asp-for="Diagnosis" class="form-control" type="text" required value="@Model.Diagnosis" /> 
-                                <span asp-validation-for="Diagnosis" class="text-danger"></span> 
-                            </div> 
-                        </div> 
-                        <div class="col-sm-12"> 
-                            <div class="form-group"> 
-                                <label>Medication<span class="text-danger">*</span></label> 
-                                <textarea asp-for="Treatment" class="form-control" rows="4" required value="@Model.Treatment"></textarea> 
-                                <span asp-validation-for="Treatment" class="text-danger"></span> 
-                            </div> 
-                        </div> 
-                        <div class="col-sm-12"> 
-                            <div class="form-group"> 
-                                <label>Patient's response to medication</label> 
-                                <textarea asp-for="Response" class="form-control" rows="4" value="@Model.Response"></textarea> 
-                                <span asp-validation-for="Response" class="text-danger"></span> 
-                            </div> 
-                        </div> 
-                        <div class="form-group col-sm-12"> 
-                            <label asp-for="DateOfEntry" class="control-label"></label> 
-                            <input asp-for="DateOfEntry" class="form-control" type="text" value="@DateTime.Now.ToShortDateString()" /> 
-                            <span asp-validation-for="DateOfEntry" class="text-danger"></span> 
-                        </div> 
-                    </div> 
- 
-                    <h5>Please give information about the patient's health.</h5> 
-                    <table class="table"> 
-                        <thead> 
-                            <tr> 
-                                <th class="empty border-0"></th> 
-                                <th class="bg text-white y" style="border-radius: 10px 0 0 0;">Yes</th> 
-                                <th class="bg text-white" style="border-radius: 0 10px 0 0;">No</th>
+﻿@model HospitalSystem.Core.Entities.MedicalRecord
+
+@{
+    ViewData["Title"] = "Update Medical Record";
+}
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Update Medical Record</h2>
+                    <ul class="bread-list">
+                        <li><a href="~/Home">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">Medical Records</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="parent" style="min-height:1500px; background-color: #f8f9fa;">
+    <div class="content">
+        <div class="container">
+            <br /><br /><br />
+            <div class="form-container" style="background-color: #ffffff; border-radius: 10px; padding: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                <h3 class="form-header fw-semibold my-3" style="color: #007bff;">Update Medical Record</h3>
+                <div class="line my-2"></div>
+                <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="PatientID" />
+                    <input type="hidden" asp-for="DoctorID" />
+                    <input type="hidden" asp-for="DiagnosisDocument" />
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Patient Name</label>
+                                <div class="d-flex">
+                                    <input value="@Model.Patient.FirstName" class="form-control me-2" type="text" style="border-radius: 5px;" placeholder="First Name" />
+                                    <input value="@Model.Patient.LastName" class="form-control" type="text" style="border-radius: 5px;" placeholder="Last Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Patient's health issue<span class="text-danger">*</span></label>
+                                <input asp-for="Diagnosis" class="form-control" type="text" required />
+                                <span asp-validation-for="Diagnosis" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Medication<span class="text-danger">*</span></label>
+                                <textarea asp-for="Treatment" class="form-control" rows="4" required></textarea>
+                                <span asp-validation-for="Treatment" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Patient's response to medication</label>
+                                <textarea asp-for="Response" class="form-control" rows="4"></textarea>
+                                <span asp-validation-for="Response" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-sm-12">
+                            <label asp-for="DateOfEntry" class="control-label" style="font-weight: bold;"></label>
+                            <input asp-for="DateOfEntry" class="form-control" type="text" value="@DateTime.Now.ToShortDateString()" readonly />
+                            <span asp-validation-for="DateOfEntry" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <h5 style="color: #007bff;">Please provide information about the patient's health.</h5>
+                    <table class="table" style="background-color: #f8f9fa;">
+                        <thead>
+                            <tr>
+                                <th class="empty border-0"></th>
+                                <th class="bg text-white" style="border-radius: 10px 0 0 0; background-color: #007bff;">Yes</th>
+                                <th class="bg text-white" style="border-radius: 0 10px 0 0; background-color: #007bff;">No</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="bg text-white" style="border-radius: 10px 0 0 0;">Are you currently under medical care?</td>
+                                <td class="bg text-white" style="border-radius: 10px 0 0 0; background-color: #007bff;">Are you currently under medical care?</td>
                                 <td class="y"><input asp-for="IsUnderMedicalCare" type="radio" value="true" /></td>
                                 <td class="y"><input asp-for="IsUnderMedicalCare" type="radio" value="false" /></td>
                             </tr>
                             <tr>
-                                <td class="bg text-white">Do you have any drug allergies?</td>
+                                <td class="bg text-white" style="background-color: #007bff;">Do you have any drug allergies?</td>
                                 <td class="y"><input asp-for="HasDrugAllergies" type="radio" value="true" /></td>
                                 <td class="y"><input asp-for="HasDrugAllergies" type="radio" value="false" /></td>
                             </tr>
                             <tr>
-                                <td class="bg text-white">Do you have any food or environmental allergies?</td>
+                                <td class="bg text-white" style="background-color: #007bff;">Do you have any food or environmental allergies?</td>
                                 <td class="y"><input asp-for="HasFoodOrEnvironmentalAllergies" type="radio" value="true" /></td>
                                 <td class="y"><input asp-for="HasFoodOrEnvironmentalAllergies" type="radio" value="false" /></td>
                             </tr>
                             <tr>
-                                <td class="bg text-white">Have you ever been cared for by a mental health clinician?</td>
+                                <td class="bg text-white" style="background-color: #007bff;">Have you ever been cared for by a mental health clinician?</td>
                                 <td class="y"><input asp-for="HasMentalHealthCareHistory" type="radio" value="true" /></td>
                                 <td class="y"><input asp-for="HasMentalHealthCareHistory" type="radio" value="false" /></td>
                             </tr>
                             <tr>
-                                <td class="bg text-white">Have you ever restricted your eating?</td>
+                                <td class="bg text-white" style="background-color: #007bff;">Have you ever restricted your eating?</td>
                                 <td class="y"><input asp-for="HasRestrictedEating" type="radio" value="true" /></td>
                                 <td class="y"><input asp-for="HasRestrictedEating" type="radio" value="false" /></td>
                             </tr>
@@ -98,7 +109,7 @@
                     </table>
 
                     <div class="form-group ml-2">
-                        <label class="my-3">Is the patient diagnosed with chronic disease?</label>
+                        <label class="my-3" style="font-weight: bold;">Is the patient diagnosed with a chronic disease?</label>
                         <div>
                             <label>
                                 <input type="radio" asp-for="PatientChronicDisease" value="true" /> Yes
@@ -110,8 +121,8 @@
                         <span asp-validation-for="PatientChronicDisease" class="text-danger"></span>
                     </div>
 
-
                     <div class="form-group my-5">
+                        <label style="font-weight: bold;">Upload Diagnosis Document</label>
                         <input asp-for="DiagnosisDocument" type="file" name="file" id="fileId" />
                     </div>
 

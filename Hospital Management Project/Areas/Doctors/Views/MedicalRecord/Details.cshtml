@@ -79,7 +79,7 @@
                     <thead>
                         <tr>
                             <th class="empty border-0"></th>
-                            <th class="bg text-white y" style="border-radius: 10px 0 0 0;">Yes</th>
+                            <th class="bg text-white" style="border-radius: 10px 0 0 0;">Yes</th>
                             <th class="bg text-white" style="border-radius: 0 10px 0 0;">No</th>
                         </tr>
                     </thead>
@@ -91,7 +91,7 @@
                         </tr>
                         <tr>
                             <td class="bg text-white">Do you have any drug allergies?</td>
-                            <td class="y"><input asp-for="HasDrugAllergies" type="radio" value="true" disabled/></td>
+                            <td class="y"><input asp-for="HasDrugAllergies" type="radio" value="true" disabled /></td>
                             <td class="y"><input asp-for="HasDrugAllergies" type="radio" value="false" disabled /></td>
                         </tr>
                         <tr>
@@ -112,7 +112,6 @@
                     </tbody>
                 </table>
 
-
                 <div class="form-group ml-2">
                     <label class="my-3">Is the patient diagnosed with chronic disease?</label>
                     <div>
@@ -126,10 +125,9 @@
                     <span asp-validation-for="PatientChronicDisease" class="text-danger"></span>
                 </div>
 
-
                 <div class="col-sm-12 my-5">
                     <div class="form-group">
-                        <label>Patient's health issue<span class="text-danger">*</span></label>
+                        <label><strong>Patient's health issue</strong><span class="text-danger">*</span></label>
                         <input asp-for="Diagnosis" class="form-control" type="text" disabled />
                         <span asp-validation-for="Diagnosis" class="text-danger"></span>
                     </div>
@@ -137,7 +135,7 @@
 
                 <div class="col-sm-12 my-5">
                     <div class="form-group">
-                        <label>Medication<span class="text-danger">*</span></label>
+                        <label><strong>Medication</strong><span class="text-danger">*</span></label>
                         <textarea asp-for="Treatment" class="form-control" rows="4" disabled></textarea>
                         <span asp-validation-for="Treatment" class="text-danger"></span>
                     </div>
@@ -145,7 +143,7 @@
 
                 <div class="col-sm-12 my-5">
                     <div class="form-group">
-                        <label>Patient's response to medication</label>
+                        <label><strong>Patient's response to medication</strong></label>
                         <textarea asp-for="Response" class="form-control" rows="4" disabled></textarea>
                         <span asp-validation-for="Response" class="text-danger"></span>
                     </div>
@@ -169,65 +167,41 @@
         @if (User.IsInRole("Doctor"))
         {
             <div class="my-5 text-center">
-                <a class="btn btn-success fw-semibold" href="@Url.Action("RecordsByPatient", "MedicalRecord", new {id=Model.PatientID, area = "Doctors" })">Back</a>
+                <div class="btn-group">
+                    <a class="btn btn-primary fw-semibold" href="@Url.Action("RecordsByPatient", "MedicalRecord", new {id=Model.PatientID, area = "Doctors" })">Back</a>
+                </div>
             </div>
         }
         else if (User.IsInRole("Patient"))
         {
             <div class="my-5 text-center">
-                <a class="btn btn-success fw-semibold" href="@Url.Action("Index", "MedicalRecord", new { area = "Patient" })">Back</a>
+                <div class="btn-group">
+                    <a class="btn btn-primary fw-semibold" href="@Url.Action("Index", "MedicalRecord", new { area = "Patient" })">Back</a>
+                </div>
             </div>
         }
-
     </div>
 </div>
 
-
-
 <style>
     .form-container {
-        background-color: white; /* White background for the card */
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: white; 
+        border-radius: 15px; 
+        padding: 20px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        margin: auto; 
+        max-width: 750px; 
     }
 
-    .form-control {
-        border: 1px solid #ddd; /* Light grey border */
-        border-radius: 5px; /* Rounded corners for inputs */
-        padding: 10px; /* Padding inside inputs */
-    }
-
-        .form-control:focus {
-            border-color: #007bff; /* Blue border on focus */
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Light blue shadow on focus */
-        }
-
-    .bg {
-        background-color: #007bff; /* Background color for table headers */
-    }
-
-    .text-white {
-        color: white; /* White text for table headers */
-    }
-
-    .table th,
-    .table td {
-        padding: 10px; /* Padding for table cells */
+    .btn-group .btn {
+        flex: 1; 
+        margin: 0 5px; 
+        font-family: Arial, sans-serif; 
+        font-size: 16px; 
     }
 
     .btn {
-        background-color: #007bff; /* Button color */
-        border: none; /* No border for button */
-    }
-
-        .btn:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-
-    .line {
-        height: 2px; /* Line height */
-        background-color: #007bff; /* Line color */
-        border-radius: 5px; /* Rounded corners for line */
+        display: inline-block; 
+        height: 50px; 
     }
 </style>

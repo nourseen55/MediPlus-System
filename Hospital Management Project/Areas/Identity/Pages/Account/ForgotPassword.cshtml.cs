@@ -43,7 +43,9 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
                     _logger.LogWarning($"Password reset requested for unconfirmed or non-existent email: {Input.Email}");
-                    return RedirectToPage("./ForgotPasswordConfirmation");
+
+                    ModelState.AddModelError(string.Empty, "Inalid Email");
+                    return Page();
                 }
 
                 // Generate password reset token

@@ -1,5 +1,21 @@
 ﻿@model AppoinmentVM
-
+<div class="breadcrumbs overlay">
+    <div class="container">
+        <div class="bread-inner">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Create Appointment</h2>
+                    <ul class="bread-list">
+                        <li><a href="~/Home">Home</a></li>
+                        <li><i class="icofont-simple-right"></i></li>
+                        <li class="active">Appointments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
 <div class="container my-5">
     <div class="row">
         <h2>Create Appointment</h2>
@@ -11,6 +27,10 @@
                     <label asp-for="SelectedDepartmentID">Department</label>
                     <select id="DepartmentSelect" class="form-control" asp-for="SelectedDepartmentID" asp-items="Model.Departments" onchange="fetchDoctors(this.value)">
                         <option value="">Select Department</option>
+                        @if (!string.IsNullOrEmpty(Model.SelectedDepartmentID))
+                        {
+                            <option value="@Model.SelectedDepartmentID" selected>@Model.SelectedDepartmentName</option>
+                        }
                     </select>
                     <span asp-validation-for="SelectedDepartmentID" class="text-danger"></span>
                 </div>
@@ -19,13 +39,18 @@
                     <label asp-for="SelectedDoctorID">Doctor</label>
                     <select id="DoctorId" class="form-control" asp-for="SelectedDoctorID" onchange="fetchWorkingHours(this.value)">
                         <option value="">Select Doctor</option>
+                        @if (!string.IsNullOrEmpty(Model.SelectedDoctorID))
+                        {
+                            <option value="@Model.SelectedDoctorID" selected>@Model.SelectedDoctorName</option>
+                        }
                     </select>
                     <span asp-validation-for="SelectedDoctorID" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="SelectedWorkingHoursID">Working Hours</label>
-                    <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID" style="display: none;">
+                    <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID">
+                        <option value="">Select Working Hours</option>
                     </select>
                     <span asp-validation-for="SelectedWorkingHoursID" class="text-danger"></span>
                 </div>
@@ -50,6 +75,7 @@
 </div>
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script type="text/javascript">

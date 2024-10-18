@@ -19,11 +19,12 @@
                         <table class="table table-border table-striped custom-table datatable mb-0">
                             <thead>
                                 <tr>
-                                    <th>Start Date & Time</th>
-                                    <th>End Date & Time</th>
                                     <th>Patient</th>
-                                    <th>Doctor</th>
                                     <th>Department</th>
+                                    <th>Doctor</th>
+                                    <th>Date Of Day</th>
+                                    <th>StartTime</th>
+                                    <th>EndTime</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -38,11 +39,12 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
+                                            <td>@item.Patient.FullName</td>
+                                            <td>@item.Department.DepartmentName</td>
+                                            <td>@item.Doctor.FullName</td>
+                                            <td>@item.Day</td>
                                             <td>@item.StartDateTime</td>
                                             <td>@item.EndDateTime</td>
-                                            <td>@item.Patient.FullName</td>
-                                            <td>@item.Doctor.FullName</td>
-                                            <td>@item.DeptId</td>
 
                                            
                                          

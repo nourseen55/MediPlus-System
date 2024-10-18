@@ -9,7 +9,7 @@
     <div class="content">
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
-                <h4 class="page-title">Add Nurse</h4>
+                <h4 class="page-title text-center mb-4">Add Nurse</h4>
             </div>
         </div>
         <div class="row">
@@ -19,113 +19,87 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label asp-for="FirstName" class="control-label"></label>
-                            <input asp-for="FirstName" class="form-control" placeholder="Enter Name" />
+                            <input asp-for="FirstName" class="form-control" placeholder="Enter First Name" />
                             <span asp-validation-for="FirstName" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
                             <label asp-for="LastName" class="control-label"></label>
-                            <input asp-for="LastName" class="form-control" placeholder="Enter Name" />
+                            <input asp-for="LastName" class="form-control" placeholder="Enter Last Name" />
                             <span asp-validation-for="LastName" class="text-danger"></span>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Email <span class="text-danger">*</span></label>
-                                <input asp-for="Email" class="form-control" type="email" required />
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                            </div>
+                        <div class="form-group col-md-6">
+                            <label>Email <span class="text-danger">*</span></label>
+                            <input asp-for="Email" class="form-control" type="email" placeholder="Enter Email" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Password <span class="text-danger">*</span></label>
-                                <input asp-for="PasswordHash" class="form-control" type="password" required />
-                                <span asp-validation-for="PasswordHash" class="text-danger"></span>
-                            </div>
+                        <div class="form-group col-md-6">
+                            <label>Password <span class="text-danger">*</span></label>
+                            <input asp-for="PasswordHash" class="form-control" type="password" placeholder="Enter Password" required />
+                            <span asp-validation-for="PasswordHash" class="text-danger"></span>
                         </div>
-
                         <div class="form-group col-md-6">
                             <label asp-for="DateOfBirth" class="control-label"></label>
                             <input asp-for="DateOfBirth" class="form-control" type="date" />
                             <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                         </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group gender-select">
-                                <label class="gen-label">Gender:</label>
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="radio" asp-for="Gender" name="gender" value="Male" class="form-check-input" id="Male">Male
-                                    </label>
+                        <div class="form-group col-md-6">
+                            <label class="gen-label">Gender:</label>
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" asp-for="Gender" name="gender" value="Male" class="form-check-input" id="Male"> Male
+                                </label>
+                                <label class="form-check-label ml-3">
+                                    <input type="radio" asp-for="Gender" name="gender" value="Female" class="form-check-input" id="Female"> Female
+                                </label>
+                            </div>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>City</label>
+                            <input asp-for="City" class="form-control" placeholder="Enter City" />
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Postal Code</label>
+                            <input asp-for="ZipCode" class="form-control" type="text" placeholder="Enter Postal Code" required />
+                            <span asp-validation-for="ZipCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Phone</label>
+                            <input asp-for="PhoneNumber" class="form-control" type="text" placeholder="Enter Phone Number" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="DepartmentID" class="control-label">Department</label>
+                            <select asp-for="DepartmentID" class="form-control" id="DepartmentSelect">
+                                <option value="">Select Department</option>
+                                @foreach (var department in Model.Departmentss)
+                                {
+                                    <option value="@department.Id">@department.DepartmentName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="DoctorID" class="control-label">Doctor</label>
+                            <select asp-for="DoctorID" class="form-control" id="DoctorSelect">
+                                <option value="">Select Doctor</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Avatar</label>
+                            <div class="profile-upload">
+                                <div class="upload-img">
+                                    <img src="~/assets/img/user.jpg" alt="Default Image" id="ImagePreview" />
                                 </div>
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input type="radio" asp-for="Gender" name="gender" value="Female" class="form-check-input" id="Female">Female
-                                    </label>
+                                <div class="upload-input">
+                                    <input asp-for="Img" type="file" class="form-control" id="imgfile" onchange="Image(event);" name="Img" />
                                 </div>
-                                <span asp-validation-for="Gender" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>City</label>
-                                <input asp-for="City" class="form-control" type="text" />
-                                <span asp-validation-for="City" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 ">
-                            <div class="form-group">
-                                <label>Postal Code</label>
-                                <input asp-for="ZipCode" type="text" class="form-control" required />
-                                <span asp-validation-for="ZipCode" class="text-danger"></span>
-                            </div>
-                        </div>
-                    <div class="col-sm-6 ">
-                            <div class="form-group">
-                                <label>Phone</label>
-                                <input asp-for="PhoneNumber" class="form-control" type="text" />
-                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                            </div>
-                        </div>
-                        </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="DepartmentID" class="control-label">Department</label>
-                                <select asp-for="DepartmentID" class="form-control" id="DepartmentSelect">
-                                    <option value="">Select Department</option>
-                                    @foreach (var department in Model.Departmentss)
-                                    {
-                                        <option value="@department.Id">@department.DepartmentName</option>
-                                    }
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label asp-for="DoctorID" class="control-label">Doctor</label>
-                                <select asp-for="DoctorID" class="form-control" id="DoctorSelect">
-                                    <option value="">Select Doctor</option>
-                                </select>
+                                <span asp-validation-for="Img" class="text-danger"></span>
                             </div>
                         </div>
                     </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Avatar</label>
-                                <div class="profile-upload">
-                                    <div class="upload-img">
-                                        <img src="~/assets/img/user.jpg" alt="Default Image" id="ImagePreview" />
-                                    </div>
-                                    <div class="upload-input">
-                                        <input asp-for="Img" type="file" class="form-control" id="imgfile" onchange="Image(event);" name="Img" />
-                                    </div>
-                                    <span asp-validation-for="Img" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                       
 
-                    <div class="m-t-20 text-center">
+                    <div class="text-center mt-4">
                         <button class="btn btn-primary submit-btn" type="submit">Create Nurse</button>
                     </div>
                 </form>
@@ -133,6 +107,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
@@ -149,7 +124,7 @@
         {
             <text>{id: '@doctor.Id', name: '@doctor.FullName', departmentId: '@doctor.DepartmentId' }, </text>
         }
-                ];
+                        ];
 
             $('#DepartmentSelect').change(function () {
                 var selectedDepartmentId = $(this).val();
@@ -170,6 +145,67 @@
             });
         });
     </script>
-
-
 }
+
+<style>
+    .form-control {
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .form-check-input {
+        margin-left: 5px;
+    }
+
+    .form-check-inline {
+        margin-top: 5px;
+    }
+
+    .submit-btn {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+    }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+    .profile-upload {
+        display: flex;
+        align-items: center;
+    }
+
+    .upload-img img {
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        margin-right: 15px;
+    }
+
+    .upload-input {
+        flex-grow: 1;
+    }
+
+    .text-danger {
+        margin-top: 5px;
+        font-size: 12px;
+    }
+
+    .mt-4 {
+        margin-top: 1.5rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 1.5rem;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>

@@ -60,7 +60,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             return View(workingHours);
 
         }
-    
+
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<IActionResult> Edit(WorkingHours workingHours)
@@ -90,6 +90,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             await _hourservice.DeletehoursAsync(id);
             return RedirectToAction(nameof(Index));
         }
+
 
     }
 }

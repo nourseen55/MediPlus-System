@@ -11,8 +11,8 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="register-left">
-                       @*   <h2>Welcome to Our Platform</h2>
-                         <p>Join us to enjoy the best services.</p> *@
+                        @*   <h2>Welcome to Our Platform</h2>
+                        <p>Join us to enjoy the best services.</p> *@
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -53,13 +53,16 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <select asp-for="Input.Gender" class="form-control">
+                                        <select asp-for="Input.Gender" class="form-control" asp-items="Model.GenderList">
                                             <option value="">Select Gender</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                            <option value="Other">Other</option>
                                         </select>
                                         <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <input asp-for="Input.PhoneNumber" placeholder="Phone Number" type="tel" class="form-control" />
+                                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">

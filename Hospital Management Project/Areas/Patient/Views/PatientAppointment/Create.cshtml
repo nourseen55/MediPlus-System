@@ -14,7 +14,8 @@
             </div>
         </div>
     </div>
-</div><br />
+</div>
+<br />
 <div class="container my-5">
     <div class="row">
         <h2>Create Appointment</h2>
@@ -48,7 +49,8 @@
 
                 <div class="form-group">
                     <label asp-for="SelectedWorkingHoursID">Working Hours</label>
-                    <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID" style="display: none;">
+                    <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID">
+                        <option value="">Select Working Hours</option>
                     </select>
                     <span asp-validation-for="SelectedWorkingHoursID" class="text-danger"></span>
                 </div>

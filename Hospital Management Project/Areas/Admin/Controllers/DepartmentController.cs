@@ -35,7 +35,6 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                
                     if (Img != null && Img.Length > 0)
                     {
                         var path = @"Images/Departments/";
@@ -60,15 +59,34 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Departments departments)
+        public async Task<IActionResult> Edit(Departments departments, IFormFile Img)
         {
             if (ModelState.IsValid)
             {
-                await _departmentService.UpdateDepartmentAsync(departments);
+                var existingDepartment = await _departmentService.GetDepartmentByIdAsync(departments.Id);
+
+                if (existingDepartment == null)
+                {
+                    return NotFound();
+                }
+
+                existingDepartment.DepartmentName = departments.DepartmentName;
+                existingDepartment.Description = departments.Description;
+
+                if (Img != null && Img.Length > 0)
+                {
+                    var path = @"Images/Departments/";
+                    existingDepartment.Img = await _imageservice.SaveImageAsync(Img, path);
+                }
+
+                await _departmentService.UpdateDepartmentAsync(existingDepartment);
+
                 return RedirectToAction("Index");
             }
+
             return View(departments);
         }
+
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {

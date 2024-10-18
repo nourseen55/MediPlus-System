@@ -21,15 +21,13 @@
     </div>
 </div>
 
-
-
 <div id="main-content" class="blog-page">
     <div class="container">
-        <div class="card-form">
-            <div class="left-box">
-                <div class="post-list">
-                    @foreach (var item in Model)
-                    {
+        <div class="post-list">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6 mb-4">
                         <div class="card single_post">
                             <div class="body-cart">
                                 <div class="img-post">
@@ -47,19 +45,15 @@
                                     <span class="user-name">Posted by: @item.User.FullName</span>
                                     <span class="post-date">on @item.DatePosted.ToString("MMMM dd, yyyy hh:mm tt")</span>
                                 </div>
-                                <h3><a href="blog-details.html">@item.Title</a></h3>
-                                <p class="post-content">@item.Content</p> <!-- Added a class here -->
-                                <div class="social-icons">
-                                    <a href="https://twitter.com" target="_blank" class="social-icon"><i class="fa fa-twitter"></i></a>
-                                    <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fa fa-instagram"></i></a>
-                                    <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fa fa-facebook"></i></a>
-                                    @if (!User.IsInRole(UserRoles.Patient.ToString()))
-                                    {
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#delete_patient_@item.Id" style="font-size: 14px;">
-                                            <i class="fa fa-trash-o m-r-5"></i> Delete
-                                        </a>
-                                    }
-                                </div>
+                                <h3 class="text-center"><a href="blog-details.html">@item.Title</a></h3> <!-- Center the title -->
+                                <p class="post-content">@item.Content</p>
+
+                                @if (!User.IsInRole(UserRoles.Patient.ToString()))
+                                {
+                                    <a class="dropdown-item delete-link" data-toggle="modal" data-target="#delete_patient_@item.Id" style="font-size: 14px;">
+                                        <i class="fa fa-trash-o m-r-5"></i> Delete
+                                    </a>
+                                }
                             </div>
                         </div>
                         <div id="delete_patient_@item.Id" class="modal fade delete-modal" role="dialog">
@@ -79,9 +73,8 @@
                                 </div>
                             </div>
                         </div>
-                    }
-                </div>
-                
+                    </div>
+                }
             </div>
             <div style="margin-top: 20px; text-align: center;">
                 @if (Model.HasPreviousPage)
@@ -94,8 +87,6 @@
                 }
             </div>
         </div>
-
-        
     </div>
 </div>
 
@@ -127,141 +118,85 @@
     .post-info {
         display: flex;
         align-items: center;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         margin-left: 15px;
     }
 
     .single_post .body {
-        padding: 30px;
+        padding: 20px;
         margin-left: 15px;
     }
 
     h3 {
         margin-left: 15px;
+        font-size: 18px;
     }
 
     .post-content {
-        margin-left: 15px; /* Same margin as the title */
-        margin-bottom: 15px; /* Ensures consistent spacing */
-    }
-
-    .social-icons {
-        display: flex;
-        justify-content: left;
-        gap: 15px;
         margin-left: 15px;
+        margin-bottom: 10px;
+    }
+
+    .delete-link {
+        font-size: 14px;
+        color: #d9534f;
         text-decoration: none;
-        color: #333;
-        font-size: 24px;
-        transition: color 0.3s;
     }
 
-    .card-form {
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin: 30px auto;
-        width: 100%;
-    }
-
-    .card-form-button {
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin: 30px auto;
-        width: 100%;
-        max-width: 600px;
-    }
-
-        .card-form-button .body-form {
-            padding: 20px;
+        .delete-link:hover {
+            color: darkred;
         }
-
-    .form-control {
-        width: 100%;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 16px;
-        margin-bottom: 15px;
-    }
-
-    .form-control-file {
-        border-radius: 8px;
-        margin-bottom: 15px;
-    }
-
-    textarea.form-control {
-        height: 120px;
-        resize: none;
-    }
-
-    .btn-royalblue {
-        background-color: royalblue;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 8px;
-        border: none;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-        .btn-royalblue:hover {
-            background-color: darkblue;
-        }
-
-    .social-icon:hover {
-        color: royalblue;
-    }
 
     .card {
-        background: #fff;
+        background: #f9f9f9;
         transition: .5s;
-        border: 0;
-        margin-bottom: 30px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
         border-radius: .55rem;
         position: relative;
         width: 100%;
         box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+        padding: 20px;
     }
 
-        .card .body {
-            color: #444;
-            font-weight: 400;
-        }
-
-    .single_post .img-post {
+    .img-post {
         position: relative;
         overflow: hidden;
-        max-height: 500px;
-        margin-bottom: 30px;
+        max-height: 200px; /* Set a max height for the image */
     }
 
-        .single_post .img-post > img {
-            transform: scale(1.01);
-            opacity: 1;
-            transition: transform .4s ease, opacity .4s ease;
-            max-width: 100%;
+        .img-post > img {
+            width: 100%; /* Set width to 100% for responsiveness */
+            height: auto;
+            object-fit: cover;
         }
 
     .user-photo {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         margin-right: 10px;
     }
 
     .user-name {
         font-weight: bold;
-        margin-right: 15px;
+        margin-right: 10px;
     }
 
     .post-date {
         color: #888;
-        font-size: 14px;
+        font-size: 12px;
+    }
+
+    .row {
+        margin: 0 -15px; /* To adjust for the column padding */
+    }
+
+    .card h3 {
+        text-align: center; /* Center the title */
+        font-weight: bold; /* Make title bold */
+        color: #333; /* Change title color */
+        margin-bottom: 15px; /* Space below title */
     }
 
     .left-box {
@@ -269,15 +204,5 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
-    }
-
-    .pagination {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
-
-    .close-button:hover {
-        color: white; /* Change text color to white on hover */
     }
 </style>

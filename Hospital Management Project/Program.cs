@@ -17,15 +17,17 @@ namespace Hospital_Management_Project
             //var connectionstring2 = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");
             //var connectionstring3 = builder.Configuration.GetConnectionString("cs3");
 
+            // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-
+            // Configure Entity Framework with SQL Server
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
             var emalconfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
             builder.Services.AddSingleton(emalconfig);
 
+            // Identity configuration
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;
@@ -44,9 +46,10 @@ namespace Hospital_Management_Project
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
+            // Add a lifetime for the generated token
             builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
             {
-                options.TokenLifespan = TimeSpan.FromHours(1); 
+                options.TokenLifespan = TimeSpan.FromHours(1); // Token valid for 1 hour
             });
 
             builder.Services.AddRazorPages();
@@ -82,7 +85,6 @@ namespace Hospital_Management_Project
 
             });
             #endregion
-
             //builder.Services.AddAuthentication()
             //    .AddGoogle(options =>
             //    {
@@ -94,7 +96,7 @@ namespace Hospital_Management_Project
             //builder.Services.AddSession();
             var app = builder.Build();
             //app.UseSession();
-        .
+            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -102,14 +104,14 @@ namespace Hospital_Management_Project
             else
             {
                 app.UseExceptionHandler("/Error");
-				app.UseStatusCodePagesWithReExecute("/Error/{0}");
-			}
+                app.UseStatusCodePagesWithReExecute("/Error/{0}");
+            }
 
 
-			app.UseStaticFiles();
+            app.UseStaticFiles();
             app.UseRouting();
 
-            
+            // Ensure authentication and authorization middleware are in the correct order
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -4214,12 +4214,13 @@ body{
 /*=========================
 	End Footer CSS
 ===========================*/
-
 .wbook {
 	position: relative;
 	border-radius: 10px;
-	width: 220px;
-	height: 300px;
+	min-width: 50%; 
+	max-width: 60%;
+	height: auto; 
+	min-height: 250px; 
 	background-color: dodgerblue;
 	-webkit-box-shadow: 1px 1px 6px #1A76D1;
 	box-shadow: 1px 1px 12px #1A76D1;
@@ -4228,18 +4229,13 @@ body{
 	transform: preserve-3d;
 	-webkit-perspective: 2000px;
 	perspective: 2000px;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
 	align-items: center;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
 	justify-content: center;
 	color: white;
 	font-weight: bolder;
-	margin-left: 80px;
+	margin: 0 auto; 
+	margin-top: 20px;
 }
 
 .wcover {
@@ -4255,29 +4251,34 @@ body{
 	-webkit-transform-origin: 0;
 	-ms-transform-origin: 0;
 	transform-origin: 0;
-	-webkit-box-shadow: 1px 1px 12px #1A76D1;
 	box-shadow: 1px 1px 12px #1A76D1;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
 	align-items: center;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
 	justify-content: center;
 }
 
 .wbook:hover .wcover {
 	-webkit-transition: all 0.5s;
 	transition: all 0.5s;
-	-webkit-transform: rotatey(-80deg);
-	-ms-transform: rotatey(-80deg);
-	transform: rotatey(-80deg);
+	-webkit-transform: rotateY(-80deg); 
+	-ms-transform: rotateY(-80deg);
+	transform: rotateY(-80deg);
 }
 
 .wp {
-	font-size: 18px;
-	padding-left: 30px;
+	font-size: 16px;
+	padding: 15px; 
 	color: white;
+	text-align: center; 
+}
+@@media (max-width: 576px) {
+	.wbook {
+		min-height: 200px; 
+		margin: 10px auto; 
+	}
+
+	.wp {
+		font-size: 10px;
+		padding: 10px; 
+	}
 }

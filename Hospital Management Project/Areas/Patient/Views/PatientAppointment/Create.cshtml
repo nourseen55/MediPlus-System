@@ -27,10 +27,7 @@
                     <label asp-for="SelectedDepartmentID">Department</label>
                     <select id="DepartmentSelect" class="form-control" asp-for="SelectedDepartmentID" asp-items="Model.Departments" onchange="fetchDoctors(this.value)">
                         <option value="">Select Department</option>
-                        @if (!string.IsNullOrEmpty(Model.SelectedDepartmentID))
-                        {
-                            <option value="@Model.SelectedDepartmentID" selected>@Model.SelectedDepartmentName</option>
-                        }
+                       
                     </select>
                     <span asp-validation-for="SelectedDepartmentID" class="text-danger"></span>
                 </div>
@@ -39,10 +36,6 @@
                     <label asp-for="SelectedDoctorID">Doctor</label>
                     <select id="DoctorId" class="form-control" asp-for="SelectedDoctorID" onchange="fetchWorkingHours(this.value)">
                         <option value="">Select Doctor</option>
-                        @if (!string.IsNullOrEmpty(Model.SelectedDoctorID))
-                        {
-                            <option value="@Model.SelectedDoctorID" selected>@Model.SelectedDoctorName</option>
-                        }
                     </select>
                     <span asp-validation-for="SelectedDoctorID" class="text-danger"></span>
                 </div>

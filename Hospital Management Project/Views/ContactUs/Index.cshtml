@@ -23,9 +23,9 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="contact-us-left">
-
+						<!--Start Google-map -->
 						<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12427.799033347203!2d31.816224308690895!3d31.408499012345693!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f9ef248dc0e907%3A0x95976a090c6e2a4!2z2K_ZhdmK2KfYtyDYp9mE2YLYr9mK2YXZhw!5e0!3m2!1sar!2seg!4v1728765292930!5m2!1sar!2seg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+						<!--/End Google-map -->
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -62,7 +62,7 @@
 								</div>
 								<div class="col-12">
 									<div class="form-group login-btn">
-										<button class="btn" type="submit">Send</button>
+										<button class="btn btn-primary" type="submit">Send</button>
 									</div>
 									<div class="checkbox">
 										<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox" asp-for="@Model.SubscribeNewsletter">Do you want to subscribe our Newsletter ?</label>
@@ -126,7 +126,7 @@
 
 @section Scripts {
 	@{
-	    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}
 
 	@if (TempData["SuccessMessage"] != null)
@@ -136,16 +136,16 @@
 				title: 'Message Sent!',
 				text: '@TempData["SuccessMessage"]',
 				imageUrl: "/img/Mail.gif",
-				imageWidth: 200,  
-				imageHeight: 200,  
+				imageWidth: 200,
+				imageHeight: 200,
 				confirmButtonText: 'OK',
-				showCancelButton: false,  
-				input: null,  
+				showCancelButton: false,
+				input: null,
 				showInput: false,
 				customClass: {
 					title: 'custom-swal-title',
 					popup: 'custom-swal-popup',
-					content :'custom-swal-content'
+					content: 'custom-swal-content'
 				}
 			});
 		</script>

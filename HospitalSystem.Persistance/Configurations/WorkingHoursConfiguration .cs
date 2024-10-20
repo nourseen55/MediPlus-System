@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace HospitalSystem.Persistance.Configurations
+﻿namespace HospitalSystem.Persistance.Configurations
 {
     public class WorkingHoursConfiguration : IEntityTypeConfiguration<WorkingHours>
     {

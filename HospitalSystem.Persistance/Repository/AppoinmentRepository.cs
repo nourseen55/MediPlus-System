@@ -1,7 +1,4 @@
-﻿
-using HospitalSystem.Core.IRepository;
-
-namespace HospitalSystem.Persistance.Repository
+﻿namespace HospitalSystem.Persistance.Repository
 {
     public class AppointmentRepository : IAppointmentRepository
     {

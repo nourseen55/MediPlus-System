@@ -71,10 +71,12 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
             ViewBag.Departments = departments.Select(d => new SelectListItem { Value = d.Id, Text = d.DepartmentName });
             var doctor = await _doctorService.GetDoctorByIdAsync(id);
             var doctorvm = mapper.Map<DoctorVM>(doctor);
+            doctorvm.Img = doctor.Img;
+
             return View(doctorvm);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(DoctorVM doctorvm, IFormFile Img)
+        public async Task<IActionResult> Update(DoctorVM doctorvm, IFormFile? Img)
         {
             if (ModelState.IsValid)
             {
@@ -84,21 +86,33 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                     return NotFound();
                 }
                 mapper.Map(doctorvm, doctor);
+
                 if (Img != null && Img.Length > 0)
                 {
                     var path = @"Images/Doctors/";
                     doctor.Img = await _imageService.SaveImageAsync(Img, path);
                 }
+                else
+                {
+                    doctor.Img = doctorvm.Img;
+                }
+
                 doctor.Gender = doctorvm.Gender;
+
                 IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
                 ViewBag.Departments = departments.Select(d => new SelectListItem { Value = d.Id, Text = d.DepartmentName });
+
                 doctor.UserName = doctor.Email;
                 doctor.PasswordHash = _passwordHasher.HashPassword(doctor, doctor.PasswordHash);
+
                 await _doctorService.UpdateDoctorAsync(doctor);
+
                 return RedirectToAction("Index");
             }
+
             return View(doctorvm);
         }
+
 
 
         [HttpPost]

@@ -16,6 +16,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form asp-action="Update" method="post" enctype="multipart/form-data" class="shadow p-4 rounded bg-light">
+                <input type="hidden" asp-for="Img" />
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label asp-for="FirstName" class="control-label"></label>

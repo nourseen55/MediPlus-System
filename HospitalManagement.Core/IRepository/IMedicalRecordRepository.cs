@@ -1,6 +1,4 @@
-﻿using HospitalSystem.Core.Entities;
-
-namespace HospitalSystem.Core.IRepository
+﻿namespace HospitalSystem.Core.IRepository
 {
     public interface IMedicalRecordRepository : IGenericRepository<MedicalRecord>
     {

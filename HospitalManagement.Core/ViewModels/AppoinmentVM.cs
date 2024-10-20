@@ -1,13 +1,4 @@
-﻿using HospitalSystem.Core.Entities;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HospitalSystem.Core.ViewModels
+﻿namespace HospitalSystem.Core.ViewModels
 {
     public class AppoinmentVM
     {

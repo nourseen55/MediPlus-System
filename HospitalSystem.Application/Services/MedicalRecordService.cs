@@ -1,6 +1,4 @@
-﻿using HospitalSystem.Application.Interfaces;
-
-namespace HospitalSystem.Application.Services
+﻿namespace HospitalSystem.Application.Services
 {
     public class MedicalRecordService : IMedicalRecordService
     {

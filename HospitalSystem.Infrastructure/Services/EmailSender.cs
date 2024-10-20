@@ -1,8 +1,4 @@
-﻿using HospitalSystem.Core.Entities;
-using System.Net;
-using System.Net.Mail;
-
-namespace HospitalSystem.Infrastructure.Services
+﻿namespace HospitalSystem.Infrastructure.Services
 {
     public class EmailSender : IEmailSender
     {

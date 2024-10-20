@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HospitalSystem.Persistance.Repository
+﻿namespace HospitalSystem.Persistance.Repository
 {
-	public class FeedbackRepository : IGenericRepository<Feedback>
+    public class FeedbackRepository : IGenericRepository<Feedback>
 	{
 		private readonly ApplicationDbContext _context
             ;

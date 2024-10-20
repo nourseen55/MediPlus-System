@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace HospitalSystem.Persistance.Repository
+﻿namespace HospitalSystem.Persistance.Repository
 {
     public class MedicalRecordRepository : IMedicalRecordRepository
     {

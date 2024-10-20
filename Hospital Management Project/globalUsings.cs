@@ -1,12 +1,23 @@
-﻿global using HospitalSystem.Core.ViewModels;
-global using HospitalSystem.Application.Interfaces;
-global using HospitalSystem.Infrastructure.Services;
+﻿global using HospitalSystem.Application.Interfaces;
+global using HospitalSystem.Application.IServices;
+global using HospitalSystem.Application.Services;
 global using HospitalSystem.Core.Entities;
+global using HospitalSystem.Core.Enums;
+global using HospitalSystem.Core.ViewModels;
+global using HospitalSystem.Infrastructure.Mapping;
+global using HospitalSystem.Infrastructure.Services;
 global using HospitalSystem.Persistance.Data;
 global using HospitalSystem.Persistance.UnitOfWork;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Identity.UI.Services;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Routing;
 global using Microsoft.EntityFrameworkCore;
+global using Stripe;
 global using System.Diagnostics;
-
+global using System.Security.Claims;
+global using X.PagedList;
+global using AutoMapper;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using System.Data;

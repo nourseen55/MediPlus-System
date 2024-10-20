@@ -1,7 +1,4 @@
-﻿using Microsoft.Identity.Client.Extensibility;
-using System.Text;
-
-namespace HospitalSystem.Persistance.Repository
+﻿namespace HospitalSystem.Persistance.Repository
 {
     public class DoctorRepository : IDoctorRepository
     {

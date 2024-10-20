@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HospitalSystem.Core.ViewModels
+﻿namespace HospitalSystem.Core.ViewModels
 {
-	public class ContactFormVM
+    public class ContactFormVM
 	{
 		public string? FirstName { get; set; }
 		public string? LastName { get; set; }

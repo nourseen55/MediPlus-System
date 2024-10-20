@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
-namespace HospitalSystem.Persistance.UnitOfWork
+﻿namespace HospitalSystem.Persistance.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

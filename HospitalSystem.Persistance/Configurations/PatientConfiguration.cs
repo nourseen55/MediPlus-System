@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HospitalSystem.Persistance.Configurations
+﻿namespace HospitalSystem.Persistance.Configurations
 {
-        public class PatientConfiguration : IEntityTypeConfiguration<Patient>
+    public class PatientConfiguration : IEntityTypeConfiguration<Patient>
         {
             public void Configure(EntityTypeBuilder<Patient> builder)
             {

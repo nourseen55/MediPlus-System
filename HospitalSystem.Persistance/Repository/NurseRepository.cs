@@ -1,8 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Identity;
-using System.Linq;
-
-namespace HospitalSystem.Persistance.Repository
+﻿namespace HospitalSystem.Persistance.Repository
 {
     public class NurseRepository : IGenericRepository<Nurse>
     {

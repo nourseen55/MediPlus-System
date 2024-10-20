@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HospitalSystem.Persistance.Repository
+﻿namespace HospitalSystem.Persistance.Repository
 {
-	public class NewsRepository : IGenericRepository<NewsPost>
+    public class NewsRepository : IGenericRepository<NewsPost>
 	{
 		private readonly ApplicationDbContext 
 

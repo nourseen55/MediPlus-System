@@ -1,8 +1,4 @@
-﻿using HospitalSystem.Application.Services;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Hospital_Management_Project.Areas.Nurses.Controllers
+﻿namespace Hospital_Management_Project.Areas.Nurses.Controllers
 {
     [Area("Nurses")]
 

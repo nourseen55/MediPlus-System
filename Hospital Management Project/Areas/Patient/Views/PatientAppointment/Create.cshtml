@@ -25,7 +25,7 @@
 
                 <div class="form-group">
                     <label asp-for="SelectedDepartmentID">Department</label>
-                    <select id="DepartmentSelect" class="form-control" asp-for="SelectedDepartmentID" asp-items="Model.Departments" onchange="fetchDoctors(this.value)">
+                    <select id="DepartmentSelect" class="form-control" asp-for="SelectedDepartmentID" asp-items="Model.Departments" onchange="fetchDoctors(this.value)" required>
                         <option value="">Select Department</option>
                        
                     </select>
@@ -34,7 +34,7 @@
 
                 <div class="form-group">
                     <label asp-for="SelectedDoctorID">Doctor</label>
-                    <select id="DoctorId" class="form-control" asp-for="SelectedDoctorID" onchange="fetchWorkingHours(this.value)">
+                    <select id="DoctorId" class="form-control" asp-for="SelectedDoctorID" onchange="fetchWorkingHours(this.value)" required>
                         <option value="">Select Doctor</option>
                     </select>
                     <span asp-validation-for="SelectedDoctorID" class="text-danger"></span>
@@ -42,7 +42,7 @@
 
                 <div class="form-group">
                     <label asp-for="SelectedWorkingHoursID">Working Hours</label>
-                    <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID">
+                    <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID" required>
                         <option value="">Select Working Hours</option>
                     </select>
                     <span asp-validation-for="SelectedWorkingHoursID" class="text-danger"></span>

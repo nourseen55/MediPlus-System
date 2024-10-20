@@ -1,17 +1,4 @@
-﻿using AutoMapper;
-using HospitalSystem.Application.IServices;
-using HospitalSystem.Application.Services;
-using HospitalSystem.Core.Entities;
-using HospitalSystem.Core.Enums;
-using HospitalSystem.Core.ViewModels;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using System.Data;
-using System.Numerics;
-
-namespace Hospital_Management_Project.Areas.Admin.Controllers
+﻿namespace Hospital_Management_Project.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = nameof(UserRoles.Admin))]

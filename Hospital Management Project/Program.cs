@@ -1,11 +1,3 @@
-using Hospital_Management_Project.Middlewares;
-using HospitalSystem.Application.IServices;
-using HospitalSystem.Application.Services;
-using HospitalSystem.Infrastructure.Mapping;
-using HospitalSystem.Persistance.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
 namespace Hospital_Management_Project
 {
     public class Program
@@ -16,7 +8,8 @@ namespace Hospital_Management_Project
             var connectionString = builder.Configuration.GetConnectionString("cs");
             //var connectionstring2 = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");
             //var connectionstring3 = builder.Configuration.GetConnectionString("cs3");
-
+            var emalconfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+            var stripe = builder.Configuration.GetSection("Stripe");
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -24,9 +17,9 @@ namespace Hospital_Management_Project
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            var emalconfig = builder.Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
-            builder.Services.AddSingleton(emalconfig);
-
+            #region Stripe
+            builder.Services.Configure<StripeSettings>(stripe);
+            #endregion
             // Identity configuration
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -73,6 +66,7 @@ namespace Hospital_Management_Project
             builder.Services.AddScoped<IMedicalRecordService, MedicalRecordService>();
             builder.Services.AddTransient<IEmailSender, EmailSender>();
             builder.Services.AddScoped<DoctorService>();
+            builder.Services.AddSingleton(emalconfig);
             #endregion
 
             #region Configure Cookie-based Authentication
@@ -85,6 +79,9 @@ namespace Hospital_Management_Project
 
             });
             #endregion
+
+
+            #region External Authentication
             //builder.Services.AddAuthentication()
             //    .AddGoogle(options =>
             //    {
@@ -94,6 +91,9 @@ namespace Hospital_Management_Project
             //        options.CallbackPath = "/Identity/Account/Login/google";
             //        });
             //builder.Services.AddSession();
+            #endregion
+
+
             var app = builder.Build();
             //app.UseSession();
             // Configure the HTTP request pipeline.
@@ -110,7 +110,7 @@ namespace Hospital_Management_Project
 
             app.UseStaticFiles();
             app.UseRouting();
-
+            StripeConfiguration.ApiKey = stripe["SecretKey"];
             // Ensure authentication and authorization middleware are in the correct order
             app.UseAuthentication();
             app.UseAuthorization();

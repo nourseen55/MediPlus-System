@@ -1,8 +1,3 @@
-using HospitalSystem.Application.IServices;
-using HospitalSystem.Application.Services;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-
 namespace Hospital_Management_Project.Controllers
 {
     public class HomeController : Controller

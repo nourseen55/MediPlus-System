@@ -1,14 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-
-namespace HospitalSystem.Persistance.Data
+﻿namespace HospitalSystem.Persistance.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        /*public ApplicationDbContext()
+       /* public ApplicationDbContext()
         {
 
         }*/

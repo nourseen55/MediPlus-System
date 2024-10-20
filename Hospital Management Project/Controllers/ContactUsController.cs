@@ -1,11 +1,6 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Hospital_Management_Project.Controllers
+﻿namespace Hospital_Management_Project.Controllers
 {
-	public class ContactUsController : Controller
+    public class ContactUsController : Controller
 	{
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly IEmailSender _emailSender;

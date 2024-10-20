@@ -1,10 +1,5 @@
-﻿using HospitalSystem.Application.IServices;
-using HospitalSystem.Application.Services;
-using HospitalSystem.Core.Enums;
-using Microsoft.AspNetCore.Authorization;
-
-
-namespace Hospital_Management_Project.Areas.Doctors.Controllers{
+﻿namespace Hospital_Management_Project.Areas.Doctors.Controllers
+{
 
     [Area("Doctors")]
     public class MedicalRecordController : Controller

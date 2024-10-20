@@ -1,10 +1,4 @@
-﻿using HospitalSystem.Application.IServices;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using X.PagedList;
-
-namespace Hospital_Management_Project.Controllers
+﻿namespace Hospital_Management_Project.Controllers
 {
     public class FeedbackController : Controller
     {

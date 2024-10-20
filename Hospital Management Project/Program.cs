@@ -1,12 +1,3 @@
-using Hospital_Management_Project.Middlewares;
-using HospitalSystem.Application.IServices;
-using HospitalSystem.Application.Services;
-using HospitalSystem.Infrastructure.Mapping;
-using HospitalSystem.Persistance.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Stripe;
-
 namespace Hospital_Management_Project
 {
     public class Program

@@ -1,17 +1,6 @@
-﻿using HospitalSystem.Application.IServices;
-using HospitalSystem.Application.Services;
-using HospitalSystem.Core.Enums;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
-using X.PagedList;
-using Microsoft.EntityFrameworkCore;
-
-namespace Hospital_Management_Project.Areas.Patient.Controllers
+﻿namespace Hospital_Management_Project.Areas.Patient.Controllers
 {
-	[Area("Patient")]
+    [Area("Patient")]
 	[Authorize(Roles = nameof(UserRoles.Patient))]
 	public class PatientAppointmentController : Controller
 	{

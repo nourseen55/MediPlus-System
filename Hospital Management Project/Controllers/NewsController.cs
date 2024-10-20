@@ -1,12 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using HospitalSystem.Core.Entities;
-using System.Linq;
-using Microsoft.AspNetCore.Identity;
-using HospitalSystem.Application.IServices;
-using X.PagedList;
-using HospitalSystem.Application.Services;
-
-namespace HospitalSystem.Controllers
+﻿namespace HospitalSystem.Controllers
 {
     public class NewsController : Controller
     {

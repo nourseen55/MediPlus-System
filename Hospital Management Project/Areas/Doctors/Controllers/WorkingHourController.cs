@@ -1,12 +1,4 @@
-﻿using HospitalSystem.Application.IServices;
-using HospitalSystem.Application.Services;
-using HospitalSystem.Core.Entities;
-using HospitalSystem.Core.Enums;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Hospital_Management_Project.Areas.Doctors.Controllers
+﻿namespace Hospital_Management_Project.Areas.Doctors.Controllers
 {
     [Area("Doctors")]
     [Authorize(Roles = nameof(UserRoles.Doctor))]

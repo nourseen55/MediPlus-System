@@ -1,8 +1,4 @@
-﻿using HospitalSystem.Core.Enums; // Ensure this has UserRoles enum
-using System.Security.Claims;
-using Microsoft.AspNetCore.Routing;
-
-namespace Hospital_Management_Project.Middlewares
+﻿namespace Hospital_Management_Project.Middlewares
 {
     public class AreaAuthorizationMiddleware
     {

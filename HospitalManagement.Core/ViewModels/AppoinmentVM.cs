@@ -1,5 +1,6 @@
 ﻿using HospitalSystem.Core.Entities;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,19 @@ namespace HospitalSystem.Core.ViewModels
     {
         public string AppointemntId {  get; set; }=Guid.NewGuid().ToString();
         public string PatientID { get; set; }
-        public string? SelectedDepartmentID { get; set; }
-        public string? SelectedDoctorID { get; set; }
-        public string?SelectedWorkingHoursID { get; set; }
+        [Required(ErrorMessage = "Department is required.")]
+        public string SelectedDepartmentID { get; set; }
+        [Required(ErrorMessage = "Doctor is required.")]
+
+        public string SelectedDoctorID { get; set; }
+        [Required(ErrorMessage = "WorkingHours is required.")]
+
+        public string SelectedWorkingHoursID { get; set; }
         public string? SelectedDepartmentName { get; set; }
         public string? SelectedDoctorName { get; set; }
 
         public IEnumerable<SelectListItem>? Departments { get; set; }
         public IEnumerable<SelectListItem>? Doctors { get; set; }
-        [Required]
         public IEnumerable<SelectListItem>? WorkingHours { get; set; }
     }
 }

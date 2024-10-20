@@ -20,6 +20,7 @@ namespace HospitalSystem.Core.ViewModels
 
         public IEnumerable<SelectListItem>? Departments { get; set; }
         public IEnumerable<SelectListItem>? Doctors { get; set; }
+        [Required]
         public IEnumerable<SelectListItem>? WorkingHours { get; set; }
     }
 }

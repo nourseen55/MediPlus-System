@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                     <label class="form-label" asp-for="SelectedWorkingHoursID">Working Hours</label>
-                    <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID">
+                    <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID" required>
                         <option value="">Select Working Hours</option>
                     </select>
                     <span asp-validation-for="SelectedWorkingHoursID" class="text-danger"></span>

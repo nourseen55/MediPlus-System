@@ -4,6 +4,7 @@ namespace Hospital_Management_Project
     {
         public static void Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
             var connectionString = builder.Configuration.GetConnectionString("cs");
             //var connectionstring2 = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");
@@ -118,7 +119,7 @@ namespace Hospital_Management_Project
             app.MapRazorPages();
 
             //This middleware is to make all the requests with Admin area to be checked for its Authorization
-            //app.UseMiddleware<AreaAuthorizationMiddleware>();
+            app.UseMiddleware<AreaAuthorizationMiddleware>();
 
             #region Map controller routes
             app.MapControllerRoute(

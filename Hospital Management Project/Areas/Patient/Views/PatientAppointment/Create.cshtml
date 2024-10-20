@@ -1,4 +1,5 @@
 ﻿@model AppoinmentVM
+
 <div class="breadcrumbs overlay">
     <div class="container">
         <div class="bread-inner">
@@ -15,7 +16,9 @@
         </div>
     </div>
 </div>
+
 <br />
+
 <div class="container my-5">
     <div class="row">
         <h2>Create Appointment</h2>
@@ -23,15 +26,16 @@
             <form asp-action="Create" method="post">
                 <input type="hidden" asp-for="PatientID" />
 
+                <!-- Department Selection -->
                 <div class="form-group">
                     <label asp-for="SelectedDepartmentID">Department</label>
                     <select id="DepartmentSelect" class="form-control" asp-for="SelectedDepartmentID" asp-items="Model.Departments" onchange="fetchDoctors(this.value)" required>
                         <option value="">Select Department</option>
-                       
                     </select>
                     <span asp-validation-for="SelectedDepartmentID" class="text-danger"></span>
                 </div>
 
+                <!-- Doctor Selection -->
                 <div class="form-group">
                     <label asp-for="SelectedDoctorID">Doctor</label>
                     <select id="DoctorId" class="form-control" asp-for="SelectedDoctorID" onchange="fetchWorkingHours(this.value)" required>
@@ -40,6 +44,7 @@
                     <span asp-validation-for="SelectedDoctorID" class="text-danger"></span>
                 </div>
 
+                <!-- Working Hours Selection -->
                 <div class="form-group">
                     <label asp-for="SelectedWorkingHoursID">Working Hours</label>
                     <select id="WorkingHoursId" class="form-control" asp-for="SelectedWorkingHoursID" required>
@@ -54,6 +59,7 @@
             </form>
         </div>
 
+        <!-- Working Hours Card -->
         <div class="col-5" id="workingHoursCard" style="display: none;">
             <div class="wbook">
                 <div class="wcover">
@@ -73,15 +79,20 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            
+
             window.fetchDoctors = function (departmentId) {
+                console.log("Selected Department ID:", departmentId);
                 const doctorDropdown = document.getElementById('DoctorId');
-                doctorDropdown.innerHTML = '<option value="">Select Doctor</option>'; 
+                doctorDropdown.innerHTML = '<option value="">Select Doctor</option>';
 
                 if (departmentId) {
                     fetch(`/Patient/PatientAppointment/GetDoctorsByDepartment?departmentId=${departmentId}`)
-                        .then(response => response.json())
+                        .then(response => {
+                            console.log("Fetch Response Status:", response.status);
+                            return response.json();
+                        })
                         .then(data => {
+                            console.log("Doctors Data:", data);
                             if (Array.isArray(data) && data.length > 0) {
                                 data.forEach(doctor => {
                                     let option = document.createElement('option');
@@ -93,24 +104,23 @@
                             } else {
                                 doctorDropdown.style.display = "none"; 
                                 $('#workingHoursCard').hide(); 
-                                $('#workingHoursText').html("No Appointment Available"); 
+                                $('#workingHoursText').html("No Appointment Available");
                             }
                         })
                         .catch(error => console.error('Error fetching doctors:', error));
                 }
             };
 
-           
             window.fetchWorkingHours = function (doctorId) {
                 const workingHoursDropdown = document.getElementById('WorkingHoursId');
-                workingHoursDropdown.innerHTML = '<option value="">Select Working Hours</option>'; 
+                workingHoursDropdown.innerHTML = '<option value="">Select Working Hours</option>';
 
                 if (doctorId) {
                     fetch(`/Patient/PatientAppointment/GetWorkingHoursByDoctor?doctorId=${doctorId}`)
                         .then(response => response.json())
                         .then(data => {
+                            let workingHoursText = '';
                             if (Array.isArray(data) && data.length > 0) {
-                                let workingHoursText = '';
                                 data.forEach(hours => {
                                     let option = document.createElement('option');
                                     option.value = hours.value;
@@ -118,26 +128,28 @@
                                     workingHoursDropdown.appendChild(option);
                                     workingHoursText += `${hours.text}<br/>`;
                                 });
-                                workingHoursDropdown.style.display = "block";
                                 $('#workingHoursText').html(workingHoursText);
                                 $('#workingHoursCard').show();
                             } else {
-                                $('#workingHoursCard').show();  
-                                $('#workingHoursText').html("No Appointment Available"); 
+                                $('#workingHoursText').html("No Appointment Available");
+                                $('#workingHoursCard').show();
                             }
                         })
                         .catch(error => console.error('Error fetching working hours:', error));
                 } else {
-                    $('#workingHoursCard').hide();
+                    hideWorkingHoursCard();
                 }
             };
 
-          
+            function hideWorkingHoursCard() {
+                $('#workingHoursCard').hide();
+                $('#workingHoursText').html('');
+            }
+
             if ('@Model.SelectedDoctorID' !== '') {
                 fetchWorkingHours('@Model.SelectedDoctorID');
             }
 
-           
             if ('@Model.SelectedDepartmentID' !== '') {
                 fetchDoctors('@Model.SelectedDepartmentID');
             }

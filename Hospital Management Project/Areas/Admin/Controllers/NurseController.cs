@@ -49,8 +49,11 @@
                     model.Img = imgPath;
                 }
 
-                var nurse = new Nurse();
-                nurse.UserName = nurse.Email;
+                Nurse nurse = new()
+                {
+                    UserName = model.Email
+                };
+                
 
                 _mapper.Map(model, nurse);
 

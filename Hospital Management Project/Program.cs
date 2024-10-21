@@ -1,3 +1,9 @@
+using Hospital_Management_Project.Middlewares;
+using HospitalSystem.Application.IServices;
+using HospitalSystem.Application.Services;
+using HospitalSystem.Infrastructure.Mapping;
+using Stripe;
+
 namespace Hospital_Management_Project
 {
     public class Program
@@ -70,6 +76,26 @@ namespace Hospital_Management_Project
             builder.Services.AddSingleton(emalconfig);
             #endregion
 
+
+            #region External Authentication
+            builder.Services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    var googleSection = builder.Configuration.GetSection("Authentication:Google");
+                    options.ClientId = googleSection["ClientId"];
+                    options.ClientSecret = googleSection["ClientSecret"];
+                    options.CallbackPath = "/Identity/Account/ExternalLogin/Callback"; 
+                });
+            #endregion
+
+            //builder.Services.AddSession(options =>
+            //{
+            //    options.IdleTimeout = TimeSpan.FromMinutes(30);
+            //    options.Cookie.HttpOnly = true;
+            //    options.Cookie.IsEssential = true; 
+            //});
+
+
             #region Configure Cookie-based Authentication
             builder.Services.ConfigureApplicationCookie(options =>
             {
@@ -115,7 +141,7 @@ namespace Hospital_Management_Project
             // Ensure authentication and authorization middleware are in the correct order
             app.UseAuthentication();
             app.UseAuthorization();
-
+            //app.UseSession();
             app.MapRazorPages();
 
             //This middleware is to make all the requests with Admin area to be checked for its Authorization

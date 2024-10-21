@@ -17,6 +17,7 @@
                 <form asp-action="Edit" method="post" enctype="multipart/form-data">
                     @Html.AntiForgeryToken()
                     <input hidden asp-for="ID" />
+                    <input hidden asp-for="Img" />
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label asp-for="FirstName" class="control-label"></label>

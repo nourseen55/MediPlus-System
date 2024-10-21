@@ -15,17 +15,23 @@
                 <form asp-action="Edit" method="post" enctype="multipart/form-data">
                     @Html.AntiForgeryToken()
                     <input hidden asp-for="Id" />
+                    <input hidden asp-for="Img" />
+
                     <div class="form-group">
                         <label>Department Name <span class="text-danger">*</span></label>
                         <input asp-for="DepartmentName" class="form-control" type="text" required />
                         <span asp-validation-for="DepartmentName" class="text-danger"></span>
                     </div>
-                    <div class="profile-upload">
-                        <div class="upload-img">
-                            <img src="~/assets/img/user.jpg" alt="Default Image" id="ImagePreview" />
-                        </div>
-                        <div class="upload-input">
-                            <input asp-for="Img" type="file" class="form-control" id="imgfile" onchange="Image(event);" name="Img" />
+                    <div class="form-group col-md-6">
+                        <label>Avatar</label>
+                        <div class="profile-upload">
+                            <div class="upload-img">
+                                <img src="~/@Model.Img" alt="Default Image" id="ImagePreview" />
+                            </div>
+                            <div class="upload-input">
+                                <input asp-for="Img" type="file" class="form-control" id="imgfile" onchange="Image(event);" name="Img" />
+                            </div>
+                            <span asp-validation-for="Img" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="form-group">

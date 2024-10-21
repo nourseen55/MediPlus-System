@@ -107,18 +107,16 @@
         {
             if (ModelState.IsValid)
             {
-                if (record.DiagnosisDocument != null)
-                {
-                    await _fileService.DeleteFileAsync(record.DiagnosisDocument);
-                    record.DiagnosisDocument = null;
-                }
 
                 if (file != null && file.Length > 0)
                 {
+                    await _fileService.DeleteFileAsync(record.DiagnosisDocument);
+                    record.DiagnosisDocument = null;
                     var path = @"DiagnosisDocument";
                     string FilePath = await _fileService.SaveImageAsync(file, path);
                     record.DiagnosisDocument = FilePath;
                 }
+                
 
                 await _medicalRecordService.UpdateMedicalRecordAsync(record);
                 return RedirectToAction("Index", new { patientId = record.PatientID });

@@ -58,14 +58,7 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             }
             return View(workingHours);
         }
-        public async Task<WorkingHours> GetWorkingHoursByDayAndTimeAsync(string doctorId, DateOnly Day, TimeSpan startHour, TimeSpan endHour)
-        {
-            return await _context.WorkingHours.FirstOrDefaultAsync(wh => wh.DoctorId == doctorId &&
-            wh.Day == Day&& 
-            ((startHour >= wh.StartHour && startHour < wh.EndHour) ||
-            (endHour > wh.StartHour && endHour <= wh.EndHour) ||
-            (startHour < wh.StartHour && endHour > wh.EndHour)));
-        }
+        
 
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
@@ -77,13 +70,12 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
             }
             var user = await _usermanager.GetUserAsync(User);
             workingHours.DoctorId = user.Id;
+           
             return View(workingHours);
 
         }
 
         [ValidateAntiForgeryToken]
-        [HttpPost]
-
         [HttpPost]
         public async Task<IActionResult> Edit(WorkingHours workingHours)
         {
@@ -133,6 +125,14 @@ namespace Hospital_Management_Project.Areas.Doctors.Controllers
         {
             await _hourservice.DeletehoursAsync(id);
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<WorkingHours> GetWorkingHoursByDayAndTimeAsync(string doctorId, DateOnly Day, TimeSpan startHour, TimeSpan endHour)
+        {
+            return await _context.WorkingHours.FirstOrDefaultAsync(wh => wh.DoctorId == doctorId &&
+            wh.Day == Day &&
+            ((startHour >= wh.StartHour && startHour < wh.EndHour) ||
+            (endHour > wh.StartHour && endHour <= wh.EndHour) ||
+            (startHour < wh.StartHour && endHour > wh.EndHour)));
         }
 
 

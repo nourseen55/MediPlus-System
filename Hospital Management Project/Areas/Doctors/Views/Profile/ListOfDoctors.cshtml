@@ -21,18 +21,16 @@
 </div>
 
 <div class="container">
- 
     <div class="row">
-    <div class="col-md-12 d-flex justify-content-end my-4">
-        <div class="search-container" style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); display: flex; align-items: center; width: 300px;">
-            <input type="text" id="keyword" class="form-control me-2" style="width: 200px; height: 45px; font-size: 16px; border-radius: 5px; border: 1px solid #ced4da;" placeholder="Search Here..." />
-            <button id="searchButton" class="btn btn-dark" style="height: 45px; font-size: 16px; border-radius: 5px;">
-                <i class="fa fa-search"></i>
-            </button>
+        <div class="col-md-12 d-flex justify-content-end my-4">
+            <div class="search-container" style="background-color: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); display: flex; align-items: center; width: 300px;">
+                <input type="text" id="keyword" class="form-control me-2" style="width: 200px; height: 45px; font-size: 16px; border-radius: 5px; border: 1px solid #ced4da;" placeholder="Search Here..." />
+                <button id="searchButton" class="btn btn-dark" style="height: 45px; font-size: 16px; border-radius: 5px;">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
         </div>
     </div>
-</div>
-
 
     <div class="row justify-content-center card-row" id="doctorResults">
         @foreach (var doctor in Model)
@@ -67,21 +65,27 @@
 @section Scripts {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#searchButton').on('click', function () {
-                var keyword = $('#keyword').val();
+        let typingTimer; // Timer identifier
+        const doneTypingInterval = 300; // Time in ms (300 ms = 0.3 seconds)
 
-                $.ajax({
-                    url: '@Url.Action("ListOfDoctors")',
-                    type: 'GET',
-                    data: { keyword: keyword },
-                    success: function (data) {
-                        $('#doctorResults').html($(data).find('#doctorResults').html());
-                    },
-                    error: function () {
-                        alert('Error retrieving data.');
-                    }
-                });
+        $(document).ready(function () {
+            $('#keyword').on('keyup', function () {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(function () {
+                    var keyword = $('#keyword').val();
+
+                    $.ajax({
+                        url: '@Url.Action("ListOfDoctors")',
+                        type: 'GET',
+                        data: { keyword: keyword },
+                        success: function (data) {
+                            $('#doctorResults').html($(data).find('#doctorResults').html());
+                        },
+                        error: function () {
+                            alert('Error retrieving data.');
+                        }
+                    });
+                }, doneTypingInterval);
             });
         });
 
@@ -89,23 +93,23 @@
             const button = container.querySelector('.appointment-button');
             const image = container.querySelector('.doctor-photo');
             button.style.display = 'block';
-            image.style.filter = 'brightness(70%)'; 
+            image.style.filter = 'brightness(70%)';
             button.style.backgroundColor = '#007bff';
-            button.style.borderColor = '#007bff'; 
+            button.style.borderColor = '#007bff';
         }
 
         function hideAppointmentButton(container) {
             const button = container.querySelector('.appointment-button');
             const image = container.querySelector('.doctor-photo');
-            button.style.display = 'none'; 
+            button.style.display = 'none';
             image.style.filter = 'brightness(100%)';
             button.style.borderColor = 'transparent';
         }
 
         function goToDetails(event, detailViewUrl) {
-            event.stopPropagation(); 
+            event.stopPropagation();
             const doctorName = event.target;
-            doctorName.style.color = 'blue'; 
+            doctorName.style.color = 'blue';
 
             window.location.href = detailViewUrl;
         }
@@ -113,10 +117,8 @@
         function goToCreateAppointment(doctorId) {
             window.location.href = '@Url.Action("Create", "PatientAppointment", new { area = "Patient" })' + '?DoctorId=' + doctorId;
         }
-
     </script>
 }
-
 <style>
     .container {
         margin-top: 30px;

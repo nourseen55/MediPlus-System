@@ -1,4 +1,6 @@
-﻿namespace Hospital_Management_Project.Areas.Admin.Controllers
+﻿using HospitalSystem.Core.Entities;
+
+namespace Hospital_Management_Project.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = nameof(UserRoles.Admin))]
@@ -52,7 +54,7 @@
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Departments departments, IFormFile Img)
+        public async Task<IActionResult> Edit(Departments departments, IFormFile? Img)
         {
             if (ModelState.IsValid)
             {
@@ -68,8 +70,15 @@
 
                 if (Img != null && Img.Length > 0)
                 {
+                    await _imageservice.DeleteFileAsync(existingDepartment.Img);
+                    existingDepartment.Img = null;
                     var path = @"Images/Departments/";
                     existingDepartment.Img = await _imageservice.SaveImageAsync(Img, path);
+                }
+                else
+                {
+                    
+                    existingDepartment.Img =departments.Img;
                 }
 
                 await _departmentService.UpdateDepartmentAsync(existingDepartment);

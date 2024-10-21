@@ -93,7 +93,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(NurseVM nurseVM, IFormFile Img)
+        public async Task<IActionResult> Edit(NurseVM nurseVM, IFormFile? Img)
         {
             if (ModelState.IsValid)
             {
@@ -103,13 +103,18 @@
                 {
                     return NotFound();
                 }
-                var model = _mapper.Map(nurseVM, nurse);
+                 _mapper.Map(nurseVM, nurse);
 
                 if (Img != null && Img.Length > 0)
                 {
+                    await _imageService.DeleteFileAsync(nurse.Img);
                     var path = @"Images\Nurses";
                     string imgPath = await _imageService.SaveImageAsync(Img, path);
                     nurse.Img = imgPath;
+                }
+                else
+                {
+                    nurse.Img=nurseVM.Img;
                 }
                 nurse.UserName = nurse.Email;
                 nurse.PasswordHash = _passwordHasher.HashPassword(nurse, nurse.PasswordHash);

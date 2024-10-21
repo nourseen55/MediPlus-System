@@ -25,6 +25,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" style="color: red; text-align: center;"></div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="DoctorId" />
 
             <div style="margin-bottom: 20px;">
                 <label asp-for="Day" style="display: block; font-family: 'Poppins', sans-serif; color: #007BFF; margin-bottom: 10px;">Select Day</label>

@@ -1,4 +1,7 @@
-﻿namespace HospitalSystem.Application.Services
+﻿using HospitalSystem.Application.Interfaces;
+using HospitalSystem.Application.IServices;
+
+namespace HospitalSystem.Application.Services
 {
     public class WorkingHoursService : IWorkingHourstService
     {
@@ -24,7 +27,8 @@
 			return await _unitOfWork._hoursRepository.GetAllEntityAsync();
 		}
 
-		public  async Task<WorkingHours> GethoursByIdAsync(string id)
+
+        public  async Task<WorkingHours> GethoursByIdAsync(string id)
 		{
 			return await _unitOfWork._hoursRepository.GetEntityByIdAsync(id);
 		}

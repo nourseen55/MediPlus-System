@@ -1,4 +1,6 @@
-﻿namespace Hospital_Management_Project.Areas.Admin.Controllers
+﻿using Stripe;
+
+namespace Hospital_Management_Project.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = nameof(UserRoles.Admin))]
@@ -78,6 +80,8 @@
 
                 if (Img != null && Img.Length > 0)
                 {
+                    await _imageService.DeleteFileAsync(doctor.Img);
+                    doctor.Img = null;
                     var path = @"Images/Doctors/";
                     doctor.Img = await _imageService.SaveImageAsync(Img, path);
                 }

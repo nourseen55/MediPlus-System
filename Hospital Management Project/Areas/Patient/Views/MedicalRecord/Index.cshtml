@@ -25,10 +25,10 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-        .card:hover {
-            transform: translateY(-10px); 
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
-        }
+    .card:hover {
+        transform: translateY(-10px); 
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+    }
 
     .card-body {
         display: flex;
@@ -40,35 +40,71 @@
         display: flex;
         justify-content: center; 
     }
+
+    .no-records {
+        text-align: center;
+        font-size: 1.5em;
+        color: #007bff;
+        margin-top: 20px;
+        background-color: white; /* White background */
+        padding: 20px; /* Padding for the div */
+        border-radius: 15px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    }
+
+    .create-appointment-btn {
+        margin-top: 20px; /* Space above button */
+        background-color: #007bff; /* Button color */
+        color: white; /* Text color */
+        border: none; /* No border */
+        padding: 10px 20px; /* Padding */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer; /* Pointer cursor */
+        transition: background-color 0.3s; /* Transition for hover */
+    }
+
+    .create-appointment-btn:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
 </style>
 
 <div class="container">
     <div class="row">
-        @foreach (var record in Model)
+        @if (!Model.Any())
         {
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-3">
-                            <img src="~/@record.Doctor.Img" alt="Doctor Photo" class="rounded-circle" width="50" height="50" />
-                            <div class="ml-3">
-                                <h5 class="mb-0">Doctor: @record.Doctor.FullName</h5> 
+            <div class="col-12 no-records">
+                <p>No medical records available.</p>
+                <a href="~/Patient/PatientAppointment/Create" style="color:white!important" class="btn btn-primary create-appointment-btn">Make an Appointment</a>
+            </div>
+        }
+
+        else
+        {
+            @foreach (var record in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="~/@record.Doctor.Img" alt="Doctor Photo" class="rounded-circle" width="50" height="50" />
+                                <div class="ml-3">
+                                    <h5 class="mb-0">Doctor: @record.Doctor.FullName</h5> 
+                                </div>
                             </div>
-                        </div>
 
-
-                        <p><strong>Diagnosis:</strong> @record.Diagnosis</p>
-                        <p><strong>Treatment:</strong> @record.Treatment</p>
-                        <div class="feedback-date" style="font-size: 14px; color: #888;">
-                            <p><strong>Date of Entry: </strong><i class="fa fa-calendar"></i> @record.DateOfEntry.ToString("dddd, MMMM d,h:mm tt")</p>
-                        </div>
-                        
-                        <div class="button-container">
-                            <a href="@Url.Action("Details", "MedicalRecord", new { area = "Doctors", id = record.Id })" class="btn btn-primary">View Details</a>
+                            <p><strong>Diagnosis:</strong> @record.Diagnosis</p>
+                            <p><strong>Treatment:</strong> @record.Treatment</p>
+                            <div class="feedback-date" style="font-size: 14px; color: #888;">
+                                <p><strong>Date of Entry: </strong><i class="fa fa-calendar"></i> @record.DateOfEntry.ToString("dddd, MMMM d, h:mm tt")</p>
+                            </div>
+                            
+                            <div class="button-container">
+                                <a href="@Url.Action("Details", "MedicalRecord", new { area = "Doctors", id = record.Id })" class="btn btn-primary">View Details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         }
     </div>
 </div>

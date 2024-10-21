@@ -1,4 +1,8 @@
-﻿namespace Hospital_Management_Project.Areas.Doctors.Controllers
+﻿using HospitalSystem.Application.IServices;
+using HospitalSystem.Core.Enums;
+using Microsoft.AspNetCore.Authorization;
+
+namespace Hospital_Management_Project.Areas.Doctors.Controllers
 {
     [Area("Doctors")]
     [Authorize(Roles = nameof(UserRoles.Doctor))]
@@ -6,10 +10,13 @@
     {
         private readonly IWorkingHourstService _hourservice;
         private UserManager<ApplicationUser> _usermanager;
-        public WorkingHourController(IWorkingHourstService service, UserManager<ApplicationUser> usermanager)
+        private readonly ApplicationDbContext _context;
+
+        public WorkingHourController(IWorkingHourstService service, UserManager<ApplicationUser> usermanager,ApplicationDbContext Context)
         {
             _hourservice = service;
             _usermanager = usermanager;
+            _context = Context;
         }
         public async Task< IActionResult> Index()
         {
@@ -33,12 +40,33 @@
         {
             if (ModelState.IsValid)
             {
+                var existinghours = await GetWorkingHoursByDayAndTimeAsync(workingHours.DoctorId,workingHours.Day,workingHours.StartHour,workingHours.EndHour);
+                
+                if(existinghours != null)
+                {
+                    ModelState.AddModelError("", "The working hours for this day and time already exist.");
+                    return View(workingHours);
+                }
+                if (workingHours.Day < DateOnly.FromDateTime(DateTime.Now))
+                {
+                    ModelState.AddModelError("", "The working hours cannot be set in the past.");
+                    return View(workingHours);
+                }
                 await _hourservice.AddHoursAsync(workingHours);
                 return RedirectToAction("Index");
 
             }
             return View(workingHours);
         }
+        public async Task<WorkingHours> GetWorkingHoursByDayAndTimeAsync(string doctorId, DateOnly Day, TimeSpan startHour, TimeSpan endHour)
+        {
+            return await _context.WorkingHours.FirstOrDefaultAsync(wh => wh.DoctorId == doctorId &&
+            wh.Day == Day&& 
+            ((startHour >= wh.StartHour && startHour < wh.EndHour) ||
+            (endHour > wh.StartHour && endHour <= wh.EndHour) ||
+            (startHour < wh.StartHour && endHour > wh.EndHour)));
+        }
+
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
@@ -55,14 +83,35 @@
 
         [ValidateAntiForgeryToken]
         [HttpPost]
+
+        [HttpPost]
         public async Task<IActionResult> Edit(WorkingHours workingHours)
         {
+            var originalEntity = await _hourservice.GethoursByIdAsync(workingHours.Id);
+            if (originalEntity == null)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
-                var originalEntity = await _hourservice.GethoursByIdAsync(workingHours.Id);
-                if (originalEntity == null)
+                var existingHours = await GetWorkingHoursByDayAndTimeAsync(
+                    workingHours.DoctorId,
+                    workingHours.Day,
+                    workingHours.StartHour,
+                    workingHours.EndHour
+                );
+                
+
+                if (existingHours != null && existingHours.Id != originalEntity.Id)
                 {
-                    return NotFound();
+                    ModelState.AddModelError("", "The working hours for this day and time already exist.");
+                    return View(workingHours);
+                }
+                if (workingHours.Day < DateOnly.FromDateTime(DateTime.Now))
+                {
+                    ModelState.AddModelError("", "The working hours cannot be set in the past.");
+                    return View(workingHours);
                 }
 
                 originalEntity.Day = workingHours.Day;
@@ -70,11 +119,14 @@
                 originalEntity.EndHour = workingHours.EndHour;
 
                 await _hourservice.UpdatehoursAsync(originalEntity);
-
                 return RedirectToAction("Index");
             }
+
             return View(workingHours);
         }
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ConfirmDelete(string id)

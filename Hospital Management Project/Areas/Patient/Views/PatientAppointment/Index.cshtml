@@ -24,9 +24,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Appointment Reminder</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <style>
+        .no-appointments {
+            text-align: center;
+            font-size: 1.5em;
+            color: #007bff;
+            margin-top: 20px;
+            background-color: white; /* White background */
+            padding: 20px; /* Padding for the div */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */}
+
+           
+
+        .create-appointment-btn {
+            margin-top: 20px; /* Space above button */
+            background-color: #007bff; /* Button color */
+            color: white; /* Text color */
+            border: none; /* No border */
+            padding: 10px 20px; /* Padding */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor */
+            transition: background-color 0.3s; /* Transition for hover */
+        }
+
+            .create-appointment-btn:hover {
+                background-color: #0056b3; /* تغيير اللون عند التمرير فوق الزر */
+            }
+
+
         .card {
             border-radius: 10px;
             background-color: #f9f9f9;
@@ -84,47 +111,65 @@
             display: flex;
             justify-content: space-between;
         }
+
+        .no-appointments {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #007bff;
+        }
     </style>
 </head>
 <body>
     <div class="container mt-4">
         <div class="row">
-            @foreach (var appointment in Model)
+            @if (!Model.Any())
             {
-                <div class="col-md-6 mb-4">
-                    <div class="card shadow-sm">
-                        <div class="doctor-info">
-                            <img src="~/@appointment.Doctor?.Img" alt="Doctor Photo" class="rounded-circle" width="50" height="50">
-                            <h6 class="ml-3">Doctor: @appointment.Doctor?.FullName <i class="fas fa-calendar-alt calendar-icon"></i></h6>
-                        </div>
-                        <p class="appointment-details">
-                            <strong>Department:</strong> <span class="attribute">@appointment.Department?.DepartmentName</span><br />
-                            <strong>Day:</strong> <span class="attribute">@appointment.Day</span><br />
-                            <strong>Start Date Time:</strong> <span class="attribute">@appointment.StartDateTime</span><br />
-                            <strong>End Date Time:</strong> <span class="attribute">@appointment.EndDateTime</span>
-                        </p>
-                        <a data-toggle="modal" data-target="#delete_doctor_@appointment.AppointmentID" style="color: #007bff";>
-                            <i class="fa fa-trash-o m-r-5"></i> Cancel Appointment
-                        </a>
-                        <div id="delete_doctor_@appointment.AppointmentID" class="modal fade delete-modal" role="dialog">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-body text-center">
-                                        <img src="~/assets/img/sent.png" alt="" width="50" height="46">
-                                        <h3>Are you sure you want to delete this Doctor?</h3>
-                                        <div class="m-t-20">
-                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                            <form asp-action="ConfirmDelete" method="post" style="display:inline;">
-                                                <input type="hidden" name="id" value="@appointment.AppointmentID" />
-                                                <button type="submit" class="btn btn-danger">Cancel</button>
-                                            </form>
+                <div class="col-12 no-appointments">
+                    <p>No appointments available.</p>
+                    <a href="~/Patient/PatientAppointment/Create" style="color:white!important" class="btn btn-primary create-appointment-btn">Make an Appointment</a>
+                </div>
+
+            }
+            else
+            {
+                @foreach (var appointment in Model)
+                {
+                    <div class="col-md-6 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="doctor-info">
+                                <img src="~/@appointment.Doctor?.Img" alt="Doctor Photo" class="rounded-circle" width="50" height="50">
+                                <h6 class="ml-3">Doctor: @appointment.Doctor?.FullName <i class="fas fa-calendar-alt calendar-icon"></i></h6>
+                            </div>
+                            <p class="appointment-details">
+                                <strong>Department:</strong> <span class="attribute">@appointment.Department?.DepartmentName</span><br />
+                                <strong>Day:</strong> <span class="attribute">@appointment.Day</span><br />
+                                <strong>Start Date Time:</strong> <span class="attribute">@appointment.StartDateTime</span><br />
+                                <strong>End Date Time:</strong> <span class="attribute">@appointment.EndDateTime</span>
+                            </p>
+                            <a data-toggle="modal" data-target="#delete_doctor_@appointment.AppointmentID" style="color: #007bff" ;>
+                                <i class="fa fa-trash-o m-r-5"></i> Cancel Appointment
+                            </a>
+                            <div id="delete_doctor_@appointment.AppointmentID" class="modal fade delete-modal" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body text-center">
+                                            <img src="~/assets/img/sent.png" alt="" width="50" height="46">
+                                            <h3>Are you sure you want to delete this Doctor?</h3>
+                                            <div class="m-t-20">
+                                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                                <form asp-action="ConfirmDelete" method="post" style="display:inline;">
+                                                    <input type="hidden" name="id" value="@appointment.AppointmentID" />
+                                                    <button type="submit" class="btn btn-danger">Cancel</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
-                </div>
+                }
             }
         </div>
     </div>

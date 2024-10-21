@@ -103,6 +103,13 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
+        public IActionResult OnPostExternalLogin(string provider, string returnUrl = null)
+        {
+            var redirectUrl = Url.Page("./ExternalLogin", pageHandler: "Callback", values: new { returnUrl });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return new ChallengeResult(provider, properties);
+        }
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");

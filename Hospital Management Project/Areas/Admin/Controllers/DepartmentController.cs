@@ -52,7 +52,7 @@
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Departments departments, IFormFile Img)
+        public async Task<IActionResult> Edit(Departments departments, IFormFile? Img)
         {
             if (ModelState.IsValid)
             {
@@ -70,6 +70,10 @@
                 {
                     var path = @"Images/Departments/";
                     existingDepartment.Img = await _imageservice.SaveImageAsync(Img, path);
+                }
+                else
+                {
+                    existingDepartment.Img =departments.Img;
                 }
 
                 await _departmentService.UpdateDepartmentAsync(existingDepartment);

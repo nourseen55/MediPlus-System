@@ -101,6 +101,13 @@
                                     </div>
                                     <span asp-validation-for="Input.Img" class="text-danger"></span>
                                 </div>
+                                <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" onclick="toggleButton()" />
+                                        <label class="form-check-label" for="flexCheckDefault">Yes, I agree with all</label>
+                                    </div>
+                                    <a class="terms" href="#">Terms & Conditions</a>
+                                </div>
                                 <div class="form-group login-btn">
                                     <button class="btn btn-primary btn-lg" id="registerBtn" type="submit" disabled>Register</button>
                                 </div>
@@ -122,13 +129,6 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" onclick="toggleButton()" />
-                                <label class="form-check-label" for="flexCheckDefault">Yes, I agree with all</label>
-                            </div>
-                            <a class="terms" href="#">Terms & Conditions</a>
-                        </div>
                     </div>
                 </div>
             </div>

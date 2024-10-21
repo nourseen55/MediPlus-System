@@ -151,7 +151,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                //var user = CreateUser();
 
                 //var claims = info.Principal.Claims;
                 //foreach (var claim in claims)
@@ -162,16 +162,24 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                 string Name = info.Principal.FindFirstValue(ClaimTypes.Name);
                 var FullName = Name.Split(' ');
 
-                await _userStore.SetUserNameAsync(user, userEmail, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, userEmail, CancellationToken.None);
+                var patient = new HospitalSystem.Core.Entities.Patient
+                {
+                    FirstName = FullName[0],
+                    LastName = FullName[1],
+                    UserName = userEmail,
+                    Email = userEmail
+                };
 
-                user.FirstName = FullName[0];
-                user.LastName = FullName[1];
+                await _userStore.SetUserNameAsync(patient, userEmail, CancellationToken.None);
+                await _emailStore.SetEmailAsync(patient, userEmail, CancellationToken.None);
 
-                var result = await _userManager.CreateAsync(user , Input.Password);
+                var result = await _userManager.CreateAsync(patient, Input.Password);
+
+                await _userManager.AddToRoleAsync(patient, UserRoles.Patient.ToString());
+                
                 if (result.Succeeded)
                 {
-                    result = await _userManager.AddLoginAsync(user, info);
+                    result = await _userManager.AddLoginAsync(patient, info);
 
                     if (result.Succeeded)
                     {
@@ -179,8 +187,8 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 
                         #region Email Confirmation
 
-                        var userId = await _userManager.GetUserIdAsync(user);
-                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var userId = await _userManager.GetUserIdAsync(patient);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(patient);
                         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                         var callbackUrl = Url.Page(
                             "/Account/ConfirmEmail",
@@ -198,7 +206,7 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
                             return RedirectToPage("./RegisterConfirmation", new { Email = userEmail, returnUrl });
                         }
 
-                        await _signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
+                        await _signInManager.SignInAsync(patient, isPersistent: false, info.LoginProvider);
                         return LocalRedirect(returnUrl);
                     }
                 }

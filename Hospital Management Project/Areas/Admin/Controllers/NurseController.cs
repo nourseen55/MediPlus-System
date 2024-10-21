@@ -108,6 +108,7 @@
                 if (Img != null && Img.Length > 0)
                 {
                     await _imageService.DeleteFileAsync(nurse.Img);
+                    nurse.Img = null;
                     var path = @"Images\Nurses";
                     string imgPath = await _imageService.SaveImageAsync(Img, path);
                     nurse.Img = imgPath;

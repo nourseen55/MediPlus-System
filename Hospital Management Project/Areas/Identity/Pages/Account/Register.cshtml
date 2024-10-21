@@ -104,21 +104,39 @@
                                 <div class="form-group login-btn">
                                     <button class="btn btn-primary btn-lg" id="registerBtn" type="submit" disabled>Register</button>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" onclick="toggleButton()" />
-                                        <label class="form-check-label" for="flexCheckDefault">Yes, I agree with all</label>
+                            </div>
+                        </form>
+                        <br />
+                        <div class="lseparator">
+                            <hr class="line">
+                            <span>Or</span>
+                            <hr class="line">
+                        </div>
+                        <br />
+                        <form asp-page-handler="ExternalLogin" asp-route-provider="Google" method="post">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group login-btn">
+                                        <button type="submit" class="gbutton w-100 btn-lg"><i class="fab fa-google"></i>   Register with Google <span></span></button>
                                     </div>
-                                    <a class="terms" href="#">Terms & Conditions</a>
                                 </div>
                             </div>
                         </form>
+                        <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" onclick="toggleButton()" />
+                                <label class="form-check-label" for="flexCheckDefault">Yes, I agree with all</label>
+                            </div>
+                            <a class="terms" href="#">Terms & Conditions</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

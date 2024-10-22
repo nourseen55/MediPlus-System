@@ -7,5 +7,6 @@
         Task<IEnumerable<WorkingHours>> GetAllWorkingHoursAsync();
         Task UpdatehoursAsync(WorkingHours Dept);
         Task DeletehoursAsync(string id);
+       
     }
 }

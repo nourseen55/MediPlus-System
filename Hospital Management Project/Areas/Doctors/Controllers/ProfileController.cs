@@ -1,4 +1,8 @@
-﻿namespace Hospital_Management_Project.Areas.Doctors.Controllers
+﻿using HospitalSystem.Application.IServices;
+using HospitalSystem.Application.Services;
+using X.PagedList;
+
+namespace Hospital_Management_Project.Areas.Doctors.Controllers
 {
     [Area("Doctors")]
     public class ProfileController : Controller

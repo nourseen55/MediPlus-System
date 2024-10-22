@@ -43,8 +43,7 @@
 		public async Task<IActionResult> Create(string? DoctorId)
 		{
 			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-			IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
-			List<Departments> departments1 = departments.ToList();
+			IEnumerable<Departments> departments =( await _departmentService.GetAllDepartmentsAsync()).ToList();
 
 			string selectedDoctorName = null;
 			string selectedDepartmentName = null;
@@ -55,11 +54,11 @@
 				var doctor = await _doctorService.GetDoctorByIdAsync(DoctorId);
 				selectedDoctorName = doctor?.FullName;
 				selectedDepartmentID = doctor.DepartmentId;
-				selectedDepartmentName = departments1.FirstOrDefault(d => d.Id.ToString() == selectedDepartmentID)?.DepartmentName;
+				selectedDepartmentName = departments.FirstOrDefault(d => d.Id.ToString() == selectedDepartmentID)?.DepartmentName;
 				var viewModel2 = new AppoinmentVM
 				{
 					PatientID = userId,
-					Departments = departments1.Select(d => new SelectListItem
+					Departments = departments.Select(d => new SelectListItem
 					{
 						Value = d.Id.ToString(),
 						Text = d.DepartmentName
@@ -75,15 +74,11 @@
 			var viewModel = new AppoinmentVM
 			{
 				PatientID = userId,
-				Departments = departments1.Select(d => new SelectListItem
+				Departments = departments.Select(d => new SelectListItem
 				{
 					Value = d.Id.ToString(),
 					Text = d.DepartmentName
 				}).Distinct().ToList(),
-				SelectedDoctorID = DoctorId,
-				SelectedDoctorName = selectedDoctorName,
-				SelectedDepartmentID = selectedDepartmentID,
-				SelectedDepartmentName = selectedDepartmentName
 			};
 
 			return View(viewModel);
@@ -173,12 +168,6 @@
 			await _appointmentService.DeleteAppointmentAsync(id);
 
 			return RedirectToAction("Index");
-		}
-
-		public async Task<IActionResult> ViewDoctors(string id)
-		{
-			List<Doctor> doctors = await _doctorService.GetByDepartmentId(id);
-			return View(doctors);
 		}
 	}
 }

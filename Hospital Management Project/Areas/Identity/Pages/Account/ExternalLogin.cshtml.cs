@@ -96,8 +96,17 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 
             if (existingUser != null)
             {
-                 await _signInManager.SignInAsync(existingUser, isPersistent: false);
-                 return LocalRedirect(returnUrl);
+                 if(await _userManager.IsEmailConfirmedAsync(existingUser))
+                {
+                    await _signInManager.SignInAsync(existingUser, isPersistent: false);
+                    return LocalRedirect(returnUrl);
+
+                }
+                else
+                {
+                    return RedirectToPage("./Register", new { ReturnUrl = returnUrl, ErrorMessage = "Please Check Your Email For Confirmation." });
+                }
+                 
             }
 
             ReturnUrl = returnUrl;

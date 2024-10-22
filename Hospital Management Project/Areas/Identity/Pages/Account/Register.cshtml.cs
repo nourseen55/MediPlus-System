@@ -52,6 +52,8 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
 
+        public string ErrorMessage { get; set; }
+
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public List<SelectListItem> GenderList => Enum.GetValues(typeof(Gender))
@@ -117,8 +119,12 @@ namespace Hospital_Management_Project.Areas.Identity.Pages.Account
             public string City { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(string returnUrl = null , string errorMessage = null)
         {
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                ErrorMessage = errorMessage; 
+            }
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }

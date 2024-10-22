@@ -9,6 +9,14 @@
         color: white;
         background-color: red;
     }
+
+    .custom-swal-title {
+        font-size: 18px;
+    }
+
+    .custom-swal-content {
+        font-size: 14px;
+    }
 </style>
 
 <section class="register section">
@@ -156,5 +164,26 @@
             var registerBtn = document.getElementById('registerBtn');
             registerBtn.disabled = !checkBox.checked;
         }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var errorMessage = '@Model.ErrorMessage'; 
+
+            if (errorMessage) {
+                Swal.fire({
+                    icon: 'error',
+                    title: errorMessage,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Ok',
+                    customClass: {
+                        title: 'custom-swal-title',
+                        content: 'custom-swal-content'
+                    },
+                }).then(() => {
+                    window.location.href = "/Home/";
+                });
+            }
+        });
     </script>
 }

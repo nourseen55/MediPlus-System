@@ -3,7 +3,7 @@
 
 <img src="https://github.com/user-attachments/assets/f9e7c889-3474-4a40-845a-879d5af0348a"/>
 <p>
-    The <strong>Hospital Management System (HMS)</strong> automates the hospital’s operations, helping manage 
+    Mesiplus is a <strong>Hospital Management System (HMS)</strong> that automates the hospital’s operations, helping manage 
     patient appointments, medical records, departments, and staff efficiently. It streamlines the workflow 
     from patient registration to discharge.
 </p>

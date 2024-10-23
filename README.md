@@ -87,4 +87,30 @@
         </tr>
 </table>
 
+<br/>
+<h3>🕸️ Hosting & Production</h3> 
+<p>I'm proud to host my website using <strong>MonsterAsp.net</strong>, complemented by its robust cloud database services. <br />🌐Feel free to click <a href="https://medi-plus.runasp.net">here</a> to explore the live project!</p>
+
+<br/>
+<h3>👥 Contributors & Developers</h3>
+<div align="center">
+    <a href="https://github.com/nourseen55" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/159715843?v=4" alt="Contributor 1" width="10%">
+    </a>
+    <a href="https://github.com/Rahma-Akmal" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/173629630?v=4" alt="Contributor 2" width=10%">
+    </a>
+    <a href="https://github.com/rahma-mohmed" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/99695242?v=4" alt="Contributor 3" width="10%">
+    </a>
+    <a href="https://github.com/amaalselim" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/141284662?v=4" alt="Contributor 4" width="10%">
+    </a>
+    <a href="https://github.com/7usseinel8areb" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/111694991?v=4" alt="Contributor 5" width="10%">
+    </a>
+</div>
+<div align="center"><img src="https://github.com/user-attachments/assets/957aab3d-1091-41c1-bf7c-cbcc5edaddd1" alt="Additional Contributor" width="50%"></div>
+
+
 

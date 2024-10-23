@@ -1,7 +1,7 @@
 <h1 align="center"><img src="https://medi-plus.runasp.net/img/logo.png"></h1>
 <h2 align="center">Mediplus Hospital Management System</h2>
 
-<img src="https://files.fm/u/52vq99qrkp"/>
+<img src="https://github.com/user-attachments/assets/f9e7c889-3474-4a40-845a-879d5af0348a"/>
 <p>
     The <strong>Hospital Management System (HMS)</strong> automates the hospital’s operations, helping manage 
     patient appointments, medical records, departments, and staff efficiently. It streamlines the workflow 

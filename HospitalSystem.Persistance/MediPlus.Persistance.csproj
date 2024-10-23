@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HospitalSystem.Application\HospitalSystem.Application.csproj" />
+    <ProjectReference Include="..\HospitalSystem.Application\MediPlus.Application.csproj" />
   </ItemGroup>
 
 </Project>

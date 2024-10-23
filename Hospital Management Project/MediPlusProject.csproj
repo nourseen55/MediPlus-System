@@ -34,10 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HospitalManagement.Core\HospitalSystem.Core.csproj" />
-    <ProjectReference Include="..\HospitalSystem.Application\HospitalSystem.Application.csproj" />
-    <ProjectReference Include="..\HospitalSystem.Infrastructure\HospitalSystem.Infrastructure.csproj" />
-    <ProjectReference Include="..\HospitalSystem.Persistance\HospitalSystem.Persistance.csproj" />
+    <ProjectReference Include="..\HospitalManagement.Core\MediPlus.Core.csproj" />
+    <ProjectReference Include="..\HospitalSystem.Application\MediPlus.Application.csproj" />
+    <ProjectReference Include="..\HospitalSystem.Infrastructure\MediPlus.Infrastructure.csproj" />
+    <ProjectReference Include="..\HospitalSystem.Persistance\MediPlus.Persistance.csproj" />
   </ItemGroup>
 
   <ItemGroup>

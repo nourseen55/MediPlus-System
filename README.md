@@ -110,15 +110,20 @@ I'm proud to host my website using **MonsterAsp.net**, complemented by its robus
 🌐 Feel free to click [here](https://medi-plus.runasp.net) to explore the live project!<br/>
 You can try login with this users
  
-- **Doctor**
+- **✅ Doctor**
    - Email: `lila@gmail.com`
    - Password: `Lila@123`
 
-- **Nurse**
+- **✅ Nurse**
    - Email: `Liam1@gmail.com`
    - Password: `Liam@123`
 
-
+- **✅ Patient**
+   - Go and create your account from <a href="https://medi-plus.runasp.net/Identity/Account/Register">here</a><br/>
+    OR
+   - Try to login if you already have an account from <a href="https://medi-plus.runasp.net/Identity/Account/Login">here</a>
+- **❌ Admin**
+   - Can't login as an Admin
 ## 🚀 Getting Started
 
 Follow these instructions to set up and run the project on your local machine.

@@ -124,6 +124,7 @@ You can try login with this users
    - Try to login if you already have an account from <a href="https://medi-plus.runasp.net/Identity/Account/Login">here</a>
 - **❌ Admin**
    - Can't login as an Admin
+
 ## 🚀 Getting Started
 
 Follow these instructions to set up and run the project on your local machine.

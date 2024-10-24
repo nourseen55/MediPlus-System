@@ -18,7 +18,7 @@
 </ul>
 
 </br>
-<h3>🚀 Application Features</h3>
+<h2>🚀 Application Features</h2>
 <ul>
     <li><strong>🛠️ Admin</strong></li>
     <ul>
@@ -54,16 +54,16 @@
 </ul>
 
 </br>
-<h3>🔒 Application Security</h3>
+<h2>🔒 Application Security</h2>
 <ul>
-    <li>🔐 Secure registration, login, and profile updates with full attribute validation.</li>
+    <li>🔐 Secure registration, login, and profile updates with full attribute validation, implemented using ASP.NET Identity.</li>
     <li>🔑 Strong password enforcement for all users.</li>
     <li>🛡️ Protection against CSRF, XSS, and DDoS attacks for enhanced security.</li>
     <li>🌐 Third-party login and registration support using Google OAuth for convenience and security.</li>
 </ul>
 
 </br>
-<h3>🛠️ Technologies Used to Build this Application</h3>
+<h2>🛠️ Technologies Used to Build this Application</h2>
 <table align="center">
         <tr>
             <td><img src="https://img.icons8.com/color/48/000000/c-sharp-logo.png" alt="C#" width="40" height="40"/><br>C#</td>
@@ -88,29 +88,99 @@
 </table>
 
 <br/>
-<h3>🕸️ Hosting & Production</h3> 
-<p>I'm proud to host my website using <strong>MonsterAsp.net</strong>, complemented by its robust cloud database services. <br />🌐Feel free to click <a href="https://medi-plus.runasp.net">here</a> to explore the live project!</p>
+<h2>🌟 Architecture & Design</h2>
+
+### What is Clean Architecture?
+
+Clean Architecture is a software design philosophy that emphasizes the separation of concerns, making your codebase easier to manage, test, and scale. It allows developers to create systems that are flexible and adaptable to change, promoting high cohesion and low coupling between components.
+
+### Why Use Clean Architecture?
+
+- **Improved testability:** Each component can be tested independently.
+- **Maintainability:** Changes in one part of the system have minimal impact on others.
+- **Scalability:** New features can be added with less effort.
+- **Separation of concerns:** Different aspects of the application can be developed and maintained separately.
+<div align="center">
+<img src="https://github.com/user-attachments/assets/eb2d7828-9237-420b-9912-eaeef9d84ee9" width="75%" />
+</div>
 
 <br/>
-<h3>👥 Contributors & Developers</h3>
+<h2>🕸️ Hosting & Production</h2> 
+I'm proud to host my website using **MonsterAsp.net**, complemented by its robust cloud database services.  
+🌐 Feel free to click [here](https://medi-plus.runasp.net) to explore the live project!<br/>
+You can try login with this users
+ 
+- **Doctor**
+   - Email: `lila@gmail.com`
+   - Password: `Lila@123`
+
+- **Nurse**
+   - Email: `Liam1@gmail.com`
+   - Password: `Liam@123`
+
+
+## 🚀 Getting Started
+
+Follow these instructions to set up and run the project on your local machine.
+
+### Prerequisites
+
+Ensure you have the following software installed on your system:
+
+- [.NET SDK](https://dotnet.microsoft.com/download) (at least version 8.0)
+- [Git](https://git-scm.com/)
+- A code editor like [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/)
+
+### Clone the Repository
+
+To get a copy of the project up and running locally, first clone the repository using Git:
+```bash
+git clone https://github.com/nourseen55/MediPlus-System.git
+cd MediPlus-System
+```
+### Build and Run the project
+1. Open the project in Visual Studio or Visual Studio Code.
+2. Restore the necessary packages:
+    ```bash
+    dotnet restore
+    ```
+3. Build the project:
+    ```bash
+    dotnet build
+    ```
+4. Run the project:
+    ```bash
+    dotnet run
+    ```
+
+
+<br/>
+<h2>🤝 Contributors & Developers</h2>
 <div align="center">
     <a href="https://github.com/nourseen55" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/159715843?v=4" alt="Contributor 1" width="10%">
+        <img src="https://avatars.githubusercontent.com/u/159715843?v=4" alt="Contributor 1" width="15%" style="min-width: 50px;">
     </a>
     <a href="https://github.com/Rahma-Akmal" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/173629630?v=4" alt="Contributor 2" width=10%">
+        <img src="https://avatars.githubusercontent.com/u/173629630?v=4" alt="Contributor 2" width="15%" style="min-width: 50px;">
     </a>
     <a href="https://github.com/rahma-mohmed" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/99695242?v=4" alt="Contributor 3" width="10%">
+        <img src="https://avatars.githubusercontent.com/u/99695242?v=4" alt="Contributor 3" width="15%" style="min-width: 50px;">
     </a>
     <a href="https://github.com/amaalselim" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/141284662?v=4" alt="Contributor 4" width="10%">
+        <img src="https://avatars.githubusercontent.com/u/141284662?v=4" alt="Contributor 4" width="15%" style="min-width: 50px;">
     </a>
     <a href="https://github.com/7usseinel8areb" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/111694991?v=4" alt="Contributor 5" width="10%">
+        <img src="https://avatars.githubusercontent.com/u/111694991?v=4" alt="Contributor 5" width="15%" style="min-width: 50px;">
     </a>
 </div>
-<div align="center"><img src="https://github.com/user-attachments/assets/957aab3d-1091-41c1-bf7c-cbcc5edaddd1" alt="Additional Contributor" width="50%"></div>
+<div align="center">
+    <img src="https://github.com/user-attachments/assets/957aab3d-1091-41c1-bf7c-cbcc5edaddd1" alt="Additional Contributor" width="80%" style="max-width: 400px;">
+</div>
 
+<br/>
+<h3>📞 Contact Information</h3>
+For any inquiries or support, please contact me at: <a href="mailto:hospitalmanagments@gmail.com">hospitalmanagments@gmail.com</a>
 
-
+<br/>
+<h3>📜 License Information</h3>
+© Copyright 2024 | All Rights Reserved by <a href="mailto:hospitalmanagments@gmail.com">hospitalmanagments@gmail.com</a>

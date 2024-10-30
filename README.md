@@ -162,25 +162,14 @@ cd MediPlus-System
 
 <br/>
 <h2>🤝 Contributors & Developers</h2>
-<div align="center">
-    <a href="https://github.com/nourseen55" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/159715843?v=4" alt="Contributor 1" width="15%" style="min-width: 50px;">
-    </a>
-    <a href="https://github.com/Rahma-Akmal" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/173629630?v=4" alt="Contributor 2" width="15%" style="min-width: 50px;">
-    </a>
-    <a href="https://github.com/rahma-mohmed" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/99695242?v=4" alt="Contributor 3" width="15%" style="min-width: 50px;">
-    </a>
-    <a href="https://github.com/amaalselim" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/141284662?v=4" alt="Contributor 4" width="15%" style="min-width: 50px;">
-    </a>
-    <a href="https://github.com/7usseinel8areb" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/111694991?v=4" alt="Contributor 5" width="15%" style="min-width: 50px;">
-    </a>
-</div>
-<div align="center">
-    <img src="https://github.com/user-attachments/assets/957aab3d-1091-41c1-bf7c-cbcc5edaddd1" alt="Additional Contributor" width="80%" style="max-width: 400px;">
+<div>
+    <ol>
+        <li><a href="https://github.com/7usseinel8areb" target="_blank"><strong>Hussein Elghareb</strong></a></li>
+        <li><a href="https://github.com/nourseen55" target="_blank"><strong>Nourseen Mohsen</strong></a></li>
+        <li><a href="https://github.com/Rahma-Akmal" target="_blank"><strong>Rahma Akmal</strong></a></li>
+        <li><a href="https://github.com/amaalselim" target="_blank"><strong>Amaal Selim</strong></a></li>
+        <li><a href="https://github.com/rahma-mohmed" target="_blank"><strong>Rahma Mohmed</strong></a></li>
+    </ol>
 </div>
 
 <br/>

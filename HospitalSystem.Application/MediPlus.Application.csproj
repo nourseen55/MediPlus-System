@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HospitalManagement.Core\HospitalSystem.Core.csproj" />
-    <ProjectReference Include="..\HospitalSystem.Infrastructure\HospitalSystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\HospitalManagement.Core\MediPlus.Core.csproj" />
+    <ProjectReference Include="..\HospitalSystem.Infrastructure\MediPlus.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

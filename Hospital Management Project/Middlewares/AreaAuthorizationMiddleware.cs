@@ -21,11 +21,11 @@
                 return;
             }
 
-            if (!context.User.Identity?.IsAuthenticated ?? false)
-            {
-                context.Response.Redirect("/Identity/Account/Login");
-                return;
-            }
+            //if (!context.User.Identity?.IsAuthenticated ?? false)
+            //{
+            //    context.Response.Redirect("/Identity/Account/Login");
+            //    return;
+            //}
 
             // Get user roles from claims
             var userRoles = context.User.Claims

@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystemProject", "Hospital Management Project\HospitalSystemProject.csproj", "{8792A4DE-51DF-4D02-9FE3-D68D8E9CDA53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediPlusProject", "Hospital Management Project\MediPlusProject.csproj", "{8792A4DE-51DF-4D02-9FE3-D68D8E9CDA53}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Core", "HospitalManagement.Core\HospitalSystem.Core.csproj", "{4A64BC40-CA7B-4F64-AA51-FC65966109FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediPlus.Core", "HospitalManagement.Core\MediPlus.Core.csproj", "{4A64BC40-CA7B-4F64-AA51-FC65966109FB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Application", "HospitalSystem.Application\HospitalSystem.Application.csproj", "{504033C9-DA38-49A9-9800-B29789BF2F47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediPlus.Application", "HospitalSystem.Application\MediPlus.Application.csproj", "{504033C9-DA38-49A9-9800-B29789BF2F47}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Infrastructure", "HospitalSystem.Infrastructure\HospitalSystem.Infrastructure.csproj", "{2AB24AF2-704B-48D3-8645-619F156A9FEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediPlus.Infrastructure", "HospitalSystem.Infrastructure\MediPlus.Infrastructure.csproj", "{2AB24AF2-704B-48D3-8645-619F156A9FEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalSystem.Persistance", "HospitalSystem.Persistance\HospitalSystem.Persistance.csproj", "{1490C82F-797D-4FD7-BDC8-1BF2247EAAE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediPlus.Persistance", "HospitalSystem.Persistance\MediPlus.Persistance.csproj", "{1490C82F-797D-4FD7-BDC8-1BF2247EAAE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HospitalManagement.Core\HospitalSystem.Core.csproj" />
+    <ProjectReference Include="..\HospitalManagement.Core\MediPlus.Core.csproj" />
   </ItemGroup>
 
 </Project>

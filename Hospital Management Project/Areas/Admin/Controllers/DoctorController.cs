@@ -90,8 +90,6 @@ namespace Hospital_Management_Project.Areas.Admin.Controllers
                     doctor.Img = doctorvm.Img;
                 }
 
-                doctor.Gender = doctorvm.Gender;
-
                 IEnumerable<Departments> departments = await _departmentService.GetAllDepartmentsAsync();
                 ViewBag.Departments = departments.Select(d => new SelectListItem { Value = d.Id, Text = d.DepartmentName });
 

@@ -1,4 +1,7 @@
-﻿#nullable disable
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
@@ -419,21 +422,21 @@ namespace HospitalSystem.Persistance.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3e4010d1-dd79-4251-9c1a-71f579f99f2b", null, "Doctor", "DOCTOR" },
-                    { "620ebcd7-d44d-4428-b27f-07dc08b7d254", null, "Nurse", "NURSE" },
-                    { "6626ac1f-fe77-4ff6-8e8c-a50f03aa0ab4", null, "Patient", "PATIENT" },
-                    { "66bd658b-faa3-4207-a753-621ee7678069", null, "Admin", "ADMIN" }
+                    { "503f8c33-9286-4a9e-954a-8ed5ed66d0a4", null, "Admin", "ADMIN" },
+                    { "6499a8f4-fff6-43a2-86a6-4763cc49fbfb", null, "Patient", "PATIENT" },
+                    { "e43b85a6-f645-41e7-9a91-ebd28879476d", null, "Doctor", "DOCTOR" },
+                    { "f6d3d221-8c40-475e-a7ee-b1bc4f92bdeb", null, "Nurse", "NURSE" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Country", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "Gender", "Img", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "ZipCode" },
-                values: new object[] { "df7e08a4-3d92-47eb-8660-a043222dfce4", 0, null, "ec499042-5b14-42f5-b54c-9abcf9019fe2", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEIZhFx5YNnCLeAnrROhiwP1qkOq0pWiCEOxGgFLgbgXai4DG2tpDX91SL1CM6gw7Vg==", null, false, "128d4c11-d057-4d58-9ac2-ceec0584b10c", false, "admin@admin.com", null });
+                values: new object[] { "bc8359d5-c55f-406b-a7a7-86bcb636e40c", 0, null, "fdb15f28-a5b4-4dcd-9d74-9a0244a15624", null, new DateTime(2003, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@admin.com", true, "Admin", 0, null, "User", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEA+KvAYDLmbOnRCH4gBgWARKRGCk3zx/4EH4wWIcgSW5HjmSIHru8QRWx4GPKs3jUg==", null, false, "816c7296-74db-40ad-8af0-a3b182e68996", false, "admin@admin.com", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "66bd658b-faa3-4207-a753-621ee7678069", "df7e08a4-3d92-47eb-8660-a043222dfce4" });
+                values: new object[] { "503f8c33-9286-4a9e-954a-8ed5ed66d0a4", "bc8359d5-c55f-406b-a7a7-86bcb636e40c" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointment_DepartmentId",
